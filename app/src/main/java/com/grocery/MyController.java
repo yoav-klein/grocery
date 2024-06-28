@@ -11,7 +11,7 @@ public class MyController {
     @RequestMapping("/hello")
     public String sayHello(Model model) {
         model.addAttribute("message", "Hello, Spring MVC! This is using AbstractDispatcherServletInitializer.");
-        return "/WEB-INF/hellopage.jsp"; // This corresponds to the view name
+        return "hello"; // This corresponds to the view name
     }    
     
 }
