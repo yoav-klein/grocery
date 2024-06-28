@@ -19,7 +19,8 @@ dependencies {
     
     implementation 'org.springframework:spring-webmvc:6.1.1'
     implementation 'org.apache.tomcat:tomcat-servlet-api:10.1.24'
-
+    implementation group: 'org.thymeleaf', name: 'thymeleaf-spring6', version: '3.1.2.RELEASE'
+    
 
     // Use JUnit Jupiter for testing.
     testImplementation libs.junit.jupiter
@@ -27,8 +28,7 @@ dependencies {
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // This dependency is used by the application.
-    implementation libs.guava
+   
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
