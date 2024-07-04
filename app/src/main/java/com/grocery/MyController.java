@@ -3,15 +3,38 @@ package com.grocery;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.grocery.business.entities.Item;
+import com.grocery.business.entities.ItemCategory;
+import com.grocery.business.services.ItemService;
+
+import java.util.List;
+import java.util.Map;
+
 
 @Controller
 public class MyController {
+
+    @Autowired
+    ItemService itemService;
+
+    @ModelAttribute("allItems")
+    public List<Item> populateItems(){
+        return itemService.getAllItems();
+    }
+
+    @ModelAttribute("itemsByCategory")
+    public Map<ItemCategory, List<Item>> populateItemsByCategory() {
+        return itemService.getItemsByCategory();
+    }
     
-    @RequestMapping("/hello")
-    public String sayHello(Model model) {
-        model.addAttribute("message", "Hello, Spring MVC! This is using AbstractDispatcherServletInitializer.");
-        return "hello"; // This corresponds to the view name
+    @RequestMapping("/")
+    public String index(Model model) {
+        
+        return "index"; // This corresponds to the view name
     }    
     
 }

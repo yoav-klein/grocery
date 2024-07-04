@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div th:if="${#maps.containsKey(itemsByCategory, T(com.grocery.business.entities.ItemCategory).VEGETABLES)}">
+        <h2>Vegetables</h2>
+        <ul class="grocery-list">
+            <li class="grocery-item" th:each="item : ${itemsByCategory.get(T(com.grocery.business.entities.ItemCategory).VEGETABLES)}">
+                <span class="item-name" th:text="${item.name}"></span> X <span class="quantity" th:text="${item.quantity}"></span>
+            </li>
+        </ul>
+    </div>
+
+    <div th:if="${#maps.containsKey(itemsByCategory, T(com.grocery.business.entities.ItemCategory).ALCOHOL)}">
+        <h2>Alcohol</h2>
+        <ul class="grocery-list">
+            <li class="grocery-item" th:each="item : ${itemsByCategory.get(T(com.grocery.business.entities.ItemCategory).ALCOHOL)}">
+                <span class="item-name" th:text="${item.name}"></span> X <span class="quantity" th:text="${item.quantity}"></span>
+            </li>
+        </ul>
+    </div>
+
+    <ul></ul>
+    
+</body>
+</html>
