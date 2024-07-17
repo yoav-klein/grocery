@@ -3,30 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css" th:href="@{/css/style.css}"/>
     <title>Document</title>
 </head>
 <body>
-    
-    <div th:if="${#maps.containsKey(itemsByCategory, T(com.grocery.business.entities.ItemCategory).VEGETABLES)}">
-        <h2>Vegetables</h2>
-        <ul class="grocery-list">
-            <li class="grocery-item" th:each="item : ${itemsByCategory.get(T(com.grocery.business.entities.ItemCategory).VEGETABLES)}">
-                <span class="item-name" th:text="${item.name}"></span> X <span class="quantity" th:text="${item.quantity}"></span>
-            </li>
-        </ul>
-    </div>
+    <header>
+        <h1>Grocery List</h1>
+    </header>
+    <main class="main">
 
-    <div th:if="${#maps.containsKey(itemsByCategory, T(com.grocery.business.entities.ItemCategory).ALCOHOL)}">
-        <h2>Alcohol</h2>
-        <ul class="grocery-list">
-            <li class="grocery-item" th:each="item : ${itemsByCategory.get(T(com.grocery.business.entities.ItemCategory).ALCOHOL)}">
-                <span class="item-name" th:text="${item.name}"></span> X <span class="quantity" th:text="${item.quantity}"></span>
-            </li>
-        </ul>
-    </div>
+        <section id="list" class="list">
+            <article class="category" th:each="category : ${itemsByCategory}">
+                <h2 th:text="${category.key.displayName}">Vegetables</h2>
+                <table class="grocery-table">
+                    <tbody>
+                        <tr th:each="item: ${category.value}">
+                            <td th:text="${item.quantity}">3</td>
+                            <td th:text="${item.quantityType.displayName}">Kg</td>
+                            <td th:text="${item.name}">Apples</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+            
+        </section>
+        <section id="add_form">
+            <form th:action="@{/newItem}" method="post" th:object="${item}">
+                <fieldset>
+                    <legend>Add Item</legend>
 
-    <ul></ul>
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" th:field="*{name}"/>
+                    </div>
+                    <div>
+                        <label for="category">Category</label>
+                        <select th:field="*{category}">
+                            <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category.displayName}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="quantity">Quantity</label>
+                        <input type="number" th:field="*{quantity}"/>
+                        <label for="quantityType">Quantity Type</label>
+                        <select th:field="*{quantityType}">
+                            <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type.displayName}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" name="save">Submit!</button>
+                    </div>
+                
+                </fieldset>
+            </form>
+        </section>
+        
+    </main>
     
 </body>
 </html>

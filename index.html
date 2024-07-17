@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .main {
+            padding: 2px;
+            background-color: aqua;
+            display: grid;
+            /* grid-template-columns: 1fr 1fr 1fr; */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        .category {
+            margin: 10px;
+            background-color: chocolate;
+            min-height: 200px;
+            min-width: 100px;
+        }
+        .list_table {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Grocery List</h1>
+    </header>
+    <main class="main">
+        <article class="category">
+
+        </article>
+        <article class="category">
+            <h2>Vegetables</h2>
+            <table class="list_table">
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td>Kg</td>
+                        <td>Apples</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+        <article class="category"></article>
+        <article class="category"></article>
+        <article class="category"></article>
+    </main>
+</body>
+</html>
