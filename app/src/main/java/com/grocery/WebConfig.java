@@ -1,5 +1,7 @@
 package com.grocery;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -15,6 +17,8 @@ import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+
+import com.mysql.cj.jdbc.MysqlDataSource;
 
 @Configuration
 @ComponentScan
@@ -35,6 +39,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
     }
+
 
     @Bean
     public ResourceBundleMessageSource messageSource() {
@@ -81,5 +86,24 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }
+
+    
+    // ======== DataSource for MySQL database
+
+    @Bean
+	DataSource getDataSource() {
+		String dbUrl = "jdbc:mysql://localhost:3306/users";
+        String dbUser = "yoav";
+        String dbPassword = "yoav";
+
+        MysqlDataSource mysqlDS = null;
+        
+        mysqlDS = new MysqlDataSource();
+        mysqlDS.setURL(dbUrl);
+        mysqlDS.setUser(dbUser);
+        mysqlDS.setPassword(dbPassword);
+
+        return mysqlDS;
+	}
 
 }

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grocery.business.entities.repositories.ItemRepository;
+import com.grocery.business.entities.repositories.ItemDAO;
 import com.grocery.business.entities.Item;
 import com.grocery.business.entities.ItemCategory;
 
@@ -15,18 +15,18 @@ import com.grocery.business.entities.ItemCategory;
 public class ItemService {
     
     @Autowired
-    private ItemRepository itemRepository;
+    private ItemDAO itemRepository;
 
     public List<Item> getAllItems() {
         
-        return this.itemRepository.findAll();
+        return this.itemRepository.getAllItems();
     }
 
     public Map<ItemCategory, List<Item>> getItemsByCategory() {
-        return this.itemRepository.findAll().stream().collect(Collectors.groupingBy(Item::getCategory));
+        return this.itemRepository.getAllItems().stream().collect(Collectors.groupingBy(Item::getCategory));
     }
 
     public void add(Item item) {
-        this.itemRepository.add(item);
+        this.itemRepository.addItem(item);
     }
 }

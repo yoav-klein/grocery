@@ -46,6 +46,10 @@ public class Item {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return this.quantity + " " + this.quantityType.getDisplayName() + " X " + this.name + " " + this.category.getDisplayName(); 
+    }
     
     
 }

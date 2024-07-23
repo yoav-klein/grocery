@@ -50,12 +50,15 @@ public class MyController {
     
     @RequestMapping("/")
     public String index(Model model) {
+        System.out.println("DEBUG: /");
         
         return "index"; // This corresponds to the view name
     }
 
     @PostMapping("/newItem")
     public String newItem(Item item) {
+        System.out.println("DEBUG: Adding new item");
+        System.out.println(item);
         itemService.add(item);
 
         return "redirect:/";

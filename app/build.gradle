@@ -16,7 +16,8 @@ repositories {
 }
 
 dependencies {
-    
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+    implementation 'org.springframework:spring-jdbc:6.1.11'
     implementation 'org.springframework:spring-webmvc:6.1.1'
     implementation 'org.apache.tomcat:tomcat-servlet-api:10.1.24'
     implementation group: 'org.thymeleaf', name: 'thymeleaf-spring6', version: '3.1.2.RELEASE'
