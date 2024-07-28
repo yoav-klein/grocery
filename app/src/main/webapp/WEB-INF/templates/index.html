@@ -7,52 +7,129 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <h1>Grocery List</h1>
+    <header class="header">
+        <h1 class="header__h1">Grocery List</h1>
     </header>
     <main class="main">
-
         <section id="list" class="list">
-            <article class="category" th:each="category : ${itemsByCategory}">
-                <h2 th:text="${category.key.displayName}">Vegetables</h2>
-                <table class="grocery-table">
+            <article class="list__category" th:each="category : ${itemsByCategory}">
+                <h2 class="list__h2" th:text="${category.key.displayName}">VEGETABLES</h2>
+                <table class="list__table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="list__quantity-header"></th>
+                            <th scope="col" class="list__unit-header"></th>
+                            <th scope="col" class="list__name-header"></th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr th:each="item: ${category.value}">
-                            <td th:text="${item.quantity}">3</td>
-                            <td th:text="${item.quantityType.displayName}">Kg</td>
-                            <td th:text="${item.name}">Apples</td>
+                        <tr class="list__item" th:each="item: ${category.value}">
+                            <td class="list__item-quantity" th:text="${item.quantity}">3</td>
+                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
+                            <td class="list__item-name" th:text="${item.name}">Tomatos</td>
+                        </tr>
+                        <tr class="list__item" th:each="item: ${category.value}" th:remove="all">
+                            <td class="list__item-quantity" th:text="${item.quantity}">1</td>
+                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
+                            <td class="list__item-name" th:text="${item.name}">Cucumber</td>
+                        </tr>
+                        <tr class="list__item" th:each="item: ${category.value}" th:remove="all">
+                            <td class="list__item-quantity" th:text="${item.quantity}">1</td>
+                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
+                            <td class="list__item-name" th:text="${item.name}">Parsley</td>
                         </tr>
                     </tbody>
                 </table>
             </article>
-            
-        </section>
-        <section id="add_form">
-            <form th:action="@{/newItem}" method="post" th:object="${item}">
-                <fieldset>
-                    <legend>Add Item</legend>
 
-                    <div>
-                        <label for="name">Name</label>
+            <article class="list__category" th:each="category : ${itemsByCategory}" th:remove="all">
+                <h2 class="list__h2" th:text="${category.key.displayName}">FRUITS</h2>
+                <table class="list__table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="list__quantity-header"></th>
+                            <th scope="col" class="list__unit-header"></th>
+                            <th scope="col" class="list__name-header"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="list__item" th:each="item: ${category.value}">
+                            <td class="list__item-quantity" th:text="${item.quantity}">3</td>
+                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
+                            <td class="list__item-name" th:text="${item.name}">Apples</td>
+                        </tr>
+                        <tr class="list__item" th:each="item: ${category.value}">
+                            <td class="list__item-quantity" th:text="${item.quantity}">2</td>
+                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
+                            <td class="list__item-name" th:text="${item.name}">Melons</td>
+                        </tr>
+                        <tr class="list__item" th:each="item: ${category.value}">
+                            <td class="list__item-quantity" th:text="${item.quantity}">2</td>
+                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
+                            <td class="list__item-name" th:text="${item.name}">Grapes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <article class="list__category" th:each="category : ${itemsByCategory}" th:remove="all">
+                <h2 class="list__h2" th:text="${category.key.displayName}">DAIRY</h2>
+                <table class="list__table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="list__quantity-header"></th>
+                            <th scope="col" class="list__unit-header"></th>
+                            <th scope="col" class="list__name-header"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="list__item" th:each="item: ${category.value}">
+                            <td class="list__item-quantity" th:text="${item.quantity}">1</td>
+                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Unit</td>
+                            <td class="list__item-name" th:text="${item.name}">Milk</td>
+                        </tr>
+                        <tr class="list__item" th:each="item: ${category.value}">
+                            <td class="list__item-quantity" th:text="${item.quantity}">4</td>
+                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Unit</td>
+                            <td class="list__item-name" th:text="${item.name}">Yogurt</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+        <hr>
+        <section id="add_form">
+            <h1 class="additem__h1">Add Item</h1>
+            <form  class="additem" th:action="@{/newItem}" method="post" th:object="${item}">
+                <fieldset class="additem__fieldset">
+                    <legend class="offscreen">Add Item</legend>
+                    <p class="additem__p">
+                        <label class="additem__label" for="name">Name</label>
                         <input type="text" th:field="*{name}"/>
-                    </div>
-                    <div>
-                        <label for="category">Category</label>
-                        <select th:field="*{category}">
-                            <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category.displayName}"></option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="quantity">Quantity</label>
-                        <input type="number" th:field="*{quantity}"/>
-                        <label for="quantityType">Quantity Type</label>
+                    </p>
+                    <p class="additem__p">
+                        <label class="additem__label" for="quantity">Quantity</label>
+                        <input type="number" class="additem__quantity" th:field="*{quantity}"/>
+
+                        <label class="offscreen" for="quantityType">Quantity Type</label>
                         <select th:field="*{quantityType}">
-                            <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type.displayName}"></option>
+                            <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type.displayName}">Kg</option>
+                            <option th:remove="all">Unit</option>
+                            
                         </select>
-                    </div>
-                    <div>
-                        <button type="submit" name="save">Submit!</button>
-                    </div>
+                    </p>
+                    <p class="additem__p">
+                        <label class="additem__label" for="category">Category</label>
+                        <select th:field="*{category}">
+                            <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category.displayName}">Vegetables</option>
+                            <option th:remove="all">Fruits</option>
+                            <option th:remove="all">Dairy</option>
+                        </select>
+                    </p>
+                    
+                    <p class="additem__p add__item-button-container">
+                        <button  class="additem__button" type="submit" name="save">Submit!</button>
+                    </p>
                 
                 </fieldset>
             </form>

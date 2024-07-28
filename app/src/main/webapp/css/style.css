@@ -1,27 +1,208 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Wittgenstein:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Wittgenstein:ital,wght@0,400..900;1,400..900&family=Zain:wght@200;300;400;700;800;900&display=swap');
+
+/* || RESET */
+
+*,
+*::after,
+*::before {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+input,
+button,
+select,
+textarea {
+    font: inherit;
+}
+
+/* || VARIABLES */
+:root {
+    /* FONTS */
+    --FF: "Nunito", sans-serif;
+    --FF-H1: "Fugaz One", cursive;
+    --FF-H2: "Kanit", cursive;
+    --FS: clamp(1rem, 2.2vh, 1.5rem);
+
+    /* COLORS */
+    --BG-COLOR: #fff;
+    --BODY-BGCOLOR: #FFF3E0;
+    --HEADER-BGCOLOR: #FF5722;
+    --BORDER-COLOR: #333;
+    --FONT-COLOR: #000;
+    --LINK-COLOR: #000;
+    --LINK-HOVER: hsla(0, 0%, 0%, 0.6);
+
+    /* BORDERS */
+    --BORDERS: 1px solid var(--BORDER-COLOR);
+
+    /* PADDING */
+    --PADDING-TB: 0.25em;
+    --PADDING-SIDE: 2.5%;
+
+    /* STANDARD MARGIN */
+    --MARGIN: clamp(1em, 2.2vh, 1.5em) 0;
+}
+
+/* || UTILITY CLASSES */
+
+.offscreen {
+    position: absolute;
+    left: -10000px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+/* || GENERAL STYLES */
+
+html {
+    font-size: var(--FS);
+    font-family: var(--FF);
+    background-color: var(--BG-COLOR);
+    /* background-color, background-image */
+}
+
+body {
+    background-color: var(--BODY-BGCOLOR);
+    background-image: url(noise.png);
+    color: var(--FONT-COLOR);
+    min-height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-left: var(--BORDERS);
+    border-right: var(--BORDERS);
+    box-shadow: 0 0 10px var(--BORDER-COLOR);
+}
+
+
+h1 {
+    letter-spacing: 0.1em;
+    font-family: var(--FF-H1);
+}
+
+
+a:any-link {
+    color: var(--LINK-COLOR);
+}
+
+a:hover,
+a:focus-visible {
+    color:var(--LINK-HOVER);
+}
+
+/* || HEADER */
+
+.header__h1 {
+    text-align: center;
+}
+
+.header {
+    padding: 1em;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 6px 5px -5px var(--BORDER-COLOR);
+    background-color: var(--HEADER-BGCOLOR);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+
+/* || MAIN */
 
 .main {
-    padding: 2px;
-    background-color: aqua;
-    
+    padding: var(--PADDING-TB) var(--PADDING-SIDE);
 }
+
+/* || LIST */
 
 .list {
+    margin: var(--MARGIN);
     display: grid;
-    /* grid-template-columns: 1fr 1fr 1fr; */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 600px));
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap:  0.5em 0.1em;
+    min-height: 50vh;
 }
 
-.category {
-    margin: 10px;
-    background-color: chocolate;
-    min-height: 200px;
-    min-width: 100px;
-}
-
-.grocery-table {
+.list__category {
     width: 100%;
+    padding: var(--PADDING-TB) var(--PADDING-SIDE);
+}
+
+.list__h2 {
+    font-family: var(--FF-H2);
+    margin-bottom: 0.5em;
+    text-align: left;
+}
+
+.list__table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.list__table th:nth-child(1) {
+    width: 2ch;
+}
+
+.list__table th:nth-child(2) {
+    width: 4ch
+}
+
+.list__table td {
+    vertical-align: top;
+    font-family: 'Zain', cursive;
+}
+
+/* || FORM */
+
+.additem__h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.additem__fieldset {
+    border: none;
+}
+
+.additem input,
+.additem select,
+.additem__button {
+    padding: 0.25em;
+    padding-right: 1em;
+    line-height: 1rem;
+}
+
+
+.additem__p {
+    margin: 1rem 0;
+}
+
+.additem__label {
+    display: block;
+    font-weight: bold;
+}
+
+.additem__quantity {
+    width: 5ch;
+}
+
+.add__item-button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.additem__button {
+    padding: 1em;
+    border-radius: 10px;
 }
