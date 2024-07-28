@@ -55,7 +55,6 @@ public class ItemDAOJDBCImpl implements ItemDAO {
     @Override
     public void deleteItem(Item item) {
         this.jdbcTemplate.update(DELETE_ITEM, item.getName(), item.getCategory().toString(), item.getQuantityType().toString());
-        
     }
     
     

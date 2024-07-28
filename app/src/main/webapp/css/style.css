@@ -178,8 +178,7 @@ a:focus-visible {
 .additem input,
 .additem select,
 .additem__button {
-    padding: 0.25em;
-    padding-right: 1em;
+    padding: 0.25em 0;
     line-height: 1rem;
 }
 
@@ -205,4 +204,12 @@ a:focus-visible {
 .additem__button {
     padding: 1em;
     border-radius: 10px;
+}
+
+.additem__name {
+    width: 200px;
+}
+
+.additem__category {
+    width: 200px;
 }
