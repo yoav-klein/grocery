@@ -29,4 +29,8 @@ public class ItemService {
     public void add(Item item) {
         this.itemRepository.addItem(item);
     }
+
+    public void deleteItem(int id) {
+        this.itemRepository.deleteItem(id);
+    }
 }

@@ -3,9 +3,11 @@ package com.grocery;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.grocery.business.entities.Item;
@@ -64,4 +66,9 @@ public class MyController {
         return "redirect:/";
     }
     
+    @GetMapping("/deleteItem") 
+    public String deleteItem(@RequestParam("id") int id) {
+        this.itemService.deleteItem(id);
+        return "redirect:/";
+    }
 }

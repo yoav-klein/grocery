@@ -8,6 +8,6 @@ import com.grocery.business.entities.Item;
 public interface ItemDAO {
     void addItem(Item item);
     List<Item> getAllItems();
-    void deleteItem(Item item);
+    void deleteItem(int id);
     
 }

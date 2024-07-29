@@ -92,7 +92,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     @Bean
 	DataSource getDataSource() {
-		String dbUrl = "jdbc:mysql://localhost:3306/users";
+		String dbUrl = "jdbc:mysql://localhost:3306/grocery";
         String dbUser = "yoav";
         String dbPassword = "yoav";
 

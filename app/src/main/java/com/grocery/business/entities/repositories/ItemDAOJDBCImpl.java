@@ -16,16 +16,15 @@ import com.grocery.business.entities.QuantityType;
 @Repository("itemDao")
 public class ItemDAOJDBCImpl implements ItemDAO {
 
-    private static final String GET_ALL_ITEMS = "select items.name AS ItemName, categories.name AS Category, " +  
-    "items.quantity AS Quantity, quantitytypes.name AS QuantityType " +  
-    "from items JOIN categories ON items.category_id = categories.id " +
-    "JOIN quantitytypes ON items.quantity_type_id = quantitytypes.id";
+    private static final String GET_ALL_ITEMS = "select item.id, item.name AS ItemName, category.name AS Category, " +  
+    "item.quantity AS Quantity, quantity_type.name AS QuantityType " +  
+    "from item JOIN category ON item.category_id = category.id " +
+    "JOIN quantity_type ON item.quantity_type_id = quantity_type.id";
 
-    private static final String ADD_ITEM = "INSERT INTO items (name, category_id, quantity, quantity_type_id) " + 
-    "VALUES(?, (SELECT id AS category_id FROM categories WHERE ? = name), ?, (SELECT id AS quantity_type_id FROM quantitytypes WHERE ? = name))";
+    private static final String ADD_ITEM = "INSERT INTO item (name, category_id, quantity, quantity_type_id) " + 
+    "VALUES(?, (SELECT id AS category_id FROM category WHERE ? = name), ?, (SELECT id AS quantity_type_id FROM quantity_type WHERE ? = name))";
     
-    private static final String DELETE_ITEM = "DELETE FROM items WHERE name = ? AND category_id = (SELECT id FROM categories WHERE name = ?) " + 
-    "AND quantity_type_id = (SELECT id FROM quantitytypes WHERE name = ?)";
+    private static final String DELETE_ITEM = "DELETE FROM item WHERE id = ?";
     
     private JdbcTemplate jdbcTemplate;
 
@@ -38,6 +37,7 @@ public class ItemDAOJDBCImpl implements ItemDAO {
         return this.jdbcTemplate.query(GET_ALL_ITEMS, 
             (resultSet, rowNum) -> {
             Item item = new Item();
+            item.setId(resultSet.getInt("id"));
             item.setName(resultSet.getString("ItemName"));
             item.setCategory(ItemCategory.valueOf(resultSet.getString("Category")));
             item.setQuantity(resultSet.getInt("Quantity"));
@@ -53,8 +53,9 @@ public class ItemDAOJDBCImpl implements ItemDAO {
     }
 
     @Override
-    public void deleteItem(Item item) {
-        this.jdbcTemplate.update(DELETE_ITEM, item.getName(), item.getCategory().toString(), item.getQuantityType().toString());
+    public void deleteItem(int id) {
+        this.jdbcTemplate.update(DELETE_ITEM, id);
+        //this.jdbcTemplate.update(DELETE_ITEM, item.getName(), item.getCategory().toString(), item.getQuantityType().toString());
     }
     
     
