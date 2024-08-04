@@ -31,7 +31,7 @@ textarea {
     --FF: "Nunito", sans-serif;
     --FF-H1: "Fugaz One", cursive;
     --FF-H2: "Kanit", cursive;
-    --FS: clamp(1rem, 2.2vh, 1.5rem);
+     --FS: clamp(1rem, 2.2vh, 1.5rem);
 
     /* COLORS */
     --BG-COLOR: #fff;
@@ -57,7 +57,7 @@ textarea {
 
 .offscreen {
     position: absolute;
-    left: -10000px;
+    right: -10000px;
 }
 
 .nowrap {
@@ -71,6 +71,7 @@ html {
     font-family: var(--FF);
     background-color: var(--BG-COLOR);
     /* background-color, background-image */
+    /* direction: ltr; */
 }
 
 body {
@@ -143,7 +144,7 @@ a:focus-visible {
 .list__h2 {
     font-family: var(--FF-H2);
     margin-bottom: 0.5em;
-    text-align: left;
+    
 }
 
 .list__table {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html th:attr="dir=${#locale.language == 'he' ? 'rtl' : 'ltr'}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +26,7 @@
                         <tbody>
                             <tr class="list__item" th:each="item : ${category.value}">
                                 <td class="list__item-quantity" th:text="${item.quantity}">3</td>
-                                <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
+                                <td class="list__item-unit" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
                                 <td class="list__item-name" th:text="${item.name}">Tomatos</td>
                                 <td><button name="id" th:value="${item.id}">Delete</button></td>
                             </tr>
