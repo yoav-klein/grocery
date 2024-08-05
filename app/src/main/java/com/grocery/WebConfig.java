@@ -2,6 +2,7 @@ package com.grocery;
 
 import java.util.Locale;
 import java.time.Duration;
+import java.util.Collections;
 
 import javax.sql.DataSource;
 
@@ -44,6 +45,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         registry.addResourceHandler("/images/**").addResourceLocations("/images/");
         registry.addResourceHandler("/css/**").addResourceLocations("/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/");
     }
 
 
@@ -76,12 +78,13 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         registry.addInterceptor(localeChangeInterceptor());
     }
 
-
-    @Bean
-    public SpringResourceTemplateResolver templateResolver(){
+    @Bean    
+    public SpringResourceTemplateResolver htmlTemplateResolver(){
         // SpringResourceTemplateResolver automatically integrates with Spring's own
         // resource resolution infrastructure, which is highly recommended.
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setOrder(Integer.valueOf(1));
+        templateResolver.setResolvablePatterns(Collections.singleton("html/*"));
         templateResolver.setApplicationContext(this.applicationContext);
         templateResolver.setPrefix("/WEB-INF/templates/");
         templateResolver.setSuffix(".html");
@@ -93,14 +96,34 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         templateResolver.setCacheable(true);
         return templateResolver;
     }
+ 
+    @Bean    
+    public SpringResourceTemplateResolver cssTemplateResolver(){
+        // SpringResourceTemplateResolver automatically integrates with Spring's own
+        // resource resolution infrastructure, which is highly recommended.
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setOrder(Integer.valueOf(2));
+        templateResolver.setResolvablePatterns(Collections.singleton("css/*"));
+        templateResolver.setApplicationContext(this.applicationContext);
+        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setSuffix(".css");
+        templateResolver.setCharacterEncoding("UTF-8");
+        // HTML is the default value, added here for the sake of clarity.
+        templateResolver.setTemplateMode(TemplateMode.CSS);
+        // Template cache is true by default. Set to false if you want
+        // templates to be automatically updated when modified.
+        templateResolver.setCacheable(true);
+        return templateResolver;
+    }
 
-    
     @Bean
     public SpringTemplateEngine templateEngine(){
         // SpringTemplateEngine automatically applies SpringStandardDialect and
         // enables Spring's own MessageSource message resolution mechanisms.
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.addTemplateResolver(htmlTemplateResolver());
+        templateEngine.addTemplateResolver(cssTemplateResolver());
+
         // Enabling the SpringEL compiler with Spring 4.2.4 or newer can
         // speed up execution in most scenarios, but might be incompatible
         // with specific cases when expressions in one template are reused
@@ -111,7 +134,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
 
     @Bean
-    public ThymeleafViewResolver viewResolver(){
+    public ThymeleafViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
         viewResolver.setCharacterEncoding("UTF-8");

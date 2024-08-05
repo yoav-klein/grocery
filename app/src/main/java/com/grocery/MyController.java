@@ -54,7 +54,7 @@ public class MyController {
     public String index(Model model) {
         System.out.println("DEBUG: /");
         
-        return "index"; // This corresponds to the view name
+        return "html/index"; // This corresponds to the view name
     }
 
     @PostMapping("/newItem")
@@ -70,5 +70,10 @@ public class MyController {
     public String deleteItem(@RequestParam("id") int id) {
         this.itemService.deleteItem(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/css/dynamic.css") 
+    public String getCss() {
+        return "css/dynamic";
     }
 }

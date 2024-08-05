@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Varela+Round&family=Wittgenstein:ital,wght@0,400..900;1,400..900&family=Zain:wght@200;300;400;700;800;900&display=swap');
+
+@font-face {
+    font-family: 'Levin';
+    src: url('[(@{/fonts/Levin.woff})]') format('woff');
+}
+
+/* FONTS */
+
+:root {
+    --FF: [(${#locale.language == 'he' ? '"Levin"' : '"Nunito", sans-serif'})];
+    --FF-ITEM: [(${#locale.language == 'he' ? '"Levin"' : '"Nunito", sans-serif'})];
+    --FF-H1: [(${#locale.language == 'he' ? '"Varela Round"' : '"Fugaz One", cursive;'})];
+    --FF-H2: "Kanit", cursive;
+    --FS: clamp(1rem, 2.2vh, 1.5rem);
+}
