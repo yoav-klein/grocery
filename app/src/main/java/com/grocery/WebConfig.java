@@ -78,6 +78,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         registry.addInterceptor(localeChangeInterceptor());
     }
 
+    // ========== Thyemeleaf view resolver
     @Bean    
     public SpringResourceTemplateResolver htmlTemplateResolver(){
         // SpringResourceTemplateResolver automatically integrates with Spring's own
@@ -99,8 +100,6 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
  
     @Bean    
     public SpringResourceTemplateResolver cssTemplateResolver(){
-        // SpringResourceTemplateResolver automatically integrates with Spring's own
-        // resource resolution infrastructure, which is highly recommended.
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setOrder(Integer.valueOf(2));
         templateResolver.setResolvablePatterns(Collections.singleton("css/*"));
@@ -108,10 +107,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         templateResolver.setPrefix("/WEB-INF/templates/");
         templateResolver.setSuffix(".css");
         templateResolver.setCharacterEncoding("UTF-8");
-        // HTML is the default value, added here for the sake of clarity.
         templateResolver.setTemplateMode(TemplateMode.CSS);
-        // Template cache is true by default. Set to false if you want
-        // templates to be automatically updated when modified.
         templateResolver.setCacheable(true);
         return templateResolver;
     }

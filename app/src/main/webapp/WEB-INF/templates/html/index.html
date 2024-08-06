@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../../css/style.css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="../../WEB-INF/templates/css/style.css" th:href="@{/css/dynamic.css}">
     <title>Document</title>
 </head>
@@ -22,6 +22,7 @@
                                 <th scope="col" class="list__quantity-header"></th>
                                 <th scope="col" class="list__unit-header"></th>
                                 <th scope="col" class="list__name-header"></th>
+                                <th scope="col" class="list__name-header"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,7 +30,7 @@
                                 <td class="list__item-quantity" th:text="${item.quantity}">3</td>
                                 <td class="list__item-unit" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
                                 <td class="list__item-name" th:text="${item.name}">Tomatos</td>
-                                <td><button name="id" th:value="${item.id}">Delete</button></td>
+                                <td><button name="id" th:value="${item.id}"><img th:src="@{/images/v-sign.png}" alt=""></button></td>
                             </tr>
                             <tr class="list__item" th:remove="all">
                                 <td class="list__item-quantity">1</td>
@@ -48,8 +49,8 @@
                 </form>
             </article>
 
-            <article class="list__category" th:each="category : ${itemsByCategory}" th:remove="all">
-                <h2 class="list__h2" th:text="${category.key.displayName}">FRUITS</h2>
+            <article class="list__category" th:remove="all">
+                <h2 class="list__h2">FRUITS</h2>
                 <table class="list__table">
                     <thead>
                         <tr>
@@ -60,26 +61,26 @@
                     </thead>
                     <tbody>
                         <tr class="list__item" th:each="item: ${category.value}">
-                            <td class="list__item-quantity" th:text="${item.quantity}">3</td>
-                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
-                            <td class="list__item-name" th:text="${item.name}">Apples</td>
+                            <td class="list__item-quantity">3</td>
+                            <td class="list__item-unit">Kg</td>
+                            <td class="list__item-name">Apples</td>
                         </tr>
                         <tr class="list__item" th:each="item: ${category.value}">
                             <td class="list__item-quantity" th:text="${item.quantity}">2</td>
-                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
-                            <td class="list__item-name" th:text="${item.name}">Melons</td>
+                            <td class="list__item-unit">Kg</td>
+                            <td class="list__item-name">Melons</td>
                         </tr>
                         <tr class="list__item" th:each="item: ${category.value}">
                             <td class="list__item-quantity" th:text="${item.quantity}">2</td>
-                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Kg</td>
-                            <td class="list__item-name" th:text="${item.name}">Grapes</td>
+                            <td class="list__item-unit">Kg</td>
+                            <td class="list__item-name">Grapes</td>
                         </tr>
                     </tbody>
                 </table>
             </article>
 
-            <article class="list__category" th:each="category : ${itemsByCategory}" th:remove="all">
-                <h2 class="list__h2" th:text="${category.key.displayName}">DAIRY</h2>
+            <article class="list__category" th:remove="all">
+                <h2 class="list__h2">DAIRY</h2>
                 <table class="list__table">
                     <thead>
                         <tr>
@@ -89,15 +90,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="list__item" th:each="item: ${category.value}">
-                            <td class="list__item-quantity" th:text="${item.quantity}">1</td>
-                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Unit</td>
-                            <td class="list__item-name" th:text="${item.name}">Milk</td>
+                        <tr class="list__item">
+                            <td class="list__item-quantity">1</td>
+                            <td class="list__item-unit">Unit</td>
+                            <td class="list__item-name">Milk</td>
                         </tr>
-                        <tr class="list__item" th:each="item: ${category.value}">
-                            <td class="list__item-quantity" th:text="${item.quantity}">4</td>
-                            <td class="list__item-unit" th:text="${item.quantityType.displayName}">Unit</td>
-                            <td class="list__item-name" th:text="${item.name}">Yogurt</td>
+                        <tr class="list__item">
+                            <td class="list__item-quantity">4</td>
+                            <td class="list__item-unit">Unit</td>
+                            <td class="list__item-name">Yogurt</td>
                         </tr>
                     </tbody>
                 </table>

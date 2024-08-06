@@ -5,12 +5,11 @@
     src: url('[(@{/fonts/Levin.woff})]') format('woff');
 }
 
-/* FONTS */
 
 :root {
-    --FF: [(${#locale.language == 'he' ? '"Levin"' : '"Nunito", sans-serif'})];
+    /* FONTS */
     --FF-ITEM: [(${#locale.language == 'he' ? '"Levin"' : '"Nunito", sans-serif'})];
+    --FF-CATEGORY: "Kanit", cursive;
     --FF-H1: [(${#locale.language == 'he' ? '"Varela Round"' : '"Fugaz One", cursive;'})];
-    --FF-H2: "Kanit", cursive;
     --FS: clamp(1rem, 2.2vh, 1.5rem);
 }
