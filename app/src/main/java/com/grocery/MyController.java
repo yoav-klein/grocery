@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+
 
 import com.grocery.business.entities.Item;
 import com.grocery.business.entities.ItemCategory;
@@ -58,15 +60,14 @@ public class MyController {
     }
 
     @PostMapping("/newItem")
-    public String newItem(Item item) {
-        System.out.println("DEBUG: Adding new item");
-        System.out.println(item);
+    public String newItem(@Validated @ModelAttribute Item item) {
+        System.out.println("Got new item");
         itemService.add(item);
 
         return "redirect:/";
     }
     
-    @GetMapping("/deleteItem") 
+    @GetMapping("/deleteItem")
     public String deleteItem(@RequestParam("id") int id) {
         this.itemService.deleteItem(id);
         return "redirect:/";

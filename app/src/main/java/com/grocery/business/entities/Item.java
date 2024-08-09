@@ -1,9 +1,20 @@
 package com.grocery.business.entities;
 
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class Item {
 
     private int id = -1;
+
+    @NotNull
+    @Size(max=48)
+    @Size(min=2)
     private String name;
+
+    @Min(1)
     private int quantity;
     private ItemCategory category;
     private QuantityType quantityType;
