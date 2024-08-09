@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
 
@@ -60,8 +61,10 @@ public class MyController {
     }
 
     @PostMapping("/newItem")
-    public String newItem(@Validated @ModelAttribute Item item) {
-        System.out.println("Got new item");
+    public String newItem(@Validated @ModelAttribute Item item, BindingResult result) {
+        if(result.hasErrors()) {
+            return "html/index";
+        }
         itemService.add(item);
 
         return "redirect:/";

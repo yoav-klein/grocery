@@ -10,11 +10,11 @@ public class Item {
     private int id = -1;
 
     @NotNull
-    @Size(max=48)
-    @Size(min=2)
+    @Size(max=48, message="Name too long")
+    @Size(min=2, message="Name too short")
     private String name;
 
-    @Min(1)
+    @Min(value=1, message="Min quantity: 1")
     private int quantity;
     private ItemCategory category;
     private QuantityType quantityType;
