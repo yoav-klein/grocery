@@ -1,4 +1,4 @@
-package com.grocery;
+package com.grocery.web.controllers;
 
 
 import org.springframework.stereotype.Controller;
@@ -52,10 +52,10 @@ public class MyController {
     public ItemCategory[] populateAllCategories() {
         return ItemCategory.values();
     }
+
     
     @RequestMapping("/")
     public String index(Model model) {
-        System.out.println("DEBUG: /");
         
         return "html/index"; // This corresponds to the view name
     }
@@ -76,8 +76,9 @@ public class MyController {
         return "redirect:/";
     }
 
-    @GetMapping("/css/dynamic.css") 
+    @GetMapping("/css/dynamic.css")
     public String getCss() {
         return "css/dynamic";
     }
+
 }

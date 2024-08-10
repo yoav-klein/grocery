@@ -1,4 +1,4 @@
-package com.grocery;
+package com.grocery.web;
 
 import java.util.Locale;
 import java.time.Duration;
@@ -25,14 +25,14 @@ import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
 @Configuration
 @ComponentScan
 @EnableWebMvc
-public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
+public class SpringWebConfig implements WebMvcConfigurer, ApplicationContextAware {
     
     private ApplicationContext applicationContext;
 
