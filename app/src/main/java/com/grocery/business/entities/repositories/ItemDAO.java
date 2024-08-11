@@ -9,5 +9,6 @@ public interface ItemDAO {
     void addItem(Item item);
     List<Item> getAllItems();
     void deleteItem(int id);
-    
+    Item getItemByName(Item item);
+    void addQuantity(Item target, int quantity);
 }
