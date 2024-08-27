@@ -18,7 +18,7 @@ resource "aws_security_group_rule" "server_from_lb" {
   to_port           = 8080
   protocol          = "tcp"
   source_security_group_id = aws_security_group.load_balancer.id
-  security_group_id        = aws_security_group.asg.id
+  security_group_id        = aws_security_group.server.id
 }
 
 
@@ -27,7 +27,7 @@ resource "aws_security_group_rule" "lb_to_server" {
   from_port         = 8080
   to_port           = 8080
   protocol          = "tcp"
-  source_security_group_id = aws_security_group.asg.id
+  source_security_group_id = aws_security_group.server.id
   security_group_id        = aws_security_group.load_balancer.id
 }
 
