@@ -27,10 +27,20 @@ public class ItemService {
     }
 
     public void add(Item item) {
+        if(isItemInList(item)) {
+            this.itemRepository.addQuantity(item, item.getQuantity());
+            return;
+        }
         this.itemRepository.addItem(item);
     }
 
     public void deleteItem(int id) {
         this.itemRepository.deleteItem(id);
+    }
+
+    private boolean isItemInList(Item item) {
+        Item requestedItem = itemRepository.getItemByName(item);
+
+        return requestedItem != null;
     }
 }

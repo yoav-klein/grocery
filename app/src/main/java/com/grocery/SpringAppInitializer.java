@@ -5,17 +5,21 @@ package com.grocery;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import com.grocery.business.SpringBusinessConfig;
+import com.grocery.web.SpringWebConfig;
+
 public class SpringAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return null;
-	}
+	
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[] { SpringWebConfig.class, SpringBusinessConfig.class };
+    }
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] { WebConfig.class };
-	}
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return null;
+    }
 
 	@Override
 	protected String[] getServletMappings() {

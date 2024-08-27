@@ -110,6 +110,11 @@
             <form  class="additem" th:action="@{/newItem}" method="post" th:object="${item}">
                 <fieldset class="additem__fieldset">
                     <legend class="offscreen">Add Item</legend>
+                    
+                    <ul th:if="${#fields.hasErrors('*')}">
+                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                    </ul>
+
                     <p class="additem__p">
                         <label class="additem__label" for="name" th:text="#{additem.label.name}">Name</label>
                         <input class="additem__name" type="text" th:field="*{name}"/>

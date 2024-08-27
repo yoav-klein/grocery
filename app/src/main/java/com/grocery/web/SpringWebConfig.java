@@ -1,4 +1,4 @@
-package com.grocery;
+package com.grocery.web;
 
 import java.util.Locale;
 import java.time.Duration;
@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -25,12 +26,13 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
+
 import com.mysql.cj.jdbc.MysqlDataSource;
 
 @Configuration
 @ComponentScan
 @EnableWebMvc
-public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
+public class SpringWebConfig implements WebMvcConfigurer, ApplicationContextAware {
     
     private ApplicationContext applicationContext;
 
@@ -77,6 +79,12 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
+
+    @Bean
+	public LocalValidatorFactoryBean validator() {
+		return new LocalValidatorFactoryBean();
+	}
+
 
     // ========== Thyemeleaf view resolver
     @Bean    

@@ -1,4 +1,4 @@
-package com.grocery;
+package com.grocery.web.controllers;
 
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+
 
 import com.grocery.business.entities.Item;
 import com.grocery.business.entities.ItemCategory;
@@ -49,31 +52,33 @@ public class MyController {
     public ItemCategory[] populateAllCategories() {
         return ItemCategory.values();
     }
+
     
     @RequestMapping("/")
     public String index(Model model) {
-        System.out.println("DEBUG: /");
         
         return "html/index"; // This corresponds to the view name
     }
 
     @PostMapping("/newItem")
-    public String newItem(Item item) {
-        System.out.println("DEBUG: Adding new item");
-        System.out.println(item);
+    public String newItem(@Validated @ModelAttribute Item item, BindingResult result) {
+        if(result.hasErrors()) {
+            return "html/index";
+        }
         itemService.add(item);
 
         return "redirect:/";
     }
     
-    @GetMapping("/deleteItem") 
+    @GetMapping("/deleteItem")
     public String deleteItem(@RequestParam("id") int id) {
         this.itemService.deleteItem(id);
         return "redirect:/";
     }
 
-    @GetMapping("/css/dynamic.css") 
+    @GetMapping("/css/dynamic.css")
     public String getCss() {
         return "css/dynamic";
     }
+
 }
