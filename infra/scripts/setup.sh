@@ -3,7 +3,7 @@
 ### Install Tomcat
 
 sudo apt-get update
-sudo apt-get install -y openjdk-11-jdk
+sudo apt-get install -y openjdk-17-jdk
 
 cd /tmp
 sudo mkdir /opt/tomcat
@@ -22,7 +22,7 @@ After=network.target
 [Service]
 Type=forking
 
-Environment="JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64"
+Environment="JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64"
 Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom"
 Environment="CATALINA_BASE=/opt/tomcat"
 Environment="CATALINA_HOME=/opt/tomcat"
