@@ -64,7 +64,7 @@ public class SpringWebConfig implements WebMvcConfigurer, ApplicationContextAwar
     public LocaleResolver localeResolver() {
         CookieLocaleResolver slr = new CookieLocaleResolver("language");
         slr.setCookieMaxAge(Duration.ofHours(24));
-        slr.setDefaultLocale(Locale.US);
+        slr.setDefaultLocale(new Locale("HE"));
         return slr;
     }
 

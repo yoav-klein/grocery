@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'war'
+    id 'org.hidetake.ssh' version '2.11.2'
 }
 
 repositories {
@@ -53,4 +54,28 @@ tasks.register('deploy', Copy) {
 
     from war.archiveFile
     into "C:\\apache-tomcat-10.1.24-windows-x64\\webapps"
+}
+
+
+/**  Deploy to remote server */
+
+remotes {
+  webServer {
+    host = 'ec2-3-81-168-72.compute-1.amazonaws.com'
+    user = 'ubuntu'
+    identity = file('C:\\Users\\yoavk\\.secrets\\server.key')
+  }
+}
+
+ssh.settings {
+    knownHosts = allowAnyHosts
+}
+
+tasks.register('deployRemote') {
+dependsOn 'war'
+    ssh.run {
+        session(remotes.webServer) {
+        put from: war.archiveFile.get().getAsFile(), into: '/opt/tomcat/webapps/ROOT.war'
+        }
+    }
 }
