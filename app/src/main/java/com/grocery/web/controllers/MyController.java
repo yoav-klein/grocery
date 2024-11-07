@@ -28,11 +28,6 @@ public class MyController {
     @Autowired
     ItemService itemService;
 
-    @ModelAttribute("allItems")
-    public List<Item> populateItems(){
-        return itemService.getAllItems();
-    }
-
     @ModelAttribute("itemsByCategory")
     public Map<ItemCategory, List<Item>> populateItemsByCategory() {
         return itemService.getItemsByCategory();
