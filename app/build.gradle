@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+    implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'org.springframework:spring-jdbc:6.1.11'
     implementation 'org.springframework:spring-webmvc:6.1.1'
     implementation 'org.apache.tomcat:tomcat-servlet-api:10.1.24'
@@ -26,13 +26,7 @@ dependencies {
     implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
     implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
     
-
-    // Use JUnit Jupiter for testing.
-    testImplementation libs.junit.jupiter
-    
-
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
+    testImplementation libs.testng
    
 }
 
@@ -45,8 +39,11 @@ java {
 
 
 tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+    // Use TestNG for unit tests.
+    useTestNG {
+        useDefaultListeners(true)
+        println getListeners()
+    }
 }
 
 tasks.register('deploy', Copy) {
@@ -61,7 +58,7 @@ tasks.register('deploy', Copy) {
 
 remotes {
   webServer {
-    host = 'ec2-3-81-168-72.compute-1.amazonaws.com'
+    host = 'ec2-54-242-76-117.compute-1.amazonaws.com'
     user = 'ubuntu'
     identity = file('C:\\Users\\yoavk\\.secrets\\server.key')
   }
