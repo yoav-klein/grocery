@@ -109,7 +109,7 @@
             <h1 class="additem__h1" th:text="#{additem.title}">Add Item</h1>
             <form  class="additem" th:action="@{/newItem}" method="post" th:object="${item}">
                 <fieldset class="additem__fieldset">
-                    <legend class="offscreen">Add Item</legend>
+                    
                     
                     <ul th:if="${#fields.hasErrors('*')}">
                         <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
@@ -123,7 +123,7 @@
                         <label class="additem__label" for="quantity" th:text="#{additem.label.quantity}">Quantity</label>
                         <input type="number" class="additem__quantity" th:field="*{quantity}"/>
 
-                        <label class="offscreen" for="quantityType">Quantity Type</label>
+                        
                         <select th:field="*{quantityType}">
                             <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="#{${'additem.quantitytype.' + type}}">Kg</option>
                             <option th:remove="all">Unit</option>

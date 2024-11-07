@@ -1,6 +1,6 @@
 
 module "vpc" {
-    source = "github.com/yoav-klein/terraform//aws/modules/vpc"
+    source = "github.com/yoav-klein/terraform//aws/modules/vpc?ref=vpc-no-nat-gateway"
     name = "grocery-app"
     cidr = "10.0.0.0/16"
     public_subnets = [{

@@ -53,7 +53,7 @@ textarea {
 
 .offscreen {
     position: absolute;
-    right: -10000px;
+    left: -10000px;
 }
 
 .nowrap {
