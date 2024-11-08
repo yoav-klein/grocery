@@ -26,8 +26,8 @@ dependencies {
     implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
     implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
 
-    // these 2 are needed for the Validation bean in tests for some reason
     testImplementation group: 'com.h2database', name: 'h2', version: '2.3.232'
+    // these 2 are needed for the Validation bean in tests for some reason
     testImplementation 'jakarta.el:jakarta.el-api:6.0.0'
     testImplementation 'org.glassfish:jakarta.el:4.0.2'
     testImplementation 'org.springframework:spring-test:6.1.1'
