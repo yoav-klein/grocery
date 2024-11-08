@@ -17,13 +17,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 
-
 import com.grocery.web.SpringWebConfig;
 import com.grocery.business.SpringBusinessConfig;
 
 
 
 @WebAppConfiguration
+@ActiveProfiles("dev")
 @ContextConfiguration(classes = { SpringWebConfig.class, SpringBusinessConfig.class })
 public class AppTest extends AbstractTestNGSpringContextTests {
     private MockMvc mockMvc;

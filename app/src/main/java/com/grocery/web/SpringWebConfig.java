@@ -11,6 +11,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,6 +23,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.context.annotation.Profile;
+
+
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -149,7 +154,19 @@ public class SpringWebConfig implements WebMvcConfigurer, ApplicationContextAwar
     // ======== DataSource for MySQL database
 
     @Bean
-	DataSource getDataSource() {
+    @Profile("dev")
+	DataSource getDevDataSource() {
+		return new EmbeddedDatabaseBuilder()
+			.setType(EmbeddedDatabaseType.H2)
+			.addScript("classpath:com/grocery/schema.sql")
+            .setScriptEncoding("UTF-8")
+			.build();
+	}
+
+    
+    @Bean
+    @Profile("default")
+	DataSource getProdDataSource() {
 		String dbUrl = "jdbc:mysql://localhost:3306/grocery";
         String dbUser = "yoav";
         String dbPassword = "yoav";
