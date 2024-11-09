@@ -23,7 +23,7 @@ import java.util.Map;
 
 
 @Controller
-public class MyController {
+public class WebController {
 
     @Autowired
     ItemService itemService;

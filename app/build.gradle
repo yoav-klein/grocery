@@ -32,6 +32,7 @@ dependencies {
     testImplementation 'org.glassfish:jakarta.el:4.0.2'
     testImplementation 'org.springframework:spring-test:6.1.1'
     testImplementation libs.testng
+    testImplementation("org.assertj:assertj-core:3.26.3")
    
 }
 
@@ -74,7 +75,7 @@ ssh.settings {
 }
 
 tasks.register('deployRemote') {
-dependsOn 'war'
+    dependsOn 'war'
     ssh.run {
         session(remotes.webServer) {
         put from: war.archiveFile.get().getAsFile(), into: '/opt/tomcat/webapps/ROOT.war'
