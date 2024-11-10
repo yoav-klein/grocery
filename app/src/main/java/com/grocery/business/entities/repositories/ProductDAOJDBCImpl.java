@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.grocery.business.entities.ListItem;
 import com.grocery.business.entities.Product;
 import com.grocery.business.entities.ProductCategory;
 import com.grocery.business.entities.QuantityType;

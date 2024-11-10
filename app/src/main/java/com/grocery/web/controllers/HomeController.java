@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -16,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import com.grocery.business.entities.ListItem;
 import com.grocery.business.entities.ProductCategory;
 import com.grocery.business.entities.QuantityType;
-import com.grocery.business.services.ItemService;
+import com.grocery.business.services.ListItemService;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,7 @@ import java.util.Map;
 public class HomeController {
 
     @Autowired
-    ItemService itemService;
+    ListItemService itemService;
 
     @ModelAttribute("itemsByCategory")
     public Map<ProductCategory, List<ListItem>> populateItemsByCategory() {
