@@ -79,4 +79,9 @@ public class AppTest extends AbstractTestNGSpringContextTests {
             .param("category", "VEGETABLES"))
             .andExpect(model().hasErrors());
     }
+
+    @Test
+    void addProductTest() throws Exception {
+        
+    }
 }
