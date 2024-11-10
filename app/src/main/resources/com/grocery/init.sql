@@ -46,3 +46,11 @@ CREATE TABLE item(
     FOREIGN KEY(quantity_type_id) REFERENCES quantity_type(id)
 );
 
+CREATE TABLE product(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    category_id INT DEFAULT 1,
+    quantity_type_id INT DEFAULT 1,
+    FOREIGN KEY(category_id) REFERENCES category(id),
+    FOREIGN KEY(quantity_type_id) REFERENCES quantity_type(id)
+)

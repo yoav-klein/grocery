@@ -55,9 +55,14 @@ public class WebController {
         return "html/index"; // This corresponds to the view name
     }
 
-    @GetMapping("fixed-list")
+    @GetMapping("/myList")
     public String fixedList(Model model) {
-        return "html/fixed-list";
+        return "html/my-list";
+    }
+
+    @GetMapping("/myProducts")
+    public String myProducts(Model model) {
+        return "html/my-products";
     }
 
     @PostMapping("/newItem")
