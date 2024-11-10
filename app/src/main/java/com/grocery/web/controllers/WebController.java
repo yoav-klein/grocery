@@ -49,10 +49,15 @@ public class WebController {
     }
 
     
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index(Model model) {
         
         return "html/index"; // This corresponds to the view name
+    }
+
+    @GetMapping("fixed-list")
+    public String fixedList(Model model) {
+        return "html/fixed-list";
     }
 
     @PostMapping("/newItem")

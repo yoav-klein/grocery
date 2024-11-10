@@ -95,14 +95,14 @@ a:any-link {
 
 a:hover,
 a:focus-visible {
-    color:var(--LINK-HOVER);
+    color: var(--LINK-HOVER);
+}
+
+a:active {
+    color: var(--LINK-ACTIVE);
 }
 
 /* || HEADER */
-
-.header__h1 {
-    text-align: center;
-}
 
 .header {
     padding: 1em;
@@ -113,6 +113,20 @@ a:focus-visible {
     background-color: var(--HEADER-BGCOLOR);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+}
+
+.header__h1 {
+    text-align: center;
+}
+
+.header__nav {
+    background-color: 
+}
+
+.header ul {
+    display: flex;
+    list-style-type: none;
+    gap: 1rem;
 }
 
 /* || MAIN */

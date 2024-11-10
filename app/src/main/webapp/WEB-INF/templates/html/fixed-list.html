@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:attr="dir=${#locale.language == 'he' ? 'rtl' : 'ltr'}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" href="../../../css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../WEB-INF/templates/css/style.css" th:href="@{/css/dynamic.css}">
+    <link rel="icon" href="../../../images/grocery.ico" type="image/x-icon" th:href="@{/images/grocery.ico}">
+    <title th:text="#{heading}">Shopping List</title>
+</head>
+<body>
+    <header class="header">
+        <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+        <nav class="header__nav">
+            <ul class="header__ul">
+                <li>
+                    <a href="index.html" th:href="@{/}">Home</a>
+                </li>
+                <li>
+                    <a href="management.html" th:href="@{/management}">Management</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+
+    </main>
+</body>
+</html>

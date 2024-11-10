@@ -10,7 +10,17 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__h1" th:text="#{heading}">Shops</h1>
+        <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+        <nav class="header__nav">
+            <ul class="header__ul">
+                <li>
+                    <a href="fixed-list.html" th:href="@{/fixed-list}">My Fixed List</a>
+                </li>
+                <li>
+                    <a href="management.html" th:href="@{/management}">Management</a>
+                </li>
+            </ul>
+        </nav>
     </header>
     <main class="main">
         <section id="list" class="list">
