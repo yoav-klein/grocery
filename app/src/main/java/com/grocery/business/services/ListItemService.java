@@ -7,26 +7,26 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grocery.business.entities.repositories.ItemDAO;
-import com.grocery.business.entities.Item;
-import com.grocery.business.entities.ItemCategory;
+import com.grocery.business.entities.repositories.ListItemDAO;
+import com.grocery.business.entities.ListItem;
+import com.grocery.business.entities.ProductCategory;
 
 @Service
-public class ItemService {
+public class ListItemService {
     
     @Autowired
-    private ItemDAO itemRepository;
+    private ListItemDAO itemRepository;
 
-    public List<Item> getAllItems() {
+    public List<ListItem> getAllItems() {
         
         return this.itemRepository.getAllItems();
     }
 
-    public Map<ItemCategory, List<Item>> getItemsByCategory() {
-        return this.itemRepository.getAllItems().stream().collect(Collectors.groupingBy(Item::getCategory));
+    public Map<ProductCategory, List<ListItem>> getItemsByCategory() {
+        return this.itemRepository.getAllItems().stream().collect(Collectors.groupingBy(ListItem::getCategory));
     }
 
-    public void add(Item item) {
+    public void add(ListItem item) {
         if(isItemInList(item)) {
             this.itemRepository.addQuantity(item, item.getQuantity());
             return;
@@ -38,8 +38,8 @@ public class ItemService {
         this.itemRepository.deleteItem(id);
     }
 
-    private boolean isItemInList(Item item) {
-        Item requestedItem = itemRepository.getItemByName(item);
+    private boolean isItemInList(ListItem item) {
+        ListItem requestedItem = itemRepository.getItemByName(item);
 
         return requestedItem != null;
     }

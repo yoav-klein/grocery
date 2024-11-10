@@ -13,8 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
 
-import com.grocery.business.entities.Item;
-import com.grocery.business.entities.ItemCategory;
+import com.grocery.business.entities.ListItem;
+import com.grocery.business.entities.ProductCategory;
 import com.grocery.business.entities.QuantityType;
 import com.grocery.business.services.ItemService;
 
@@ -23,19 +23,19 @@ import java.util.Map;
 
 
 @Controller
-public class WebController {
+public class HomeController {
 
     @Autowired
     ItemService itemService;
 
     @ModelAttribute("itemsByCategory")
-    public Map<ItemCategory, List<Item>> populateItemsByCategory() {
+    public Map<ProductCategory, List<ListItem>> populateItemsByCategory() {
         return itemService.getItemsByCategory();
     }
 
     @ModelAttribute("item") 
-    public Item populateItem() {
-        return new Item();
+    public ListItem populateItem() {
+        return new ListItem();
     }
 
     @ModelAttribute("allQuantityTypes") 
@@ -44,8 +44,8 @@ public class WebController {
     }
 
     @ModelAttribute("allCategories")
-    public ItemCategory[] populateAllCategories() {
-        return ItemCategory.values();
+    public ProductCategory[] populateAllCategories() {
+        return ProductCategory.values();
     }
 
     
@@ -55,18 +55,9 @@ public class WebController {
         return "html/index"; // This corresponds to the view name
     }
 
-    @GetMapping("/myList")
-    public String fixedList(Model model) {
-        return "html/my-list";
-    }
-
-    @GetMapping("/myProducts")
-    public String myProducts(Model model) {
-        return "html/my-products";
-    }
 
     @PostMapping("/newItem")
-    public String newItem(@Validated @ModelAttribute Item item, BindingResult result) {
+    public String newItem(@Validated @ModelAttribute ListItem item, BindingResult result) {
         if(result.hasErrors()) {
             return "html/index";
         }
