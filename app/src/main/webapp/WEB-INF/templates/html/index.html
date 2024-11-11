@@ -24,103 +24,49 @@
     </header>
     <main class="main">
         <section id="list" class="list">
-            <article class="list__category" th:each="category : ${itemsByCategory}">
-                <h2 class="list__h2 nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+            <article class="category" th:each="category : ${itemsByCategory}">
+                <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                 <form th:action="@{/deleteItem}" method="get">
-                    <table class="list__table">
+                    <table class="category__table">
                         <thead>
                             <tr>
-                                <th scope="col" class="list__quantity-header"></th>
-                                <th scope="col" class="list__unit-header"></th>
-                                <th scope="col" class="list__name-header"></th>
-                                <th scope="col" class="list__name-header"></th>
+                                <th scope="col" class="quantity-header"></th>
+                                <th scope="col" class="quantity-type-header"></th>
+                                <th scope="col" class="product-name-header"></th>
+                                <th scope="col" class="delete-button-header"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="list__item" th:each="item : ${category.value}">
-                                <td class="list__item-quantity" th:text="${item.quantity}">3</td>
-                                <td class="list__item-unit" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
-                                <td class="list__item-name" th:text="${item.name}">Tomatos</td>
-                                <td><button name="id" th:value="${item.id}"><img th:src="@{/images/v-sign.png}" alt=""></button></td>
+                            <tr class="category__item" th:each="item : ${category.value}">
+                                <td th:text="${item.quantity}">3</td>
+                                <td th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
+                                <td th:text="${item.name}">Tomatos</td>
+                                <td><button class="delete-button" name="id" th:value="${item.id}"><img src="../../../images/v-sign.png" th:src="@{/images/v-sign.png}" alt=""></button></td>
                             </tr>
-                            <tr class="list__item" th:remove="all">
-                                <td class="list__item-quantity">1</td>
-                                <td class="list__item-unit">Kg</td>
-                                <td class="list__item-name">Cucumber</td>
-                                <td><button>Delete</button></td>
+                            <tr class="category__item" th:remove="all">
+                                <td>1</td>
+                                <td>Kg</td>
+                                <td>Cucumber</td>
+                                <td><button class="delete-button"><img src="../../../images/v-sign.png"  alt=""></button></td>
                             </tr>
-                            <tr class="list__item" th:remove="all">
-                                <td class="list__item-quantity">1</td>
-                                <td class="list__item-unit">Kg</td>
-                                <td class="list__item-name">Parsley</td>
-                                <td><button>Delete</button></td>
+                            <tr class="category__item" th:remove="all">
+                                <td>1</td>
+                                <td>Kg</td>
+                                <td>Parsley</td>
+                                <td><button class="delete-button"><img src="../../../images/v-sign.png"  alt=""></button></td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
             </article>
 
-            <article class="list__category" th:remove="all">
-                <h2 class="list__h2">FRUITS</h2>
-                <table class="list__table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="list__quantity-header"></th>
-                            <th scope="col" class="list__unit-header"></th>
-                            <th scope="col" class="list__name-header"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="list__item" th:each="item: ${category.value}">
-                            <td class="list__item-quantity">3</td>
-                            <td class="list__item-unit">Kg</td>
-                            <td class="list__item-name">Apples</td>
-                        </tr>
-                        <tr class="list__item" th:each="item: ${category.value}">
-                            <td class="list__item-quantity" th:text="${item.quantity}">2</td>
-                            <td class="list__item-unit">Kg</td>
-                            <td class="list__item-name">Melons</td>
-                        </tr>
-                        <tr class="list__item" th:each="item: ${category.value}">
-                            <td class="list__item-quantity" th:text="${item.quantity}">2</td>
-                            <td class="list__item-unit">Kg</td>
-                            <td class="list__item-name">Grapes</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </article>
-
-            <article class="list__category" th:remove="all">
-                <h2 class="list__h2">DAIRY</h2>
-                <table class="list__table">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="list__quantity-header"></th>
-                            <th scope="col" class="list__unit-header"></th>
-                            <th scope="col" class="list__name-header"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="list__item">
-                            <td class="list__item-quantity">1</td>
-                            <td class="list__item-unit">Unit</td>
-                            <td class="list__item-name">Milk</td>
-                        </tr>
-                        <tr class="list__item">
-                            <td class="list__item-quantity">4</td>
-                            <td class="list__item-unit">Unit</td>
-                            <td class="list__item-name">Yogurt</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </article>
+            
         </section>
         <hr>
-        <section id="add_form">
-            <h1 class="additem__h1" th:text="#{additem.title}">Add Item</h1>
-            <form  class="additem" th:action="@{/newItem}" method="post" th:object="${item}">
+        <section id="add_form" class="additem">
+            <h2  th:text="#{additem.title}">Add Item</h2>
+            <form  th:action="@{/newItem}" method="post" th:object="${item}">
                 <fieldset class="additem__fieldset">
-                    
                     
                     <ul th:if="${#fields.hasErrors('*')}">
                         <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>

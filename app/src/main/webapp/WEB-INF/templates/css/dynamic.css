@@ -11,5 +11,5 @@
     --FF-ITEM: [(${#locale.language == 'he' ? '"Levin"' : '"Nunito", sans-serif'})];
     --FF-CATEGORY: "Kanit", cursive;
     --FF-H1: [(${#locale.language == 'he' ? '"Varela Round"' : '"Fugaz One", cursive;'})];
-    --FS: clamp(1rem, 2.2vh, 1.5rem);
+    
 }
