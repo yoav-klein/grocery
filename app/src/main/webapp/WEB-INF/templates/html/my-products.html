@@ -30,8 +30,8 @@
                     <table class="category__table">
                         <thead>
                             <tr>
-                                <th scope="col" class="product-name-header">Name</th>
-                                <th scope="col" class="quantity-type-header">Unit</th>
+                                <th scope="col" class="product-name-header" th:text="#{category.heading.name}">Name</th>
+                                <th scope="col" class="quantity-type-header" th:text="#{category.heading.quantitytype}">Unit</th>
                                 <th scope="col" class="delete-button-header"></th>
                             </tr>
                         </thead>
@@ -59,7 +59,7 @@
         </section>
         <hr>
         <section id="add_form" class="additem">
-            <h2  th:text="#{additem.title}">Add Product</h2>
+            <h2  th:text="#{addproduct.title}">Add Product</h2>
             <form  th:action="@{/newProduct}" method="post" th:object="${product}">
                 <fieldset class="additem__fieldset">
                     
@@ -68,18 +68,18 @@
                     </ul>
 
                     <p class="additem__p">
-                        <label class="additem__label" for="name" th:text="#{additem.label.name}">Name</label>
+                        <label class="additem__label" for="name" th:text="#{addproduct.label.name}">Name</label>
                         <input class="additem__name" type="text" th:field="*{name}"/>
                     </p>
                     <p class="additem__p">
-                        <label class="additem__label" for="quantityType" th:text="#{additem.label.unit}">Unit</label>
+                        <label class="additem__label" for="quantityType" th:text="#{addproduct.label.quantitytype}">Unit</label>
                         <select th:field="*{quantityType}">
-                            <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="#{${'additem.quantitytype.' + type}}">Kg</option>
+                            <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="#{${'addproduct.quantitytype.' + type}}">Kg</option>
                             <option th:remove="all">Unit</option>
                         </select>
                     </p>
                     <p class="additem__p">
-                        <label class="additem__label" for="category" th:text="#{additem.label.category}">Category</label>
+                        <label class="additem__label" for="category" th:text="#{addproduct.label.category}">Category</label>
                         <select class="additem__category" th:field="*{category}">
                             <option th:each="category : ${allCategories}" th:value="${category}" th:text="#{'category.option.' + ${category}}">Vegetables</option>
                             <option th:remove="all">Fruits</option>
@@ -88,7 +88,7 @@
                     </p>
                     
                     <p class="additem__p add__item-button-container">
-                        <button  class="additem__button" type="submit" name="save" th:text="#{additem.submit}">Submit!</button>
+                        <button  class="additem__button" type="submit" name="save" th:text="#{addproduct.submit}">Submit!</button>
                     </p>
                 
                 </fieldset>

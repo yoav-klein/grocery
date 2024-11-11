@@ -4,11 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.grocery.business.entities.ProductCategory;
 import com.grocery.business.entities.QuantityType;
+import com.grocery.business.entities.ListItem;
 import com.grocery.business.entities.Product;
 import com.grocery.business.services.ProductService;
 
@@ -24,6 +28,11 @@ public class FixedListController {
     @ModelAttribute("allQuantityTypes") 
     public QuantityType[] populateAllTypes() {
         return QuantityType.values();
+    }
+
+    @ModelAttribute("product")
+    public Product populateProduct() {
+        return new Product();
     }
 
     @ModelAttribute("allCategories")
@@ -45,4 +54,15 @@ public class FixedListController {
     public String myProducts(Model model) {
         return "html/my-products";
     }
+
+    @PostMapping("/newProduct")
+    public String myProducts(@Validated @ModelAttribute Product product, BindingResult result) {
+        if(result.hasErrors()) {
+            return "html/my-products";
+        }
+        productService.addProduct(product);
+
+        return "redirect:/myProducts";
+    }
+
 }
