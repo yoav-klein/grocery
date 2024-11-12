@@ -4,13 +4,14 @@ CREATE TABLE category(
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
-INSERT INTO category (name) values('OTHER');
+INSERT INTO category values(1, 'OTHER');
 INSERT INTO category (name) values('VEGETABLES');
 INSERT INTO category (name) values('FRUITS');
 INSERT INTO category (name) values('PROTEIN');
-INSERT INTO category (name) values('DAIRY');
 INSERT INTO category (name) values('DRY_GOODS');
-INSERT INTO category (name) values('CANNED');
+INSERT INTO category (name) values('SPICES');
+INSERT INTO category (name) values('CANNED_GOODS');
+INSERT INTO category (name) values('DAIRY');
 INSERT INTO category (name) values('BEVERAGES');
 INSERT INTO category (name) values('ALCOHOL');
 INSERT INTO category (name) values('HYGIENE');
@@ -27,8 +28,9 @@ CREATE TABLE quantity_type(
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
-INSERT INTO quantity_type (name) values('UNIT');
+INSERT INTO quantity_type values(1, 'UNIT');
 INSERT INTO quantity_type (name) values('KG');
+
 
 CREATE TABLE item(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -40,11 +42,10 @@ CREATE TABLE item(
     FOREIGN KEY(quantity_type_id) REFERENCES quantity_type(id)
 );
 
-
 CREATE TABLE product(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL UNIQUE,
-    category_id INT DEFAULT 1,
+    category_id INT DEFAULT 1 NOT NULL,
     quantity_type_id INT DEFAULT 1,
     FOREIGN KEY(category_id) REFERENCES category(id),
     FOREIGN KEY(quantity_type_id) REFERENCES quantity_type(id)
