@@ -9,10 +9,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grocery.business.entities.ProductCategory;
 import com.grocery.business.entities.QuantityType;
-import com.grocery.business.entities.ListItem;
 import com.grocery.business.entities.Product;
 import com.grocery.business.services.ProductService;
 
@@ -25,7 +25,7 @@ public class FixedListController {
     @Autowired
     private ProductService productService;
 
-    @ModelAttribute("allQuantityTypes") 
+    @ModelAttribute("allQuantityTypes")
     public QuantityType[] populateAllTypes() {
         return QuantityType.values();
     }
@@ -62,6 +62,12 @@ public class FixedListController {
         }
         productService.addProduct(product);
 
+        return "redirect:/myProducts";
+    }
+
+    @GetMapping("/deleteProduct")
+    public String deleteItem(@RequestParam("id") int id) {
+        this.productService.deleteProduct(id);
         return "redirect:/myProducts";
     }
 

@@ -18,9 +18,9 @@ public class ProductDAOJDBCImpl implements ProductDAO {
 
     // SQL STATEMENTS
 
-    private static final String GET_ALL_PRODUCTS = "select product.id, product.name AS ProductName, category.name AS Category, " +  
+    private static final String GET_ALL_PRODUCTS = "SELECT product.id, product.name AS ProductName, category.name AS Category, " +  
     "quantity_type.name AS QuantityType " +  
-    "from product JOIN category ON product.category_id = category.id " +
+    "FROM product JOIN category ON product.category_id = category.id " +
     "JOIN quantity_type ON product.quantity_type_id = quantity_type.id";
 
     private static final String ADD_PRODUCT = "INSERT INTO product (name, category_id, quantity_type_id) " + 
