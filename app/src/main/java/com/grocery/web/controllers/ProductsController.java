@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class FixedListController {
+public class ProductsController {
     
     @Autowired
     private ProductService productService;
@@ -45,11 +45,6 @@ public class FixedListController {
         return productService.getProductsByCategory();
     }
     
-    @GetMapping("/myList")
-    public String fixedList(Model model) {
-        return "html/my-list";
-    }
-
     @GetMapping("/myProducts")
     public String myProducts(Model model) {
         return "html/my-products";

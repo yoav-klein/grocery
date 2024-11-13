@@ -23,7 +23,18 @@
         </nav>
     </header>
     <main class="main">
-
+        <form th:object="${itemsByCategory}" method="post" th:action="@{/insert}">
+            <article th:each="category : *{map}">
+                <h2 th:text="${category.key}"></h2>
+                <div th:each="item,itemStat : ${category.value}">
+                    <p th:text="${item.name}"></p>
+                     <input type="text" th:field="*{map[__${category.key}__][__${itemStat.index}__].quantity}">
+                     
+                </div>
+            </article>
+            <input type="submit">
+        </form>
+        
     </main>
 </body>
 </html>
