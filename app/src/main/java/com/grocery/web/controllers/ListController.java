@@ -29,6 +29,9 @@ public class ListController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ListItemService itemService;
+
     @ModelAttribute("itemsByCategory")
     public FullListForm populateItemsByCategory() {
         List<Product> allProducts = productService.getAllProducts();
@@ -54,7 +57,17 @@ public class ListController {
 
     @PostMapping("/insert")
     public String insert(@ModelAttribute("itemsByCategory") FullListForm list) {
-        System.out.println(list.getMap().get(ProductCategory.ALCOHOL).get(0).getQuantity());
+        for(ProductCategory category : list.getMap().keySet()) {
+            List<ListItem> items = list.getMap().get(category);
+
+            for(ListItem item : items) {
+                if(item.getQuantity() > 0) {
+                    itemService.add(item);
+                }
+            }
+
+        }
+
         return "redirect:/";
     }
 
