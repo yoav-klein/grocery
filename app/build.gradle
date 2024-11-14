@@ -64,7 +64,7 @@ tasks.register('deploy', Copy) {
 
 remotes {
   webServer {
-    host = 'ec2-54-242-76-117.compute-1.amazonaws.com'
+    host = 'ec2-184-73-100-165.compute-1.amazonaws.com'
     user = 'ubuntu'
     identity = file('C:\\Users\\yoavk\\.secrets\\server.key')
   }
