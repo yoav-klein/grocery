@@ -110,6 +110,9 @@ a:active {
     white-space: nowrap;
 }
 
+.center {
+    text-align: center;
+}
 
 
 /* || HEADER */
@@ -156,6 +159,27 @@ a:active {
     min-height: 50vh;
 }
 
+/* || LIST PAGE */
+
+.listitem {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* || ITEM */
+
+.item__name {
+    font-family: var(--FF-ITEM);
+}
+
+.item__quantity {
+    width: 5ch;
+}
+
+.align_end {
+    margin-right: auto;
+}
+
 /* || CATEGORY */
 
 .category {
@@ -191,7 +215,6 @@ a:active {
 
 .category__table td {
     vertical-align: top;
-    font-family: var(--FF-ITEM);
 }
 
 
@@ -231,9 +254,6 @@ a:active {
     font-weight: bold;
 }
 
-.additem__quantity {
-    width: 5ch;
-}
 
 .add__item-button-container {
     display: flex;

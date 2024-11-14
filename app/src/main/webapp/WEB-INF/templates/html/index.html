@@ -38,9 +38,9 @@
                         </thead>
                         <tbody>
                             <tr class="category__item" th:each="item : ${category.value}">
-                                <td th:text="${item.quantity}">3</td>
-                                <td th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
-                                <td th:text="${item.name}">Tomatos</td>
+                                <td class="item__name" th:text="${item.quantity}">3</td>
+                                <td class="item__name" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
+                                <td class="item__name" th:text="${item.name}">Tomatos</td>
                                 <td><button class="delete-button" name="id" th:value="${item.id}"><img src="../../../images/v-sign.png" th:src="@{/images/v-sign.png}" alt=""></button></td>
                             </tr>
                             <tr class="category__item" th:remove="all">
@@ -78,7 +78,7 @@
                     </p>
                     <p class="additem__p">
                         <label class="additem__label" for="quantity" th:text="#{additem.label.quantity}">Quantity</label>
-                        <input type="number" class="additem__quantity" th:field="*{quantity}"/>
+                        <input type="number" class="item__quantity" th:field="*{quantity}"/>
 
                         
                         <select th:field="*{quantityType}">

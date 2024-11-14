@@ -26,10 +26,6 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class ListController {
-    
-    @Autowired
-    private ListItemService itemService;
-
     @Autowired
     private ProductService productService;
 
@@ -43,16 +39,13 @@ public class ListController {
         }
 
         FullListForm form = new FullListForm();
-        form.setMap(allItems.stream().collect(Collectors.groupingBy(ListItem::getCategory)));
+        Map<ProductCategory, List<ListItem>> itemsByCategory = allItems.stream().collect(Collectors.groupingBy(ListItem::getCategory));
+
+        form.setMap(itemsByCategory);
+        
         return form;
     }
     
-    @ModelAttribute("test")
-    public Map<String, String> test() {
-        Map<String, String> someMap = new HashMap<>();
-        someMap.put("Kaki", "Man");
-        return someMap;
-    }
     
     @GetMapping("/myList")
     public String fixedList(Model model) {
@@ -60,7 +53,8 @@ public class ListController {
     }
 
     @PostMapping("/insert")
-    public String insert(@ModelAttribute Map<ProductCategory, List<ListItem>> list) {
+    public String insert(@ModelAttribute("itemsByCategory") FullListForm list) {
+        System.out.println(list.getMap().get(ProductCategory.ALCOHOL).get(0).getQuantity());
         return "redirect:/";
     }
 
