@@ -22,8 +22,8 @@ import org.testng.annotations.*;
 
 import com.grocery.web.SpringWebConfig;
 import com.grocery.business.SpringBusinessConfig;
-import com.grocery.business.entities.Item;
-import com.grocery.business.entities.ItemCategory;
+import com.grocery.business.entities.ListItem;
+import com.grocery.business.entities.ProductCategory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -59,10 +59,10 @@ public class AppTest extends AbstractTestNGSpringContextTests {
             .andExpect(model().hasNoErrors());
         
         MvcResult result = mockMvc.perform(get("/")).andReturn();
-        Map<ItemCategory, List<Item>> itemsByCategory = (Map<ItemCategory, List<Item>>)result.getModelAndView().getModelMap().getAttribute("itemsByCategory");
-        assertThat(itemsByCategory).containsKey(ItemCategory.VEGETABLES);
+        Map<ProductCategory, List<ListItem>> itemsByCategory = (Map<ProductCategory, List<ListItem>>)result.getModelAndView().getModelMap().getAttribute("itemsByCategory");
+        assertThat(itemsByCategory).containsKey(ProductCategory.VEGETABLES);
 
-        List<Item> items = itemsByCategory.get(ItemCategory.VEGETABLES);
+        List<ListItem> items = itemsByCategory.get(ProductCategory.VEGETABLES);
         assertThat(items).anyMatch(item -> "Cucumber".equals(item.getName()));
         
         assertThat(items).hasSize(1);
@@ -78,5 +78,10 @@ public class AppTest extends AbstractTestNGSpringContextTests {
             .param("quantityType", "KG")
             .param("category", "VEGETABLES"))
             .andExpect(model().hasErrors());
+    }
+
+    @Test
+    void addProductTest() throws Exception {
+        
     }
 }

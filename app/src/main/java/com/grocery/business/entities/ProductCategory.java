@@ -1,6 +1,6 @@
 package com.grocery.business.entities;
 
-public enum ItemCategory {
+public enum ProductCategory {
     OTHER("Other"),
     VEGETABLES("Vegetables"),
     FRUITS("Fruits"),
@@ -21,7 +21,7 @@ public enum ItemCategory {
 
     private final String displayName;
 
-    ItemCategory(String displayName) {
+    ProductCategory(String displayName) {
         this.displayName = displayName;
     }
 

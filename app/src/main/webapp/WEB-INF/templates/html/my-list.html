@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html th:attr="dir=${#locale.language == 'he' ? 'rtl' : 'ltr'}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" href="../../../css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../WEB-INF/templates/css/style.css" th:href="@{/css/dynamic.css}">
+    <link rel="icon" href="../../../images/grocery.ico" type="image/x-icon" th:href="@{/images/grocery.ico}">
+    <title th:text="#{heading}">Shopping List</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header__title">
+            <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+            <img class="header__image" src="../../../images/shopping-cart.png" th:src="@{/images/shopping-cart.png}" alt="shopping-cart-image">
+        </div>
+        <nav class="header__nav">
+            <ul class="header__ul">
+                <li>
+                    <a href="index.html" th:href="@{/}" th:text="#{link.home}">Home</a>
+                </li>
+                <li>
+                    <a href="my-products.html" th:href="@{/myProducts}" th:text="#{link.myproducts}">My Products</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <form th:object="${itemsByCategory}" method="post" th:action="@{/insert}">
+            <section class="main__section grid">
+                <article class="category" th:each="category : *{map}">
+                    <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                    <div class="listitem" th:each="item,itemStat : ${category.value}">
+                        <p class="item-font" th:text="${item.name}"></p>
+                        <input class="quantity-input align_end" type="number" th:field="*{map[__${category.key}__][__${itemStat.index}__].quantity}">
+                            
+                    </div>
+                </article>
+
+            </section>
+            <p class="field-container submit-button-container">
+                <button  class="submit-button" type="submit" name="save" th:text="#{addproduct.submit}">Submit!</button>
+            </p>
+        </form>
+    
+    </main>
+</body>
+</html>

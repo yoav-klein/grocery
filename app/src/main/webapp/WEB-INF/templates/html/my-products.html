@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html th:attr="dir=${#locale.language == 'he' ? 'rtl' : 'ltr'}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" href="../../../css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../WEB-INF/templates/css/style.css" th:href="@{/css/dynamic.css}">
+    <link rel="icon" href="../../../images/grocery.ico" type="image/x-icon" th:href="@{/images/grocery.ico}">
+    <title th:text="#{heading}">Shopping List</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header__title">
+            <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+            <img class="header__image" src="../../../images/shopping-cart.png" th:src="@{/images/shopping-cart.png}" alt="shopping-cart-image">
+        </div>
+        <nav class="header__nav">
+            <ul class="header__ul">
+                <li>
+                    <a href="index.html" th:href="@{/}" th:text="#{link.home}">Home</a>
+                </li>
+                <li>
+                    <a href="myList.html" th:href="@{/myList}" th:text="#{link.mylist}">My List</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <section id="list" class="main__section grid">
+            <article class="category" th:each="category : ${productsByCategory}">
+                <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                <form th:action="@{/deleteProduct}" method="get">
+                    <table class="category__table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="product-name-header" th:text="#{category.heading.name}">Name</th>
+                                <th scope="col" class="quantity-type-header" th:text="#{category.heading.quantitytype}">Unit</th>
+                                <th scope="col" class="delete-button-header"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="item-font" th:each="item : ${category.value}">
+                                <td th:text="${item.name}">Tomatos</td>
+                                <td th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
+                                <td ><button class="delete-button" name="id" th:value="${item.productId}"><img src="../../../images/delete.png" th:src="@{/images/delete.png}" alt=""></button></td>
+                            </tr>
+                            <tr class="item-font" th:remove="all">
+                                <td>Cucumber</td>
+                                <td>Kg</td>
+                                <td><button class="delete-button"><img src="../../../images/delete.png" alt=""></button></td>
+                            </tr>
+                            <tr class="item-font" th:remove="all">
+                                <td>Parsley</td>
+                                <td>Kg</td>
+                                <td><button class="delete-button"><img src="../../../images/delete.png" alt=""></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+
+            </article>
+        </section>
+        <hr>
+        <section class="main__section">
+            <h2  th:text="#{addproduct.title}">Add Product</h2>
+            <form  th:action="@{/newProduct}" method="post" th:object="${product}">
+                <fieldset>
+                    
+                    <ul th:if="${#fields.hasErrors('*')}">
+                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                    </ul>
+
+                    <p class="field-container">
+                        <label class="field-label" for="name" th:text="#{addproduct.label.name}">Name</label>
+                        <input class="long-input" type="text" th:field="*{name}"/>
+                    </p>
+                    <p class="field-container">
+                        <label class="field-label" for="quantityType" th:text="#{addproduct.label.quantitytype}">Unit</label>
+                        <select th:field="*{quantityType}">
+                            <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="#{${'addproduct.quantitytype.' + type}}">Kg</option>
+                            <option th:remove="all">Unit</option>
+                        </select>
+                    </p>
+                    <p class="field-container">
+                        <label class="field-label" for="category" th:text="#{addproduct.label.category}">Category</label>
+                        <select class="long-input" th:field="*{category}">
+                            <option th:each="category : ${allCategories}" th:value="${category}" th:text="#{'category.option.' + ${category}}">Vegetables</option>
+                            <option th:remove="all">Fruits</option>
+                            <option th:remove="all">Dairy</option>
+                        </select>
+                    </p>
+                    
+                    <p class="field-container submit-button-container">
+                        <button  class="submit-button" type="submit" name="save" th:text="#{addproduct.submit}">Submit!</button>
+                    </p>
+                
+                </fieldset>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

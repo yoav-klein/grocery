@@ -12,9 +12,9 @@ INSERT INTO category values(1, 'OTHER');
 INSERT INTO category (name) values('VEGETABLES');
 INSERT INTO category (name) values('FRUITS');
 INSERT INTO category (name) values('PROTEIN');
-INSERT INTO category (name) values('DAIRY');
 INSERT INTO category (name) values('DRY_GOODS');
-INSERT INTO category (name) values('CANNED');
+INSERT INTO category (name) values('SPICES');
+INSERT INTO category (name) values('CANNED_GOODS');
 INSERT INTO category (name) values('DAIRY');
 INSERT INTO category (name) values('BEVERAGES');
 INSERT INTO category (name) values('ALCOHOL');
@@ -46,3 +46,11 @@ CREATE TABLE item(
     FOREIGN KEY(quantity_type_id) REFERENCES quantity_type(id)
 );
 
+CREATE TABLE product(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    category_id INT DEFAULT 1 NOT NULL,
+    quantity_type_id INT DEFAULT 1,
+    FOREIGN KEY(category_id) REFERENCES category(id),
+    FOREIGN KEY(quantity_type_id) REFERENCES quantity_type(id)
+);
