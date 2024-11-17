@@ -26,7 +26,7 @@
         </nav>
     </header>
     <main class="main">
-        <section id="list" class="main__section grid">
+        <section id="list" class="main__section grid notebook">
             <article class="category" th:each="category : ${productsByCategory}">
                 <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                 <form th:action="@{/deleteProduct}" method="get">

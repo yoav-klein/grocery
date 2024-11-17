@@ -42,6 +42,9 @@ fieldset {
     --FS: clamp(1rem, 2.2vh, 1.5rem);
     
     /* COLORS */
+    --DEEP-BLUE: rgb(0, 45, 112);
+    --DEEP-BLUE-OPACITY: rgba(0, 45, 112, 0.356);
+
     --BG-COLOR: #fff;
     --BODY-BGCOLOR: #fffec1;
     
@@ -53,7 +56,7 @@ fieldset {
     --LINK-HOVER: hsla(0, 0%, 0%, 0.6);
     
     --FONT-COLOR: #000;
-    --LIST-FONT-COLOR: rgb(0, 45, 112);
+    --LIST-FONT-COLOR: var(--DEEP-BLUE);
     --MENU-FONT-COLOR: var(--HEADER-BGCOLOR);
 
     /* BORDERS */
@@ -135,6 +138,10 @@ a:active {
 
 .align_end {
     margin-right: auto;
+}
+
+.notebook {
+    background-image: repeating-linear-gradient(transparent 0px 20px, var(--DEEP-BLUE-OPACITY) 20px 21px);
 }
 
 /* || HEADER */

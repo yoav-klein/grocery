@@ -27,7 +27,7 @@
     </header>
     <main class="main">
         <form th:object="${itemsByCategory}" method="post" th:action="@{/insert}">
-            <section class="main__section grid">
+            <section class="main__section grid notebook">
                 <article class="category" th:each="category : *{map}">
                     <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                     <div class="listitem" th:each="item,itemStat : ${category.value}">
