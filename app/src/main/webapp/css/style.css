@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Wittgenstein:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Wittgenstein:ital,wght@0,400..900;1,400..900&family=Zain:wght@200;300;400;700;800;900&display=swap');
 
+
 /* || RESET */
 
 *,
@@ -26,20 +27,22 @@ textarea {
     font: inherit;
 }
 
-
 /* || VARIABLES */
 
 :root {
     /* FONT */
     --FS: clamp(1rem, 2.2vh, 1.5rem);
+    --LIST-FONT-COLOR: rgb(0, 45, 112);
 
     /* COLORS */
     --BG-COLOR: #fff;
-    --BODY-BGCOLOR: #FFF3E0;
-    --HEADER-BGCOLOR: #FF5722;
+    --BODY-BGCOLOR: #fffec1;
+    
+    --NAV-BGCOLOR: rgba(32, 5, 0, 0.74);
+    --HEADER-BGCOLOR: #fffedf;
     --BORDER-COLOR: #333;
     --FONT-COLOR: #000;
-    --LINK-COLOR: #000;
+    --LINK-COLOR: #fff;
     --LINK-HOVER: hsla(0, 0%, 0%, 0.6);
 
     /* BORDERS */
@@ -55,18 +58,22 @@ textarea {
 
 
 /* || GENERAL STYLES */
+
 html {
     font-size: var(--FS);
-    /* font-family: in the dynamic CSS */
+    font-family: var(--FF);
     background-color: var(--BG-COLOR);
     color: var(--FONT-COLOR);
     background-color: var(--BG-COLOR);
-    /* direction: ltr; */
 }
+
+
+/**/
+
+
 
 body {
     background-color: var(--BODY-BGCOLOR);
-    background-image: url(noise.png);
     min-height: 100vh;
     max-width: 1000px;
     margin: 0 auto;
@@ -76,17 +83,17 @@ body {
 }
 
 
-
-h1, h2, h3 {
-    letter-spacing: 0.1em;
+h1 {
     font-family: var(--FF-H1);
 }
 
 h2, h3 {
+    font-family: var(--FF-H2);
     margin-bottom: 1em;
 }
 
 a:any-link {
+    font-family: var(--FF-MENU);
     color: var(--LINK-COLOR);
 }
 
@@ -115,27 +122,85 @@ a:active {
 }
 
 
+/* || GENERAL CLASSES */
+
+.submit-button {
+    background: #f08a36;
+    color: #fff;
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 25px 80px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    
+}
+
+/* Submit button */
+
+.submit-button:hover {
+	background: #d16a15;
+}
+
+.submit-button:active {
+	background: #d16a15;
+	top: 2px;
+}
+
+.submit-button:before {
+	position: absolute;
+	height: 100%;
+	left: 0;
+	top: 0;
+	line-height: 3;
+	font-size: 140%;
+	width: 60px;
+}
+
+
+/* Fields */
+
 /* || HEADER */
 
 .header {
-    padding: 1em;
     position: sticky;
     top: 0;
     z-index: 1;
     box-shadow: 0 6px 5px -5px var(--BORDER-COLOR);
     background-color: var(--HEADER-BGCOLOR);
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    /* border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px; */
+}
+
+.header__title {
+    padding: 1em;
+    display: flex;
+    justify-content: space-evenly;
+    background-image: radial-gradient(transparent, var(--BODY-BGCOLOR));
+}
+
+.header__image { 
+    height: 3rem;
 }
 
 .header__h1 {
     text-align: center;
 }
 
-/* .header__nav {
-    background-color: 
+.header__nav {
+    background-color: var(--NAV-BGCOLOR);
+    color: #fff;
+    padding: .5em;
 }
- */
+ 
 .header__ul {
     display: flex;
     list-style-type: none;
@@ -146,18 +211,29 @@ a:active {
 
 .main {
     padding: var(--PADDING-TB) var(--PADDING-SIDE);
+    
 }
+
+
+
+
 
 /* || LIST */
 
+
 .list {
-    margin: var(--MARGIN);
+    padding: var(--MARGIN);
     display: grid;
     justify-content: space-evenly;
     grid-template-columns: repeat(auto-fit, 300px);
     gap:  0.5em 0.1em;
     min-height: 50vh;
+
+    background-color: #fffec1;
+    background-image: repeating-linear-gradient(transparent 0 20px, #002e6a4d 20px 21px);
+
 }
+
 
 /* || LIST PAGE */
 
@@ -184,10 +260,10 @@ a:active {
 
 .category {
     padding: var(--PADDING-TB) var(--PADDING-SIDE);
+    color: var(--LIST-FONT-COLOR);
 }
 
 .category h2 {
-    font-family: var(--FF-CATEGORY);
     margin-bottom: 0.5em; /* I want a smaller bottom margin */
 }
 
@@ -272,3 +348,4 @@ a:active {
 .additem__category {
     width: 200px;
 }
+

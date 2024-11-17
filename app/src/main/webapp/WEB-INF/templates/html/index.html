@@ -10,7 +10,10 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+        <div class="header__title">
+            <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+            <img class="header__image" src="../../../images/shopping-cart.png" th:src="@{/images/shopping-cart.png}" alt="shopping-cart-image">
+        </div>
         <nav class="header__nav">
             <ul class="header__ul">
                 <li>
@@ -23,45 +26,46 @@
         </nav>
     </header>
     <main class="main">
-        <section id="list" class="list">
-            <article class="category" th:each="category : ${itemsByCategory}">
-                <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
-                <form th:action="@{/deleteItem}" method="get">
-                    <table class="category__table">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="quantity-header"></th>
-                                <th scope="col" class="quantity-type-header"></th>
-                                <th scope="col" class="product-name-header"></th>
-                                <th scope="col" class="delete-button-header"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="category__item" th:each="item : ${category.value}">
-                                <td class="item__name" th:text="${item.quantity}">3</td>
-                                <td class="item__name" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
-                                <td class="item__name" th:text="${item.name}">Tomatos</td>
-                                <td><button class="delete-button" name="id" th:value="${item.id}"><img src="../../../images/v-sign.png" th:src="@{/images/v-sign.png}" alt=""></button></td>
-                            </tr>
-                            <tr class="category__item" th:remove="all">
-                                <td>1</td>
-                                <td>Kg</td>
-                                <td>Cucumber</td>
-                                <td><button class="delete-button"><img src="../../../images/v-sign.png"  alt=""></button></td>
-                            </tr>
-                            <tr class="category__item" th:remove="all">
-                                <td>1</td>
-                                <td>Kg</td>
-                                <td>Parsley</td>
-                                <td><button class="delete-button"><img src="../../../images/v-sign.png"  alt=""></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </article>
 
-            
-        </section>
+            <section id="list" class="list">
+                <article class="category" th:each="category : ${itemsByCategory}">
+                    <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                    <form th:action="@{/deleteItem}" method="get">
+                        <table class="category__table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="quantity-header"></th>
+                                    <th scope="col" class="quantity-type-header"></th>
+                                    <th scope="col" class="product-name-header"></th>
+                                    <th scope="col" class="delete-button-header"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="category__item" th:each="item : ${category.value}">
+                                    <td class="item__name" th:text="${item.quantity}">3</td>
+                                    <td class="item__name" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
+                                    <td class="item__name" th:text="${item.name}">Tomatos</td>
+                                    <td><button class="delete-button" name="id" th:value="${item.id}"><img src="../../../images/v-sign.png" th:src="@{/images/v-sign.png}" alt=""></button></td>
+                                </tr>
+                                <tr class="category__item" th:remove="all">
+                                    <td>1</td>
+                                    <td>Kg</td>
+                                    <td>Cucumber</td>
+                                    <td><button class="delete-button"><img src="../../../images/v-sign.png"  alt=""></button></td>
+                                </tr>
+                                <tr class="category__item" th:remove="all">
+                                    <td>1</td>
+                                    <td>Kg</td>
+                                    <td>Parsley</td>
+                                    <td><button class="delete-button"><img src="../../../images/v-sign.png"  alt=""></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </article>
+    
+                
+            </section>
         <hr>
         <section id="add_form" class="additem">
             <h2  th:text="#{additem.title}">Add Item</h2>
@@ -96,7 +100,7 @@
                     </p>
                     
                     <p class="additem__p add__item-button-container">
-                        <button  class="additem__button" type="submit" name="save" th:text="#{additem.submit}">Submit!</button>
+                        <button  class="submit-button add-to-list-button" type="submit" name="save" th:text="#{additem.submit}">Submit!</button>
                     </p>
                 
                 </fieldset>

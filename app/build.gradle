@@ -22,7 +22,6 @@ dependencies {
     implementation 'org.springframework:spring-webmvc:6.1.1'
     implementation 'org.apache.tomcat:tomcat-servlet-api:10.1.24'
     implementation group: 'org.thymeleaf', name: 'thymeleaf-spring6', version: '3.1.2.RELEASE'
-    
     implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
     implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
 
@@ -78,7 +77,7 @@ tasks.register('deployRemote') {
     dependsOn 'war'
     ssh.run {
         session(remotes.webServer) {
-        put from: war.archiveFile.get().getAsFile(), into: '/opt/tomcat/webapps/ROOT.war'
+            put from: war.archiveFile.get().getAsFile(), into: '/opt/tomcat/webapps/ROOT.war'
         }
     }
 }

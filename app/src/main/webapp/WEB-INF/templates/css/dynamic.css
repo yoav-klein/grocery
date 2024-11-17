@@ -8,8 +8,12 @@
 
 :root {
     /* FONTS */
-    --FF-ITEM: [(${#locale.language == 'he' ? '"Levin"' : '"Nunito", sans-serif'})];
-    --FF-CATEGORY: "Kanit", cursive;
+    --FF-GENERIC: [(${#locale.language == 'he' ? '"Arial"' : '"Nunito", sans-serif'})];
     --FF-H1: [(${#locale.language == 'he' ? '"Varela Round"' : '"Fugaz One", cursive;'})];
-    
+    --FF-H2: [(${#locale.language == 'he' ? '"Varela Round"' : '"Fugaz One", cursive;'})];
+    --FF-LIST-ITEM: [(${#locale.language == 'he' ? '"Levin"' : '"Nunito", sans-serif'})];
+    --FF-MENU: var(--FF-GENERIC);
+    --FF-CATEGORY: "Kanit", cursive;
+    --FF-FIELD-LABEL: var(--FF-GENERIC);
+    --FF-INPUT-FIELD: var(--FF-GENERIC); 
 }
