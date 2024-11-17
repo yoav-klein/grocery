@@ -10,7 +10,10 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+        <div class="header__title">
+            <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+            <img class="header__image" src="../../../images/shopping-cart.png" th:src="@{/images/shopping-cart.png}" alt="shopping-cart-image">
+        </div>
         <nav class="header__nav">
             <ul class="header__ul">
                 <li>
@@ -23,7 +26,7 @@
         </nav>
     </header>
     <main class="main">
-        <section id="list" class="list">
+        <section id="list" class="main__section grid">
             <article class="category" th:each="category : ${productsByCategory}">
                 <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                 <form th:action="@{/deleteProduct}" method="get">
@@ -36,17 +39,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="category__item" th:each="item : ${category.value}">
+                            <tr class="item-font" th:each="item : ${category.value}">
                                 <td th:text="${item.name}">Tomatos</td>
                                 <td th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
                                 <td ><button class="delete-button" name="id" th:value="${item.productId}"><img src="../../../images/delete.png" th:src="@{/images/delete.png}" alt=""></button></td>
                             </tr>
-                            <tr class="category__item" th:remove="all">
+                            <tr class="item-font" th:remove="all">
                                 <td>Cucumber</td>
                                 <td>Kg</td>
                                 <td><button class="delete-button"><img src="../../../images/delete.png" alt=""></button></td>
                             </tr>
-                            <tr class="category__item" th:remove="all">
+                            <tr class="item-font" th:remove="all">
                                 <td>Parsley</td>
                                 <td>Kg</td>
                                 <td><button class="delete-button"><img src="../../../images/delete.png" alt=""></button></td>
@@ -58,37 +61,37 @@
             </article>
         </section>
         <hr>
-        <section id="add_form" class="additem">
+        <section class="main__section">
             <h2  th:text="#{addproduct.title}">Add Product</h2>
             <form  th:action="@{/newProduct}" method="post" th:object="${product}">
-                <fieldset class="additem__fieldset">
+                <fieldset>
                     
                     <ul th:if="${#fields.hasErrors('*')}">
                         <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
                     </ul>
 
-                    <p class="additem__p">
-                        <label class="additem__label" for="name" th:text="#{addproduct.label.name}">Name</label>
-                        <input class="additem__name" type="text" th:field="*{name}"/>
+                    <p class="field-container">
+                        <label class="field-label" for="name" th:text="#{addproduct.label.name}">Name</label>
+                        <input class="long-input" type="text" th:field="*{name}"/>
                     </p>
-                    <p class="additem__p">
-                        <label class="additem__label" for="quantityType" th:text="#{addproduct.label.quantitytype}">Unit</label>
+                    <p class="field-container">
+                        <label class="field-label" for="quantityType" th:text="#{addproduct.label.quantitytype}">Unit</label>
                         <select th:field="*{quantityType}">
                             <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="#{${'addproduct.quantitytype.' + type}}">Kg</option>
                             <option th:remove="all">Unit</option>
                         </select>
                     </p>
-                    <p class="additem__p">
-                        <label class="additem__label" for="category" th:text="#{addproduct.label.category}">Category</label>
-                        <select class="additem__category" th:field="*{category}">
+                    <p class="field-container">
+                        <label class="field-label" for="category" th:text="#{addproduct.label.category}">Category</label>
+                        <select class="long-input" th:field="*{category}">
                             <option th:each="category : ${allCategories}" th:value="${category}" th:text="#{'category.option.' + ${category}}">Vegetables</option>
                             <option th:remove="all">Fruits</option>
                             <option th:remove="all">Dairy</option>
                         </select>
                     </p>
                     
-                    <p class="additem__p add__item-button-container">
-                        <button  class="additem__button" type="submit" name="save" th:text="#{addproduct.submit}">Submit!</button>
+                    <p class="field-container submit-button-container">
+                        <button  class="submit-button" type="submit" name="save" th:text="#{addproduct.submit}">Submit!</button>
                     </p>
                 
                 </fieldset>

@@ -26,6 +26,13 @@ select,
 textarea {
     font: inherit;
     border-radius: 5px;
+    padding: 0.25em 0;
+    padding-inline-start: 0.25em;
+    line-height: 1rem;
+}
+
+fieldset {
+    border: none;
 }
 
 /* || VARIABLES */
@@ -71,10 +78,6 @@ html {
     color: var(--FONT-COLOR);
     background-color: var(--BG-COLOR);
 }
-
-
-/**/
-
 
 
 body {
@@ -126,71 +129,12 @@ a:active {
     text-align: center;
 }
 
-
-/* || GENERAL CLASSES */
-
-/* Submit button */
-
-.submit-button {
-    background: #f08a36;
-    color: #fff;
-    border: none;
-    font-size: inherit;
-    cursor: pointer;
-    padding: 25px 80px;
-    display: inline-block;
-    margin: 15px 30px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    outline: none;
-    position: relative;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-    
+.item-font {
+    font-family: var(--FF-LIST-ITEM);
 }
 
-.submit-button:hover {
-	background: #d16a15;
-}
-
-.submit-button:active {
-	background: #d16a15;
-	top: 2px;
-}
-
-.submit-button:before {
-	position: absolute;
-	height: 100%;
-	left: 0;
-	top: 0;
-	line-height: 3;
-	font-size: 140%;
-	width: 60px;
-}
-
-.submit-button-container {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-
-/* Fields */
-
-.field-container {
-    margin: 1rem 0;
-    font-family: var(--FF-FIELD-LABEL);
-}
-
-.long-input {
-    width: 200px;
-}
-
-
-.field-label {
-    display: block;
-    font-weight: bold;
+.align_end {
+    margin-right: auto;
 }
 
 /* || HEADER */
@@ -238,6 +182,7 @@ a:active {
     text-decoration: none;
 }
 
+
 /* || MAIN */
 
 .main {
@@ -248,39 +193,92 @@ a:active {
     padding: var(--PADDING-SECTION);
 }
 
+/* || GRID */
 
-/* || LIST PAGE */
-
-.list {
+.grid {
     display: grid;
     justify-content: space-evenly;
     grid-template-columns: repeat(auto-fit, 300px);
     gap:  0.5em 0.1em;
     min-height: 50vh;
-
-    background-color: #fffec1;
-    background-image: repeating-linear-gradient(transparent 0 20px, #002e6a4d 20px 21px);
-
 }
+
+
+/* || FORM FIELDS */
+
+.field-container {
+    margin: 1rem 0;
+    font-family: var(--FF-FIELD-LABEL);
+}
+
+.long-input {
+    width: 200px;
+}
+
+
+.field-label {
+    display: block;
+    font-weight: bold;
+}
+
+.quantity-input {
+    width: 5ch;
+}
+
+
+/* || SUBMIT BUTTON */
+
+.submit-button {
+    background: #f08a36;
+    color: #fff;
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 25px 80px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    
+}
+
+.submit-button:hover {
+	background: #d16a15;
+}
+
+.submit-button:active {
+	background: #d16a15;
+	top: 2px;
+}
+
+.submit-button:before {
+	position: absolute;
+	height: 100%;
+	left: 0;
+	top: 0;
+	line-height: 3;
+	font-size: 140%;
+	width: 60px;
+}
+
+.submit-button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/* || FIXED LIST PAGE */
 
 
 .listitem {
     display: flex;
     justify-content: space-between;
-}
-
-/* || ITEM */
-
-.item__name {
-    font-family: var(--FF-ITEM);
-}
-
-.item__quantity {
-    width: 5ch;
-}
-
-.align_end {
-    margin-right: auto;
 }
 
 /* || CATEGORY */
@@ -299,6 +297,27 @@ a:active {
     width: 100%;
 }
 
+
+.category__table th {
+    text-align: start;
+    padding: 10px 0px;
+}
+
+.category__table td {
+    vertical-align: top;
+}
+
+.category__item img {
+    max-height: var(--FS);
+}
+
+.delete-button {
+    border: none;
+    background-color: transparent;
+}
+
+/* headers */
+
 .quantity-header {
     width: 2ch;
 }
@@ -310,47 +329,4 @@ a:active {
 .delete-button-header {
     width: 3ch;
 }
-
-.category__table th {
-    text-align: start;
-    padding: 10px 0px;
-}
-
-.category__table td {
-    vertical-align: top;
-}
-
-
-.category__item img {
-    max-height: var(--FS);
-}
-
-.category__item {
-    font-family: var(--FF-LIST-ITEM);
-}
-
-.delete-button {
-    border: none;
-    background-color: transparent;
-}
-
-/* || FORM */
-
-.additem {
-    margin: var(--MARGIN);
-}
-
-.additem__fieldset {
-    border: none;
-}
-
-.additem input,
-.additem select,
-.additem__button {
-    padding: 0.25em;
-    padding-inline-start: 0.25em;
-    line-height: 1rem;
-}
-
-
 

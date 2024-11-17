@@ -27,7 +27,7 @@
     </header>
     <main class="main">
 
-            <section id="list" class="main__section list">
+            <section id="list" class="main__section grid">
                 <article class="category" th:each="category : ${itemsByCategory}">
                     <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                     <form th:action="@{/deleteItem}" method="get">
@@ -41,7 +41,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="category__item" th:each="item : ${category.value}">
+                                <tr class="item-font" th:each="item : ${category.value}">
                                     <td class="item__name" th:text="${item.quantity}">3</td>
                                     <td class="item__name" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</td>
                                     <td class="item__name" th:text="${item.name}">Tomatos</td>
@@ -70,7 +70,7 @@
         <section class="main__section" id="add_form">
             <h2  th:text="#{additem.title}">Add Item</h2>
             <form  th:action="@{/newItem}" method="post" th:object="${item}">
-                <fieldset class="additem__fieldset">
+                <fieldset>
                     
                     <ul th:if="${#fields.hasErrors('*')}">
                         <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
@@ -82,7 +82,7 @@
                     </p>
                     <p class="field-container">
                         <label class="field-label" for="quantity" th:text="#{additem.label.quantity}">Quantity</label>
-                        <input type="number" class="item__quantity" th:field="*{quantity}"/>
+                        <input type="number" class="quantity-input" th:field="*{quantity}"/>
                         
                         <select th:field="*{quantityType}">
                             <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="#{${'additem.quantitytype.' + type}}">Kg</option>
