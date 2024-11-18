@@ -32,7 +32,9 @@
                     <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                     <div class="listitem" th:each="item,itemStat : ${category.value}">
                         <p class="item-font" th:text="${item.name}"></p>
-                        <input class="quantity-input align_end" type="number" th:field="*{map[__${category.key}__][__${itemStat.index}__].quantity}">
+                        <button th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), -1)">-</button>
+                        <input th:id="'input' + ${category.key} + ${itemStat.index}" class="quantity-input align_end" type="number" th:field="*{map[__${category.key}__][__${itemStat.index}__].quantity}">
+                        <button th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), +1)">+</button>
                             
                     </div>
                 </article>
@@ -42,7 +44,13 @@
                 <button  class="submit-button" type="submit" name="save" th:text="#{addproduct.submit}">Submit!</button>
             </p>
         </form>
-    
     </main>
+    <script>
+        function changeValue(inputId, delta) {
+            const input = document.getElementById(inputId);
+            const currentValue = parseInt(input.value, 10) || 0;
+            input.value = currentValue + delta;
+        }
+    </script>
 </body>
 </html>
