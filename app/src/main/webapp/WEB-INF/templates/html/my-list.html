@@ -32,10 +32,13 @@
                     <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                     <div class="listitem" th:each="item,itemStat : ${category.value}">
                         <p class="item-font" th:text="${item.name}"></p>
-                        <button th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), -1)">-</button>
-                        <input th:id="'input' + ${category.key} + ${itemStat.index}" class="quantity-input align_end" type="number" th:field="*{map[__${category.key}__][__${itemStat.index}__].quantity}">
-                        <button th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), +1)">+</button>
-                            
+
+                        <div class="item-number">
+                            <button class="item-number__button" th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), -1)">-</button>
+                            <input th:id="'input' + ${category.key} + ${itemStat.index}" class="quantity-input align_end" type="number" th:field="*{map[__${category.key}__][__${itemStat.index}__].quantity}">
+                            <button class="item-number__button" th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), +1)">+</button>
+                                
+                        </div>
                     </div>
                 </article>
 
@@ -46,10 +49,17 @@
         </form>
     </main>
     <script>
-        function changeValue(inputId, delta) {
+        function changeValue(inputId, change) {
             const input = document.getElementById(inputId);
-            const currentValue = parseInt(input.value, 10) || 0;
-            input.value = currentValue + delta;
+            const currentValue = parseInt(input.value, 10) || 0; // Handle empty or invalid values as 0
+            const newValue = currentValue + change;
+
+            // Ensure the value does not go below 0
+            if (newValue >= 0) {
+                input.value = newValue;
+            } else {
+                input.value = 0;
+            }
         }
     </script>
 </body>

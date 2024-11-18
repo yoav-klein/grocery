@@ -288,6 +288,20 @@ a:active {
     justify-content: space-between;
 }
 
+.item-number__button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: #007BFF;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
 /* || CATEGORY */
 
 .category {
