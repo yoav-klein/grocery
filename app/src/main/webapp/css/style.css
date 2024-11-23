@@ -25,10 +25,6 @@ button,
 select,
 textarea {
     font: inherit;
-    border-radius: 5px;
-    padding: 0.25em 0;
-    padding-inline-start: 0.25em;
-    line-height: 1rem;
 }
 
 fieldset {
@@ -77,7 +73,6 @@ fieldset {
 html {
     font-size: var(--FS);
     font-family: var(--FF);
-    background-color: var(--BG-COLOR);
     color: var(--FONT-COLOR);
     background-color: var(--BG-COLOR);
 }
@@ -142,6 +137,7 @@ a:active {
 
 .notebook {
     background-image: repeating-linear-gradient(transparent 0px 20px, var(--DEEP-BLUE-OPACITY) 20px 21px);
+    background-repeat: repeat;
 }
 
 /* || HEADER */
@@ -218,6 +214,13 @@ a:active {
     font-family: var(--FF-FIELD-LABEL);
 }
 
+.field-container input, .field-container select {
+    border-radius: 5px;
+    padding: 0.25em 0;
+    padding-inline-start: 0.25em;
+    line-height: 1rem;
+}
+
 .long-input {
     width: 200px;
 }
@@ -286,22 +289,29 @@ a:active {
 .listitem {
     display: flex;
     justify-content: space-between;
+    align-items: start;
+}
+
+.item-number {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .item-number__button {
-    /* width: 40px; */
-    /* height: 40px; */
     border: none;
     background-color: transparent;
-    /* border-radius: 50%; */
-    /* background-color: #007BFF; */
-    /* color: white; */
     font-size: 18px;
     font-weight: 900;
     cursor: pointer;
-    /* transition: background-color 0.3s ease, transform 0.2s ease; */
 }
 
+.item-number-spacing {
+    margin: 0 0.1rem;
+}
+
+.item-number-input {
+    max-height: 1.5rem;
+}
 
 /* || CATEGORY */
 

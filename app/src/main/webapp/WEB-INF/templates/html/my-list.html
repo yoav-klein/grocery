@@ -30,13 +30,14 @@
             <section class="main__section grid notebook">
                 <article class="category" th:each="category : *{map}">
                     <h2 class="nowrap" th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
-                    <div class="listitem" th:each="item,itemStat : ${category.value}">
-                        <p class="item-font" th:text="${item.name}"></p>
+                    <div class="item-font listitem" th:each="item,itemStat : ${category.value}">
+                        <p  th:text="${item.name}">Tomato</p>
 
                         <div class="item-number">
-                            <button class="item-number__button" th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), -1)">-</button>
-                            <input th:id="'input' + ${category.key} + ${itemStat.index}" class="quantity-input align_end" type="number" th:field="*{map[__${category.key}__][__${itemStat.index}__].quantity}">
-                            <button class="item-number__button" th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), +1)">+</button>
+                            <button class="item-number-spacing item-number__button" th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), -1)">-</button>
+                            <input th:id="'input' + ${category.key} + ${itemStat.index}" class="item-number-input item-number-spacing quantity-input align_end" type="number" th:field="*{map[__${category.key}__][__${itemStat.index}__].quantity}">
+                            <button class="item-number-spacing item-number__button" th:data-item="|input${category.key}${itemStat.index}|" type="button" onclick="changeValue(this.getAttribute('data-item'), +1)">+</button>
+                            <p class="item-number-spacing" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Unit</p>
                                 
                         </div>
                     </div>
