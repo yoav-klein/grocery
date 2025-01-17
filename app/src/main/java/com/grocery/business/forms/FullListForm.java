@@ -14,10 +14,6 @@ public class FullListForm {
 
     public FullListForm() {
         map = new HashMap<>();
-        List<ListItem> buzz = new ArrayList<ListItem>();
-        buzz.add(new ListItem());
-
-        map.put(ProductCategory.ALCOHOL, buzz);
     }
 
     public void setMap(Map<ProductCategory, List<ListItem>> map) {

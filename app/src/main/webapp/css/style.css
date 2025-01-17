@@ -137,7 +137,7 @@ a:active {
 
 .notebook {
     background-image: repeating-linear-gradient(transparent 0px 20px, var(--DEEP-BLUE-OPACITY) 20px 21px);
-    background-repeat: repeat;
+    background-size: 100% 21px;
 }
 
 /* || HEADER */
@@ -295,6 +295,7 @@ a:active {
 .item-number {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: nowrap;
 }
 
 .item-number__button {
