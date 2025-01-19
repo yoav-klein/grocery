@@ -38,4 +38,8 @@ public class ProductService {
         this.productRepository.deleteProduct(id);
     }
 
+    public Product getProductById(int id) {
+        return this.productRepository.getProductById(id);
+    }
+
 }

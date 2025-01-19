@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.grocery.business.entities.repositories.ListItemDAO;
 import com.grocery.business.entities.ListItem;
+import com.grocery.business.entities.Product;
 import com.grocery.business.entities.ProductCategory;
 
 @Service
 public class ListItemService {
+    @Autowired
+    private ProductService productService;
     
     @Autowired
     private ListItemDAO itemRepository;
@@ -32,6 +35,12 @@ public class ListItemService {
             return;
         }
         this.itemRepository.addItem(item);
+    }
+
+    public void addByProductId(int productId, int quantity) {
+        Product product = productService.getProductById(productId);
+        
+        this.itemRepository.addItem(new ListItem(0, product.getName(), quantity, product.getCategory(), product.getQuantityType()));
     }
 
     public void deleteItem(int id) {

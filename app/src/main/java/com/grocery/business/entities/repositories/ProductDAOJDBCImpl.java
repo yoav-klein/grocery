@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.grocery.business.entities.Product;
 import com.grocery.business.entities.ProductCategory;
@@ -19,14 +20,20 @@ public class ProductDAOJDBCImpl implements ProductDAO {
     // SQL STATEMENTS
 
     private static final String GET_ALL_PRODUCTS = "SELECT product.id, product.name AS ProductName, category.name AS Category, " +  
-    "quantity_type.name AS QuantityType " +  
-    "FROM product JOIN category ON product.category_id = category.id " +
-    "JOIN quantity_type ON product.quantity_type_id = quantity_type.id";
+        "quantity_type.name AS QuantityType " +  
+        "FROM product JOIN category ON product.category_id = category.id " +
+        "JOIN quantity_type ON product.quantity_type_id = quantity_type.id";
 
     private static final String ADD_PRODUCT = "INSERT INTO product (name, category_id, quantity_type_id) " + 
     "VALUES(?, (SELECT id AS category_id FROM category WHERE ? = name), (SELECT id AS quantity_type_id FROM quantity_type WHERE ? = name))";
 
     private static final String DELETE_PRODUCT = "DELETE FROM product WHERE id = ?";
+
+    private static final String GET_PRODUCT_BY_ID = "SELECT product.id, product.name AS productName, category.name AS category, " +
+        "quantity_type.name AS QuantityType " +
+        "FROM product JOIN category ON product.category_id = category.id " +
+        "JOIN quantity_type ON product.quantity_type_id = quantity_type.id " +
+        "WHERE product.id = ?"; 
 
     private JdbcTemplate jdbcTemplate;
 
@@ -58,6 +65,16 @@ public class ProductDAOJDBCImpl implements ProductDAO {
     @Override
     public List<Product> getAllProducts() {
         return jdbcTemplate.query(GET_ALL_PRODUCTS, this.rowMapper);
+    }
+
+    @Override
+    public Product getProductById(int id) {
+        Product p = null;
+        try {
+            p = jdbcTemplate.queryForObject(GET_PRODUCT_BY_ID, this.rowMapper, id);
+        } catch(EmptyResultDataAccessException e) {}
+        
+        return p;
     }
     
 }

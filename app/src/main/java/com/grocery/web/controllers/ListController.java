@@ -1,25 +1,23 @@
 package com.grocery.web.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.grocery.business.entities.ProductCategory;
-import com.grocery.business.entities.ListItem;
 import com.grocery.business.entities.Product;
 import com.grocery.business.services.ListItemService;
 import com.grocery.business.services.ProductService;
-import com.grocery.business.forms.FullListForm;
+
+import com.grocery.web.dto.CategoryProduct;
+import com.grocery.web.dto.CategoryProductDto;
+import com.grocery.web.dto.ProductQuantity;
+import com.grocery.web.dto.ProductQuantityDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,21 +30,24 @@ public class ListController {
     @Autowired
     private ListItemService itemService;
 
-    @ModelAttribute("itemsByCategory")
-    public FullListForm populateItemsByCategory() {
+    @ModelAttribute("categoryProductDto")
+    public CategoryProductDto categoryProductDto() {
         List<Product> allProducts = productService.getAllProducts();
 
-        List<ListItem> allItems = new ArrayList<>();
-        for(Product product : allProducts) {
-            allItems.add(new ListItem(0, product.getName(), 0, product.getCategory(), product.getQuantityType()));
-        }
+        CategoryProductDto categoryProductDto = new CategoryProductDto();
+        List<CategoryProduct> categoryProductList = categoryProductDto.getCategoryProducts();
 
-        FullListForm form = new FullListForm();
-        Map<ProductCategory, List<ListItem>> itemsByCategory = allItems.stream().collect(Collectors.groupingBy(ListItem::getCategory));
-
-        form.setMap(itemsByCategory);
+        allProducts.stream()
+            .collect(Collectors.groupingBy(Product::getCategory))
+                .forEach((k, v) -> { categoryProductList.add(new CategoryProduct(k, v)); });
         
-        return form;
+        return categoryProductDto;
+    }
+
+    @ModelAttribute("productQuantityDto")
+    public ProductQuantityDto productQuantityDto() {
+        ProductQuantityDto productQuantityDto = new ProductQuantityDto();
+        return productQuantityDto;
     }
     
     
@@ -56,18 +57,17 @@ public class ListController {
     }
 
     @PostMapping("/insert")
-    public String insert(@ModelAttribute("itemsByCategory") FullListForm list) {
-        for(ProductCategory category : list.getMap().keySet()) {
-            List<ListItem> items = list.getMap().get(category);
-
-            for(ListItem item : items) {
-                if(item.getQuantity() > 0) {
-                    itemService.add(item);
-                }
-            }
-
+    public String insert(@ModelAttribute ProductQuantityDto dto) {
+        List<List<ProductQuantity>> list = dto.getProductQuantities();
+        List<ProductQuantity> summed = new ArrayList<>();
+        for(List<ProductQuantity> sublist : list) {
+            sublist.stream().filter(t -> t.getQuantity() > 0).forEach(t -> summed.add(t));
         }
 
+        for(ProductQuantity pq : summed) {
+            itemService.addByProductId(pq.getProductId(), pq.getQuantity());
+        }
+        
         return "redirect:/";
     }
 
