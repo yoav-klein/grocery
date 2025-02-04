@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:fragment="layout(main, links)" th:attr="dir=${#locale.language == 'he' ? 'rtl' : 'ltr'}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" href="../../../css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../WEB-INF/templates/css/style.css" th:href="@{/css/dynamic.css}">
+    <link rel="icon" href="../../../images/grocery.ico" type="image/x-icon" th:href="@{/images/grocery.ico}">
+    <th:block th:replace="${links}"></th:block>
+    <title th:text="#{heading}">Shopping List</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header__title">
+            <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
+            <img class="header__image" src="../../../images/shopping-cart.png" th:src="@{/images/shopping-cart.png}" alt="shopping-cart-image">
+        </div>
+        <nav class="header__nav">
+            <ul class="header__ul">
+                <li>
+                    <a href="index.html" th:href="@{/}" th:text="#{link.home}">Home</a>
+                </li>
+                <li>
+                    <a href="my-list.html" th:href="@{/myList}" th:text="#{link.mylist}">My List</a>
+                </li>
+                <li>
+                    <a href="my-products.html" th:href="@{/myProducts}" th:text="#{link.myproducts}">My Products</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main th:replace="${main}" class="main">
+        <div>TEMPLATE</div>
+    </main>
+    
+</body>
+</html>
