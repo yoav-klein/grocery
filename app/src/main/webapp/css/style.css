@@ -34,6 +34,9 @@ fieldset {
 /* || VARIABLES */
 
 :root {
+    /* SIZES */
+    --BODY-MAX-WIDTH: 1000px;
+
     /* FONT */
     --FS: clamp(1rem, 2.2vh, 1.5rem);
     
@@ -46,6 +49,7 @@ fieldset {
     
     --NAV-BGCOLOR: rgba(32, 5, 0, 0.74);
     --HEADER-BGCOLOR: #fffedf;
+    --DIALOG-BGCOLOR: #fffa63;
     --BORDER-COLOR: #333;
     
     --LINK-COLOR: #fff;
@@ -81,11 +85,19 @@ html {
 body {
     background-color: var(--BODY-BGCOLOR);
     min-height: 100vh;
-    max-width: 1000px;
+    max-width: var(--BODY-MAX-WIDTH);
     margin: 0 auto;
     border-left: var(--BORDERS);
     border-right: var(--BORDERS);
     box-shadow: 0 0 10px var(--BORDER-COLOR);
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -129,10 +141,6 @@ a:active {
 
 .item-font {
     font-family: var(--FF-LIST-ITEM);
-}
-
-.align_end {
-    margin-right: auto;
 }
 
 .notebook {
@@ -194,7 +202,11 @@ a:active {
 
 .main__section {
     padding: var(--PADDING-SECTION);
+    flex-grow: 1;
+    position: relative;
+    margin-bottom: 5em;
 }
+
 
 /* || GRID */
 
@@ -203,9 +215,36 @@ a:active {
     justify-content: space-evenly;
     grid-template-columns: repeat(auto-fit, 300px);
     gap:  0.5em 0.1em;
-    min-height: 50vh;
 }
 
+/* || DIALOG */
+dialog {
+    width: calc(var(--BODY-MAX-WIDTH) / 2);
+    margin: auto;
+    position: relative;
+    padding: 1em;
+    border: none;
+    border-radius: 15px;
+    background-image: radial-gradient(var(--BODY-BGCOLOR), var(--DIALOG-BGCOLOR));
+    box-shadow: 0 0 10px black;
+}
+
+.example {
+    height: 200px;
+    background-color: purple;
+    width: 50%;
+
+}
+
+#close-dialog {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    background-color: transparent;
+}
 
 /* || FORM FIELDS */
 
@@ -236,38 +275,40 @@ a:active {
 }
 
 
-/* || SUBMIT BUTTON */
+/* || ADD BUTTON */
 
-.submit-button {
+
+.button-container {
+    position: fixed;
+    bottom: 20px;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+}
+
+html[dir="rtl"] .button-container {
+    transform: translateX(50%);
+}
+
+.button-shared {
     background: #f08a36;
-    color: #fff;
     border: none;
-    font-size: inherit;
+    color: #fff;
     cursor: pointer;
-    padding: 25px 80px;
-    display: inline-block;
-    margin: 15px 30px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    outline: none;
-    position: relative;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-    
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 0 10px black;
 }
 
-.submit-button:hover {
+.button-shared:hover {
 	background: #d16a15;
+    transform: scale(1.1);
 }
 
-.submit-button:active {
+.button-shared:active {
 	background: #d16a15;
 	top: 2px;
 }
 
-.submit-button:before {
+.button-shared:before {
 	position: absolute;
 	height: 100%;
 	left: 0;
@@ -275,6 +316,30 @@ a:active {
 	line-height: 3;
 	font-size: 140%;
 	width: 60px;
+}
+
+/* || ADD BUTTON */
+
+.add-button {
+    font-size: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50%;
+    
+}
+
+/* || SUBMIT BUTTON */
+
+.submit-button {
+    font-size: inherit;
+    padding: 1em;
+    display: inline-block;
+    margin: auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    border-radius: 5px;
 }
 
 .submit-button-container {
