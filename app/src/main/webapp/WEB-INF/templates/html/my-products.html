@@ -43,7 +43,7 @@
             </section>
             <section id="add-form">
                 <dialog>
-                    <h2  th:text="#{addproduct.title}">Add Product</h2>
+                    <h2 class="center" th:text="#{addproduct.title}">Add Product</h2>
                     <button id="close-dialog">&#x00d7;</button>
                     <form  th:action="@{/newProduct}" method="post" th:object="${product}">
                         <fieldset>
