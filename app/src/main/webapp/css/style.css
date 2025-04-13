@@ -175,6 +175,11 @@ a:active {
     height: auto;
 }
 
+.header__user {
+    max-width: 30px;
+    height: auto;
+}
+
 
 .header__nav {
     font-family: var(--FF-MENU);

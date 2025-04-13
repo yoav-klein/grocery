@@ -12,6 +12,7 @@
 <body>
     <header class="header">
         <div class="header__title">
+            <img class="header__user" th:src="${pictureUrl}" alt="user picture">
             <h1 class="header__h1" th:text="#{heading}">Shopping List</h1>
             <img class="header__image" src="../../../images/shopping-cart.png" th:src="@{/images/shopping-cart.png}" alt="shopping-cart-image">
         </div>
