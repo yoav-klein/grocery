@@ -1,4 +1,4 @@
-package com.grocery.business.entities.repositories;
+package com.grocery.business.domain.repository;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 
-import com.grocery.business.entities.Product;
-import com.grocery.business.entities.ProductCategory;
-import com.grocery.business.entities.QuantityType;
+import com.grocery.business.domain.model.Product;
+import com.grocery.business.domain.model.ProductCategory;
+import com.grocery.business.domain.model.QuantityType;
 
 @Repository("productDao")
 public class ProductDAOJDBCImpl implements ProductDAO {

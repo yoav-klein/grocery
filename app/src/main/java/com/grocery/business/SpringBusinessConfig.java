@@ -1,29 +1,34 @@
 package com.grocery.business;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import com.mysql.cj.jdbc.MysqlDataSource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
-import javax.sql.DataSource;
+import com.mysql.cj.jdbc.MysqlDataSource;
 
 
 
 @Configuration
 @ComponentScan
+@PropertySource("file:/C:/Users/yoavk/.secrets/google-openid-credentials.properties")
 public class SpringBusinessConfig implements WebMvcConfigurer {
+    @Value("${db.user}")
+    private String dbUser;
+
+    @Value("${db.password}")
+    private String dbPassword;
+
     public SpringBusinessConfig() {
         super();
     }
-
-    
-    
-    // ======== DataSource for MySQL database
 
     @Bean
     @Profile("dev")
@@ -34,21 +39,16 @@ public class SpringBusinessConfig implements WebMvcConfigurer {
             .setScriptEncoding("UTF-8")
 			.build();
 	}
-
     
     @Bean
     @Profile("default")
 	DataSource getProdDataSource() {
 		String dbUrl = "jdbc:mysql://localhost:3306/grocery";
-        String dbUser = "yoav";
-        String dbPassword = "yoav";
-
-        MysqlDataSource mysqlDS = null;
         
-        mysqlDS = new MysqlDataSource();
+        MysqlDataSource mysqlDS = new MysqlDataSource();
         mysqlDS.setURL(dbUrl);
-        mysqlDS.setUser(dbUser);
-        mysqlDS.setPassword(dbPassword);
+        mysqlDS.setUser(this.dbUser);
+        mysqlDS.setPassword(this.dbPassword);
 
         return mysqlDS;
 	}

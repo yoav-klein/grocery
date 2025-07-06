@@ -1,5 +1,4 @@
-package com.grocery.business.entities;
-
+package com.grocery.business.domain.model;
 
 import jakarta.validation.constraints.Min;
 

@@ -1,4 +1,4 @@
-package com.grocery.business.entities;
+package com.grocery.business.domain.model;
 
 public enum QuantityType {
     KG("Kg"),

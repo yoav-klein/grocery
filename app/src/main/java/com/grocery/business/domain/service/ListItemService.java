@@ -1,4 +1,4 @@
-package com.grocery.business.services;
+package com.grocery.business.domain.service;
 
 import java.util.List;
 import java.util.Map;
@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grocery.business.entities.repositories.ListItemDAO;
-import com.grocery.business.entities.ListItem;
-import com.grocery.business.entities.Product;
-import com.grocery.business.entities.ProductCategory;
+import com.grocery.business.domain.repository.ListItemDAO;
+import com.grocery.business.domain.model.ListItem;
+import com.grocery.business.domain.model.Product;
+import com.grocery.business.domain.model.ProductCategory;
 
 @Service
 public class ListItemService {

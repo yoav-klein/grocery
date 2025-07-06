@@ -1,9 +1,8 @@
-package com.grocery.business.entities.repositories;
+package com.grocery.business.domain.repository;
 
 import java.util.List;
 
-
-import com.grocery.business.entities.ListItem;
+import com.grocery.business.domain.model.ListItem;
 
 public interface ListItemDAO {
     void addItem(ListItem item);

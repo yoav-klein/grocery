@@ -1,9 +1,8 @@
-package com.grocery.business.entities.repositories;
+package com.grocery.business.domain.repository;
 
 import java.util.List;
 
-import com.grocery.business.entities.Product;
-
+import com.grocery.business.domain.model.Product;
 
 public interface ProductDAO {
     void addProduct(Product product);
