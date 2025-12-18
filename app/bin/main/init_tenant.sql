@@ -20,3 +20,16 @@ CREATE TABLE tenant_<TENANT_ID>.products(
     FOREIGN KEY(category_id) REFERENCES grocery_global.category(id),
     FOREIGN KEY(quantity_type_id) REFERENCES grocery_global.quantity_type(id)
 );
+
+CREATE TABLE tenant_<TENANT_ID>.lists(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE tenant_<TENANT_ID>.list_product(
+    product_id INT NOT NULL,
+    list_id INT NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES tenant_<TENANT_ID>.products(id) ON DELETE CASCADE,
+    FOREIGN KEY (list_id) REFERENCES tenant_<TENANT_ID>.lists(id) ON DELETE CASCADE,
+    UNIQUE(product_id, list_id)
+);

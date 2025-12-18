@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.grocery.business.domain.dto.ListItemRequest;
 import com.grocery.business.domain.dto.ProductQuantity;
 import com.grocery.business.domain.events.AddItemEvent;
+import com.grocery.business.domain.events.ListRefreshEvent;
 import com.grocery.business.domain.events.DeleteItemEvent;
 import com.grocery.business.domain.events.EventManager;
 import com.grocery.business.domain.model.CurrentListItem;
@@ -69,6 +70,8 @@ public class CurrentListController {
             @RequestBody ArrayList<ProductQuantity> productQuantityList) throws UserNotFoundException {
         OAuth2User oauth2User = (OAuth2User)user;
         currentListService.bulkAdd(tenantId, oauth2User.getAttribute("sub"), listId, productQuantityList);
+
+        eventManager.addEvent(new ListRefreshEvent());
 
         return new ResponseEntity(HttpStatus.OK);
     }

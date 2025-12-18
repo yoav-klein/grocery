@@ -30,14 +30,5 @@ abstract public class Event<T> {
     }
 
     abstract public String getStreamName();
-/* 
-    public String getStreamName() {
-        return streamName;
-    }
 
-    public void setStreamName(String streamName) {
-        this.streamName = streamName;
-    }
- */
-    
 }

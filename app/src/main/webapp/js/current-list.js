@@ -70,6 +70,10 @@ evtSource.addEventListener("DELETE-ITEM", (event) => {
     }
 });
 
+evtSource.addEventListener("REFRESH-LIST", (event) => {
+    location.reload();
+})
+
 function createNewCategory(categoryName) {
     const listEl = document.getElementById('list');
     const newElement = document.getElementById("category-template").content.cloneNode(true);
