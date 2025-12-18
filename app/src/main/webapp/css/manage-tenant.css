@@ -1,0 +1,184 @@
+
+/* MANAGE TENANT */
+
+
+
+main {
+    padding: 1rem;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+ul {
+    list-style-type: none;
+}
+
+section {
+    margin: 1rem 0;
+    border: 1px solid #333;
+    padding: 1rem;
+}
+
+h2 {
+    text-align: start;
+    margin: 1rem 0rem 2rem 0rem;
+}
+
+.members-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.members-head button {
+    padding: 0.5rem 0rem;
+    background-color: greenyellow;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.member-row {
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    border: none;
+    background-color: var(--HOVER-COLOR);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.member-row img {
+    height: 90%;
+    width: auto;
+}
+
+.member-action-menu-container-placeholder {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.member-action-menu-container {
+    position: relative;
+    border-radius: 50%;
+    
+    > button {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: var(--SECONDARY-TEXT-COLOR);
+    }
+
+}
+
+.member-action-menu {
+    /* hide by default */
+    /* display: none; */
+    transform: scaleY(0%);
+
+    position: absolute;
+    top: 100%; /* display below button */
+    inset-inline-end: -50%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: azure;
+    z-index: 1;
+    padding: 0.25rem;
+    width: 300px;
+    transition: all 0.1s ease;
+}
+
+.pressed .member-action-menu {
+    /* display: block; */
+    transform: scaleY(100%);
+    
+}
+
+.member-action-menu li {
+    margin: 0.5rem;
+}
+
+.member-action-menu li button {
+    width: 100%;
+    
+    cursor: pointer;
+    padding: 1rem;
+    border: none;
+    background: none;
+}
+
+.member-action-menu li button:hover {
+    opacity: 0.5;
+}
+
+.member-action-menu li:last-child button {
+    background-color: red;
+    color: white;
+}
+
+
+/* DANGER ZONE */
+
+section.danger-zone {
+    padding: 1rem;
+    border: 1px  #dc3545;
+    border-style: dashed;
+}
+
+.danger-zone ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.danger-zone li {
+    width: 40%;
+
+    > form { width: 100%; }
+}
+
+.danger-zone-button {
+    width: 100%;
+    padding: 1rem;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-weight: bold;
+    
+}
+
+.danger-zone li:first-child button {
+    background-color: #dc3545;
+    color: white;
+    
+    svg {
+        fill: white;
+    }
+}
+
+.danger-zone li:first-child button:hover {
+    background-color: #bb2d3b;
+}
+
+.danger-zone li:last-child button {
+    
+    background-color: transparent;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    svg {
+        fill: #dc3545;
+    }
+}
+
+.danger-zone li:last-child button:hover {
+    background-color: #f1b0b7;
+}

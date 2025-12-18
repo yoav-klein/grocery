@@ -1,0 +1,53 @@
+
+
+
+.item-quantity {
+    min-width: 3rem;
+}
+
+/* CHECKBOX */
+
+
+.checkbox-container {
+    /* in order to align the checkbox and text in the same height, display flex*/
+    display: flex;
+    align-items: center;
+    /* gap: 1rem; */
+}
+
+.checkbox-container label {
+    /* so that we'll see the label clickable */
+    cursor: pointer;
+
+    /* in order for the label::before width will be respected, the display must not be inline (which is the default) */
+    display: flex;
+}
+
+.checkbox-container input[type="checkbox"] {
+    /* we want the default checkbox icon  to disappear and create our own */
+    appearance: none;
+}
+
+/* this will create our own checkbox icon */
+.checkbox-container label::before {
+    content: '';
+    /* 1em will make it the same size as our font-size */
+    width: 1em;
+    height: 1em;
+    border: 0.05em solid white;
+    border-radius: 0.15em;
+    margin-right: .5em;
+}
+
+/* hover effect */
+.checkbox-container label:hover::before {
+    background-color: #35E07D;
+}
+
+.checkbox-container input[type="checkbox"]:checked + label::before {
+    content: '\002714';
+    background-color: #27AE60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

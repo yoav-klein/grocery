@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form Example</title>
+</head>
+<body>
+
+<form id="myForm">
+  <input type="text" name="username" placeholder="Username" required>
+  <input type="number" name="age" placeholder="Age" required>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const form = document.getElementById("myForm");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault(); // prevent page reload
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries()); // convert to plain object
+
+    const response = await fetch("/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.text();
+    alert("Server response: " + result);
+  });
+</script>
+
+</body>
+</html>

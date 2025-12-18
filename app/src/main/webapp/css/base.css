@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Gupter:wght@700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* || VARIABLES */
+:root {
+    --BASE-COLOR: #11121a;
+    --LINE-COLOR: #42434a;
+    --HOVER-COLOR: #222533;
+    --TEXT-COLOR: #e6e6ef;
+    --ACCENT-COLOR: #5e63ff;
+    --SECONDARY-TEXT-COLOR: #b0b3c1;
+    --HEADER-HEIGHT: 4rem;
+}
+
+/* || RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input,
+button,
+select,
+textarea {
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: var(--TEXT-COLOR);
+}
+
+
+html {
+    font-family: Poppins, 'Segoe UI', sans-serif;
+    line-height: 1.5rem;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--BASE-COLOR);
+    color: var(--TEXT-COLOR);
+}
+
+header {
+    height: var(--HEADER-HEIGHT);
+    border-bottom: 1px solid var(--LINE-COLOR);
+    display: flex;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--BASE-COLOR);
+}
+
+
+/* || UTILITY */
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.padding-1rem {
+    padding: 1rem;
+}
+
+.flex-1 {
+    flex-grow: 1;
+}
+
+

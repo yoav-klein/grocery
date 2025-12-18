@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head th:include="~{layout :: head(~{::link},{})}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/shared.css}">
+</head>
+<body th:replace="~{layout :: layout(~{::main},~{})}">
+    <main>
+        <p th:each="list : ${fixedLists}" th:text="${list.name}"></p>
+        <form th:action="@{/tenant/{tenantId}/lists(tenantId=${tenant.id})}" method="post">
+            <input type="text" name="name">
+            
+            <div th:each="product: ${allProducts}">
+                <label th:for="'product_' + ${product.productId}" th:text="${product.name}">PRODUCT NAME</label>
+                <input th:id="'product_' + ${product.productId}" type="checkbox" name="productIds" th:value="${product.productId}">
+            </div>
+
+            <input type="submit">
+        </form>
+        
+    </main>
+    <!-- <script th:src="@{/js/current-list.js}"></script> -->
+</body>
+</html>

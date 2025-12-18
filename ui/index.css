@@ -1,0 +1,104 @@
+
+main {
+    padding-bottom: 5rem;
+    caret-color: transparent;
+}
+
+#list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 500px);
+    gap: 20px;
+}
+
+.category {
+    border: 1px solid white;
+    padding: 1rem;
+    > h2 {
+        margin-bottom: 2rem;
+    }
+}
+
+.category ul {
+    width: 100%;
+}
+
+.list-item {
+    display: flex;
+    flex-direction: row;
+    line-height: 2;
+
+    
+}
+
+.item-quantity {
+    min-width: 3rem;
+}
+
+.item-quantity-type {
+    min-width: 3rem;
+}
+
+.item-name {
+    flex: 1;
+    > span {
+        cursor: pointer;
+    }
+}
+
+#add-item-button {
+    position: fixed;
+    bottom: 20px;
+    right: 50%;
+    font-size: 3rem;
+    padding: 2rem;
+    border-radius: 50%;
+}
+
+/* CHECKBOX */
+
+
+.checkbox-container {
+    /* margin: 1rem 0; */
+
+    /* in order to align the checkbox and text in the same height, display flex*/
+    display: flex;
+    align-items: center;
+    /* gap: 1rem; */
+}
+
+.checkbox-container label {
+    /* so that we'll see the label clickable */
+    cursor: pointer;
+
+    /* in order for the label::before width will be respected, the display must not be inline (which is the default) */
+    display: flex;
+}
+
+.checkbox-container input[type="checkbox"] {
+    /* we want the default checkbox icon  to disappear and create our own */
+    appearance: none;
+}
+
+/* this will create our own checkbox icon */
+.checkbox-container label::before {
+    content: '';
+    /* 1em will make it the same size as our font-size */
+    width: 1em;
+    height: 1em;
+    border: 0.05em solid white;
+    border-radius: 0.15em;
+    margin-right: .5em;
+}
+
+/* hover effect */
+.checkbox-container label:hover::before {
+    background-color: #35E07D;
+}
+
+.checkbox-container input[type="checkbox"]:checked + label::before {
+    content: '\002714';
+    background-color: #27AE60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

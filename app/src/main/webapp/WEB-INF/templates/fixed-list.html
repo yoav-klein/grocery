@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head th:include="~{layout :: head(~{::link},~{::meta})}">
+    <title>Document</title>
+    <meta name="listId" th:content="${fixedList.id}">
+    <meta name="tenantId" th:content="${tenant.id}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/shared.css}">
+</head>
+<body th:replace="~{layout :: layout(~{::main},~{::script})}">
+    <main>
+        <h1 th:text="${fixedList.name}">LIST NAME</h1>
+        <section class="category-grid">
+            <form id="list">
+                <article class="category" th:each="category : ${productsByCategory}">
+                    <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                    <ul>
+                        <li th:each="product : ${category.value}" class="category-item">
+                            <p class="product-name"><span th:text="${product.name}">PRODUCT NAME</span></p>
+                            <input class="quantity" type="number" th:id="'product-' + ${product.productId}" value="0">
+                        </li>
+                    </ul>
+                </article>
+                <input type="submit" value="SUBMIT">
+            </form>
+        </section>
+    </main>
+    <script type="module" th:src="@{/js/fixed-list.js}"></script>
+</body>
+</html>

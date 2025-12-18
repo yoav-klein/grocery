@@ -1,0 +1,173 @@
+
+#layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    position: relative;
+}
+
+#menu-button {
+    border: none;
+    border-radius: .5em;
+    margin-left: 1rem;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    cursor: pointer;
+    z-index: 1000;
+    /* visibility: hidden; */
+}
+
+#menu-button:hover {
+    background-color: var(--HOVER-COLOR);
+}
+
+#sidebar {
+    min-height: calc(100vh - var(--HEADER-HEIGHT) - 2rem);
+    width: 250px;
+    border-right: 1px solid var(--LINE-COLOR);
+    border-bottom: 1px solid var(--LINE-COLOR);
+
+    /* sticky positioning so that when we scroll down, the sidebar will stay in place */
+    position: sticky;
+    top: var(--HEADER-HEIGHT);
+    align-self: start;
+    transition: 300ms ease-in-out;
+    z-index: 1000; /* be on top of overlay */
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+#sidebar nav {
+    padding: .2rem;
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar nav ul {
+    list-style-type: none;
+    flex-grow: 1;
+}
+
+
+
+#sidebar nav a, #sidebar nav .dropdown-button {
+    border-radius: 0.5em;
+    display: flex;
+    text-decoration: none;
+    color: var(--TEXT-COLOR);
+    align-items: center;
+    padding: 1em;
+    gap: 1em; /* to separate the icon from teh text */
+}
+
+/* setting a different style to the active tab */
+#sidebar nav ul li.active a, #sidebar a.active {
+    color: var(--ACCENT-COLOR);
+    svg {
+        fill: var(--ACCENT-COLOR);
+    }
+}
+
+/* since the dropdown button is a button, we need some styles to make it look like the <a> elements */
+.dropdown-button {
+    width: 100%;
+    text-align: start;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+#sidebar nav svg {
+    flex-shrink: 0; /* avoid distortions something ... ?*/
+    fill: var(--TEXT-COLOR);
+}
+
+#sidebar nav a span, #sidebar nav .dropdown-button span {
+    /* so that the span will take all the available space, pushing the other flex elements to the sides 
+    so that the little button of the Create item will be in the end of the line */ 
+    flex-grow: 1;
+}
+
+#sidebar nav a:hover, .dropdown-button:hover {
+    background-color: var(--HOVER-COLOR);
+}
+
+/* || SUB MENU OPEN AND CLOSE */
+
+/* this is a trick to open and close the sub-menu with transition, meaning smooth open and close and not at once */
+#sidebar .sub-menu {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: 300ms ease-in-out;
+
+    > div {
+        overflow: hidden;
+    }
+}
+
+#sidebar .sub-menu.show {
+    grid-template-rows: 1fr;
+}
+
+/* the drop-down menu arrow rotated */
+.dropdown-button svg {
+    transition: 200ms ease;
+}
+
+.rotate svg:last-child {
+    rotate: 180deg;
+}
+
+/* have the submenu items idented */
+#sidebar .sub-menu a {
+    padding-inline-start: 2em;
+}
+
+/* || MOBILE SCREEN */
+
+@media (max-width: 768px) {
+    #menu-button {
+        visibility: visible;
+    }
+
+    #sidebar {
+        background-color: var(--BASE-COLOR);
+        position: fixed;
+        top: var(--HEADER-HEIGHT);
+        left: 0;
+        transform: translateX(0);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+ 
+    #sidebar.close {
+        transform: translateX(-100%);
+    }
+    
+    .overlay {
+        position: fixed;
+        top: var(--HEADER-HEIGHT);
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}

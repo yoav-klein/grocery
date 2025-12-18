@@ -1,0 +1,104 @@
+
+/* || TENANTS PAGE */
+
+.tenants-main {
+    margin: 2rem auto;
+    max-width: 70%;
+    min-height: calc(100vh - var(--HEADER-HEIGHT) - 4rem);
+    border: 1px solid var(--LINE-COLOR);
+    border-radius: 10px;
+    padding: 1rem;
+
+    > h1 {
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+    }
+}
+
+.tenants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 200px;
+    gap: 1rem;
+}
+
+.tenant-card {
+    border: 1px solid white;
+    border-radius: 16px;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;    
+}
+
+.tenant-card:hover {
+    border: 1px solid blue;
+    transform: translateY(-7px);
+}
+
+.tenant-card {
+    > a {
+        display: block;
+        height: 100%;
+        padding: 1rem;
+    }
+    > #add-tenant-button {
+        display: block flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background:none;
+        border-radius: 16px;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+    }
+}
+
+.tenant-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 2rem;
+
+}
+
+.tenant-header h2 {
+    font-size: 1.5rem;
+}
+
+
+.tenant-image-container {
+    height: 80px;
+    width: 80px;
+}
+
+
+.tenant-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+/* add new tenant card */
+.tenants-grid > div:last-child {
+    a {
+        border: 3px dashed white;
+        background-color: #5e63ff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px; 
+    }
+
+    div:first-child {
+        font-size: 48px;
+    }
+    transition: transform 0.3s ease;
+}
+
+.tenants-grid > div:last-child:hover {
+    transform: translateY(-7px) translateX(-2px);
+}
