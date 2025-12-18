@@ -42,17 +42,6 @@ body {
     color: var(--TEXT-COLOR);
 }
 
-header {
-    height: var(--HEADER-HEIGHT);
-    border-bottom: 1px solid var(--LINE-COLOR);
-    display: flex;
-    align-items: center;
-
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--BASE-COLOR);
-}
 
 
 /* || UTILITY */

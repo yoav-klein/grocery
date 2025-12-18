@@ -7,12 +7,13 @@
     <link rel="stylesheet" th:href="@{/css/base.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/shared.css}">
+    <link rel="stylesheet" th:href="@{/css/fixed-list.css}">
 </head>
 <body th:replace="~{layout :: layout(~{::main},~{::script})}">
     <main>
         <h1 th:text="${fixedList.name}">LIST NAME</h1>
-        <section class="category-grid">
-            <form id="list">
+        <form id="list">
+            <section class="category-grid">
                 <article class="category" th:each="category : ${productsByCategory}">
                     <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                     <ul>
@@ -22,9 +23,9 @@
                         </li>
                     </ul>
                 </article>
-                <input type="submit" value="SUBMIT">
-            </form>
-        </section>
+            </section>
+            <input type="submit" value="SUBMIT">
+        </form>
     </main>
     <script type="module" th:src="@{/js/fixed-list.js}"></script>
 </body>

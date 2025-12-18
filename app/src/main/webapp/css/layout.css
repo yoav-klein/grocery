@@ -5,6 +5,18 @@
     position: relative;
 }
 
+header {
+    height: var(--HEADER-HEIGHT);
+    border-bottom: 1px solid var(--LINE-COLOR);
+    display: flex;
+    align-items: center;
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--BASE-COLOR);
+}
+
 #menu-button {
     border: none;
     border-radius: .5em;
@@ -41,8 +53,6 @@
     flex-direction: column;
 }
 
-
-
 #sidebar nav {
     padding: .2rem;
     height: 100%;
@@ -55,8 +65,6 @@
     list-style-type: none;
     flex-grow: 1;
 }
-
-
 
 #sidebar nav a, #sidebar nav .dropdown-button {
     border-radius: 0.5em;

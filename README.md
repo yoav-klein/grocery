@@ -65,13 +65,16 @@ Model:
 
 
 ## Features
+* Delete list
+* Edit list
 * Mark check - when a user marks an item as checked, it is still there for a while, so it's apparent that someone bought it.
+* Current list item history - a user clicks on an item in the current list page, and a popup pops with a small chat and history
 
 ## Tasks
-* Error handling in backend
 * UI polishing
+* Error handling in backend
 * Localization - languages
-
+* Delete and edit list
 
 ## Leftovers
 ---

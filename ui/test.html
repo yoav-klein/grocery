@@ -4,37 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            min-height: 100vh;
+        }
+        #layout {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            height: 100%;
+        }
+        header {
+            border-bottom: 1px solid black;
+        }
+        aside {
+            border-right: black 1px solid;
+        }
+    </style>
 </head>
 <body>
-    <form id="list" action="#">
-        <section>
-            <h2>VEGETABLES</h2>
-            <div>
-                <label for="product-1">Tomato</label>
-                <input class="quantity" id="product-1" type="number" value="0">
-            </div>
-            <div>
-                <label for="product-2">Cucumber</label>
-                <input class="quantity" id="product-2" type="number" value="0">
-            </div>
-            <div>
-                <label for="product-3">Onion</label>
-                <input class="quantity" id="product-3" type="number" value="0">
-            </div>
-        </section>
-        <section>
-            <h2>FRUIT</h2>
-            <div>
-                <label for="product-4">Strawberry</label>
-                <input class="quantity" id="product-4" type="number" value="0">
-            </div>
-            <div>
-                <label for="product-5">Orange</label>
-                <input class="quantity" id="product-5" type="number" value="0">
-            </div>
-        </section>
-        <input type="submit">
-    </form>
-    <script src="test.js"></script>
+    <header>
+        <h1>This is header</h1>
+    </header>
+    <div id="layout">
+        <aside>This is aside</aside>
+        <main>This is main</main>
+    </div>
+    
 </body>
 </html>
