@@ -65,13 +65,12 @@ Model:
 
 
 ## Features
-* Bulk add
-  * If duplicate - add quantities
-  * Handle 0 quantity
+* Mark check - when a user marks an item as checked, it is still there for a while, so it's apparent that someone bought it.
 
 ## Tasks
 * Error handling in backend
 * UI polishing
+* Localization - languages
 
 
 ## Leftovers
