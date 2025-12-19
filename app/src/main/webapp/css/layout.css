@@ -1,8 +1,7 @@
 
-#layout {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    position: relative;
+body {
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 header {
@@ -11,10 +10,34 @@ header {
     display: flex;
     align-items: center;
 
-    position: sticky;
-    top: 0;
-    z-index: 1;
     background-color: var(--BASE-COLOR);
+}
+
+.content {
+    position: relative;
+    display: grid;
+    overflow: auto;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "sidebar main";
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+    
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+main {
+    grid-area: main;
+    overflow: auto;
 }
 
 #menu-button {
@@ -36,18 +59,12 @@ header {
 }
 
 #sidebar {
-    min-height: calc(100vh - var(--HEADER-HEIGHT) - 2rem);
+    grid-area: sidebar;
     width: 250px;
     border-right: 1px solid var(--LINE-COLOR);
-    border-bottom: 1px solid var(--LINE-COLOR);
 
-    /* sticky positioning so that when we scroll down, the sidebar will stay in place */
-    position: sticky;
-    top: var(--HEADER-HEIGHT);
-    align-self: start;
     transition: 300ms ease-in-out;
-    z-index: 1000; /* be on top of overlay */
-    overflow: hidden;
+    overflow: auto;
 
     display: flex;
     flex-direction: column;
@@ -143,11 +160,13 @@ header {
 /* || MOBILE SCREEN */
 
 @media (max-width: 768px) {
+    
     #menu-button {
         visibility: visible;
     }
 
     #sidebar {
+        height: calc(100% - var(--HEADER-HEIGHT));
         background-color: var(--BASE-COLOR);
         position: fixed;
         top: var(--HEADER-HEIGHT);
@@ -155,24 +174,14 @@ header {
         transform: translateX(0);
         transition: transform 0.3s ease-in-out;
         box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        z-index: 1000; /* be on top of overlay */
     }
  
     #sidebar.close {
         transform: translateX(-100%);
     }
     
-    .overlay {
-        position: fixed;
-        top: var(--HEADER-HEIGHT);
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.5);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
+    
 
     .overlay.active {
         opacity: 1;

@@ -30,6 +30,9 @@ a {
     color: var(--TEXT-COLOR);
 }
 
+html, body {
+    height: 100%;
+}
 
 html {
     font-family: Poppins, 'Segoe UI', sans-serif;
@@ -37,7 +40,6 @@ html {
 }
 
 body {
-    min-height: 100vh;
     background-color: var(--BASE-COLOR);
     color: var(--TEXT-COLOR);
 }
