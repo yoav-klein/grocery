@@ -8,11 +8,11 @@ const sidebarEl = document.getElementById("sidebar");
 
 function toggleSidebar() {
     
-    const isMobile = window.innerWidth <= 768;
+    /* const isMobile = window.innerWidth <= 768; */
     sidebarEl.classList.toggle('close');
     
-    if (isMobile) {
+    /* if (isMobile) { */
         overlayEl.classList.toggle('active');
-    }
+    /* } */
 }
 

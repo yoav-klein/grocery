@@ -1,141 +1,44 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
   <style>
-    html, body {
-        margin: 0;
-        height: 100%;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-        display: grid;
-        grid-template-rows: auto 1fr;
-        grid-template-columns: 220px 1fr;
-        grid-template-areas:
-            "header header"
-            "sidebar main";
-            /* overflow: hidden; /* page itself doesn't scroll */
-        }
+    body {
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
 
-        header {
-        grid-area: header;
-        padding: 12px;
-        border-bottom: 1px solid #ccc;
-        }
+    header {
+      border-bottom: 1px solid black;
+      height: 3rem;
+    }
 
-        aside {
-        grid-area: sidebar;
-        padding: 12px;
-        border-right: 1px solid #ccc;
-        /* overflow: auto; */ /* optional: sidebar can scroll if it overflows */
-        }
+    .content {
+      display: grid;
+      grid-template-columns: auto 1fr;
+    }
 
-        main {
-        grid-area: main;
-        padding: 12px;
-        overflow: auto; /* main scrolls */
-        }
+    aside {
+      width: 200px;
+      border-right: 1px solid black;
+    }
+
   </style>
 </head>
 <body>
-  <header>Header</header>
-  <aside>Sidebar</aside>
-  <main>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae corporis explicabo, quis quod facilis laboriosam voluptates fugit, atque inventore quaerat deleniti placeat! Dignissimos debitis quo incidunt cumque nisi saepe dolore!</div>
-  </main>
+  <header>HEADER</header>
+  <div class="content">
+    <aside>SIDEBAR</aside>
+    <main>MAIN</main>
+  </div>
+
 </body>
 </html>

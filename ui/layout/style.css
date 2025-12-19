@@ -9,20 +9,107 @@
 :root {
     --HEADER-HEIGHT: 4rem;
     --BASE-COLOR: #fef;
+    --SIDEBAR-WIDTH: 200px;
 }
 
 html, body {
+    /* html needs to be height: 100% so that it stretches on all viewport height */
     height: 100%;
 }
 
 body {
+    /* split the layout to header and content */
     display: grid;
     grid-template-rows: auto 1fr;
-    grid-template-columns: auto 1fr;
-    grid-template-areas: 
-        "header header"
-        "sidebar main";
+    
 }
+
+header {
+    /* position: relative for the position: absolute of the button */
+    position: relative;
+    min-height: var(--HEADER-HEIGHT);
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > button {
+        position: absolute;
+        top: 50%;
+        left: 4px;
+    }
+}
+ 
+.content {
+    /* position: relative so that it's the reference for the position: absolute of the sidebar for small screens */
+    position: relative;
+    /* grid layout so that the sidebar and main will be one aside each other */
+    display: grid;
+    /* the sidebar has a auto width, the rest is main */
+    grid-template-columns: auto 1fr;
+    /* without overflow: auto here, if the sidebar/main will be heigher from the screen then the whole screen will scroll (including the header) */
+    overflow: auto;
+    /* we must have this so that the overlay will not be counted as a grid item */
+    grid-template-areas: "sidebar main";
+}
+
+#sidebar {
+    grid-area: sidebar;
+    /* fixed width for the sidebar */
+    width: var(--SIDEBAR-WIDTH);
+    border-right: 1px solid #333;
+    /* without overflow: auto here, if the height of the sidebar is higher than the content, the whole content will scroll (including the main) */
+    overflow: auto;
+    z-index: 1000; /* on top of overlay*/
+}
+
+main {
+    grid-area: main;
+    padding: 1rem;
+    /* same here */
+    overflow: auto;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    /* be on top of everything except sidebar */
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+
+@media (max-width: 768px) {
+    
+    #sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        
+        background-color: var(--BASE-COLOR);
+        transform: translateX(0);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        
+    }
+ 
+    #sidebar.close {
+        transform: translateX(-100%);
+    }
+
+    .overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 
 ul {
     list-style-type: none;
@@ -35,33 +122,6 @@ ul {
     }
 }
 
-header {
-    position: relative;
-    grid-area: header;
-    height: var(--HEADER-HEIGHT);
-    border-bottom: 1px solid #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    > button {
-        position: absolute;
-        top: 50%;
-        left: 4px;
-    }
-}
-
-#sidebar {
-    width: 200px;
-    grid-area: sidebar;
-    border-right: 1px solid #333;
-}
-
-main {
-    grid-area: main;
-    padding: 1rem;
-    overflow: auto;
-}
 
 .container {
     margin: 1rem;
@@ -70,42 +130,3 @@ main {
     width: 50%;
 }
 
-
-
-@media (max-width: 768px) {
-    
-    #sidebar {
-        z-index: 1000; /* on top of overlay */
-        height: calc(100% - var(--HEADER-HEIGHT));
-        background-color: var(--BASE-COLOR);
-        position: fixed;
-        top: var(--HEADER-HEIGHT);
-        left: 0;
-        transform: translateX(0);
-        transition: transform 0.3s ease-in-out;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-        overflow: auto;
-    }
- 
-    #sidebar.close {
-        transform: translateX(-100%);
-    }
-    
-    .overlay {
-        position: fixed;
-        top: var(--HEADER-HEIGHT);
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.5);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-}
