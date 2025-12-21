@@ -12,12 +12,13 @@ main {
     display: grid;
     align-items: start;
     grid-template-columns: repeat(auto-fit, 500px);
+    
     gap: 20px;
     justify-content: space-around;
     margin: 0 auto;
+    padding-bottom: 100px;
     overflow: auto;
     height: 100%;
-    padding-bottom: 100px;
     
 }
 
@@ -145,16 +146,4 @@ main {
 
 .long-input {
     width: 50%;
-}
-
-/* ADD BUTTON */
-
-
-.add-button {
-    position: fixed;
-    bottom: 20px;
-    right: 50%;
-    font-size: 3rem;
-    padding: 2rem;
-    border-radius: 50%;
 }

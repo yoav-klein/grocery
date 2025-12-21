@@ -1,7 +1,7 @@
 
 body {
-  display: grid;
-  grid-template-rows: auto 1fr;
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
 
 header {
@@ -16,28 +16,16 @@ header {
 .content {
     position: relative;
     display: grid;
-    overflow: auto;
+    
     grid-template-columns: auto 1fr;
+    grid-auto-rows: 100%;
     grid-template-areas: "sidebar main";
+    overflow: auto;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 999;
-    
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
 
 main {
     grid-area: main;
-    overflow: auto;
 }
 
 #menu-button {
@@ -64,11 +52,11 @@ main {
     border-right: 1px solid var(--LINE-COLOR);
 
     transition: 300ms ease-in-out;
-    overflow: auto;
 
     /* flex to arrange the tenant card and the menu (nav) */
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 #sidebar nav {
@@ -159,6 +147,21 @@ main {
 /* have the submenu items idented */
 #sidebar .sub-menu a {
     padding-inline-start: 2em;
+}
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+    
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 /* || MOBILE SCREEN */

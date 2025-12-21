@@ -38,6 +38,7 @@ html, body {
 html {
     font-family: Poppins, 'Segoe UI', sans-serif;
     line-height: 1.5rem;
+    background-color: white;
 }
 
 body {
