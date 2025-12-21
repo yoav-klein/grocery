@@ -7,22 +7,17 @@ main {
 
 /* CATEGORY GRID */
 
-/* that shitty trick is needed in order to allow:
-1. the Add button to always be in the bottom, even when there are many items and categories
-2. a category to be in a natural size. if we set height: 100% on the .category-grid itself, then a single category with a single item would spread
-on all the space vertically.
-*/
-.category-grid-wrapper {
-    overflow: auto;
-    height: 100%;
-}
 
 .category-grid {
     display: grid;
+    align-items: start;
     grid-template-columns: repeat(auto-fit, 500px);
     gap: 20px;
     justify-content: space-around;
     margin: 0 auto;
+    overflow: auto;
+    height: 100%;
+    padding-bottom: 100px;
     
 }
 
