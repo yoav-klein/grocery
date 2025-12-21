@@ -15,21 +15,22 @@ function toggleSidebar() {
         ul.previousElementSibling.classList.toggle('rotate');
     });
     
-    const isMobile = window.innerWidth <= 768;
+    /* const isMobile = window.innerWidth <= 768; */
     sidebarEl.classList.toggle('close');
     
-    if (isMobile) {
+    /* if (isMobile) { */
         overlayEl.classList.toggle('active');
-    }
+    /* } */
 }
 
 function toggleSubMenu(e) {
     
+    // the next element after the button element is the <ul> element, which is the menu
     const subMenuEl = e.currentTarget.nextElementSibling;
     subMenuEl.classList.toggle('show');
     e.currentTarget.classList.toggle('rotate');
     
-    // if submenu button clicked and sidebar is closed, open it
+    // if submenu button clicked and sidebar is closed, open it, not so relevant in our case but let it be
     if(sidebarEl.classList.contains('close')) {
         sidebarEl.classList.toggle('close');
         toggleSidebarButtonEl.classList.toggle('rotate');

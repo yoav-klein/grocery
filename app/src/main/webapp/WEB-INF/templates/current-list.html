@@ -31,235 +31,25 @@
                 </ul>
             </article>
         </template>
-        <section id="list" class="category-grid">
-            <article class="category" th:each="category : ${itemsByCategory}" th:id="'category-' + ${category.key}">
-                <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
-                <ul>
-                    <li th:each="item : ${category.value}" class="category-item" th:id="'item-' + ${item.id}">
-                        <p class="item-quantity" th:text="${item.quantity}">3</p>
-                        <p class="item-quantity-type" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</p>
-                        <p class="item-name"><span th:text="${item.name}">Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox" th:id="'delete-checkbox-' + ${item.id}">
-                            <label th:for="'delete-checkbox-' + ${item.id}"></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-            
-            <article class="category">
-                <h2>VEGETABLES</h2>
-                <ul>
-                    <li class="category-item">
-                        <p class="item-quantity">3</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Tomato</span></p>
-                        <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox">
-                            <label></label>
-                        </p>
-                    </li>
-                </ul>
-            </article>
-
-        </section>
-        <button id="add-item-button" class="add-button">+</button>
+        <div class="category-grid-wrapper">
+            <section id="list" class="category-grid">
+                <article class="category" th:each="category : ${itemsByCategory}" th:id="'category-' + ${category.key}">
+                    <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                    <ul>
+                        <li th:each="item : ${category.value}" class="category-item" th:id="'item-' + ${item.id}">
+                            <p class="item-quantity" th:text="${item.quantity}">3</p>
+                            <p class="item-quantity-type" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</p>
+                            <p class="item-name"><span th:text="${item.name}">Tomato</span></p>
+                            <p class="checkbox-container">
+                                <input class="delete-checkbox" type="checkbox" th:id="'delete-checkbox-' + ${item.id}">
+                                <label th:for="'delete-checkbox-' + ${item.id}"></label>
+                            </p>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+        </div>
+        <button id="add-item-button">+</button>
         <dialog id="add-item-dialog" class="half-screen-dialog">
             <form id="new-item-form">
                 <fieldset>

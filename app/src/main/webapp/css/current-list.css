@@ -1,4 +1,7 @@
 
+main {
+    position: relative;
+}
 
 
 .item-quantity {
@@ -50,4 +53,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+#add-item-button {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    padding: 2rem;
+    border-radius: 50%;
 }

@@ -51,7 +51,7 @@ main {
     background: none;
     cursor: pointer;
     z-index: 1000;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 #menu-button:hover {
@@ -60,12 +60,13 @@ main {
 
 #sidebar {
     grid-area: sidebar;
-    width: 250px;
+    width: var(--SIDEBAR-WIDTH);
     border-right: 1px solid var(--LINE-COLOR);
 
     transition: 300ms ease-in-out;
     overflow: auto;
 
+    /* flex to arrange the tenant card and the menu (nav) */
     display: flex;
     flex-direction: column;
 }
@@ -73,7 +74,10 @@ main {
 #sidebar nav {
     padding: .2rem;
     height: 100%;
+    /* have the nav take all the available space in the sidebar */
     flex-grow: 1;
+
+    /* flex to arrange the main menu and the Manage Tenant link which is separate */
     display: flex;
     flex-direction: column;
 }
@@ -166,11 +170,12 @@ main {
     }
 
     #sidebar {
-        height: calc(100% - var(--HEADER-HEIGHT));
-        background-color: var(--BASE-COLOR);
-        position: fixed;
-        top: var(--HEADER-HEIGHT);
+        position: absolute;
+        top: 0;
         left: 0;
+        bottom: 0;
+        
+        background-color: var(--BASE-COLOR);
         transform: translateX(0);
         transition: transform 0.3s ease-in-out;
         box-shadow: 2px 0 10px rgba(0,0,0,0.1);
@@ -180,8 +185,6 @@ main {
     #sidebar.close {
         transform: translateX(-100%);
     }
-    
-    
 
     .overlay.active {
         opacity: 1;
