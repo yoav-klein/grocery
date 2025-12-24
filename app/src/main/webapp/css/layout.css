@@ -4,13 +4,12 @@ body {
     grid-template-rows: auto 1fr;
 }
 
-header {
+body > header {
     height: var(--HEADER-HEIGHT);
     border-bottom: 1px solid var(--LINE-COLOR);
     display: flex;
     align-items: center;
 
-    background-color: var(--BASE-COLOR);
 }
 
 .content {
@@ -18,7 +17,6 @@ header {
     display: grid;
     
     grid-template-columns: auto 1fr;
-    grid-auto-rows: 100%;
     grid-template-areas: "sidebar main";
     overflow: auto;
 }
@@ -26,6 +24,8 @@ header {
 
 main {
     grid-area: main;
+    overflow: auto;
+    padding: 1rem;
 }
 
 #menu-button {
