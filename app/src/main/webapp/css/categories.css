@@ -2,6 +2,7 @@
 
 main {
     caret-color: transparent;
+    position: relative;
 }
 
 /* CATEGORY GRID */
@@ -27,6 +28,12 @@ main {
     > h2 {
         margin-bottom: 2rem;
     }
+
+    > ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 .category ul {
@@ -36,7 +43,7 @@ main {
 .category-item {
     display: flex;
     flex-direction: row;
-    line-height: 2;
+    
 }
 
 
@@ -46,9 +53,14 @@ main {
 
 .item-name {
     flex: 1;
-    > span {
-        cursor: pointer;
-    }
 }
 
-
+.big-add-button { 
+    position: absolute;   
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    padding: 2rem;
+    border-radius: 50%;
+}

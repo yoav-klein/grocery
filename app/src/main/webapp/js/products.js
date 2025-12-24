@@ -8,3 +8,8 @@ const addProductDialogEl = document.getElementById("add-product-dialog");
 addProductButtonEl.addEventListener('click', () => {
     addProductDialogEl.showModal();
 })
+
+const closeModalButton = document.getElementById('close-modal-button');
+closeModalButton.addEventListener('click', () => {
+    addProductDialogEl.close();
+})
