@@ -46,9 +46,14 @@ main {
     
 }
 
+.item-quantity {
+    width: 3rem;
+    text-align: center;
+}
 
 .item-quantity-type {
     min-width: 3rem;
+    text-align: center;
 }
 
 .item-name {
@@ -56,10 +61,6 @@ main {
 }
 
 .big-add-button { 
-    position: absolute;   
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 3rem;
     padding: 2rem;
     border-radius: 50%;

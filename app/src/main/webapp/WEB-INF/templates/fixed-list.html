@@ -5,8 +5,7 @@
     <meta name="listId" th:content="${fixedList.id}">
     <meta name="tenantId" th:content="${tenant.id}">
     <link rel="stylesheet" th:href="@{/css/base.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/shared.css}">
+    <link rel="stylesheet" th:href="@{/css/categories.css}">
     <link rel="stylesheet" th:href="@{/css/fixed-list.css}">
 </head>
 <body th:replace="~{layout :: layout(~{::main},~{::script})}">
@@ -18,13 +17,14 @@
                     <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                     <ul>
                         <li th:each="product : ${category.value}" class="category-item">
-                            <p class="product-name"><span th:text="${product.name}">PRODUCT NAME</span></p>
-                            <input class="quantity" type="number" th:id="'product-' + ${product.productId}" value="0">
+                            <p class="item-name"><span th:text="${product.name}">PRODUCT NAME</span></p>
+                            <input class="item-quantity quantity" type="number" th:id="'product-' + ${product.productId}" value="0">
+                            <p class="item-quantity-type" th:text="${product.quantityType}">Kg</p>
                         </li>
                     </ul>
                 </article>
             </section>
-            <input type="submit" value="SUBMIT">
+            <input type="submit" value="INSERT" class="absolute-bottom-center insert-button">
         </form>
     </main>
     <script type="module" th:src="@{/js/fixed-list.js}"></script>
