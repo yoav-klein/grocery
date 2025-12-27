@@ -73,24 +73,104 @@
             </nav>
         </aside>
         <main>
-            <section id="list" class="category-grid">
-                <article class="category">
-                    <h2>FRUIT</h2>
-                    <ul>
-                        <li class="category-item">
-                            <input id="strawberry" name="strawberry" type="checkbox">
-                            <label for="strawberry">Strawberry</label>
-                        </li>
-                        <li class="category-item">
-                            <input name="orange" type="checkbox">
-                            <label for="orange">Orange</label>
-                        </li>
-                    </ul>
-                </article>
+            <section id="category-list-wrapper">
+                <section id="list" class="category-grid">
+                    <article class="category">
+                        <h2>FRUIT</h2>
+                        <ul>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="FRUIT" id="1" type="checkbox">
+                                <label for="1">Strawberry</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="FRUIT" id="2" type="checkbox">
+                                <label for="2">Orange</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="FRUIT" id="3" type="checkbox">
+                                <label for="3">Apple</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="FRUIT" id="4" type="checkbox">
+                                <label for="4">Kiwi</label>
+                            </li>
+                        </ul>
+                    </article>
+                    <article class="category">
+                        <h2>VEGETABLES</h2>
+                        <ul>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="VEGETABLES" id="5" type="checkbox">
+                                <label for="5">Tomato</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="VEGETABLES" id="6" type="checkbox">
+                                <label for="6">Pepper</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="VEGETABLES" id="7" type="checkbox">
+                                <label for="7">Cucumber</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="VEGETABLES" id="8" type="checkbox">
+                                <label for="8">Onion</label>
+                            </li>
+                        </ul>
+                    </article>
+                    <article class="category">
+                        <h2>PROTEIN</h2>
+                        <ul>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="PROTEIN" id="9" type="checkbox">
+                                <label for="9">Meat 5</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="PROTEIN" id="10" type="checkbox">
+                                <label for="10">Asado</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="PROTEIN" id="11" type="checkbox">
+                                <label for="11">Musht</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="PROTEIN" id="12" type="checkbox">
+                                <label for="12">Eggs</label>
+                            </li>
+                        </ul>
+                    </article>
+                    <article class="category">
+                        <h2>CLEANING-SUPPLY</h2>
+                        <ul>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="CLEANING-SUPPLY" id="13" type="checkbox">
+                                <label for="13">Economica</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="CLEANING-SUPPLY" id="14" type="checkbox">
+                                <label for="14">Skotchim</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="CLEANING-SUPPLY" id="15" type="checkbox">
+                                <label for="15">Dish Soap</label>
+                            </li>
+                            <li class="category-item">
+                                <input class="product-checkbox" data-category="CLEANING-SUPPLY" id="16" type="checkbox">
+                                <label for="16">Floor Soap</label>
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+                <button id="add-item-button" class="absolute-bottom-center insert-button">INSERT</button>
+            </section>
+            <section id="selected-section">
+                <ul id="selected-list">
+
+                </ul>
             </section>
         </main>
     </div>
     
     <script src="../../app/src/main/webapp/js/layout.js"></script>
+    <script src="../../app/src/main/webapp/js/add-fixed-list.js"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@
     /* in order for the label::before width will be respected, the display must not be inline (which is the default) */
     display: flex;
 }
-
+`
 .checkbox-container input[type="checkbox"] {
     /* we want the default checkbox icon  to disappear and create our own */
     appearance: none;

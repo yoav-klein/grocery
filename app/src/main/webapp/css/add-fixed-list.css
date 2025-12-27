@@ -1,0 +1,38 @@
+
+main {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+}
+
+input[type="checkbox"]:checked + label {
+    font-weight: bold;
+}
+
+#category-list-wrapper {
+    flex-grow: 5;
+    flex-basis: 0;
+    position: relative;
+}
+
+#list {
+    padding: 1rem;
+    border-right: 1px solid var(--LINE-COLOR);
+}
+
+#selected-section {
+    padding: 1rem;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+
+.insert-button {
+    width: 150px;
+    height: 70px;
+    border-radius: 5px;
+}
