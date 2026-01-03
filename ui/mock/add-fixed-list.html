@@ -73,8 +73,22 @@
             </nav>
         </aside>
         <main>
-            <section id="category-list-wrapper">
-                <section id="list" class="category-grid">
+            <div class="step-wrapper">
+                <header class="step">
+                    <div class="title">
+                        <h1>Add Fixed List</h1>
+                        <p>Create a reusable list</p>
+                    </div>
+                    <div class="name">
+                        <label for="listName">List name</label>
+                        <input id="listName" type="text" placeholder="e.g., Weekly groceries" />
+                    </div>
+                    <div class="actions">
+                        <button>Cancel</button>
+                        <button>Save</button>
+                    </div>
+                </header>
+                <section id="catalog" class="category-grid step">
                     <article class="category">
                         <h2>FRUIT</h2>
                         <ul>
@@ -160,13 +174,14 @@
                         </ul>
                     </article>
                 </section>
-                <button id="add-item-button" class="absolute-bottom-center insert-button">INSERT</button>
-            </section>
-            <section id="selected-section">
-                <ul id="selected-list">
-
-                </ul>
-            </section>
+                <section id="selected-section step">
+                    <ul id="selected-list">
+                        
+                    </ul>
+                </section>
+            </div>
+            <button id="prev-button">PREV</button>
+            <button id="next-button">NEXT</button>
         </main>
     </div>
     

@@ -53,3 +53,28 @@ allCheckboxes.forEach(input => {
 });
 
 
+/* MOBILE STEPPER */
+
+const nextButton = document.getElementById('next-button');
+const prevButton = document.getElementById('prev-button');
+
+const mainEl = document.querySelector('main');
+const numSteps = parseInt(getComputedStyle(mainEl).getPropertyValue('--num-steps'));
+let currentStep = parseInt(getComputedStyle(mainEl).getPropertyValue('--current-step'));
+
+const render = () => mainEl.style.setProperty('--current-step', currentStep);
+        
+nextButton.addEventListener('click', () => {
+    if(currentStep < numSteps - 1) {
+        ++currentStep;
+        render();
+    }
+});
+
+prevButton.addEventListener('click', () => {
+    if(currentStep > 0) {
+        --currentStep;
+        render();
+    }
+});
+

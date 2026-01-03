@@ -16,7 +16,6 @@ import com.grocery.business.domain.exception.FixedListNotFoundException;
 import com.grocery.business.domain.model.FixedList;
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.service.FixedListsService;
-import com.grocery.business.domain.service.CurrentListService;
 import com.grocery.business.domain.service.ProductService;
 
 @Controller
@@ -31,7 +30,7 @@ public class FixedListsController {
 
     @GetMapping("/addList")
     public String addList(Model model, @PathVariable("tenantId") String tenantId) {
-        model.addAttribute("allProducts", productService.getAllProducts(tenantId));
+        model.addAttribute("productsByCategory", productService.getAllProducts(tenantId).stream().collect(Collectors.groupingBy(Product::getCategory)));
 
         return "add-fixed-list";
     }

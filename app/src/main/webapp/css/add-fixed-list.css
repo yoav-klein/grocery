@@ -1,33 +1,73 @@
 
 main {
-    display: flex;
-    flex-direction: row;
     padding: 0;
 }
 
-input[type="checkbox"] {
-    appearance: none;
+.step-wrapper {
+    height: 100%;
+    display: grid;
+    flex-direction: row;
+    padding: 0;
+
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        "head head"
+        "catalog selected"
+    ;
 }
 
-input[type="checkbox"]:checked + label {
-    font-weight: bold;
+.step-wrapper header {
+    grid-area: head;
+    border-bottom: 1px solid var(--LINE-COLOR);
+    height: 100px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding-right: 3rem;
+    padding-left: 3rem;
+
+    > .title {
+        flex: 1 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    > .name {
+        flex: 1 0 0;
+        display: grid;
+        align-content: center;
+    }
+
+    > .actions {
+        flex: 1 0 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        align-items: center;
+
+        > button {
+            height: 50px;
+        }
+    }
 }
 
-#category-list-wrapper {
-    flex-grow: 5;
-    flex-basis: 0;
-    position: relative;
-}
+#catalog {
+    grid-area: catalog;
 
-#list {
     padding: 1rem;
+    padding-bottom: 100px;
     border-right: 1px solid var(--LINE-COLOR);
 }
 
 #selected-section {
+    grid-area: selected;
     padding: 1rem;
-    flex-grow: 1;
-    flex-basis: 0;
+    
+    position: relative;
 }
 
 
@@ -35,4 +75,85 @@ input[type="checkbox"]:checked + label {
     width: 150px;
     height: 70px;
     border-radius: 5px;
+}
+
+#next-button, #prev-button {
+    display: none;
+}
+
+
+.category-item input[type="checkbox"] {
+    appearance: none;
+
+    &:checked + label {
+        font-weight: bold;
+    }
+}
+
+@media(max-width: 768px) {
+
+    
+    main {
+        --num-steps: 3;
+        --current-step: 0;
+        overflow-x: hidden;
+    }
+
+    .step-wrapper {
+        width: calc(var(--num-steps) * 100%);
+        display: flex;
+        flex-direction: row;
+
+        transform: translateX(calc(-1 * (100% / var(--num-steps)) * var(--current-step)));
+        transition: transform 1s;
+
+    }
+
+    #next-button, #prev-button {
+        position: absolute;
+        bottom: 20px;
+        height: 30px;
+        display: block;
+        
+    }
+
+    #prev-button {
+        left: 20px;
+    }
+
+    #next-button {
+        right: 20px;
+    }
+
+    .step {
+        width: calc(100% / var(--num-steps));
+        height: 100%;
+        padding: 1rem;
+    }
+
+    .step-wrapper header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+
+        h1, p {
+            text-align: center;
+        }
+
+    }
+
+    header.step .name {
+        flex-grow: 1;
+    }
+
+    header.step .title {
+        flex-grow: 0;
+    }
+
+    header.step .actions {
+        display: none;
+    }
+
+    
 }
