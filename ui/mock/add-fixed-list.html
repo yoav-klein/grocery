@@ -73,6 +73,8 @@
             </nav>
         </aside>
         <main>
+            <!-- this step-wrapper shit is because CSS tranform creates a stacking context, so we can't 
+             put the buttons right in the `main` element, becasue `main` needs to be NUM-STEPS * WIDTH wide -->
             <div class="step-wrapper">
                 <header class="step">
                     <div class="title">
@@ -174,14 +176,26 @@
                         </ul>
                     </article>
                 </section>
-                <section id="selected-section step">
+                <section id="selected-section" class="step">
+                    <h1>LIST NAME</h1>
                     <ul id="selected-list">
                         
                     </ul>
+                    <button id="save-button-mobile">Save!</button>
                 </section>
             </div>
-            <button id="prev-button">PREV</button>
-            <button id="next-button">NEXT</button>
+            <div class="step-actions">
+                <button id="step-primary-button">
+                    <span class="current">Continue</span>
+                    <span>Review</span>
+                    <span>Save</span>
+                </button>
+                <button id="step-secondary-button">
+                    <span class="current">Cancel</span>
+                    <span>Back</span>
+                    <span>Back</span>
+                </button>
+            </div>
         </main>
     </div>
     

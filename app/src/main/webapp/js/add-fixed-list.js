@@ -55,8 +55,8 @@ allCheckboxes.forEach(input => {
 
 /* MOBILE STEPPER */
 
-const nextButton = document.getElementById('next-button');
-const prevButton = document.getElementById('prev-button');
+const nextButton = document.getElementById('step-primary-button');
+const prevButton = document.getElementById('step-secondary-button');
 
 const mainEl = document.querySelector('main');
 const numSteps = parseInt(getComputedStyle(mainEl).getPropertyValue('--num-steps'));
@@ -68,6 +68,7 @@ nextButton.addEventListener('click', () => {
     if(currentStep < numSteps - 1) {
         ++currentStep;
         render();
+        setButtons();
     }
 });
 
@@ -75,6 +76,17 @@ prevButton.addEventListener('click', () => {
     if(currentStep > 0) {
         --currentStep;
         render();
+        setButtons();
     }
 });
+
+function setButtons() {
+    const primaryLabels = Array.from(document.querySelectorAll('#step-primary-button span'));
+    const secondaryLabels = Array.from(document.querySelectorAll('#step-secondary-button span'));
+
+    primaryLabels.forEach(label => label.classList.remove('current'));
+    secondaryLabels.forEach(label => label.classList.remove('current'));
+    primaryLabels[currentStep].classList.add('current');
+    secondaryLabels[currentStep].classList.add('current');
+}
 

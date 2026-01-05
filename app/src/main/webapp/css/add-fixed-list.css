@@ -66,8 +66,24 @@ main {
 #selected-section {
     grid-area: selected;
     padding: 1rem;
-    
-    position: relative;
+
+    > ul {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        > li h3 {
+            margin-bottom: 10px;
+        }
+    }
+
+    #save-button-mobile {
+        display: none;
+    }
+
+    > h1 {
+        display: none;
+    }
 }
 
 
@@ -77,10 +93,9 @@ main {
     border-radius: 5px;
 }
 
-#next-button, #prev-button {
+.step-actions {
     display: none;
 }
-
 
 .category-item input[type="checkbox"] {
     appearance: none;
@@ -92,14 +107,18 @@ main {
 
 @media(max-width: 768px) {
 
-    
     main {
         --num-steps: 3;
         --current-step: 0;
         overflow-x: hidden;
+
+        display: flex;
+        flex-direction: column;
     }
 
     .step-wrapper {
+        flex-grow: 1;
+
         width: calc(var(--num-steps) * 100%);
         display: flex;
         flex-direction: row;
@@ -107,22 +126,33 @@ main {
         transform: translateX(calc(-1 * (100% / var(--num-steps)) * var(--current-step)));
         transition: transform 1s;
 
+        overflow: auto;
+
     }
 
-    #next-button, #prev-button {
-        position: absolute;
-        bottom: 20px;
-        height: 30px;
-        display: block;
+    .step-actions {
+        display: flex;
+        flex-direction: column;
         
-    }
+        button {
+            position: relative;
+            height: 3rem;
+        }
 
-    #prev-button {
-        left: 20px;
-    }
+        span {
+            opacity: 0;
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-content: center;
+            transition: opacity 0.3s;
+            transition-delay: 0.3s;
+        }
 
-    #next-button {
-        right: 20px;
+        .current {
+            opacity: 1;
+        }
+
     }
 
     .step {
@@ -155,5 +185,24 @@ main {
         display: none;
     }
 
-    
+    #selected-section {
+        display: flex;
+        flex-direction: column;
+        
+        > h1 {
+            display: block;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        > ul {
+            flex-grow: 1;
+        }
+
+        padding-bottom: 100px;
+
+        #save-button-mobile {
+            display: block;
+        }
+    }
 }
