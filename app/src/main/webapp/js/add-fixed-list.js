@@ -1,7 +1,12 @@
 
-const allCheckboxes = document.querySelectorAll('.product-checkbox');
+const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]')
+const csrfToken = document.querySelector('meta[name="_csrf"]')
 
+const allCheckboxes = document.querySelectorAll('.product-checkbox');
 const selectedProductsListEl = document.getElementById('selected-list');
+const listNameInputEl = document.getElementById("listName");
+const listNameHeadingEl = document.querySelector('#selected-section h1');
+
 
 const selectedProducts = new Array();
 
@@ -19,7 +24,6 @@ allCheckboxes.forEach(input => {
             let selectedProductsCategoryListEl;
 
             if(selectedProductsCategory === undefined) {
-                console.log("CREATING SELECTED PRODUCTS CATEGORY");
                 const selectedProductsCategory = document.createElement('li');
                 const header = document.createElement('h3');
                 header.innerText = productCategory;
@@ -52,6 +56,9 @@ allCheckboxes.forEach(input => {
     });
 });
 
+/* SAVE BUTTON */
+
+document.getElementById('save-button').addEventListener('click', saveList);
 
 /* MOBILE STEPPER */
 
@@ -65,10 +72,13 @@ let currentStep = parseInt(getComputedStyle(mainEl).getPropertyValue('--current-
 const render = () => mainEl.style.setProperty('--current-step', currentStep);
         
 nextButton.addEventListener('click', () => {
+    
     if(currentStep < numSteps - 1) {
         ++currentStep;
         render();
         setButtons();
+    } else { // save was hit
+        saveList();
     }
 });
 
@@ -88,5 +98,32 @@ function setButtons() {
     secondaryLabels.forEach(label => label.classList.remove('current'));
     primaryLabels[currentStep].classList.add('current');
     secondaryLabels[currentStep].classList.add('current');
+}
+
+/* CHANGE NAME OF LIST */
+
+
+listNameInputEl.addEventListener('change', (e) => {
+    listNameHeadingEl.innerText = e.target.value;
+});
+
+function saveList() {
+    const listName = listNameInputEl.value;
+    const data = {
+        listName: listName,
+        productIds: selectedProducts
+    };
+
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append(csrfHeaderName.content, csrfToken.content);
+    const body = JSON.stringify(data);
+    const responsePromise = fetch(document.baseURI, {
+        method: "POST",
+        headers: headers,
+        body: body
+    });
+    responsePromise.then(resp => console.log(`OK: ${resp.ok}`)).catch(e => console.log(`error: ${e}`));
+
 }
 

@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.grocery.business.domain.exception.FixedListNotFoundException;
 import com.grocery.business.domain.model.FixedList;
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.service.FixedListsService;
 import com.grocery.business.domain.service.ProductService;
+import com.grocery.business.domain.dto.FixedListRequest;
 
 @Controller
 @RequestMapping("/tenant/{tenantId}/lists")
@@ -45,9 +47,9 @@ public class FixedListsController {
     }
 
     // new list
-    @PostMapping
-    public String createList(@PathVariable("tenantId") String tenantId, @RequestParam("name") String name, @RequestParam("productIds") List<Integer> productIds) {
-        fixedListsService.createFixedList(tenantId, name, productIds);
+    @PostMapping("/addList")
+    public String createList(@PathVariable("tenantId") String tenantId, @RequestBody FixedListRequest fixedListRequest) {
+        fixedListsService.createFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
 
         return String.format("redirect:/tenant/%s", tenantId);
     }

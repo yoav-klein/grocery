@@ -11,25 +11,51 @@
 </head>
 <body th:replace="~{layout :: layout(~{::main},~{::script})}">
     <main>
-        <section id="category-list-wrapper">
-            <section id="list" class="category-grid">
-                <article class="category" th:each="category: ${productsByCategory}">
-                    <h2 th:text="#{${'category.title.' + category.key}}">CATEGORY NAME</h2>
-                    <ul>
-                        <li class="category-item" th:each="product : ${category.value}">
-                            <input class="product-checkbox" th:attr="data-category=${category.key}" th:id="${product.productId}" type="checkbox">
-                            <label th:for="${product.productId}" th:text="${product.name}">PRODUCT NAME</label>
-                        </li>
+        <div class="step-wrapper">
+            <header class="step">
+                    <div class="title">
+                        <h1>Add Fixed List</h1>
+                        <p>Create a reusable list</p>
+                    </div>
+                    <div class="name">
+                        <label for="listName">List name</label>
+                        <input id="listName" type="text" placeholder="e.g., Weekly groceries" />
+                    </div>
+                    <div class="actions">
+                        <button id="cancel-button">Cancel</button>
+                        <button id="save-button">Save</button>
+                    </div>
+                </header>
+                <section id="catalog" class="category-grid step">
+                    <article class="category" th:each="category: ${productsByCategory}">
+                        <h2 th:text="#{${'category.title.' + category.key}}">CATEGORY NAME</h2>
+                        <ul>
+                            <li class="category-item" th:each="product : ${category.value}">
+                                <input class="product-checkbox" th:attr="data-category=${category.key}" th:id="${product.productId}" type="checkbox">
+                                <label th:for="${product.productId}" th:text="${product.name}">PRODUCT NAME</label>
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+                <section id="selected-section" class="step">
+                    <h1>LIST NAME</h1>
+                    <ul id="selected-list">
+                        
                     </ul>
-                </article>
-            </section>
-            <button id="add-item-button" class="absolute-bottom-center insert-button">INSERT</button>
-        </section>
-        <section id="selected-section">
-            <ul id="selected-list">
-
-            </ul>
-        </section>
+                </section>
+        </div>
+        <div class="step-actions">
+                <button id="step-primary-button">
+                    <span class="current">Continue</span>
+                    <span>Review</span>
+                    <span>Save</span>
+                </button>
+                <button id="step-secondary-button">
+                    <span class="current">Cancel</span>
+                    <span>Back</span>
+                    <span>Back</span>
+                </button>
+            </div>
     </main>
     <script th:src="@{/js/add-fixed-list.js}"></script>
 </body>

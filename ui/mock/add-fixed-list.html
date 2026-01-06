@@ -73,8 +73,6 @@
             </nav>
         </aside>
         <main>
-            <!-- this step-wrapper shit is because CSS tranform creates a stacking context, so we can't 
-             put the buttons right in the `main` element, becasue `main` needs to be NUM-STEPS * WIDTH wide -->
             <div class="step-wrapper">
                 <header class="step">
                     <div class="title">
@@ -86,8 +84,8 @@
                         <input id="listName" type="text" placeholder="e.g., Weekly groceries" />
                     </div>
                     <div class="actions">
-                        <button>Cancel</button>
-                        <button>Save</button>
+                        <button id="cancel-button">Cancel</button>
+                        <button id="save-button">Save</button>
                     </div>
                 </header>
                 <section id="catalog" class="category-grid step">
@@ -181,7 +179,6 @@
                     <ul id="selected-list">
                         
                     </ul>
-                    <button id="save-button-mobile">Save!</button>
                 </section>
             </div>
             <div class="step-actions">
