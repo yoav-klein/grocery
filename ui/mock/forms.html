@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../../app/src/main/webapp/css/base.css">
+  <link rel="stylesheet" href="../../app/src/main/webapp/css/dialogs.css">
+  <style>
+
+    html, body {
+      background-color: white;
+    }
+    
+    main {
+      width: 70%;
+      height: 100%;
+      background-color: aqua;
+      margin: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <main>
+    <button id="button-one">Show Dialog</button>
+
+    <dialog id="dialog-one" class="dialog-layout dialog-form">
+
+      <header>
+        <h2>My Form</h2>
+        <button class="close-modal-button">X</button>
+      </header>
+      <form action="">
+        <div class="body">
+          <div class="field-container">
+            <label for="id">ID</label>
+            <input type="text" class="short-input">
+          </div>
+          <div class="field-container">
+            <label for="name">Name</label>
+            <input type="text" class="long-input">
+          </div>
+        </div>
+        <div class="footer">
+          <button>Insert</button>
+        </div>
+      </form>
+    </dialog>
+
+    <button id="button-two">Show Dialog</button>
+
+    <dialog id="dialog-two" class="dialog-layout">
+
+      <header>
+        <h2>My Form</h2>
+        <button class="close-modal-button">X</button>
+      </header>
+      <form action="">
+        <div class="body">
+          <div class="field-container">
+            <label for="id">ID</label>
+            <input type="text" class="short-input">
+          </div>
+          <div class="field-container">
+            <label for="name">Name</label>
+            <input type="text" class="long-input">
+          </div>
+        </div>
+        <div class="footer">
+          <button>Insert</button>
+        </div>
+      </form>
+    </dialog>
+  </main>
+
+  <script>
+    const buttonOneEl = document.getElementById('button-one');
+    const buttonTwoEl = document.getElementById('button-two');
+    const dialogOneEl = document.getElementById('dialog-one');
+    const dialogTwoEl = document.getElementById('dialog-two');
+
+    buttonOneEl.addEventListener('click', () => { dialogOneEl.showModal(); });
+    buttonTwoEl.addEventListener('click', () => { dialogTwoEl.showModal(); });
+
+    Array.from(document.querySelectorAll('.close-modal-button')).forEach(el => el.addEventListener('click', (e) => { e.target.closest('dialog').close() }));
+  </script>
+</body>
+</html>

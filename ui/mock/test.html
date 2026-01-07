@@ -1,259 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Add Fixed List – Same HTML, Mobile Step 1</title>
-  <style>
-    :root{
-      --gap: 14px;
-      --radius: 16px;
-      --border: 1px solid rgba(0,0,0,0.12);
-      --muted: rgba(0,0,0,0.55);
-      --soft: rgba(0,0,0,0.04);
-    }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      padding:24px;
-      background:#f4f5f7;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      display:flex;
-      justify-content:center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* Simulated phone screen container */
-    .phone{
-      width:390px;
-      height:740px;
-      background:#fff;
-      border: var(--border);
-      border-radius: 22px;
-      overflow:hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    }
+        dialog[open] {
+            background-color: aqua;
+            display: flex;
+        }
 
-    /* SAME desktop root container (just smaller here) */
-    .main-content-mock{
-      height:100%;
-      background:#fff;
-    }
-
-    /* === SAME GRID HIERARCHY AS DESKTOP === */
-    .afl-grid{
-      display:grid;
-      grid-template-columns: minmax(0, 1fr) 340px;
-      grid-template-rows: auto minmax(0, 1fr);
-      height:100%;
-    }
-
-    .afl-header{
-      grid-column: 1 / -1;
-      display:grid;
-      grid-template-columns: 1fr minmax(280px, 520px) auto;
-      gap: 16px;
-      align-items:center;
-      padding: 16px 18px;
-      border-bottom: var(--border);
-      background:#fff;
-    }
-
-    .afl-title{ min-width:0; }
-    .afl-title h1{
-      margin:0;
-      font-size:18px;
-      font-weight:750;
-      line-height:1.2;
-    }
-    .afl-title p{
-      margin:4px 0 0;
-      font-size:13px;
-      color: var(--muted);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .afl-name{ display:grid; gap:6px; min-width:0; }
-    .afl-name label{ font-size:12px; color:var(--muted); font-weight:650; }
-    .afl-name input{
-      height:40px;
-      border-radius:12px;
-      border: var(--border);
-      padding: 0 12px;
-      font-size:14px;
-      outline:none;
-    }
-
-    .afl-actions{ display:flex; gap:10px; white-space:nowrap; }
-    .btn{
-      height:40px;
-      padding:0 14px;
-      border-radius:12px;
-      border: var(--border);
-      background:#fff;
-      font-weight:700;
-      cursor:pointer;
-    }
-    .btn-primary{
-      border:none;
-      background:#111;
-      color:#fff;
-    }
-    .btn:disabled{ opacity:0.55; cursor:not-allowed; }
-
-    .catalog{
-      grid-column:1;
-      grid-row:2;
-      overflow:auto;
-      padding:16px 18px;
-    }
-    .selected{
-      grid-column:2;
-      grid-row:2;
-      border-left: var(--border);
-      background: rgba(0,0,0,0.03);
-      overflow:auto;
-      padding:16px;
-    }
-
-    /* =========================================================
-       MOBILE STEP 1 MODE — SAME HTML, DIFFERENT CSS ONLY
-       (simulate "current step = 0")
-       ========================================================= */
-    .is-mobile-step1 .afl-grid{
-      /* collapse to a single full-screen area */
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
-    }
-
-    .is-mobile-step1 .catalog,
-    .is-mobile-step1 .selected{
-      display:none; /* Step 1 only */
-    }
-
-    .is-mobile-step1 .afl-header{
-      /* header becomes the whole screen */
-      grid-column: 1;
-      grid-row: 1;
-
-      height: 100%;
-      border-bottom: none;
-
-      /* turn into a full-screen step layout */
-      display:grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr auto; /* top, center content, bottom action */
-      gap: 18px;
-
-      padding: 20px 18px 18px;
-    }
-
-    /* top area: we’ll keep the title compact; acts like context */
-    .is-mobile-step1 .afl-title h1{
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    /* reuse the subtitle as the “instruction / helper” */
-    .is-mobile-step1 .afl-title p{
-      margin-top: 10px;
-      white-space: normal;
-
-      background: var(--soft);
-      padding: 12px;
-      border-radius: var(--radius);
-      color: rgba(0,0,0,0.72);
-      line-height: 1.35;
-      font-size: 13px;
-    }
-
-    /* center: make the name field feel like the whole step */
-    .is-mobile-step1 .afl-name{
-      align-content: start;
-      gap: 10px;
-      padding-top: 8px;
-    }
-
-    .is-mobile-step1 .afl-name label{
-      font-size: 12px;
-      letter-spacing: 0.2px;
-    }
-
-    .is-mobile-step1 .afl-name input{
-      height: 54px;
-      border-radius: var(--radius);
-      padding: 0 16px;
-      font-size: 16px;
-    }
-
-    .is-mobile-step1 .afl-name input:focus{
-      border-color: rgba(0,0,0,0.3);
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
-    }
-
-    /* bottom: actions become sticky footer (Continue) */
-    .is-mobile-step1 .afl-actions{
-      border-top: var(--border);
-      padding-top: 14px;
-      gap: 10px;
-
-      /* stack buttons vertically */
-      flex-direction: column-reverse; /* primary at bottom feels natural */
-    }
-
-    .is-mobile-step1 .btn,
-    .is-mobile-step1 .btn-primary{
-      height: 54px;
-      border-radius: var(--radius);
-      font-size: 16px;
-      font-weight: 800;
-      width: 100%;
-    }
-
-    /* Optional: on very small phones */
-    @media (max-width: 420px){
-      .phone{ width: 360px; height: 720px; }
-    }
-  </style>
+    </style>
 </head>
 <body>
-
-  <!-- Add this class to simulate "mobile step 1" mode -->
-  <div class="phone is-mobile-step1">
-    <div class="main-content-mock">
-      <div class="afl-grid">
-
-        <!-- SAME afl-header HTML as desktop -->
-        <header class="afl-header">
-          <div class="afl-title">
-            <h1>Add Fixed List</h1>
-            <p>This name will help you recognize and reuse it later.</p>
-          </div>
-
-          <div class="afl-name">
-            <label for="listName">List name</label>
-            <input id="listName" type="text" placeholder="e.g. Weekly groceries" autofocus />
-          </div>
-
-          <div class="afl-actions">
-            <button class="btn">Cancel</button>
-            <button class="btn btn-primary" disabled>Continue</button>
-          </div>
-        </header>
-
-        <!-- SAME siblings as desktop (hidden in step 1 mode) -->
-        <main class="catalog">
-          Catalog (hidden in step 1 mode)
-        </main>
-
-        <aside class="selected">
-          Selected (hidden in step 1 mode)
-        </aside>
-
-      </div>
-    </div>
-  </div>
-
+    <button>OPEN</button>
+    <dialog>
+        <h2>DIALOG</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic recusandae quibusdam incidunt iusto. Quasi, magnam! Blanditiis doloribus doloremque, ut recusandae, id quos aperiam, itaque error quibusdam inventore delectus laborum dolorum.</p>
+    </dialog>
+    <script>
+        document.querySelector('dialog').showModal();
+        /* document.querySelector('dialog').close(); */
+    </script>
 </body>
 </html>

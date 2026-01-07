@@ -1,4 +1,11 @@
 
+/* ADD ITEM FORM */
+
+#add-item-dialog {
+    width: 50vw;
+    height: 50vh;
+}
+
 
 .item-quantity {
     min-width: 3rem;

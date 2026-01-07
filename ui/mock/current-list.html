@@ -380,18 +380,18 @@
             </section>
             
             <button id="add-item-button" class="absolute-bottom-center big-add-button">+</button>
-            <dialog id="add-item-dialog" class="form-layout half-screen-dialog">
+            <dialog id="add-item-dialog" class="dialog-layout dialog-form">
                 <header>
                     <h2>New Item</h2>
-                    <button id="close-modal-button" class="close-button">X</button>
+                    <button class="close-modal-button">X</button>
                 </header>
                 <form id="new-item-form">
                     <div class="body">
-                        <div class="field">
+                        <div class="field-container">
                             <label for="name">Name</label>
                             <input name="name" class="long-input" type="text" id="name">
                         </div>
-                        <div class="field">
+                        <div class="field-container">
                             <label for="quantity">Quantity</label>
                             <input class="short-input" name="quantity" type="number" id="quantity">
                             
@@ -400,7 +400,7 @@
                                 <option>Unit</option>
                             </select>
                         </div>
-                        <div class="field">
+                        <div class="field-container">
                             <label for="category">Category</label>
                             <select name="category" class="long-input">
                                 <option>Vegetables</option>
@@ -415,15 +415,13 @@
                             <button id="new-item-button" type="submit" name="save">Submit!</button>
                         </p>
                     </div>
-                    
-                    
                 </form>
-
             </dialog>
         </main>
     </div>
     
     <script src="../../app/src/main/webapp/js/layout.js"></script>
+    <script src="../../app/src/main/webapp/js/dialogs.js"></script>
     <script src="../../app/src/main/webapp/js/current-list.js"></script>
 </body>
 </html>

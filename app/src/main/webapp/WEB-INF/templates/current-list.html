@@ -48,10 +48,10 @@
             </article>
         </section>
         <button id="add-item-button" class="absolute-bottom-center big-add-button">+</button>
-        <dialog id="add-item-dialog" class="form-layout half-screen-dialog">
+        <dialog id="add-item-dialog" class="dialog-layout dialog-form">
             <header>
                 <h2>New Item</h2>
-                <button id="close-modal-button" class="close-button">X</button>
+                <button class="close-modal-button">X</button>
             </header>
             <form id="new-item-form">
                 <div class="body">
@@ -87,6 +87,7 @@
             </form>
         </dialog>
     </main>
+    <script th:src="@{/js/dialogs.js}"></script>
     <script th:src="@{/js/current-list.js}"></script>
 </body>
 </html>

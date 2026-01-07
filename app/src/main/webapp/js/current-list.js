@@ -30,11 +30,6 @@ addItemButton.addEventListener('click', () => {
     addItemDialogEl.showModal();
 })
 
-const closeModalButton = document.getElementById('close-modal-button');
-closeModalButton.addEventListener('click', () => {
-    addItemDialogEl.close();
-})
-
 
 newItemFormEl.addEventListener("submit", (event) => {
     event.preventDefault(); // prevent page reload
