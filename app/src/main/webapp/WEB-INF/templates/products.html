@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/base.css}">
     <link rel="stylesheet" th:href="@{/css/categories.css}">
     <link rel="stylesheet" th:href="@{/css/dialogs.css}">
+    <link rel="stylesheet" th:href="@{/css/products.css}">
 </head>
 <body th:replace="~{layout :: layout(~{::main},~{::script})}">
     <main>
@@ -28,10 +29,10 @@
             </article>
         </section>
         <button id="add-product-button" class="absolute-bottom-center big-add-button">+</button>
-        <dialog id="add-product-dialog" class="form-layout half-screen-dialog">
+        <dialog id="add-product-dialog" class="dialog-layout dialog-layout">
             <header>
                 <h2>New Product</h2>
-                <button id="close-modal-button" class="close-button">X</button>
+                <button class="close-modal-button">X</button>
             </header>
             <form id="new-product-form" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" method="post">
                 <div class="body">
@@ -63,6 +64,7 @@
             </form>
         </dialog>
     </main>
+    <script th:src="@{/js/dialogs.js}"></script>
     <script th:src="@{/js/products.js}"></script>
 </body>
 </html>
