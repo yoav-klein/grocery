@@ -6,6 +6,7 @@ const allCheckboxes = document.querySelectorAll('.product-checkbox');
 const selectedProductsListEl = document.getElementById('selected-list');
 const listNameInputEl = document.getElementById("listName");
 const listNameHeadingEl = document.querySelector('#selected-section h1');
+const saveButtonEl = document.getElementById('save-button');
 
 /* CONFIRMATION AND ERROR MODALS ELEMENTS */
 const confirmationDialogEl = document.getElementById('confirmation-dialog');
@@ -22,15 +23,19 @@ allCheckboxes.forEach(input => {
     
     input.addEventListener('change', (e) => {
         const selectedProductsCategories = selectedProductsListEl.querySelectorAll('li');
+        const productId = e.target.getAttribute('id');
 
+        // get the name and category of clicked checkbox
         const name = e.target.nextElementSibling.innerText;
         const productCategory = e.target.getAttribute('data-category');
 
+        // find the relevant category li
         const selectedProductsCategory = Array.from(selectedProductsCategories).find(i => i.getAttribute('data-category-name') === productCategory);
 
         if(e.target.checked) {
             let selectedProductsCategoryListEl;
 
+            // if there's not such category yet in the selected list, create it
             if(selectedProductsCategory === undefined) {
                 const selectedProductsCategory = document.createElement('li');
                 const header = document.createElement('h3');
@@ -50,7 +55,7 @@ allCheckboxes.forEach(input => {
             liEl.innerText = name;
 
             selectedProductsCategoryListEl.appendChild(liEl);
-            selectedProducts.push(e.target.getAttribute('id'));
+            selectedProducts.push(productId);
         } else {
             const selectedProductsCategoryListEl = selectedProductsCategory.querySelector('ul');
             
@@ -59,19 +64,35 @@ allCheckboxes.forEach(input => {
                     selectedProductsCategoryListEl.removeChild(child);
                 }
             });
-            if(selectedProductsCategoryListEl.hasChildNodes()) { console.log(selectedProductsCategoryListEl.hasChildNodes) } else { selectedProductsListEl.removeChild(selectedProductsCategory); }
+            // in case it's last item in category, remove category
+            if(false === selectedProductsCategoryListEl.hasChildNodes()) { 
+                selectedProductsListEl.removeChild(selectedProductsCategory); 
+            }
+
+            // remove item from selectedProducts array
+            selectedProducts.splice(selectedProducts.indexOf(productId), 1);
         }
+
+        toggleSaveButton();
     });
 });
 
 /* SAVE BUTTON */
 
-document.getElementById('save-button').addEventListener('click', saveList);
+function toggleSaveButton() {
+    if(selectedProducts.length === 0 || listNameInputEl.value === '') {
+        saveButtonEl.disabled = true;
+    } else {
+        saveButtonEl.disabled = false;
+    }
+}
+
+saveButtonEl.addEventListener('click', saveList);
 
 /* MOBILE STEPPER */
 
-const nextButton = document.getElementById('step-primary-button');
-const prevButton = document.getElementById('step-secondary-button');
+const primaryButtonEl = document.getElementById('step-primary-button');
+const secondaryButtonEl = document.getElementById('step-secondary-button');
 
 const mainEl = document.querySelector('main');
 const numSteps = parseInt(getComputedStyle(mainEl).getPropertyValue('--num-steps'));
@@ -79,7 +100,7 @@ let currentStep = parseInt(getComputedStyle(mainEl).getPropertyValue('--current-
 
 const render = () => mainEl.style.setProperty('--current-step', currentStep);
         
-nextButton.addEventListener('click', () => {
+primaryButtonEl.addEventListener('click', () => {
     
     if(currentStep < numSteps - 1) {
         ++currentStep;
@@ -90,7 +111,7 @@ nextButton.addEventListener('click', () => {
     }
 });
 
-prevButton.addEventListener('click', () => {
+secondaryButtonEl.addEventListener('click', () => {
     if(currentStep > 0) {
         --currentStep;
         render();
@@ -106,12 +127,25 @@ function setButtons() {
     secondaryLabels.forEach(label => label.classList.remove('current'));
     primaryLabels[currentStep].classList.add('current');
     secondaryLabels[currentStep].classList.add('current');
+
+    // if on step 3, check if list is empty/no name, and if so - disable button
+    if(currentStep === numSteps - 1) {
+        if(selectedProducts.length === 0 || listNameInputEl.value === '') {
+            primaryButtonEl.disabled = true;
+        } else {
+            primaryButtonEl.disabled = false;
+        }
+    } else {
+        primaryButtonEl.disabled = false;
+    }
+
 }
 
 /* CHANGE NAME OF LIST */
 
-listNameInputEl.addEventListener('change', (e) => {
+listNameInputEl.addEventListener('input', (e) => {
     listNameHeadingEl.innerText = e.target.value;
+    toggleSaveButton();
 });
 
 function saveList() {
@@ -145,14 +179,14 @@ function saveList() {
         if(e instanceof HttpError) {
             if(e.response.status == 409) {
                 errorMessageEl.innerText = `List with name already exists!`;
-            } else if(e.response.status >= 500) {
+            } else {
                 errorMessageEl.innerText = 'Something went wrong on our side...';
             }
         } else {
             errorMessageEl.innerText = 'Something went wrong on our side...';
         }
         
-        errorDialogEl.showModal()
+        errorDialogEl.showModal();
     });
 }
 
