@@ -7,7 +7,15 @@ const selectedProductsListEl = document.getElementById('selected-list');
 const listNameInputEl = document.getElementById("listName");
 const listNameHeadingEl = document.querySelector('#selected-section h1');
 
+/* CONFIRMATION AND ERROR MODALS ELEMENTS */
+const confirmationDialogEl = document.getElementById('confirmation-dialog');
+const errorDialogEl = document.getElementById('error-dialog');
+const errorMessageEl = document.getElementById('error-message');
+const successListNameSpanEl = document.getElementById('success-list-name');
+const toListLinkEl = document.getElementById('to-list-link');
 
+
+// array that will hold the selected products and will be sent to the server
 const selectedProducts = new Array();
 
 allCheckboxes.forEach(input => {
@@ -102,7 +110,6 @@ function setButtons() {
 
 /* CHANGE NAME OF LIST */
 
-
 listNameInputEl.addEventListener('change', (e) => {
     listNameHeadingEl.innerText = e.target.value;
 });
@@ -123,7 +130,29 @@ function saveList() {
         headers: headers,
         body: body
     });
-    responsePromise.then(resp => console.log(`OK: ${resp.ok}`)).catch(e => console.log(`error: ${e}`));
 
+    responsePromise.then(resp => {
+        if(!resp.ok) {
+            throw new HttpError(resp);
+        }
+        return resp.text();
+    }).then(listId => {
+        successListNameSpanEl.innerText = listName;
+        // add /<list-id> using the list-id we get back from the server to the href
+        toListLinkEl.setAttribute('href', toListLinkEl.getAttribute('href') + '/' + listId);
+        confirmationDialogEl.showModal();
+    }).catch(e => {
+        if(e instanceof HttpError) {
+            if(e.response.status == 409) {
+                errorMessageEl.innerText = `List with name already exists!`;
+            } else if(e.response.status >= 500) {
+                errorMessageEl.innerText = 'Something went wrong on our side...';
+            }
+        } else {
+            errorMessageEl.innerText = 'Something went wrong on our side...';
+        }
+        
+        errorDialogEl.showModal()
+    });
 }
 

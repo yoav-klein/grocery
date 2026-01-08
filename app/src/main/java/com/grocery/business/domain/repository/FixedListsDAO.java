@@ -15,9 +15,11 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 
 import com.grocery.business.domain.model.FixedList;
 import com.grocery.business.domain.exception.FixedListNotFoundException;
+import com.grocery.business.domain.exception.FixedListAlreadyExistsException;
 
 
 @Repository
@@ -51,23 +53,26 @@ public class FixedListsDAO {
             return jdbcTemplate.queryForObject(String.format(FIND_FIXED_LIST, tenantId), fixedListMapper, listId);
         } catch(EmptyResultDataAccessException e) {
             throw new FixedListNotFoundException(listId);
-        }
+        } 
     }
 
-    public int addFixedList(String tenantId, String name) {
-        
+    public int addFixedList(String tenantId, String name) throws FixedListAlreadyExistsException {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         
         String statement = String.format(ADD_FIXED_LIST, tenantId);
 
-        this.jdbcTemplate.update(new PreparedStatementCreator() {
-            public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
-                PreparedStatement ps = conn.prepareStatement(statement, new String[] {"id"});
-                ps.setString(1, name);
-
-                return ps;
-            }
-        }, keyHolder);
+        try {
+            this.jdbcTemplate.update(new PreparedStatementCreator() {
+                public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
+                    PreparedStatement ps = conn.prepareStatement(statement, new String[] {"id"});
+                    ps.setString(1, name);
+    
+                    return ps;
+                }
+            }, keyHolder);
+        } catch(DuplicateKeyException e) {
+            throw new FixedListAlreadyExistsException();
+        } 
 
         return keyHolder.getKey().intValue();
     }

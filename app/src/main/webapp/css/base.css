@@ -103,3 +103,8 @@ ul {
     color: #b71c1c;
 }
 
+.top-corner-button {
+    position: absolute;
+    inset-inline-end: 5px;
+    top: 5px;
+}

@@ -1,6 +1,5 @@
 package com.grocery.web.controllers.app;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
+import com.grocery.business.domain.dto.FixedListRequest;
+import com.grocery.business.domain.exception.FixedListAlreadyExistsException;
 import com.grocery.business.domain.exception.FixedListNotFoundException;
 import com.grocery.business.domain.model.FixedList;
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.service.FixedListsService;
 import com.grocery.business.domain.service.ProductService;
-import com.grocery.business.domain.dto.FixedListRequest;
 
 @Controller
 @RequestMapping("/tenant/{tenantId}/lists")
@@ -47,10 +49,10 @@ public class FixedListsController {
 
     // new list
     @PostMapping("/addList")
-    public String createList(@PathVariable("tenantId") String tenantId, @RequestBody FixedListRequest fixedListRequest) {
-        fixedListsService.createFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
+    public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException {
+        int listId = fixedListsService.createFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
 
-        return String.format("redirect:/tenant/%s", tenantId);
+        return new ResponseEntity<Integer>(Integer.valueOf(listId), HttpStatus.OK);
     }
     
 }

@@ -32,7 +32,7 @@
         <dialog id="add-product-dialog" class="dialog-layout dialog-layout">
             <header>
                 <h2>New Product</h2>
-                <button class="close-modal-button">X</button>
+                <button class="close-modal-button top-corner-button">X</button>
             </header>
             <form id="new-product-form" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" method="post">
                 <div class="body">

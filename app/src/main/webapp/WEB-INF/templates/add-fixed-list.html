@@ -13,50 +13,76 @@
     <main>
         <div class="step-wrapper">
             <header class="step">
-                    <div class="title">
-                        <h1>Add Fixed List</h1>
-                        <p>Create a reusable list</p>
-                    </div>
-                    <div class="name">
-                        <label for="listName">List name</label>
-                        <input id="listName" type="text" placeholder="e.g., Weekly groceries" />
-                    </div>
-                    <div class="actions">
-                        <button id="cancel-button">Cancel</button>
-                        <button id="save-button">Save</button>
-                    </div>
-                </header>
-                <section id="catalog" class="category-grid step">
-                    <article class="category" th:each="category: ${productsByCategory}">
-                        <h2 th:text="#{${'category.title.' + category.key}}">CATEGORY NAME</h2>
-                        <ul>
-                            <li class="category-item" th:each="product : ${category.value}">
-                                <input class="product-checkbox" th:attr="data-category=${category.key}" th:id="${product.productId}" type="checkbox">
-                                <label th:for="${product.productId}" th:text="${product.name}">PRODUCT NAME</label>
-                            </li>
-                        </ul>
-                    </article>
-                </section>
-                <section id="selected-section" class="step">
-                    <h1>LIST NAME</h1>
-                    <ul id="selected-list">
-                        
+                <div class="title">
+                    <h1>Add Fixed List</h1>
+                    <p>Create a reusable list</p>
+                </div>
+                <div class="name">
+                    <label for="listName">List name</label>
+                    <input id="listName" type="text" placeholder="e.g., Weekly groceries" />
+                </div>
+                <div class="actions">
+                    <button id="cancel-button">Cancel</button>
+                    <button id="save-button">Save</button>
+                </div>
+            </header>
+            <section id="catalog" class="category-grid step">
+                <article class="category" th:each="category: ${productsByCategory}">
+                    <h2 th:text="#{${'category.title.' + category.key}}">CATEGORY NAME</h2>
+                    <ul>
+                        <li class="category-item" th:each="product : ${category.value}">
+                            <input class="product-checkbox" th:attr="data-category=${category.key}" th:id="${product.productId}" type="checkbox">
+                            <label th:for="${product.productId}" th:text="${product.name}">PRODUCT NAME</label>
+                        </li>
                     </ul>
-                </section>
+                </article>
+            </section>
+            <section id="selected-section" class="step">
+                <h1>LIST NAME</h1>
+                <ul id="selected-list">
+                    
+                </ul>
+            </section>
         </div>
         <div class="step-actions">
-                <button id="step-primary-button">
-                    <span class="current">Continue</span>
-                    <span>Review</span>
-                    <span>Save</span>
-                </button>
-                <button id="step-secondary-button">
-                    <span class="current">Cancel</span>
-                    <span>Back</span>
-                    <span>Back</span>
-                </button>
+            <button id="step-primary-button">
+                <span class="current">Continue</span>
+                <span>Review</span>
+                <span>Save</span>
+            </button>
+            <button id="step-secondary-button">
+                <span class="current">Cancel</span>
+                <span>Back</span>
+                <span>Back</span>
+            </button>
+        </div>
+        <dialog id="confirmation-dialog" class="dialog-layout">
+            <header>
+                <h2>List Added!</h2>
+            </header>
+            <div class="body">
+                <p>List <span id="success-list-name">LISTNAME</span> successfully added</p>
             </div>
+            <div class="footer">
+                <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
+                <a id="to-list-link" th:href="@{/tenant/{tenantId}/lists(tenantId=${tenant.id})}">To the List</a>
+            </div>
+        </dialog>
+        <dialog id="error-dialog" class="dialog-layout">
+            <header>
+                <h2>Ooops...</h2>
+            </header>
+            <div class="body">
+                <p id="error-message"></p>
+            </div>
+            <div class="footer">
+                <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
+                <button class="close-modal-button">To the List</button>
+            </div>
+        </dialog>
     </main>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/dialogs.js}"></script>
     <script th:src="@{/js/add-fixed-list.js}"></script>
 </body>
 </html>
