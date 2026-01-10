@@ -19,6 +19,18 @@ const toListLinkEl = document.getElementById('to-list-link');
 // array that will hold the selected products and will be sent to the server
 const selectedProducts = new Array();
 
+// warn the user before exiting the page
+let hasUnsavedChanges = false;
+
+saveButtonEl.addEventListener('click', saveList);
+
+window.addEventListener("beforeunload", (e) => {
+  if (!hasUnsavedChanges) return;
+
+  e.preventDefault();
+  e.returnValue = "";
+});
+
 allCheckboxes.forEach(input => {
     
     input.addEventListener('change', (e) => {
@@ -33,6 +45,7 @@ allCheckboxes.forEach(input => {
         const selectedProductsCategory = Array.from(selectedProductsCategories).find(i => i.getAttribute('data-category-name') === productCategory);
 
         if(e.target.checked) {
+            
             let selectedProductsCategoryListEl;
 
             // if there's not such category yet in the selected list, create it
@@ -73,21 +86,29 @@ allCheckboxes.forEach(input => {
             selectedProducts.splice(selectedProducts.indexOf(productId), 1);
         }
 
-        toggleSaveButton();
+        respondToChange();
     });
 });
 
-/* SAVE BUTTON */
+/* RESPOND TO CHANGE */
 
-function toggleSaveButton() {
-    if(selectedProducts.length === 0 || listNameInputEl.value === '') {
+function respondToChange() {
+    if(selectedProducts.length === 0 && listNameInputEl.value === '') {
+        hasUnsavedChanges = false;
         saveButtonEl.disabled = true;
-    } else {
-        saveButtonEl.disabled = false;
+    }
+    else {
+        hasUnsavedChanges = true;
+        if(selectedProducts.length !== 0 && listNameInputEl.value !== '') {
+            saveButtonEl.disabled = false;
+            return;
+        }
+
+        saveButtonEl.disabled = true;
     }
 }
 
-saveButtonEl.addEventListener('click', saveList);
+
 
 /* MOBILE STEPPER */
 
@@ -145,7 +166,7 @@ function setButtons() {
 
 listNameInputEl.addEventListener('input', (e) => {
     listNameHeadingEl.innerText = e.target.value;
-    toggleSaveButton();
+    respondToChange();
 });
 
 function saveList() {
@@ -174,6 +195,7 @@ function saveList() {
         successListNameSpanEl.innerText = listName;
         // add /<list-id> using the list-id we get back from the server to the href
         toListLinkEl.setAttribute('href', toListLinkEl.getAttribute('href') + '/' + listId);
+        hasUnsavedChanges = false;
         confirmationDialogEl.showModal();
     }).catch(e => {
         if(e instanceof HttpError) {

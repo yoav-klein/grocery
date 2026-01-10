@@ -71,12 +71,11 @@ Model:
 * Current list item history - a user clicks on an item in the current list page, and a popup pops with a small chat and history
 
 ## Tasks
-* Add fixed list:
-   * Disable "Save" if list name is empty
-   * Disable "Save" if no items are selected
 * Delete and edit list
+* Error handling in UI for fetch requests
 * Error handling in PRoducts and Current List page.
 * Error handling in backend
+* User icon
 * Localization - languages
 
 ## Leftovers

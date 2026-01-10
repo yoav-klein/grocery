@@ -1,7 +1,6 @@
 
 
 main {
-    caret-color: transparent;
     position: relative;
 }
 
@@ -11,7 +10,7 @@ main {
 .category-grid {
     display: grid;
     align-content: start;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
     
     gap: 20px;
     justify-content: space-around;

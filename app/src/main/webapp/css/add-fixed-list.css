@@ -40,18 +40,26 @@ main {
         flex: 1 0 0;
         display: grid;
         align-content: center;
+
+        input[type="text"] {
+            padding: 10px;
+        }
     }
 
     > .actions {
         flex: 1 0 0;
+
         display: flex;
         justify-content: center;
-        gap: 20px;
         align-items: center;
+        gap: 20px;
 
         > button {
             height: 50px;
+            width: 150px;
+            border-radius: 5px;
         }
+
     }
 }
 

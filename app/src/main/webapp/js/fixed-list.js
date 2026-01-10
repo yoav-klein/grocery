@@ -1,14 +1,14 @@
 
 import { BASE_URL } from './config.js';
 
-const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]').content
-const csrfToken = document.querySelector('meta[name="_csrf"]').content
+const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]').content;
+const csrfToken = document.querySelector('meta[name="_csrf"]').content;
 
-const listId = document.querySelector('meta[name="listId"]').content
-const tenantId = document.querySelector('meta[name="tenantId"]').content
+const listId = document.querySelector('meta[name="listId"]').content;
+const tenantId = document.querySelector('meta[name="tenantId"]').content;
 
-const tenantBaseUrl = `${BASE_URL}/tenant/${tenantId}`
-const bulkUrl = `${tenantBaseUrl}/currentList/bulk/${listId}`
+const tenantBaseUrl = `${BASE_URL}/tenant/${tenantId}`;
+const bulkUrl = `${tenantBaseUrl}/currentList/bulk/${listId}`;
 
 const formEl = document.getElementById('list');
 

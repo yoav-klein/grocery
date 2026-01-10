@@ -10,6 +10,8 @@
     --SECONDARY-TEXT-COLOR: #b0b3c1;
     --HEADER-HEIGHT: 4rem;
     --SIDEBAR-WIDTH: 250px;
+    --SAVE-BUTTON-COLOR: rgb(26, 216, 26);
+    --SAVE-BUTTON-HOVER-COLOR: rgb(17, 128, 17);
 }
 
 /* || RESET */
@@ -24,6 +26,10 @@ button,
 select,
 textarea {
     font: inherit;
+}
+
+button {
+    cursor: pointer;
 }
 
 a {
@@ -107,4 +113,16 @@ ul {
     position: absolute;
     inset-inline-end: 5px;
     top: 5px;
+}
+
+.save-button {
+    background-color: var(--SAVE-BUTTON-COLOR);
+
+    &:hover {
+        background-color: var(--SAVE-BUTTON-HOVER-COLOR);
+    }
+
+    &:disabled {
+        background-color: #b0b3c1;
+    }
 }
