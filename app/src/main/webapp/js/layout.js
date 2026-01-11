@@ -6,13 +6,17 @@ toggleSidebarButtonEl.addEventListener('click', toggleSidebar);
 const sidebarEl = document.getElementById("sidebar");
 
 const subMenuButtons = document.querySelectorAll(".dropdown-button");
-subMenuButtons.forEach(btn => btn.addEventListener('click', toggleSubMenu));
+subMenuButtons.forEach(btn => btn.addEventListener('click', toggleSubMenuHandler));
 
 function toggleSidebar() {
+
     // when closing the sidebar with any of the sub-menus open, close them
-    Array.from(sidebarEl.getElementsByClassName('show')).forEach(ul => {
-        ul.classList.remove('show');
-        ul.previousElementSibling.classList.toggle('rotate');
+    // but only if a submenu element is not the current page    
+    Array.from(sidebarEl.querySelectorAll('.show')).forEach(ul => {
+        const activeElement = ul.querySelector('div li.active'); // all li's are in a div for the trick of opening and closing submenus
+        if(activeElement == null) {
+            toggleSubMenu(ul);
+        } 
     });
     
     /* const isMobile = window.innerWidth <= 768; */
@@ -23,17 +27,24 @@ function toggleSidebar() {
     /* } */
 }
 
-function toggleSubMenu(e) {
-    
-    // the next element after the button element is the <ul> element, which is the menu
-    const subMenuEl = e.currentTarget.nextElementSibling;
+function toggleSubMenu(subMenuEl) {
     subMenuEl.classList.toggle('show');
-    e.currentTarget.classList.toggle('rotate');
-    
-    // if submenu button clicked and sidebar is closed, open it, not so relevant in our case but let it be
-    if(sidebarEl.classList.contains('close')) {
-        sidebarEl.classList.toggle('close');
-        toggleSidebarButtonEl.classList.toggle('rotate');
-    }
+    subMenuEl.previousElementSibling.classList.toggle('rotate');
+
 }
 
+function toggleSubMenuHandler(e) {
+    // the next element after the button element is the <ul> element, which is the menu
+    const subMenuEl = e.currentTarget.nextElementSibling;
+    toggleSubMenu(subMenuEl);
+}
+
+/* if a submenu item is the active page, show the submenu */
+
+const activePageEl = document.querySelector('aside nav ul li.active');
+// if active page is within a submenu
+const submenuEl = activePageEl.closest('.sub-menu');
+if(submenuEl !== null) {
+    // the previous element is the button
+    toggleSubMenu(submenuEl); 
+}

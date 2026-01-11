@@ -41,6 +41,7 @@ public class FixedListsController {
     @GetMapping("/{listId}")
     public String fixedList(Model model, @PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId) throws FixedListNotFoundException {
         FixedList fixedList = fixedListsService.getFixedList(tenantId, listId);
+        model.addAttribute("page", "fixedList" + fixedList.getId());
         model.addAttribute("fixedList", fixedList);
         model.addAttribute("productsByCategory", fixedList.getProducts().stream().collect(Collectors.groupingBy(Product::getCategory)));
 
