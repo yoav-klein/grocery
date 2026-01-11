@@ -61,7 +61,7 @@ main {
 
 #sidebar nav {
     padding: .2rem;
-
+    /* height: 100%; */
     /* have the nav take all the available space in the sidebar */
     flex-grow: 1;
 
@@ -145,21 +145,8 @@ main {
 }
 
 /* have the submenu items idented */
-#sidebar .sub-menu li {
-    padding-inline-start: 1em;
-
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
-
-    button {
-        width: auto;
-        height: auto;
-        border-radius: 50%;
-        background-color: var(--SECONDARY-TEXT-COLOR);
-    }
+#sidebar .sub-menu a {
+    padding-inline-start: 2em;
 }
 
 

@@ -13,7 +13,7 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
     
     gap: 20px;
-    justify-content: start;
+    justify-content: space-around;
     padding-bottom: 100px;
     overflow: auto;
     height: 100%;
