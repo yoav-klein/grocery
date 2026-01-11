@@ -33,6 +33,7 @@ public class FixedListsController {
 
     @GetMapping("/addList")
     public String addList(Model model, @PathVariable("tenantId") String tenantId) {
+        model.addAttribute("page", "addFixedList");
         model.addAttribute("productsByCategory", productService.getAllProducts(tenantId).stream().collect(Collectors.groupingBy(Product::getCategory)));
 
         return "add-fixed-list";
