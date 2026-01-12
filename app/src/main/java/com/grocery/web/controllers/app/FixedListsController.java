@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,13 @@ public class FixedListsController {
         model.addAttribute("productsByCategory", fixedList.getProducts().stream().collect(Collectors.groupingBy(Product::getCategory)));
 
         return "fixed-list";
+    }
+
+    @DeleteMapping("/{listId}")
+    public String deleteList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId ) {
+        fixedListsService.deleteFixedList(tenantId, listId);
+
+        return "redirect:/";
     }
 
     // new list

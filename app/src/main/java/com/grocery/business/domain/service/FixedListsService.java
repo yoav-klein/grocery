@@ -39,6 +39,10 @@ public class FixedListsService {
         return listId;
     }
 
+    public void deleteFixedList(String tenantId, int listId) {
+        fixedListDao.deleteFixedList(tenantId, listId);
+    }
+
     public List<Product> getAllProductsForList(String tenantId, int listId) { 
         return listProductDao.getAllProductsForList(tenantId, listId);
     }

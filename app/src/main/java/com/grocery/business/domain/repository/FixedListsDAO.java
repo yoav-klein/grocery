@@ -28,6 +28,7 @@ public class FixedListsDAO {
     private final static String FIND_ALL_FIXED_LISTS = "SELECT * FROM tenant_%s.lists";
     private final static String FIND_FIXED_LIST = "SELECT * FROM tenant_%s.lists WHERE id = ?";
     private final static String ADD_FIXED_LIST = "INSERT INTO tenant_%s.lists(name) VALUES(?)";
+    private final static String DELETE_FIXED_LIST = "DELETE FROM tenant_%s.lists WHERE id = ?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -75,5 +76,9 @@ public class FixedListsDAO {
         } 
 
         return keyHolder.getKey().intValue();
+    }
+
+    public void deleteFixedList(String tenantId, int listId) {
+        this.jdbcTemplate.update(String.format(DELETE_FIXED_LIST, tenantId), listId);
     }
 }
