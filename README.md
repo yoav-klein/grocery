@@ -69,12 +69,17 @@ Model:
 * Edit list
     * List name is disabled, and there's a edit button next to it that enables it
     * Products currently in list are shown bold and in the "selected products" pane
+    * when user clicks on a product that's in the list, it's removed
+    * when user clicks on a product that's not in the list, it's added
+    * user can change name of list
     * 
 * Mark check - when a user marks an item as checked, it is still there for a while, so it's apparent that someone bought it.
 * Current list item history - a user clicks on an item in the current list page, and a popup pops with a small chat and history
 
 ## Tasks
-* Delete and edit list
+* Edit list
+    * UI is pretty much done (not pretty though)
+    * Implement the controller method and call to it in the frontend
 * Error handling in UI for fetch requests
 * Error handling in PRoducts and Current List page.
 * Error handling in backend
