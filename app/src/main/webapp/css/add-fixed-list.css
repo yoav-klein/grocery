@@ -38,8 +38,9 @@ main {
 
     > .name {
         flex: 1 0 0;
-        display: grid;
-        align-content: center;
+        display: flex;
+        align-items: center;
+        
 
         input[type="text"] {
             padding: 10px;
@@ -74,6 +75,10 @@ main {
 #selected-section {
     grid-area: selected;
     padding: 1rem;
+    
+    > h1 {
+        display: none;
+    }
 
     > ul {
         display: flex;
@@ -89,9 +94,6 @@ main {
         display: none;
     }
 
-    > h1 {
-        display: none;
-    }
 }
 
 

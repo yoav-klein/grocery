@@ -65,8 +65,11 @@ Model:
 
 
 ## Features
-* Delete list
+* Delete list (V)
 * Edit list
+    * List name is disabled, and there's a edit button next to it that enables it
+    * Products currently in list are shown bold and in the "selected products" pane
+    * 
 * Mark check - when a user marks an item as checked, it is still there for a while, so it's apparent that someone bought it.
 * Current list item history - a user clicks on an item in the current list page, and a popup pops with a small chat and history
 

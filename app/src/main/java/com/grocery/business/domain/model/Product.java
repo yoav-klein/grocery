@@ -57,4 +57,11 @@ public class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if(other instanceof Product && (((Product)other).productId == this.productId)) return true;
+        return false;
+    }
+
 }
