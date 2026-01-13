@@ -39,6 +39,11 @@ public class FixedListsService {
         return listId;
     }
 
+    public void editFixedList(String tenantId, int listId, String listName, List<Integer> addProducts, List<Integer> removeProducts) throws FixedListNotFoundException {
+        this.fixedListDao.updateListName(tenantId, listId, listName);
+        this.listProductDao.editProducts(tenantId, listId, addProducts, removeProducts);
+    }
+
     public void deleteFixedList(String tenantId, int listId) {
         fixedListDao.deleteFixedList(tenantId, listId);
     }

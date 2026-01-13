@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head th:include="~{layout :: head(~{::link},~{})}">
+<head th:include="~{layout :: head(~{::link},~{::meta})}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tenantId" th:content="${tenant.id}">
+    <meta name="listId" th:if="${mode} == 'edit'" th:content="${fixedList.id}">
+    
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/base.css}">
     <link rel="stylesheet" th:href="@{/css/dialogs.css}">
     <link rel="stylesheet" th:href="@{/css/categories.css}">
-    <link rel="stylesheet" th:href="@{/css/add-fixed-list.css}">
+    <link rel="stylesheet" th:href="@{/css/fixed-list-editor.css}">
 </head>
 <body th:replace="~{layout :: layout(~{::main},~{::script})}">
     <main>

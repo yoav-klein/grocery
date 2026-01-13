@@ -3,6 +3,10 @@
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]');
 const csrfToken = document.querySelector('meta[name="_csrf"]');
 
+const listId = document.querySelector('meta[name="listId"]').content;
+const tenantId = document.querySelector('meta[name="tenantId"]').content;
+
+
 const listNameInputEl = document.getElementById("listName");
 const initialListName = listNameInputEl.getAttribute("data-init-value");
 const editNameButtonEl = document.getElementById("edit-name-button");
@@ -55,18 +59,20 @@ function respondToChange() {
 
 /* SAVE LIST */
 function saveList() {
-/*    const listName = listNameInputEl.value;
+    const listName = listNameInputEl.value;
     const data = {
         listName: listName,
-        productIds: selectedProducts
+        addProducts: addProductsList,
+        addProducts: addProductsList,
+        removeProducts: removeProductsList
     };
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append(csrfHeaderName.content, csrfToken.content);
     const body = JSON.stringify(data);
-    const responsePromise = fetch(document.baseURI, {
-        method: "POST",
+    const responsePromise = fetch(`${window.location.origin}/app/tenant/${tenantId}/lists/${listId}`, {
+        method: "PUT",
         headers: headers,
         body: body
     });
@@ -76,7 +82,7 @@ function saveList() {
             throw new HttpError(resp);
         }
         return resp.text();
-    }).then(listId => {
+    }).then(() => {
         successListNameSpanEl.innerText = listName;
         // add /<list-id> using the list-id we get back from the server to the href
         toListLinkEl.setAttribute('href', toListLinkEl.getAttribute('href') + '/' + listId);
@@ -94,5 +100,4 @@ function saveList() {
         }
         errorDialogEl.showModal();
     });
-    */
 }

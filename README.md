@@ -91,4 +91,11 @@ Model:
 * Error handling in TenantRepository
 * Error handling in Repositories
 * SSE edge cases
-* Localization of items in JavaScript 
+* Localization of items in JavaScript
+* How do you handle paths all over the application?
+
+## Improvements
+---
+* Edit fixed list
+    * When user removes products - line crosses the product instead of it deleted from the selected products pane
+    * When user adds produts - they're highlighted in the selected products pane
