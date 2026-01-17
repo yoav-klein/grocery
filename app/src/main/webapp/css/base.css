@@ -124,5 +124,7 @@ ul {
 
     &:disabled {
         background-color: #b0b3c1;
+    
+    
     }
 }

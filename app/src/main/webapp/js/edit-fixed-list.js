@@ -1,11 +1,9 @@
 
-
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]');
 const csrfToken = document.querySelector('meta[name="_csrf"]');
 
 const listId = document.querySelector('meta[name="listId"]').content;
 const tenantId = document.querySelector('meta[name="tenantId"]').content;
-
 
 const listNameInputEl = document.getElementById("listName");
 const initialListName = listNameInputEl.getAttribute("data-init-value");

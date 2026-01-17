@@ -79,7 +79,7 @@ Model:
 ## Tasks
 * Edit list
     * UI is pretty much done (not pretty though)
-    * Implement the controller method and call to it in the frontend
+    * Implement the controller method and call to it in the frontend (V)
 * Error handling in UI for fetch requests
 * Error handling in PRoducts and Current List page.
 * Error handling in backend
