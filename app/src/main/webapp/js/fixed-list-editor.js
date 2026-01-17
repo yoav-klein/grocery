@@ -5,14 +5,25 @@ const selectedProductsListEl = document.getElementById('selected-list');
 
 const listNameHeadingEl = document.querySelector('#selected-section h1');
 
-
 /* CONFIRMATION AND ERROR MODALS ELEMENTS */
 const confirmationDialogEl = document.getElementById('confirmation-dialog');
 const errorDialogEl = document.getElementById('error-dialog');
 const errorMessageEl = document.getElementById('error-message');
 const successListNameSpanEl = document.getElementById('success-list-name');
+const cancelDialogEl = document.getElementById('cancel-dialog');
 
+const saveButtonEl = document.getElementById('save-button');
 saveButtonEl.addEventListener('click', saveList);
+
+const cancelButtonEl = document.getElementById('cancel-button');
+cancelButtonEl.addEventListener('click', () => {
+    // if(!hasUnsavedChanges) {
+        window.location.replace(`${window.location.origin}/app/tenant/${tenantId}`);
+    //} else {
+    //    cancelDialogEl.showModal();
+    //}
+});
+
 
 window.addEventListener("beforeunload", (e) => {
   if (!hasUnsavedChanges) return;

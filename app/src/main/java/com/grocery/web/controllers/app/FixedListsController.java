@@ -69,7 +69,7 @@ public class FixedListsController {
     public String deleteList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId ) {
         fixedListsService.deleteFixedList(tenantId, listId);
 
-        return "redirect:/";
+        return String.format("redirect:/tenant/%s", tenantId);
     }
 
     // new list

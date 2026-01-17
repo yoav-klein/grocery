@@ -8,7 +8,7 @@ const tenantId = document.querySelector('meta[name="tenantId"]').content;
 const listNameInputEl = document.getElementById("listName");
 const initialListName = listNameInputEl.getAttribute("data-init-value");
 const editNameButtonEl = document.getElementById("edit-name-button");
-const saveButtonEl = document.getElementById('save-button');
+
 
 // array that will hold the selected products and will be sent to the server
 const toListLinkEl = document.getElementById('to-list-link');

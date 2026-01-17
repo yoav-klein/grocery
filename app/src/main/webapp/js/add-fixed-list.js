@@ -4,7 +4,7 @@ const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]');
 const csrfToken = document.querySelector('meta[name="_csrf"]');
 
 const listNameInputEl = document.getElementById("listName");
-const saveButtonEl = document.getElementById('save-button');
+const tenantId = document.querySelector('meta[name="tenantId"]').content;
 
 // array that will hold the selected products and will be sent to the server
 const selectedProducts = new Array();

@@ -99,3 +99,4 @@ Model:
 * Edit fixed list
     * When user removes products - line crosses the product instead of it deleted from the selected products pane
     * When user adds produts - they're highlighted in the selected products pane
+    * In the summary pane - show numbers of added and removed

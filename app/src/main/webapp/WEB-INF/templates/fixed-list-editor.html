@@ -133,6 +133,18 @@
                         <button class="close-modal-button">To the List</button>
                     </div>
                 </dialog>
+                <dialog id="cancel-dialog" class="dialog-layout">
+                    <header>
+                        <h2>Cancel</h2>
+                        <button class="close-modal-button top-corner-button">X</button>
+                    </header>
+                    <div class="body">
+                        <p>Are you sure you want to abort?</p>
+                    </div>
+                    <div class="footer">
+                        <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Yes</a>
+                    </div>
+                </dialog>
             </main>
         </div>
         <script src="../../js/common.js" th:src="@{/js/common.js}"></script>
