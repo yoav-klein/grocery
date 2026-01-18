@@ -1,6 +1,10 @@
 # Plan
 ---
 
+## Where Im at now
+
+* Validation in controllers. Validate all forms and input that comes from UI.
+
 
 ## Milestones
 
