@@ -1,98 +1,50 @@
 # Plan
 ---
 
-I want to plan my progress, split the work into manageable tasks and define the boundaries between them.
 
-So first off we have the frontend and the backend. We need to set the interface between them in a clear way so that it'll be easy to work on one side
-without breaking the other side.
+## Milestones
 
-So I want to define the pages I have in the frontend, and for each page:
-* What are the model objects needed to render it
-* What are the API endpoints it uses (forms/links/REST API calls)
+### 1 - MVP
 
-So for this I need to define the UI in a clear fashion - what pages I have, what controls are in each page.
+*Current list page*: displays all the items to currently buy. The user can check items he bought, and the items are removed from the list. He can also add items ad-hoc.
+This page is updated on the fly using SSE events.
 
+*Fixed list page*: displays a fixed list, where the user can specify how much to add to the list from each item, and hit "Submit".
 
-## Pages
-* Tenants page
-* Tenant management page
-* Tenant working page
+*Catalog page*: displays all the products the user can think about. From this the user can assemble fixed lists
 
-### Tenants page 
-Endpoint: `/tenants`
+*Add fixed list page*: allows the user to create new fixed lists.
 
-A card for each tenant with:
-* Tenant image
-* Tenant name
+*Manage Tenant*: A tenant management page
 
-Model: 
-* `allTenants: List<TenantView>`
-* `newTenant: TenantDto`
+*Layout*: A menu on the side, and a header on top. User icon with "Logout", language selection
 
-Links: 
-* A card is a link to connect to the tenant `/tenants/<tenantId>/connect`
+Multi-language: The application is multi-language, the user can select Hebrew or English
 
-Forms:
-* A `Add tenant` form (Modal) - opens a modal in Javascript. The user fills in the name of the tenant, an image, and `Create` button sends the form to `POST /tenants`. Redirects to tenants page.
+### 2 - Item history
+Each item can be clicked, and a dialog is opened that shows the history of the item: 
+* Added by
+* Added at
+* Marked bought by+at
+* Comments
 
-### Tenant management page
-Endpoint: `/tenant/<tenantId>/management`
+### 3 - Mark check
+When a user marks an item as checked, the item is not just deleted from the list, but rather it's displayed with a line crossing it, and is kept for a retention period. This allows users to see that an item was checked by another user.
 
-* A list of members (kick-out member, promote, demote)
-* A list of pending invitations
-* Invite member
-* Leave tenant
-
-Model:
-* `allMembers: List<TenantMember>`
-* `allInvitations: List<Invitation>`
-* `invitation: InvitationDto`
-
-Links/Forms:
-* Leave tenant - `DELETE /<tenantId>/membership/leave`
-* Delte tenant - `DELETE /<tenantId>`
-* Invite user - `POST /<tenantId>/invite`
-
-### Working page - "Current List"
-Endpoint: `/tenant/<tenantId>`
-
-* A List of all current items
-* A form to add a new item ad-hoc
-
-Model:
-* `allItems` - all current items
-* `newItem` - new item form
-
-
-## Features
-* Delete list (V)
-* Edit list
-    * List name is disabled, and there's a edit button next to it that enables it
-    * Products currently in list are shown bold and in the "selected products" pane
-    * when user clicks on a product that's in the list, it's removed
-    * when user clicks on a product that's not in the list, it's added
-    * user can change name of list
-    * 
-* Mark check - when a user marks an item as checked, it is still there for a while, so it's apparent that someone bought it.
-* Current list item history - a user clicks on an item in the current list page, and a popup pops with a small chat and history
 
 ## Tasks
-* Edit list
-    * UI is pretty much done (not pretty though)
-    * Implement the controller method and call to it in the frontend (V)
-* Error handling in UI for fetch requests
-* Error handling in PRoducts and Current List page.
-* Error handling in backend
 * User icon
 * Localization - languages
 
 ## Leftovers
 ---
+* Error handling in UI for fetch requests
+* Error handling in PRoducts and Current List page.
+* Error handling in backend
 * Error handling in TenantRepository
 * Error handling in Repositories
 * SSE edge cases
-* Localization of items in JavaScript
-* How do you handle paths all over the application?
+
 
 ## Improvements
 ---
@@ -100,3 +52,5 @@ Model:
     * When user removes products - line crosses the product instead of it deleted from the selected products pane
     * When user adds produts - they're highlighted in the selected products pane
     * In the summary pane - show numbers of added and removed
+* Current List
+    * Autocomplete in Add new item

@@ -73,7 +73,11 @@ function saveList() {
         if(e instanceof HttpError) {
             if(e.response.status == 409) {
                 errorMessageEl.innerText = `List with name already exists!`;
-            } else {
+            } if(e.response.status == 400) {
+                errorMessageEl.innerText = `Bad request!`;
+                e.response.text().then(t => console.log(t));
+            }
+            else {
                 errorMessageEl.innerText = 'Something went wrong on our side...';
             }
         } else {

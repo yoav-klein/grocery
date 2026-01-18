@@ -25,6 +25,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.2'
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2")
     implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
 
     // TESTING
     

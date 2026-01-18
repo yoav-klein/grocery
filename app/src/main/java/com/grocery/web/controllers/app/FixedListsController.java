@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 
 import com.grocery.business.domain.dto.FixedListRequest;
 import com.grocery.business.domain.dto.FixedListEditRequest;
@@ -65,6 +66,7 @@ public class FixedListsController {
         return "fixed-list";
     }
 
+    // delete list
     @DeleteMapping("/{listId}")
     public String deleteList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId ) {
         fixedListsService.deleteFixedList(tenantId, listId);
@@ -74,12 +76,14 @@ public class FixedListsController {
 
     // new list
     @PostMapping("/addList")
-    public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException {
+    public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @Validated @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException {
+        
         int listId = fixedListsService.createFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
 
         return new ResponseEntity<Integer>(Integer.valueOf(listId), HttpStatus.OK);
     }
 
+    // patch list
     @PutMapping("/{listId}")
     public ResponseEntity editList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId, @RequestBody FixedListEditRequest fixedListEditRequest) throws FixedListNotFoundException {
         fixedListsService.editFixedList(tenantId,
