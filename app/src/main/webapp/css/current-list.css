@@ -1,4 +1,14 @@
 
+main {
+    padding: 1rem;
+}
+
+/* ADD ITEM FORM */
+
+#add-item-dialog {
+    width: 50vw;
+    height: 50vh;
+}
 
 
 .item-quantity {
@@ -51,3 +61,4 @@
     align-items: center;
     justify-content: center;
 }
+

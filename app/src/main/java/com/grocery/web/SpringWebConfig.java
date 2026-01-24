@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -39,8 +38,6 @@ public class SpringWebConfig implements WebMvcConfigurer, ApplicationContextAwar
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
         registry.addResourceHandler("/image/**").addResourceLocations("/image/");
     }
-
-
 
     @Bean    
     public SpringResourceTemplateResolver templateResolver(){

@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grocery.business.domain.model.Product;
-import com.grocery.business.domain.model.ProductCategory;
-import com.grocery.business.domain.model.QuantityType;
 import com.grocery.business.domain.service.ProductService;
-import com.grocery.business.tenancy.exception.UserNotFoundException;
 import com.grocery.business.tenancy.service.TenantService;
 
 @Controller

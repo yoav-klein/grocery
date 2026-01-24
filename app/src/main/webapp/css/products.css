@@ -1,0 +1,11 @@
+
+/* ADD PRODUCT FORM */
+
+main {
+    padding: 1rem;
+}
+
+#add-product-dialog {
+    width: 50vw;
+    height: 50vh;
+}

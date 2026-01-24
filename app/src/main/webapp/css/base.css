@@ -9,6 +9,9 @@
     --ACCENT-COLOR: #5e63ff;
     --SECONDARY-TEXT-COLOR: #b0b3c1;
     --HEADER-HEIGHT: 4rem;
+    --SIDEBAR-WIDTH: 250px;
+    --SAVE-BUTTON-COLOR: rgb(26, 216, 26);
+    --SAVE-BUTTON-HOVER-COLOR: rgb(17, 128, 17);
 }
 
 /* || RESET */
@@ -25,33 +28,32 @@ textarea {
     font: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
 a {
     text-decoration: none;
     color: var(--TEXT-COLOR);
 }
 
-
 html {
     font-family: Poppins, 'Segoe UI', sans-serif;
     line-height: 1.5rem;
+    background-color: white;
 }
 
 body {
-    min-height: 100vh;
     background-color: var(--BASE-COLOR);
     color: var(--TEXT-COLOR);
 }
 
-header {
-    height: var(--HEADER-HEIGHT);
-    border-bottom: 1px solid var(--LINE-COLOR);
-    display: flex;
-    align-items: center;
+html, body {
+    height: 100%;
+}
 
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--BASE-COLOR);
+ul {
+    list-style-type: none;
 }
 
 
@@ -77,4 +79,52 @@ header {
     flex-grow: 1;
 }
 
+.round-borders {
+    border-radius: 10px;
+}
 
+.padding-1 {
+    padding: 1rem;
+}
+
+.absolute-bottom-center {
+    position: absolute;   
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.delete-button {
+    color: #d32f2f; ;
+    background-color: transparent;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+}
+
+.delete-button:hover {
+    color: #b71c1c;
+}
+
+.top-corner-button {
+    position: absolute;
+    inset-inline-end: 5px;
+    top: 5px;
+}
+
+.save-button {
+    background-color: var(--SAVE-BUTTON-COLOR);
+
+    &:hover {
+        background-color: var(--SAVE-BUTTON-HOVER-COLOR);
+    }
+
+    &:disabled {
+        background-color: #b0b3c1;
+    
+    
+    }
+}

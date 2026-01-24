@@ -27,9 +27,9 @@ evtSource.addEventListener("NEW-ITEM", (event) => {
 
 const addItemButton = document.getElementById('add-item-button');
 addItemButton.addEventListener('click', () => {
-    
     addItemDialogEl.showModal();
 })
+
 
 newItemFormEl.addEventListener("submit", (event) => {
     event.preventDefault(); // prevent page reload

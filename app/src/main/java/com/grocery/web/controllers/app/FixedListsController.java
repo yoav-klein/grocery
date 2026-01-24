@@ -1,31 +1,29 @@
 package com.grocery.web.controllers.app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 
-import com.grocery.business.domain.dto.ProductQuantity;
+import com.grocery.business.domain.dto.FixedListRequest;
+import com.grocery.business.domain.dto.FixedListEditRequest;
+import com.grocery.business.domain.exception.FixedListAlreadyExistsException;
 import com.grocery.business.domain.exception.FixedListNotFoundException;
 import com.grocery.business.domain.model.FixedList;
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.service.FixedListsService;
-import com.grocery.business.domain.service.CurrentListService;
 import com.grocery.business.domain.service.ProductService;
-import com.grocery.business.tenancy.exception.UserNotFoundException;
 
 @Controller
 @RequestMapping("/tenant/{tenantId}/lists")
@@ -37,31 +35,64 @@ public class FixedListsController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private CurrentListService currentListService;
-
     @GetMapping("/addList")
     public String addList(Model model, @PathVariable("tenantId") String tenantId) {
-        model.addAttribute("allProducts", productService.getAllProducts(tenantId));
+        model.addAttribute("page", "addFixedList");
+        model.addAttribute("productsByCategory", productService.getAllProducts(tenantId).stream().collect(Collectors.groupingBy(Product::getCategory)));
+        model.addAttribute("mode", "add");
+        
+        return "fixed-list-editor";
+    }
+    
+    @GetMapping("/edit/{listId}")
+    public String editList(Model model, @PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId) throws FixedListNotFoundException {
+        FixedList fixedList = fixedListsService.getFixedList(tenantId, listId);
+        model.addAttribute("page", "fixedList" + fixedList.getId());
+        model.addAttribute("fixedList", fixedList);
+        model.addAttribute("productsByCategory", productService.getAllProducts(tenantId).stream().collect(Collectors.groupingBy(Product::getCategory)));
+        model.addAttribute("listProductsByCategory", fixedList.getProducts().stream().collect(Collectors.groupingBy(Product::getCategory)));
+        model.addAttribute("mode", "edit");
 
-        return "add-fixed-list";
+        return "fixed-list-editor";
     }
 
     @GetMapping("/{listId}")
     public String fixedList(Model model, @PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId) throws FixedListNotFoundException {
         FixedList fixedList = fixedListsService.getFixedList(tenantId, listId);
+        model.addAttribute("page", "fixedList" + fixedList.getId());
         model.addAttribute("fixedList", fixedList);
         model.addAttribute("productsByCategory", fixedList.getProducts().stream().collect(Collectors.groupingBy(Product::getCategory)));
 
         return "fixed-list";
     }
 
-    // new list
-    @PostMapping
-    public String createList(@PathVariable("tenantId") String tenantId, @RequestParam("name") String name, @RequestParam("productIds") List<Integer> productIds) {
-        fixedListsService.createFixedList(tenantId, name, productIds);
+    // delete list
+    @DeleteMapping("/{listId}")
+    public String deleteList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId ) {
+        fixedListsService.deleteFixedList(tenantId, listId);
 
         return String.format("redirect:/tenant/%s", tenantId);
+    }
+
+    // new list
+    @PostMapping("/addList")
+    public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @Validated @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException {
+        
+        int listId = fixedListsService.createFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
+
+        return new ResponseEntity<Integer>(Integer.valueOf(listId), HttpStatus.OK);
+    }
+
+    // patch list
+    @PutMapping("/{listId}")
+    public ResponseEntity editList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId, @RequestBody FixedListEditRequest fixedListEditRequest) throws FixedListNotFoundException {
+        fixedListsService.editFixedList(tenantId,
+            listId,
+            fixedListEditRequest.getListName(),
+            fixedListEditRequest.getAddProducts(), 
+            fixedListEditRequest.getRemoveProducts());
+
+        return new ResponseEntity(HttpStatus.OK);
     }
     
 }

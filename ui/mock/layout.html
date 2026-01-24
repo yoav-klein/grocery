@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../app/src/main/webapp/css/layout.css">
+    <link rel="stylesheet" href="../../app/src/main/webapp/css/base.css">
+</head>
+<style>
+    main {
+        display: grid;
+        grid-template-areas: 
+        "h h h h"
+        "m m m s"
+        "m m m s"
+        ;
+
+        --NUM-STEPS: 4;
+        --CURRENT-STEP: 0;
+    }
+
+    .head {
+        grid-area: h;
+    }
+
+    .main {
+        grid-area: m;
+    }
+
+    .side {
+        grid-area: s;
+    }
+
+    .step {
+        border: 2px dashed red;
+    }
+
+    #next, #prev {
+        display: none;
+    }
+
+    @media(max-width: 768px) {
+        .content {
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #next, #prev {
+            display: block;
+            position: absolute;
+            bottom: 20px;
+        }
+
+        #next {
+            right: 20px;
+        }
+
+        #prev {
+            left: 20px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+
+            width: calc(var(--NUM-STEPS) * 100%);
+            transform: translateX(calc(-1 * (100% / var(--NUM-STEPS)) * var(--CURRENT-STEP)));
+        }
+
+        .step {
+            width: calc(100% / var(--NUM-STEPS));
+        }
+    }
+
+</style>
+<body>
+    <header>
+        HEADER
+    </header>
+    <div class="content">
+        <aside id="sidebar" class="close">
+            ASIDE
+        </aside>
+        <main>
+            <div class="step head">HEAD</div>
+            <div class="step main">MAIN</div>
+            <div class="step side">SIDE</div>
+            <button id="next">NEXT</button>
+            <button id="prev">PREVIOUS</button>
+        </main>
+    </div>
+</body>
+</html>

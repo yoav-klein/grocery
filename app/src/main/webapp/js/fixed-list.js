@@ -1,16 +1,22 @@
 
 import { BASE_URL } from './config.js';
 
-const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]').content
-const csrfToken = document.querySelector('meta[name="_csrf"]').content
+const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]').content;
+const csrfToken = document.querySelector('meta[name="_csrf"]').content;
 
-const listId = document.querySelector('meta[name="listId"]').content
-const tenantId = document.querySelector('meta[name="tenantId"]').content
-
-const tenantBaseUrl = `${BASE_URL}/tenant/${tenantId}`
-const bulkUrl = `${tenantBaseUrl}/currentList/bulk/${listId}`
+const listId = document.querySelector('meta[name="listId"]').content;
+const tenantId = document.querySelector('meta[name="tenantId"]').content;
+const tenantBaseUrl = `${BASE_URL}/tenant/${tenantId}`;
+const bulkUrl = `${tenantBaseUrl}/currentList/bulk/${listId}`;
 
 const formEl = document.getElementById('list');
+const deleteButtonEl = document.getElementById('delete-button');
+const editButtonEl = document.getElementById('edit-button');
+const deleteConfirmationDialog = document.getElementById('delete-confirmation-dialog');
+
+deleteButtonEl.addEventListener('click', () => {
+    deleteConfirmationDialog.showModal();
+})
 
 const inputs = document.querySelectorAll('.quantity');
 

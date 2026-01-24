@@ -1,87 +1,377 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head th:include="~{layout :: head(~{::link},~{})}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" th:href="@{/css/base.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/shared.css}">
-    <link rel="stylesheet" th:href="@{/css/current-list.css}">
-</head>
-<body th:replace="~{layout :: layout(~{::main},~{::script})}">
-    <main>
-        <!-- template for adding items in JavaScript -->
-        <template id="item-template">
-            <li class="category-item">
-                <p class="item-quantity">0</p>
-                <p class="item-quantity-type">Kg</p>
-                <p class="item-name"><span>Fish</span></p>
-                <p class="checkbox-container">
-                    <input class="delete-checkbox" type="checkbox">
-                    <label></label>
-                </p>
-            </li>
-        </template>
-        <template id="category-template">
-            <article class="category">
-                <h2>CATEGORY NAME</h2>
-                <ul>
-
-                </ul>
-            </article>
-        </template>
-        <section id="list" class="category-grid">
-            <article class="category" th:each="category : ${itemsByCategory}" th:id="'category-' + ${category.key}">
-                <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
-                <ul>
-                    <li th:each="item : ${category.value}" class="category-item" th:id="'item-' + ${item.id}">
-                        <p class="item-quantity" th:text="${item.quantity}">3</p>
-                        <p class="item-quantity-type" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</p>
-                        <p class="item-name"><span th:text="${item.name}">Tomato</span></p>
+    <head th:include="~{layout :: head(~{::link},~{})}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
+        <link rel="stylesheet" href="../../css/offline.css" th:remove="all">
+        <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
+        <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
+        <link rel="stylesheet" href="../../css/current-list.css" th:href="@{/css/current-list.css}">
+    </head>
+    <body th:replace="~{layout :: layout(~{::main},~{::script})}">
+        <div class="wrapper" th:remove="tag">
+            <main>
+                <!-- template for adding items in JavaScript -->
+                <template id="item-template">
+                    <li class="category-item">
+                        <p class="item-quantity">0</p>
+                        <p class="item-quantity-type">Kg</p>
+                        <p class="item-name"><span>Fish</span></p>
                         <p class="checkbox-container">
-                            <input class="delete-checkbox" type="checkbox" th:id="'delete-checkbox-' + ${item.id}">
-                            <label th:for="'delete-checkbox-' + ${item.id}"></label>
+                            <input class="delete-checkbox" type="checkbox">
+                            <label></label>
                         </p>
                     </li>
-                </ul>
-            </article>
-        </section>
-        <button id="add-item-button" class="add-button">+</button>
-        <dialog id="add-item-dialog" class="half-screen-dialog">
-            <form id="new-item-form">
-                <fieldset>
-                    <p>
-                        <label for="name">Name</label>
-                        <input name="name" class="long-input" type="text" id="name">
-                    </p>
-                    <p>
-                        <label for="quantity">Quantity</label>
-                        <input name="quantity" type="number" class="quantity-input" id="quantity">
-                        
-                        <select name="quantityType">
-                            <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
-                            <option th:remove="all">Unit</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label for="category" th:text="#{additem.label.category}">Category</label>
-                        <select name="category" class="long-input">
-                            <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}">Vegetables</option>
-                            <option th:remove="all">Fruits</option>
-                            <option th:remove="all">Dairy</option>
-                        </select>
-                    </p>
-                    
-                    <p class="submit-button-container">
-                        <button id="new-item-button" class="submit-button" type="submit" name="save">Submit!</button>
-                    </p>
-                
-                </fieldset>
-            </form>
-        </dialog>
+                </template>
+                <template id="category-template">
+                    <article class="category">
+                        <h2>CATEGORY NAME</h2>
+                        <ul>
         
-    </main>
-    <script th:src="@{/js/current-list.js}"></script>
-</body>
+                        </ul>
+                    </article>
+                </template>
+                <section id="list" class="category-grid">
+                    <article class="category" th:each="category : ${itemsByCategory}" th:id="'category-' + ${category.key}">
+                        <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                        <ul>
+                            <li th:each="item : ${category.value}" class="category-item" th:id="'item-' + ${item.id}">
+                                <p class="item-quantity" th:text="${item.quantity}">3</p>
+                                <p class="item-quantity-type" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</p>
+                                <p class="item-name"><span th:text="${item.name}">Tomato</span></p>
+                                <p class="checkbox-container">
+                                    <input class="delete-checkbox" type="checkbox" th:id="'delete-checkbox-' + ${item.id}">
+                                    <label th:for="'delete-checkbox-' + ${item.id}"></label>
+                                </p>
+                            </li>
+                        </ul>
+                    </article>
+                    <!-- a bunch of categories for demo purposes, will be removed by the th:remove -->
+                    <div th:remove="all" class="display-contents">
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Cucumber</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Pepper</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>CLEANING SUPPLY</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Economica</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Soap</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>BEVERAGE</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Water</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Coke</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">6</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Beer</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>ALCOHOL</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Whiskey</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Wine</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>DRY GOODS</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Rice</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Salt</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Sugar</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>CANNED</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Pickled Cucumbers</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Unit</p>
+                                    <p class="item-name"><span>Olives</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                        
+                        <article class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <p class="item-quantity">3</p>
+                                    <p class="item-quantity-type">Kg</p>
+                                    <p class="item-name"><span>Tomato</span></p>
+                                    <p class="checkbox-container">
+                                        <input class="delete-checkbox" type="checkbox">
+                                        <label></label>
+                                    </p>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+                <button id="add-item-button" class="absolute-bottom-center big-add-button">+</button>
+                <dialog id="add-item-dialog" class="dialog-layout dialog-form">
+                    <header>
+                        <h2>New Item</h2>
+                        <button class="close-modal-button top-corner-button">X</button>
+                    </header>
+                    <form id="new-item-form">
+                        <div class="body">
+                            <div class="field">
+                                <label for="name">Name</label>
+                                <input name="name" class="long-input" type="text" id="name">
+                            </div>
+                            <div class="field">
+                                <label for="quantity">Quantity</label>
+                                <input class="short-input" name="quantity" type="number" id="quantity">
+                                
+                                <select name="quantityType">
+                                    <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
+                                    <option th:remove="all">Unit</option>
+                                </select>
+                            
+                            </div>
+                            <div class="field">
+                                <label for="category" th:text="#{additem.label.category}">Category</label>
+                                <select name="category" class="long-input">
+                                    <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}">Vegetables</option>
+                                    <option th:remove="all">Fruits</option>
+                                    <option th:remove="all">Dairy</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="footer">
+                            <p class="submit-button-container">
+                                <button id="new-item-button" type="submit" name="save">Submit!</button>
+                            </p>
+                        </div>
+                    </form>
+                </dialog>
+            </main>
+        </div>
+        <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script src="../../js/current-list.js" th:src="@{/js/current-list.js}"></script>
+    </body>
 </html>

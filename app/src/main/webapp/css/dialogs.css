@@ -1,0 +1,71 @@
+
+/* MODAL DIALOG */
+
+.dialog-layout[open] {
+    /* put the dialog in the middle of page */
+    margin: auto;
+    padding: 1rem;
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    
+    > header {
+        position: relative; /* for close button */
+        flex: 0 0 auto; /* stay the same size */
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    }
+
+    .body {
+        flex: 1 1 auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1rem 1rem;
+    }
+
+    .footer {
+        flex: 0 0 auto;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+} 
+
+.dialog-form {
+    > form {
+        display: contents;
+    }
+}
+
+
+.field-container {
+    /* margin: 1rem 0; */
+
+    > label {
+        display: block;
+        font-weight: bold;
+    }
+
+    input, select {
+        border-radius: 5px;
+        padding: 0.25rem;
+        padding-inline-start: 1rem;
+        line-height: 1rem;
+    }
+}
+
+.long-input {
+    width: 50%;
+}
+
+.short-input {
+    width: 3rem;
+}

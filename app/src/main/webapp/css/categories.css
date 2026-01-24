@@ -1,0 +1,65 @@
+
+
+main {
+    position: relative;
+}
+
+/* CATEGORY GRID */
+
+
+.category-grid {
+    display: grid;
+    align-content: start;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+    
+    gap: 20px;
+    justify-content: space-around;
+    padding-bottom: 100px;
+    overflow: auto;
+    height: 100%;
+    
+}
+
+.category {
+    border: 1px solid white;
+    padding: 1rem;
+    > h2 {
+        margin-bottom: 2rem;
+    }
+
+    > ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.category ul {
+    width: 100%;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.item-quantity {
+    width: 3rem;
+    text-align: center;
+}
+
+.item-quantity-type {
+    min-width: 3rem;
+    text-align: center;
+}
+
+.item-name {
+    flex: 1;
+}
+
+.big-add-button { 
+    font-size: 3rem;
+    padding: 2rem;
+    border-radius: 50%;
+}

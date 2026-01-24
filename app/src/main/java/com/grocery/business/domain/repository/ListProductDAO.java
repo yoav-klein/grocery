@@ -6,6 +6,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,8 @@ import com.grocery.business.domain.model.QuantityType;
 public class ListProductDAO {
 
     private final String ADD_PRODUCT_TO_LIST = "INSERT INTO tenant_%s.list_product(list_id, product_id) VALUES(?, ?)";
+    
+    private final String DELETE_PRODUCT_FROM_LIST = "DELETE FROM tenant_%s.list_product WHERE list_id = ? AND product_id = ?";
 
     private final String FIND_ALL_PRODUCTS_FOR_LIST = "SELECT products.id, products.name AS ProductName, category.name AS Category, qt.name AS QuantityType " +
         "FROM tenant_<TENANT_ID>.list_product lp " +
@@ -59,6 +62,22 @@ public class ListProductDAO {
         }
 
         this.jdbcTemplate.batchUpdate(String.format(ADD_PRODUCT_TO_LIST, tenantId), batch);
+    }
+
+    private void batchRemoveProductsFromList(String tenantId, int listId, List<Integer> productIds) { 
+        List<Object[]> batch = new ArrayList<>();
+
+        for(Integer productId : productIds) {
+            batch.add(new Object[] { listId, productId });
+        }
+
+        this.jdbcTemplate.batchUpdate(String.format(DELETE_PRODUCT_FROM_LIST, tenantId), batch);
+    }
+
+
+    public void editProducts(String tenantId, int listId, List<Integer> addProducts, List<Integer> removeProducts) {
+        batchAddProductsToList(tenantId, listId, addProducts);
+        batchRemoveProductsFromList(tenantId, listId, removeProducts);
     }
 
 }

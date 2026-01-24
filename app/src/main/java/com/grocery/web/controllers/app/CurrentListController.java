@@ -26,9 +26,9 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.grocery.business.domain.dto.ListItemRequest;
 import com.grocery.business.domain.dto.ProductQuantity;
 import com.grocery.business.domain.events.AddItemEvent;
-import com.grocery.business.domain.events.ListRefreshEvent;
 import com.grocery.business.domain.events.DeleteItemEvent;
 import com.grocery.business.domain.events.EventManager;
+import com.grocery.business.domain.events.ListRefreshEvent;
 import com.grocery.business.domain.model.CurrentListItem;
 import com.grocery.business.domain.service.CurrentListService;
 import com.grocery.business.tenancy.exception.UserNotFoundException;
@@ -69,7 +69,10 @@ public class CurrentListController {
             @PathVariable("listId") String listId, 
             @RequestBody ArrayList<ProductQuantity> productQuantityList) throws UserNotFoundException {
         OAuth2User oauth2User = (OAuth2User)user;
+
+        System.out.println("BULK ADDING");
         currentListService.bulkAdd(tenantId, oauth2User.getAttribute("sub"), listId, productQuantityList);
+        System.out.println("BULK ADDING2");
 
         eventManager.addEvent(new ListRefreshEvent());
 

@@ -1,8 +1,8 @@
 package com.grocery.business.domain.service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.grocery.business.domain.dto.ListItemRequest;
+import com.grocery.business.domain.dto.ProductQuantity;
 import com.grocery.business.domain.model.CurrentListItem;
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.model.ProductCategory;
@@ -17,9 +18,6 @@ import com.grocery.business.domain.repository.CurrentListDao;
 import com.grocery.business.tenancy.exception.UserNotFoundException;
 import com.grocery.business.tenancy.model.User;
 import com.grocery.business.tenancy.service.UserService;
-import com.grocery.business.domain.service.ProductService;
-import com.grocery.business.domain.dto.ProductQuantity;
-import com.grocery.business.tenancy.exception.UserNotFoundException;
 
 @Service
 public class CurrentListService {
@@ -57,6 +55,8 @@ public class CurrentListService {
     }
 
     public void bulkAdd(String tenantId, String userId, String listId, List<ProductQuantity> products) throws UserNotFoundException {
+        System.out.println("BULK ADD SERVICE");
+        System.out.println(products.size());
         List<CurrentListItem> itemsToAdd = new ArrayList<>();
         LocalDateTime now = LocalDateTime.now();
         User addedBy = userService.getUserById(userId);
@@ -70,6 +70,8 @@ public class CurrentListService {
             item.setAddedAt(now);
             item.setQuantityType(product.getQuantityType());
             item.setCategory(product.getCategory());
+
+            System.out.println("BULK ADDING: " + item.getQuantity() + " X " + item.getName() );
 
             itemsToAdd.add(item);
         });

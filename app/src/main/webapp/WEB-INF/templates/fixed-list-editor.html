@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head th:include="~{layout :: head(~{::link},~{::meta})}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="tenantId" th:content="${tenant.id}">
+        <meta name="listId" th:if="${mode} == 'edit'" th:content="${fixedList.id}">
+        
+        <title>Document</title>
+        <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
+        <link rel="stylesheet" href="../../css/offline.css" th:remove="all">
+        <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
+        <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
+        <link rel="stylesheet" href="../../css/fixed-list-editor.css" th:href="@{/css/fixed-list-editor.css}">
+    </head>
+    <body th:replace="~{layout :: layout(~{::main},~{::script})}">
+        <div class="wrapper">
+            <main>
+                <div class="step-wrapper">
+                    <header class="step">
+                        <div class="title">
+                            <h1 th:text="(${mode} == 'add')? 'Add Fixed List' : 'Edit Fixed List'">HEADING</h1>
+                            <p th:text="(${mode} == 'add')? 'Create a reusable list' : 'Edit the fixed list'">Create a reusable list</p>
+                        </div>
+                        <div class="name">
+                            <button th:if="${mode} == 'edit'" id="edit-name-button"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 -960 960 960" width="36px" fill="#ffffff"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></button>
+                            <label for="listName">List name</label>
+                            <input id="listName" type="text" placeholder="e.g., Weekly groceries" th:value="(${mode} == 'edit')? ${fixedList.name} : ''" th:disabled="${mode} == 'edit'" th:data-init-value="(${mode} == 'edit')? ${fixedList.name} : ''"/>
+                        </div>
+                        <div class="actions">
+                            <button id="cancel-button">Cancel</button>
+                            <button id="save-button" class="save-button" disabled>Save</button>
+                        </div>
+                    </header>
+                    <section id="catalog" class="category-grid step">
+                        <article class="category" th:each="category: ${productsByCategory}">
+                            <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                            <ul>
+                                <li class="category-item" th:each="product : ${category.value}">
+                                    <input class="product-checkbox" data-category="VEGETABLES" th:attr="data-category=${category.key}" id="1" th:id="${product.productId}" type="checkbox" th:checked="${mode} == 'edit' and ${#lists.contains(fixedList.products, product)}">
+                                    <label for="1" th:for="${product.productId}" th:text="${product.name}">Tomato</label>
+                                </li>
+                                
+                                <li class="category-item" th:remove="all">
+                                    <input data-category="VEGETABLES" class="product-checkbox" id="2" type="checkbox">
+                                    <label for="2">Cucumber</label>
+                                </li>
+                                <li class="category-item" th:remove="all">
+                                    <input data-category="VEGETABLES" class="product-checkbox" id="3" type="checkbox">
+                                    <label for="3">Pepper</label>
+                                </li>
+                                <li class="category-item" th:remove="all">
+                                    <input data-category="VEGETABLES" class="product-checkbox" id="4" type="checkbox">
+                                    <label for="4">Onion</label>
+                                </li>
+                            </ul>
+                        </article>
+                        <article class="category" th:remove="all">
+                            <h2>FRUIT</h2>
+                            <ul>
+                                <li class="category-item">
+                                    <input class="product-checkbox" data-category="FRUIT" id="5" type="checkbox">
+                                    <label for="5" th:for="${product.productId}" th:text="${product.name}">Strawberry</label>
+                                </li>
+                                <li class="category-item">
+                                    <input class="product-checkbox" data-category="FRUIT" id="6" type="checkbox">
+                                    <label for="6">Orange</label>
+                                </li>
+                                <li class="category-item">
+                                    <input class="product-checkbox" data-category="FRUIT" id="7" type="checkbox">
+                                    <label for="7">Banana</label>
+                                </li>
+                                <li class="category-item">
+                                    <input class="product-checkbox" data-category="FRUIT" id="8" type="checkbox">
+                                    <label for="8">Kiwi</label>
+                                </li>
+                            </ul>
+                        </article>
+                        
+                    </section>
+                    <section id="selected-section" class="step">
+                        <h1>LIST NAME</h1>
+                        <ul id="selected-list">
+                            <li th:if="${mode} == 'edit'" th:each="category: ${listProductsByCategory}" th:attr="data-category-name=${category.key}">
+                                <h3 th:text="#{${'category.title.' + category.key}}">CATEGORY NAME</h3>
+                                <ul>
+                                    <li th:each="product : ${category.value}" th:attr="data-category=${category.key}" th:text="${product.name}"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <template id="selected-list-category-template">
+                            <li data-category-name="CATEGORY-NAME">
+                                <h3>CATEGORY NAME</h3>
+                                <ul>
+                                </ul>
+                            </li>
+                        </template>
+                    </section>
+                </div>
+                <div class="step-actions">
+                    <button id="step-primary-button">
+                        <span class="current">Continue</span>
+                        <span>Review</span>
+                        <span>Save</span>
+                    </button>
+                    <button id="step-secondary-button">
+                        <span class="current">Cancel</span>
+                        <span>Back</span>
+                        <span>Back</span>
+                    </button>
+                </div>
+                <dialog id="confirmation-dialog" class="dialog-layout">
+                    <header>
+                        <h2>List Added!</h2>
+                    </header>
+                    <div class="body">
+                        <p>List <span id="success-list-name">LISTNAME</span> successfully added</p>
+                    </div>
+                    <div class="footer">
+                        <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
+                        <a id="to-list-link" th:href="@{/tenant/{tenantId}/lists(tenantId=${tenant.id})}">To the List</a>
+                    </div>
+                </dialog>
+                <dialog id="error-dialog" class="dialog-layout">
+                    <header>
+                        <h2>Ooops...</h2>
+                    </header>
+                    <div class="body">
+                        <p id="error-message"></p>
+                    </div>
+                    <div class="footer">
+                        <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
+                        <button class="close-modal-button">To the List</button>
+                    </div>
+                </dialog>
+                <dialog id="cancel-dialog" class="dialog-layout">
+                    <header>
+                        <h2>Cancel</h2>
+                        <button class="close-modal-button top-corner-button">X</button>
+                    </header>
+                    <div class="body">
+                        <p>Are you sure you want to abort?</p>
+                    </div>
+                    <div class="footer">
+                        <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Yes</a>
+                    </div>
+                </dialog>
+            </main>
+        </div>
+        <script src="../../js/common.js" th:src="@{/js/common.js}"></script>
+        <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script src="../../js/add-fixed-list.js" th:if="${mode} == 'add'" th:src="@{/js/add-fixed-list.js}"></script>
+        <script th:if="${mode} == 'edit'" th:src="@{/js/edit-fixed-list.js}"></script>
+        <script src="../../js/fixed-list-editor.js" th:src="@{/js/fixed-list-editor.js}"></script>
+    </body>
+</html>

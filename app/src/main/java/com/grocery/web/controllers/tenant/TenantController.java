@@ -1,11 +1,7 @@
 package com.grocery.web.controllers.tenant;
 
-import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -15,17 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.grocery.business.domain.model.ProductCategory;
-import com.grocery.business.domain.model.QuantityType;
-import com.grocery.business.domain.service.CurrentListService;
 import com.grocery.business.tenancy.exception.UserAlreadyInTenantException;
 import com.grocery.business.tenancy.exception.UserAlreadyInvitedException;
 import com.grocery.business.tenancy.exception.UserNotFoundException;

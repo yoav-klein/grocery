@@ -1,0 +1,41 @@
+
+main {
+    padding: 0;
+}
+
+main > header {
+    position: relative;
+    border-bottom: 1px solid var(--LINE-COLOR);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    h1 {
+        text-align: center;
+    }
+
+    .actions {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        inset-inline-end: 40px;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        button {
+            background-color: transparent;
+            border: none;
+        }
+    }
+}
+
+.category-grid {
+    padding: 1rem;
+}
+
+
+.insert-button {
+    width: 150px;
+    height: 70px;
+    border-radius: 5px;
+}

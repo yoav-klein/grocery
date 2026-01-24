@@ -1,65 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head th:include="~{layout :: head(~{::link},~{})}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" th:href="@{/css/base.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/shared.css}">
-</head>
-<body th:replace="~{layout :: layout(~{::main},~{::script})}">
-    <main>
-        <section id="list" class="category-grid">
-            <article class="category" th:each="category : ${productsByCategory}">
-                <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
-                <ul>
-                    <li class="category-item" th:each="product : ${category.value}">
-                        <p class="item-name" th:text="${product.name}">Tomato</p>
-                        <p class="item-quantity-type" th:text="${product.quantityType}">Kg</p>
-                        <div>
-                            <form method="post" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}">
-                                <input type="hidden" name="_method" value="delete">
-                                <button name="id" th:value="${product.productId}">X</button>
-                            </form>
+    <head th:include="~{layout :: head(~{::link},~{})}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
+        <link rel="stylesheet" href="../../css/offline.css">
+        <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
+        <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
+        <link rel="stylesheet" href="../../css/products.css" th:href="@{/css/products.css}">
+    </head>
+    <body th:replace="~{layout :: layout(~{::main},~{::script})}">
+        <div class="wrapper" th:remove="tag">
+
+            <main>
+                <section id="list" class="category-grid">
+                    <article class="category" th:each="category : ${productsByCategory}">
+                        <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                        <ul>
+                            <li class="category-item" th:each="product : ${category.value}">
+                                <p class="item-name" th:text="${product.name}">Tomato</p>
+                                <p class="item-quantity-type" th:text="${product.quantityType}">Kg</p>
+                                <div>
+                                    <form method="post" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}">
+                                        <input type="hidden" name="_method" value="delete">
+                                        <button name="id" th:value="${product.productId}" class="delete-button">×</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+                </section>
+                <button id="add-product-button" class="absolute-bottom-center big-add-button">+</button>
+                <dialog id="add-product-dialog" class="dialog-layout dialog-layout">
+                    <header>
+                        <h2>New Product</h2>
+                        <button class="close-modal-button top-corner-button">X</button>
+                    </header>
+                    <form id="new-product-form" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" method="post">
+                        <div class="body">
+                            <div class="field">
+                                <label for="name">Name</label>
+                                <input name="name" class="long-input" type="text" id="name">
+                            </div>
+                            <div class="field">
+                                <label for="quantity">Quantity Type</label>
+                                <select name="quantityType">
+                                    <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
+                                    <option th:remove="all">Unit</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="category" th:text="#{additem.label.category}">Category</label>
+                                <select name="category" class="long-input">
+                                    <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}">Vegetables</option>
+                                    <option th:remove="all">Fruits</option>
+                                    <option th:remove="all">Dairy</option>
+                                </select>
+                            </div>
                         </div>
-                    </li>
-                </ul>
-            </article>
-        </section>
-        <button id="add-product-button" class="add-button">+</button>
-        <dialog id="add-product-dialog">
-            <form id="new-product-form" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" method="post">
-                <fieldset>
-                    <p>
-                        <label for="name">Name</label>
-                        <input name="name" class="long-input" type="text" id="name">
-                    </p>
-                    <p>
-                        <label for="quantity">Quantity Type</label>
-                        
-                        <select name="quantityType">
-                            <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
-                            <option th:remove="all">Unit</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label for="category" th:text="#{additem.label.category}">Category</label>
-                        <select name="category" class="long-input">
-                            <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}">Vegetables</option>
-                            <option th:remove="all">Fruits</option>
-                            <option th:remove="all">Dairy</option>
-                        </select>
-                    </p>
-                    
-                    <p class="submit-button-container">
-                        <button id="new-item-button" class="submit-button" type="submit" name="save">Submit!</button>
-                    </p>
-                
-                </fieldset>
-            </form>
-        </dialog>
-    </main>
-    <script th:src="@{/js/products.js}"></script>
-</body>
+                        <div class="footer">
+                            <p class="submit-button-container">
+                                <button id="new-item-button" type="submit" name="save">Submit!</button>
+                            </p>
+                        </div>
+                    </form>
+                </dialog>
+            </main>
+        </div>
+        <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script src="../../js/products.js" th:src="@{/js/products.js}"></script>
+    </body>
 </html>
