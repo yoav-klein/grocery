@@ -1,4 +1,4 @@
-package com.grocery.web.controllers.tenant;
+package com.grocery.web.controllers.ui.tenant;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

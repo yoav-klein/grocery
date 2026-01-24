@@ -1,24 +1,15 @@
-package com.grocery.web.controllers.app;
+package com.grocery.web.controllers.ui.app;
 
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 
-import com.grocery.business.domain.dto.FixedListRequest;
-import com.grocery.business.domain.dto.FixedListEditRequest;
-import com.grocery.business.domain.exception.FixedListAlreadyExistsException;
 import com.grocery.business.domain.exception.FixedListNotFoundException;
 import com.grocery.business.domain.model.FixedList;
 import com.grocery.business.domain.model.Product;
@@ -72,27 +63,6 @@ public class FixedListsController {
         fixedListsService.deleteFixedList(tenantId, listId);
 
         return String.format("redirect:/tenant/%s", tenantId);
-    }
-
-    // new list
-    @PostMapping("/addList")
-    public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @Validated @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException {
-        
-        int listId = fixedListsService.createFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
-
-        return new ResponseEntity<Integer>(Integer.valueOf(listId), HttpStatus.OK);
-    }
-
-    // patch list
-    @PutMapping("/{listId}")
-    public ResponseEntity editList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId, @RequestBody FixedListEditRequest fixedListEditRequest) throws FixedListNotFoundException {
-        fixedListsService.editFixedList(tenantId,
-            listId,
-            fixedListEditRequest.getListName(),
-            fixedListEditRequest.getAddProducts(), 
-            fixedListEditRequest.getRemoveProducts());
-
-        return new ResponseEntity(HttpStatus.OK);
     }
     
 }

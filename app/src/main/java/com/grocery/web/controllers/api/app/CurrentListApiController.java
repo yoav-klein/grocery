@@ -1,17 +1,17 @@
 
-package com.grocery.web.controllers.app;
+package com.grocery.web.controllers.api.app;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,25 +35,16 @@ import com.grocery.business.tenancy.exception.UserNotFoundException;
 
 @Controller
 @RequestMapping("/tenant/{tenantId}/currentList")
-public class CurrentListController {
+public class CurrentListApiController {
 
     private final EventManager eventManager = new EventManager();
 
     @Autowired
     private CurrentListService currentListService;
 
-    @GetMapping
-    public String currentList(Model model, @PathVariable("tenantId") String tenantId) {
-        // add to model current list of tenant
-        model.addAttribute("page", "currlist");
-        model.addAttribute("itemsByCategory", currentListService.getCurrentListByCategory(tenantId));
-        
-        return "current-list";
-    }
-
     // add item
     @PostMapping("/addItem")
-    public ResponseEntity addItem(@RequestBody ListItemRequest request, @AuthenticationPrincipal Object user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
+    public ResponseEntity addItem(@RequestBody @Validated ListItemRequest request, @AuthenticationPrincipal Object user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
         OAuth2User oauth2User = (OAuth2User)user;
         CurrentListItem item = currentListService.addListItem(request, oauth2User.getAttribute("sub"), tenantId);
 

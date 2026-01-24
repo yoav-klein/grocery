@@ -1,4 +1,4 @@
-package com.grocery.web.controllers.app;
+package com.grocery.web.controllers.ui.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.service.ProductService;
-import com.grocery.business.tenancy.service.TenantService;
 
 @Controller
 @RequestMapping("/tenant/{tenantId}/products")
@@ -23,9 +22,6 @@ public class ProductsController {
 
     @Autowired
     private ProductService productService;
-
-    @Autowired
-    private TenantService tenantService;
         
     @GetMapping
     public String products(Model model, @PathVariable("tenantId")String tenantId) {

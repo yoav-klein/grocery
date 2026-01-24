@@ -37,7 +37,6 @@ newItemFormEl.addEventListener("submit", (event) => {
     const formData = new FormData(newItemFormEl);
     const data = Object.fromEntries(formData.entries()); // convert to plain object
     newItemFormEl.reset();
-    addItemDialogEl.close();
     
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -48,7 +47,17 @@ newItemFormEl.addEventListener("submit", (event) => {
         headers: headers,
         body: body
     });
-    responsePromise.then(resp => console.log(`OK: ${resp.ok}`)).catch(e => console.log(`error: ${e}`));
+    responsePromise.then(resp => { 
+        if(!resp.ok) throw new HttpError(resp); 
+        else { 
+            console.log('OK'); 
+            addItemDialogEl.close(); 
+        }
+    }).catch(e => {
+        if(e instanceof HttpError) {
+            e.response.text().then(t => console.log(`ERROR: ${t}`))
+        }
+    });
 });
 
 /* DELETE ITEMS */
