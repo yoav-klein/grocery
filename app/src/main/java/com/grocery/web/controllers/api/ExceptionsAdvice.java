@@ -1,5 +1,6 @@
 package com.grocery.web.controllers.api;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class ExceptionsAdvice extends ResponseEntityExceptionHandler {
 			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
         ProblemDetail body = ex.getBody();
+        body.setType(URI.create("invalid-arguments"));
 
         List<Map<String, String>> localizedErrors = ex.getFieldErrors()
             .stream()

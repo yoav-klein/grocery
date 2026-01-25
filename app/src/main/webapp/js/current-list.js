@@ -48,14 +48,16 @@ newItemFormEl.addEventListener("submit", (event) => {
         body: body
     });
     responsePromise.then(resp => { 
-        if(!resp.ok) throw new HttpError(resp); 
+        if(!resp.ok) throw new HttpError(resp);
         else { 
             console.log('OK'); 
             addItemDialogEl.close(); 
         }
     }).catch(e => {
         if(e instanceof HttpError) {
-            e.response.text().then(t => console.log(`ERROR: ${t}`))
+            e.response.json().then(data => {
+                console.log(data);
+            })
         }
     });
 });
