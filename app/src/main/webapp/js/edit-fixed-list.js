@@ -1,28 +1,22 @@
 
-const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]');
-const csrfToken = document.querySelector('meta[name="_csrf"]');
+import { initFixedListEditor, commonElements } from "./fixed-list-editor.js";
+import { HttpError } from './common.js';
 
 const listId = document.querySelector('meta[name="listId"]').content;
 const tenantId = document.querySelector('meta[name="tenantId"]').content;
 
-const listNameInputEl = document.getElementById("listName");
-const initialListName = listNameInputEl.getAttribute("data-init-value");
+const initialListName = commonElements.listNameInputEl.getAttribute("data-init-value");
 const editNameButtonEl = document.getElementById("edit-name-button");
 
-
 // array that will hold the selected products and will be sent to the server
-const toListLinkEl = document.getElementById('to-list-link');
-
 const addProductsList = [];
 const removeProductsList = [];
 
-editNameButtonEl.addEventListener('click', () => { listNameInputEl.disabled = false; });
+editNameButtonEl.addEventListener('click', () => { commonElements.listNameInputEl.disabled = false; });
 
 
-/* RESPOND TO CHANGE */
-
-// warn the user before exiting the page
 let hasUnsavedChanges = false;
+function hasUnsavedChangesFunc() { return hasUnsavedChanges; }
 
 function itemsCheckboxHandler(isChecked, productId, name, productCategory) {
     if(isChecked) {
@@ -42,22 +36,20 @@ function itemsCheckboxHandler(isChecked, productId, name, productCategory) {
 
 function respondToChange() {
     const isProductsAddedOrRemoved = addProductsList.length !== 0 || removeProductsList.length !== 0;
-    const isNameChanged = listNameInputEl.value !== initialListName;
-
+    const isNameChanged = commonElements.listNameInputEl.value !== initialListName;
+    
     if(!isProductsAddedOrRemoved && !isNameChanged) {
         hasUnsavedChanges = false;
-        saveButtonEl.disabled = true;
+        commonElements.saveButtonEl.disabled = true;
     }
     else {
         hasUnsavedChanges = true;
-        saveButtonEl.disabled = false;
+        commonElements.saveButtonEl.disabled = false;
     }
 }
 
-
-/* SAVE LIST */
 function saveList() {
-    const listName = listNameInputEl.value;
+    const listName = commonElements.listNameInputEl.value;
     const data = {
         listName: listName,
         addProducts: addProductsList,
@@ -67,7 +59,7 @@ function saveList() {
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    headers.append(csrfHeaderName.content, csrfToken.content);
+    headers.append(commonElements.csrfHeaderName.content, commonElements.csrfToken.content);
     const body = JSON.stringify(data);
     const responsePromise = fetch(`${window.location.origin}/app/tenant/${tenantId}/lists/${listId}`, {
         method: "PUT",
@@ -81,21 +73,23 @@ function saveList() {
         }
         return resp.text();
     }).then(() => {
-        successListNameSpanEl.innerText = listName;
+        commonElements.successListNameSpanEl.innerText = listName;
         // add /<list-id> using the list-id we get back from the server to the href
-        toListLinkEl.setAttribute('href', toListLinkEl.getAttribute('href') + '/' + listId);
+        commonElements.toListLinkEl.setAttribute('href', commonElements.toListLinkEl.getAttribute('href') + '/' + listId);
         hasUnsavedChanges = false;
-        confirmationDialogEl.showModal();
+        commonElements.confirmationDialogEl.showModal();
     }).catch(e => {
         if(e instanceof HttpError) {
             if(e.response.status == 409) {
-                errorMessageEl.innerText = `List with name already exists!`;
+                commonElements.errorMessageEl.innerText = `List with name already exists!`;
             } else {
-                errorMessageEl.innerText = 'Something went wrong on our side...';
+                commonElements.errorMessageEl.innerText = 'Something went wrong on our side...';
             }
         } else {
-            errorMessageEl.innerText = 'Something went wrong on our side...';
+            commonElements.errorMessageEl.innerText = 'Something went wrong on our side...';
         }
-        errorDialogEl.showModal();
+        commonElements.errorDialogEl.showModal();
     });
 }
+
+initFixedListEditor(saveList, respondToChange, itemsCheckboxHandler, hasUnsavedChangesFunc);

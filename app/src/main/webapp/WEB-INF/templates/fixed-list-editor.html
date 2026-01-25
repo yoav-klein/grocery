@@ -147,10 +147,8 @@
                 </dialog>
             </main>
         </div>
-        <script src="../../js/common.js" th:src="@{/js/common.js}"></script>
         <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
-        <script src="../../js/add-fixed-list.js" th:if="${mode} == 'add'" th:src="@{/js/add-fixed-list.js}"></script>
-        <script th:if="${mode} == 'edit'" th:src="@{/js/edit-fixed-list.js}"></script>
-        <script src="../../js/fixed-list-editor.js" th:src="@{/js/fixed-list-editor.js}"></script>
+        <script type="module" th:if="${mode} == 'add'"  th:src="@{/js/add-fixed-list.js}"  src="../../js/add-fixed-list.js"></script>
+        <script type="module" th:if="${mode} == 'edit'" th:src="@{/js/edit-fixed-list.js}"></script>
     </body>
 </html>

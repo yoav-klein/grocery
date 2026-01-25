@@ -5,3 +5,5 @@ class HttpError extends Error {
         this.response = response;
     }
 }
+
+export { HttpError };
