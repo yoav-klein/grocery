@@ -30,6 +30,4 @@ public class FixedListRequest {
     public void setProductIds(List<Integer> productIds) {
         this.productIds = productIds;
     }
-
-    
 }

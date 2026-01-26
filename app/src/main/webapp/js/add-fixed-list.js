@@ -18,13 +18,13 @@ let hasUnsavedChanges = false;
 function hasUnsavedChangesFunc() { return hasUnsavedChanges; }
 
 function respondToChange() {
-    if(selectedProducts.length === 0 && commonElements.listNameInputEl.value === '') {
+    if(selectedProducts.length === 0 && commonElements.listNameInputEl.value.length <= 1) {
         hasUnsavedChanges = false;
         commonElements.saveButtonEl.disabled = true;
     }
     else {
         hasUnsavedChanges = true;
-        if(selectedProducts.length !== 0 && commonElements.listNameInputEl.value !== '') {
+        if(selectedProducts.length !== 0 && commonElements.listNameInputEl.value.length > 1) {
             commonElements.saveButtonEl.disabled = false;
             return;
         }
@@ -64,15 +64,22 @@ function saveList() {
     }).catch(e => {
         if(e instanceof HttpError) {
             if(e.response.status == 409) {
-                commonElements.errorMessageEl.innerText = `List with name already exists!`;
+                commonElements.errorMessageTitleEl.innerText = `List with name already exists!`;
             } else if(e.response.status == 400) {
-                commonElements.errorMessageEl.innerText = `Bad request!`;
-                e.response.text().then(t => console.log(t));
+                e.response.json().then(data => {
+                    commonElements.errorMessageTitleEl.innerText = data.title;
+                    commonElements.errorMessageDetailsEl.replaceChildren();
+                    data.errors.forEach(err =>  {
+                        const listItem = document.createElement('li');
+                        listItem.innerText = `${err.reason}`;
+                        commonElements.errorMessageDetailsEl.appendChild(listItem);
+                    })
+                });
             } else {
-                commonElements.errorMessageEl.innerText = 'Something went wrong on our side...';
+                commonElements.errorMessageTitleEl.innerText = 'Something went wrong on our side...';
             }
         } else {
-            commonElements.errorMessageEl.innerText = 'Something went wrong on our side...';
+            commonElements.errorMessageTitleEl.innerText = 'Something went wrong on our side...';
         }
         commonElements.errorDialogEl.showModal();
     });

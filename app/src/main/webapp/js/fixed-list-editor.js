@@ -10,7 +10,8 @@ export const commonElements = {
     toListLinkEl: document.getElementById('to-list-link'),
     confirmationDialogEl: document.getElementById('confirmation-dialog'),
     errorDialogEl: document.getElementById('error-dialog'),
-    errorMessageEl: document.getElementById('error-message'),
+    errorMessageTitleEl: document.getElementById('error-message-title'),
+    errorMessageDetailsEl: document.getElementById('error-message-details'),
     successListNameSpanEl: document.getElementById('success-list-name')
  };
 
