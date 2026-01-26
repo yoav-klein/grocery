@@ -114,7 +114,7 @@
                         <h2>List Added!</h2>
                     </header>
                     <div class="body">
-                        <p>List <span id="success-list-name">LISTNAME</span> successfully added</p>
+                        <p>List <span id="success-list-name">LISTNAME</span> successfully <span th:if="${mode} == 'add'">added</span><span>th:if="${mode} == 'edit'">edited</span></p>
                     </div>
                     <div class="footer">
                         <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
@@ -147,10 +147,8 @@
                 </dialog>
             </main>
         </div>
-        <script src="../../js/common.js" th:src="@{/js/common.js}"></script>
         <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
-        <script th:if="${mode} == 'add'" th:src="@{/js/add-fixed-list.js}" src="../../js/add-fixed-list.js"></script>
-        <script th:if="${mode} == 'edit'" th:src="@{/js/edit-fixed-list.js}"></script>
-        <script src="../../js/fixed-list-editor.js" th:src="@{/js/fixed-list-editor.js}"></script>
+        <script type="module" th:if="${mode} == 'add'"  th:src="@{/js/add-fixed-list.js}"  src="../../js/add-fixed-list.js"></script>
+        <script type="module" th:if="${mode} == 'edit'" th:src="@{/js/edit-fixed-list.js}"></script>
     </body>
 </html>
