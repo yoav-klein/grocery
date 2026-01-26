@@ -46,7 +46,7 @@ When a user marks an item as checked, the item is not just deleted from the list
 * Error handling - in Edit Fixed List - add a validator in the backend that validates the EditFixedListRequest:
     * Check that either add/remove lists are not empty
     * Check that list name has changed
-* Error handling - add custom pages for status codes 500, 404, 403, 401
+
 
 
 ## Improvements
@@ -64,8 +64,11 @@ When a user marks an item as checked, the item is not just deleted from the list
 ## What I want
 * Error handling for API calls - result in RFC 9457, handled by JS in the frontend
 * Error handling for UI calls - result in @ResponseCode exceptions that are translated to status codes
+* Default error pages for 500, 404, 401, 403. Already started, but consider changing them to be templates and not static HTMLs.
 
 ## What to do
 * Go over all the services/repositores and make sure that all possible exceptions are handled
 * Go over all controllers and make sure there's validations for all POST/PUT requests
 
+## NOTES
+* Repository exceptions are translated to 500

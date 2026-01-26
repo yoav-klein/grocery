@@ -83,6 +83,7 @@ public class CurrentListDao {
         return this.jdbcTemplate.query(String.format(FIND_ALL_ITEMS, tenantId), listItemRowMapper);
     }
     
+    // returns the ID of the new item
     public int saveItem(String tenantId, String userId, CurrentListItem item) {
         String statement = String.format(SAVE_ITEM, tenantId);
 
