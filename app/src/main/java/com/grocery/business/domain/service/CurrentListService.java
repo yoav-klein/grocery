@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.grocery.business.domain.dto.ListItemRequest;
 import com.grocery.business.domain.dto.ProductQuantity;
 import com.grocery.business.domain.model.CurrentListItem;
+import com.grocery.business.domain.model.AddItemResult;
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.model.ProductCategory;
 import com.grocery.business.domain.repository.CurrentListDao;
@@ -39,7 +40,8 @@ public class CurrentListService {
         return this.getAllItems(tenantId).stream().collect(Collectors.groupingBy(CurrentListItem::getCategory));
     }
 
-    public CurrentListItem addListItem(ListItemRequest request, String userId, String tenantId) throws UserNotFoundException {
+    public AddItemResult addListItem(ListItemRequest request, String userId, String tenantId) throws UserNotFoundException {
+        
         CurrentListItem item = new CurrentListItem();
         item.setName(request.getName());
         item.setQuantity(request.getQuantity());
@@ -48,10 +50,9 @@ public class CurrentListService {
         item.setQuantityType(request.getQuantityType());
         item.setCategory(request.getCategory());
 
-        int id = listItemRepository.saveItem(tenantId, userId, item);
-        item.setId(id);
+        AddItemResult result = listItemRepository.saveItem(tenantId, userId, item);
 
-        return item;
+        return result;
     }
 
     public void bulkAdd(String tenantId, String userId, String listId, List<ProductQuantity> products) throws UserNotFoundException {

@@ -46,6 +46,8 @@ When a user marks an item as checked, the item is not just deleted from the list
 * Error handling - in Edit Fixed List - add a validator in the backend that validates the EditFixedListRequest:
     * Check that either add/remove lists are not empty
     * Check that list name has changed
+* Events
+    * ItemUpdatedEvent - when an item's quantity is updated.
 
 
 

@@ -10,6 +10,7 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -38,6 +39,15 @@ public class ExceptionsAdvice extends ResponseEntityExceptionHandler {
         body.setProperty("errors", localizedErrors);
 
         return super.handleExceptionInternal(ex, null, headers, status, request);
+    }
+
+    /* A catch-all handler that returns a 500 status code */
+    @ExceptionHandler
+    public final ProblemDetail handleAnyException(Exception ex, WebRequest request) throws Exception {
+        ProblemDetail pd = ProblemDetail.forStatus(500);
+        pd.setType(URI.create("generic-error"));
+        
+        return pd;
     }
 
 }

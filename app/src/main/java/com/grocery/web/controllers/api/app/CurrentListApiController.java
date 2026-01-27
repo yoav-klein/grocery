@@ -29,7 +29,7 @@ import com.grocery.business.domain.events.AddItemEvent;
 import com.grocery.business.domain.events.DeleteItemEvent;
 import com.grocery.business.domain.events.EventManager;
 import com.grocery.business.domain.events.ListRefreshEvent;
-import com.grocery.business.domain.model.CurrentListItem;
+import com.grocery.business.domain.model.AddItemResult;
 import com.grocery.business.domain.service.CurrentListService;
 import com.grocery.business.tenancy.exception.UserNotFoundException;
 
@@ -46,11 +46,12 @@ public class CurrentListApiController {
     @PostMapping("/addItem")
     public ResponseEntity addItem(@RequestBody @Validated ListItemRequest request, @AuthenticationPrincipal Object user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
         OAuth2User oauth2User = (OAuth2User)user;
-        CurrentListItem item = currentListService.addListItem(request, oauth2User.getAttribute("sub"), tenantId);
+        AddItemResult result = currentListService.addListItem(request, oauth2User.getAttribute("sub"), tenantId);
 
-        eventManager.addEvent(new AddItemEvent(item));
+        if     (result.getResult() == AddItemResult.Result.CREATED) eventManager.addEvent(new AddItemEvent(result.getItem()));
+        else if(result.getResult() == AddItemResult.Result.UPDATED) System.out.println("IMPLEMENT UPDATE EVENT");
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     // bulk add
@@ -61,13 +62,11 @@ public class CurrentListApiController {
             @RequestBody ArrayList<ProductQuantity> productQuantityList) throws UserNotFoundException {
         OAuth2User oauth2User = (OAuth2User)user;
 
-        System.out.println("BULK ADDING");
         currentListService.bulkAdd(tenantId, oauth2User.getAttribute("sub"), listId, productQuantityList);
-        System.out.println("BULK ADDING2");
 
         eventManager.addEvent(new ListRefreshEvent());
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     // lastEventId is either sent by the EventSource object in a reconnect in the header, or in the first connection as a parameter (code the javascript)
