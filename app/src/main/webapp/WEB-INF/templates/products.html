@@ -32,31 +32,41 @@
                     </article>
                 </section>
                 <button id="add-product-button" class="absolute-bottom-center big-add-button">+</button>
+                
                 <dialog id="add-product-dialog" class="dialog-layout dialog-layout">
                     <header>
                         <h2>New Product</h2>
                         <button class="close-modal-button top-corner-button">X</button>
                     </header>
-                    <form id="new-product-form" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" method="post">
+                    <form id="new-product-form" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" th:object="${product}" method="post">
                         <div class="body">
                             <div class="field">
                                 <label for="name">Name</label>
-                                <input name="name" class="long-input" type="text" id="name">
+                                <input th:field="*{name}" class="long-input" type="text" th:classappend="${#fields.hasErrors('name')}? 'field-error'" />
+                                <ul th:if="${#fields.hasErrors('name')}">
+                                    <li th:each="err : ${#fields.errors('name')}" th:text="${err}">Input is incorrect</li>
+                                </ul>
                             </div>
                             <div class="field">
                                 <label for="quantity">Quantity Type</label>
-                                <select name="quantityType">
+                                <select th:field="*{quantityType}" th:classappend="${#fields.hasErrors('quantityType')}? 'field-error'">
                                     <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
                                     <option th:remove="all">Unit</option>
                                 </select>
+                                <ul th:if="${#fields.hasErrors('quantityType')}">
+                                    <li th:each="err : ${#fields.errors('quantityType')}" th:text="${err}">Input is incorrect</li>
+                                </ul>
                             </div>
                             <div class="field">
                                 <label for="category" th:text="#{additem.label.category}">Category</label>
-                                <select name="category" class="long-input">
+                                <select th:field="*{category}" class="long-input" th:classappend="${#fields.hasErrors('category')}? 'field-error'">
                                     <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}">Vegetables</option>
                                     <option th:remove="all">Fruits</option>
                                     <option th:remove="all">Dairy</option>
                                 </select>
+                                <ul th:if="${#fields.hasErrors('category')}">
+                                    <li th:each="err : ${#fields.errors('category')}" th:text="${err}">Input is incorrect</li>
+                                </ul>
                             </div>
                         </div>
                         <div class="footer">

@@ -42,12 +42,13 @@ When a user marks an item as checked, the item is not just deleted from the list
 
 ## Leftovers
 ---
-* Error handling in UI for fetch requests
-* Error handling in PRoducts and Current List page.
-* Error handling in backend
-* Error handling in TenantRepository
-* Error handling in Repositories
 * SSE edge cases
+* Error handling - in Edit Fixed List - add a validator in the backend that validates the EditFixedListRequest:
+    * Check that either add/remove lists are not empty
+    * Check that list name has changed
+* Events
+    * ItemUpdatedEvent - when an item's quantity is updated.
+
 
 
 ## Improvements
@@ -58,3 +59,22 @@ When a user marks an item as checked, the item is not just deleted from the list
     * In the summary pane - show numbers of added and removed
 * Current List
     * Autocomplete in Add new item
+
+
+# Error Handling Branch
+---
+## What I want
+* Error handling for API calls - result in RFC 9457, handled by JS in the frontend
+* Error handling for UI calls - result in @ResponseCode exceptions that are translated to status codes
+* Default error pages for 500, 404, 401, 403. Already started, but consider changing them to be templates and not static HTMLs.
+
+## What to do
+* Go over all the services/repositores and make sure that all possible exceptions are handled
+* Go over all controllers and make sure there's validations for all POST/PUT requests
+
+## NOTES
+* Repository exceptions are translated to 500
+
+
+## Debates
+* Forms - full page reload or AJAX? full page reload is simpler - no JS.  On the other hand - handling modal forms with simple full page reload is messier. HTMX is an option.

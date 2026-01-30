@@ -1,6 +1,7 @@
 
 import { BASE_URL } from './config.js';
-
+import { HttpError } from './common.js';
+ 
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]').content;
 const csrfToken = document.querySelector('meta[name="_csrf"]').content;
 
@@ -14,9 +15,12 @@ const deleteButtonEl = document.getElementById('delete-button');
 const editButtonEl = document.getElementById('edit-button');
 const deleteConfirmationDialog = document.getElementById('delete-confirmation-dialog');
 
+const errorBannerEl = document.getElementById('error-banner');
+const errorBannerMessageEl = errorBannerEl.querySelector('span');
+
 deleteButtonEl.addEventListener('click', () => {
     deleteConfirmationDialog.showModal();
-})
+});
 
 const inputs = document.querySelectorAll('.quantity');
 
@@ -46,11 +50,17 @@ formEl.addEventListener('submit', (e) => {
         if(resp.ok) {
             window.location.replace(tenantBaseUrl); 
         } else {
-            alert('ERROR');
+            throw new HttpError(resp);
         }
     }).catch(e => {
-        alert('ERROR');
+        e.response.json().then(data => {
+            if(data.type === "product-not-found") {
+                errorBannerMessageEl.innerText = data.title;
+            }
+        });
+        errorBannerEl.classList.add('active');
     });
-    
-    
 });
+
+document.getElementById('close-error-banner-button').addEventListener('click', () => { errorBannerEl.classList.remove('active') });
+

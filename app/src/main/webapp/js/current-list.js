@@ -1,4 +1,6 @@
 
+import { HttpError } from './common.js';
+
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]')
 const csrfToken = document.querySelector('meta[name="_csrf"]')
 
@@ -6,8 +8,13 @@ const evtSource = new EventSource(document.baseURI + '/itemStream');
 
 const newItemFormEl = document.getElementById("new-item-form");
 const addItemDialogEl = document.getElementById('add-item-dialog');
+const closeDialogButtonEl = document.getElementById('close-add-item-dialog');
+const errorBannerEl = document.getElementById("error-banner");
 
-const listEl = document.getElementById('list');
+closeDialogButtonEl.addEventListener('click', () => { 
+    newItemFormEl.reset();
+    errorBannerEl.style.display = 'none';
+});
 
 evtSource.addEventListener("NEW-ITEM", (event) => { 
     
@@ -36,8 +43,8 @@ newItemFormEl.addEventListener("submit", (event) => {
 
     const formData = new FormData(newItemFormEl);
     const data = Object.fromEntries(formData.entries()); // convert to plain object
-    newItemFormEl.reset();
-    addItemDialogEl.close();
+    
+    newItemFormEl.querySelectorAll('.field-validation-error').forEach(item => item.innerText = '');
     
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -48,8 +55,35 @@ newItemFormEl.addEventListener("submit", (event) => {
         headers: headers,
         body: body
     });
-    responsePromise.then(resp => console.log(`OK: ${resp.ok}`)).catch(e => console.log(`error: ${e}`));
+    responsePromise.then(resp => { 
+        if(!resp.ok) throw new HttpError(resp);
+        else { 
+            newItemFormEl.reset();
+            addItemDialogEl.close(); 
+        }
+    }).catch(e => {
+        if(e instanceof HttpError) {
+            e.response.json().then(data => {
+                if(data.type === "invalid-arguments") handleInvalidArguments(data);
+                else if(data.type === "generic-error") handleGenericError(data);
+            })
+        }
+    });
 });
+
+function handleInvalidArguments(data) {
+    data.errors.forEach(error => {
+        const field = error.field;
+        const reason = error.reason;
+
+        const errorMessageEl = document.querySelector(`input[name="${field}"] ~ .field-validation-error`);
+        errorMessageEl.innerText = reason;
+    });
+}
+
+function handleGenericError(data) {
+    errorBannerEl.style.display = 'block';
+}
 
 /* DELETE ITEMS */
 

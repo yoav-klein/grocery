@@ -39,3 +39,25 @@ main > header {
     height: 70px;
     border-radius: 5px;
 }
+
+.error-banner {
+    padding: 1rem;
+    margin: 0 20px 20px 20px;
+
+    display: none;
+    border-radius: 10px;
+    position: sticky;
+    top: 10px;
+    
+    background-color: #442222; /* Dark red to match your dark theme */
+    border: 1px solid #ff4444;
+    color: #ffcccc;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.error-banner.active {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

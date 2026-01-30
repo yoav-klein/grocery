@@ -1,18 +1,21 @@
 
-package com.grocery.web.controllers.app;
+package com.grocery.web.controllers.api.app;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -29,37 +33,30 @@ import com.grocery.business.domain.events.AddItemEvent;
 import com.grocery.business.domain.events.DeleteItemEvent;
 import com.grocery.business.domain.events.EventManager;
 import com.grocery.business.domain.events.ListRefreshEvent;
-import com.grocery.business.domain.model.CurrentListItem;
+import com.grocery.business.domain.model.AddItemResult;
 import com.grocery.business.domain.service.CurrentListService;
 import com.grocery.business.tenancy.exception.UserNotFoundException;
+import com.grocery.business.domain.exception.ProductNotFoundException;
 
 @Controller
 @RequestMapping("/tenant/{tenantId}/currentList")
-public class CurrentListController {
+public class CurrentListApiController {
 
     private final EventManager eventManager = new EventManager();
 
     @Autowired
     private CurrentListService currentListService;
 
-    @GetMapping
-    public String currentList(Model model, @PathVariable("tenantId") String tenantId) {
-        // add to model current list of tenant
-        model.addAttribute("page", "currlist");
-        model.addAttribute("itemsByCategory", currentListService.getCurrentListByCategory(tenantId));
-        
-        return "current-list";
-    }
-
     // add item
     @PostMapping("/addItem")
-    public ResponseEntity addItem(@RequestBody ListItemRequest request, @AuthenticationPrincipal Object user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
+    public ResponseEntity addItem(@RequestBody @Validated ListItemRequest request, @AuthenticationPrincipal Object user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
         OAuth2User oauth2User = (OAuth2User)user;
-        CurrentListItem item = currentListService.addListItem(request, oauth2User.getAttribute("sub"), tenantId);
+        AddItemResult result = currentListService.addListItem(request, oauth2User.getAttribute("sub"), tenantId);
 
-        eventManager.addEvent(new AddItemEvent(item));
+        if     (result.getResult() == AddItemResult.Result.CREATED) eventManager.addEvent(new AddItemEvent(result.getItem()));
+        else if(result.getResult() == AddItemResult.Result.UPDATED) System.out.println("IMPLEMENT UPDATE EVENT");
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     // bulk add
@@ -67,16 +64,14 @@ public class CurrentListController {
     public ResponseEntity batchAdd(@PathVariable("tenantId") String tenantId, 
             @AuthenticationPrincipal Object user, 
             @PathVariable("listId") String listId, 
-            @RequestBody ArrayList<ProductQuantity> productQuantityList) throws UserNotFoundException {
+            @RequestBody @Validated ArrayList<ProductQuantity> productQuantityList) throws UserNotFoundException, ProductNotFoundException {
         OAuth2User oauth2User = (OAuth2User)user;
 
-        System.out.println("BULK ADDING");
         currentListService.bulkAdd(tenantId, oauth2User.getAttribute("sub"), listId, productQuantityList);
-        System.out.println("BULK ADDING2");
 
         eventManager.addEvent(new ListRefreshEvent());
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     // lastEventId is either sent by the EventSource object in a reconnect in the header, or in the first connection as a parameter (code the javascript)
@@ -112,4 +107,12 @@ public class CurrentListController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @ExceptionHandler
+    public final ProblemDetail handleProductNotFoundException(ProductNotFoundException ex, WebRequest request) throws Exception {
+        ProblemDetail pd = ProblemDetail.forStatus(404);
+        pd.setType(URI.create("product-not-found"));
+        pd.setTitle("Product not found"); // TODO: localize message
+        
+        return pd;
+    }
 }

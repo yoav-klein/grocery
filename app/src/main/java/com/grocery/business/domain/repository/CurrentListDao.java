@@ -1,5 +1,6 @@
 package com.grocery.business.domain.repository;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -8,19 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-
+import org.springframework.stereotype.Repository;
 
 import com.grocery.business.domain.model.CurrentListItem;
 import com.grocery.business.domain.model.ProductCategory;
 import com.grocery.business.domain.model.QuantityType;
+import com.grocery.business.domain.model.AddItemResult;
 import com.grocery.business.tenancy.model.User;
 
 @Repository
@@ -53,8 +53,6 @@ public class CurrentListDao {
             ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)
     """;
 
-    private static final String FIND_LAST_ITEM_ID = "SELECT MAX(ID) FROM tenant_%s.items";
-
     private static final String DELETE_ITEM_ID = "DELETE FROM tenant_%s.items WHERE id = ?";
 
     private final RowMapper<CurrentListItem> listItemRowMapper = (resultSet, rowNum) -> {
@@ -83,11 +81,11 @@ public class CurrentListDao {
         return this.jdbcTemplate.query(String.format(FIND_ALL_ITEMS, tenantId), listItemRowMapper);
     }
     
-    public int saveItem(String tenantId, String userId, CurrentListItem item) {
+    public AddItemResult saveItem(String tenantId, String userId, CurrentListItem item) {
         String statement = String.format(SAVE_ITEM, tenantId);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        this.jdbcTemplate.update(
+        int rowsAffected = this.jdbcTemplate.update(
             new PreparedStatementCreator() {
                 public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
                     PreparedStatement ps = conn.prepareStatement(statement, new String[] {"id", "added_at"});
@@ -102,8 +100,23 @@ public class CurrentListDao {
                 }
             }, keyHolder
         );
+        
+        int id = 0;
+        AddItemResult.Result result = AddItemResult.Result.CREATED;
+        
+        // when using ON DUPLICATE UPDATE, if new row is created, returns 1, and if updated an existing row, returns 2
+        if(1 == rowsAffected) { 
+            id = keyHolder.getKey().intValue();
+            result = AddItemResult.Result.CREATED; 
+        }
+        else if (2 == rowsAffected) { 
+            id = Integer.parseInt(keyHolder.getKeyList().get(0).get("GENERATED_KEY").toString());
+            result = AddItemResult.Result.UPDATED;
+        } 
+        // TODO - handle 0
 
-        return keyHolder.getKey().intValue();
+        item.setId(id);
+        return new AddItemResult(result, item);
     }
 
     public void bulkSave(String tenantId, List<CurrentListItem> items) {

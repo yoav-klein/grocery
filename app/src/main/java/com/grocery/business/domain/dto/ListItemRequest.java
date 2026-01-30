@@ -1,13 +1,19 @@
 package com.grocery.business.domain.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+
 import com.grocery.business.domain.model.ProductCategory;
 import com.grocery.business.domain.model.QuantityType;
 
 public class ListItemRequest {
-
+    @Size(min=2, max=20)
     private String name;
+
     private QuantityType quantityType;
     private ProductCategory category;
+
+    @Min(1)
     private int quantity;
 
     public ListItemRequest(String name, QuantityType quantityType, ProductCategory category, int quantity) {

@@ -334,13 +334,18 @@
                 <dialog id="add-item-dialog" class="dialog-layout dialog-form">
                     <header>
                         <h2>New Item</h2>
-                        <button class="close-modal-button top-corner-button">X</button>
+                        <button id="close-add-item-dialog" class="close-modal-button top-corner-button">X</button>
                     </header>
+                    <div id="error-banner" class="error-banner">
+                        <p>Oops, seems that something's wrong on our end</p>
+                    </div>
                     <form id="new-item-form">
                         <div class="body">
                             <div class="field">
                                 <label for="name">Name</label>
                                 <input name="name" class="long-input" type="text" id="name">
+
+                                <p class="field-validation-error"></p>
                             </div>
                             <div class="field">
                                 <label for="quantity">Quantity</label>
@@ -350,7 +355,8 @@
                                     <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
                                     <option th:remove="all">Unit</option>
                                 </select>
-                            
+
+                                <p class="field-validation-error"></p>
                             </div>
                             <div class="field">
                                 <label for="category" th:text="#{additem.label.category}">Category</label>
@@ -372,6 +378,6 @@
             </main>
         </div>
         <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
-        <script src="../../js/current-list.js" th:src="@{/js/current-list.js}"></script>
+        <script type="module" src="../../js/current-list.js" th:src="@{/js/current-list.js}"></script>
     </body>
 </html>

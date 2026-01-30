@@ -128,3 +128,17 @@ ul {
     
     }
 }
+
+.error-banner {
+    display: none;
+    background-color: #fee2e2;
+    border-left: 4px solid #ef4444;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    color: #991b1b;
+}
+
+.field-error {
+    border-color: red;
+}

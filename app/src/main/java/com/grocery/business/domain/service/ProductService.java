@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import com.grocery.business.domain.repository.ProductDAO;
 
 import com.grocery.business.domain.model.Product;
+import com.grocery.business.domain.dto.ProductRequest;
 import com.grocery.business.domain.model.ProductCategory;
-import com.grocery.business.domain.model.QuantityType;
+import com.grocery.business.domain.exception.ProductNotFoundException;
+import com.grocery.business.domain.exception.ProductAlreadyExistsException;
+
 
 @Service
 public class ProductService {
@@ -26,12 +29,12 @@ public class ProductService {
         return this.productRepository.getAllProducts(tenantId).stream().collect(Collectors.groupingBy(Product::getCategory));
     }
 
-    public void addProduct(String tenantId, Product product) {
+    public void addProduct(String tenantId, ProductRequest product) throws ProductAlreadyExistsException {
         this.productRepository.addProduct(tenantId, product);
     }
 
-    public Product getProductById(String tenantId, int productId) {
-        return this.productRepository.findProductById(tenantId, productId);
+    public Product getProductById(String tenantId, int productId) throws ProductNotFoundException {
+        return this.productRepository.findProductById(tenantId, productId).orElseThrow(() -> new ProductNotFoundException(productId));
     }
 
     public List<Product> getAllProducts(String tenantId) {

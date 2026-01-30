@@ -1,16 +1,28 @@
 package com.grocery.business.domain.repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.dao.EmptyResultDataAccessException;
 
+import com.grocery.business.domain.dto.ProductRequest;
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.model.ProductCategory;
 import com.grocery.business.domain.model.QuantityType;
+import com.grocery.business.domain.exception.ProductAlreadyExistsException;
 
 @Repository("productDao")
 public class ProductDAO {
@@ -46,13 +58,40 @@ public class ProductDAO {
         this.jdbcTemplate = new JdbcTemplate(dataSource); 
     }
 
-    public Product findProductById(String tenantId, int productId) {
-        return jdbcTemplate.queryForObject(String.format(FIND_PRODUCT_BY_ID, tenantId), rowMapper, productId);
+    public Optional<Product> findProductById(String tenantId, int productId) {
+        try {
+            return Optional.of(jdbcTemplate.queryForObject(String.format(FIND_PRODUCT_BY_ID, tenantId), rowMapper, productId));
+        } catch(EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+        
     }
 
-    public void addProduct(String tenantId, Product product) {
-        this.jdbcTemplate.update(String.format(ADD_PRODUCT, tenantId), product.getName(), product.getCategory().toString(), product.getQuantityType().toString());
+    public int addProduct(String tenantId, ProductRequest product) throws ProductAlreadyExistsException {
+        String statement = String.format(ADD_PRODUCT, tenantId);
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        try {
+            this.jdbcTemplate.update(
+                new PreparedStatementCreator() {
+                    public PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
+                        PreparedStatement ps = conn.prepareStatement(statement, new String[] {"id"});
+                        ps.setString(1, product.getName());
+                        ps.setString(2, product.getCategory().toString());
+                        ps.setString(3, product.getQuantityType().toString());
+                        
+                        return ps;
+                    }
+                }, keyHolder
+            );
+        } catch(org.springframework.dao.DuplicateKeyException e) {
+            throw new ProductAlreadyExistsException(product.getName(), product.getCategory());
+        }
         
+        int id = keyHolder.getKey().intValue();
+
+        return id;
     }
 
     public void deleteProduct(String tenantId, int id) {
