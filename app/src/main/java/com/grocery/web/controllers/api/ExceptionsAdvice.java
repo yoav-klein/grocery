@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,6 +45,7 @@ public class ExceptionsAdvice extends ResponseEntityExceptionHandler {
     /* A catch-all handler that returns a 500 status code */
     @ExceptionHandler
     public final ProblemDetail handleAnyException(Exception ex, WebRequest request) throws Exception {
+        System.out.println("handleAnyException");
         ProblemDetail pd = ProblemDetail.forStatus(500);
         pd.setType(URI.create("generic-error"));
         

@@ -21,9 +21,6 @@ public class AuthBean {
         Map<String, Object> attrs = oauth2User.getAttributes();
         String sub = (String) attrs.get("sub");
 
-        System.out.println("IS USER PART OF TENANT");
-        System.err.println(String.format("User: %s, Tenant: %s", sub, tenantId));
-
         return tenantUserService.isUserPartOfTenant(sub, tenantId);
     }
 

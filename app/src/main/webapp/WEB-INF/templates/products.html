@@ -37,15 +37,14 @@
                     <header>
                         <h2>New Product</h2>
                         <button class="close-modal-button top-corner-button">X</button>
+                        <div id="form-error-banner" class="error-banner"></div>
                     </header>
                     <form id="new-product-form" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" th:object="${product}" method="post">
                         <div class="body">
                             <div class="field">
                                 <label for="name">Name</label>
                                 <input th:field="*{name}" class="long-input" type="text" th:classappend="${#fields.hasErrors('name')}? 'field-error'" />
-                                <ul th:if="${#fields.hasErrors('name')}">
-                                    <li th:each="err : ${#fields.errors('name')}" th:text="${err}">Input is incorrect</li>
-                                </ul>
+                                <p class="field-validation-error"></p>
                             </div>
                             <div class="field">
                                 <label for="quantity">Quantity Type</label>
@@ -53,9 +52,7 @@
                                     <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
                                     <option th:remove="all">Unit</option>
                                 </select>
-                                <ul th:if="${#fields.hasErrors('quantityType')}">
-                                    <li th:each="err : ${#fields.errors('quantityType')}" th:text="${err}">Input is incorrect</li>
-                                </ul>
+                                <p class="field-validation-error"></p>
                             </div>
                             <div class="field">
                                 <label for="category" th:text="#{additem.label.category}">Category</label>
@@ -64,9 +61,7 @@
                                     <option th:remove="all">Fruits</option>
                                     <option th:remove="all">Dairy</option>
                                 </select>
-                                <ul th:if="${#fields.hasErrors('category')}">
-                                    <li th:each="err : ${#fields.errors('category')}" th:text="${err}">Input is incorrect</li>
-                                </ul>
+                                <p class="field-validation-error"></p>
                             </div>
                         </div>
                         <div class="footer">
@@ -79,6 +74,6 @@
             </main>
         </div>
         <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
-        <script src="../../js/products.js" th:src="@{/js/products.js}"></script>
+        <script type="module" src="../../js/products.js" th:src="@{/js/products.js}"></script>
     </body>
 </html>

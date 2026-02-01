@@ -78,3 +78,8 @@ When a user marks an item as checked, the item is not just deleted from the list
 
 ## Debates
 * Forms - full page reload or AJAX? full page reload is simpler - no JS.  On the other hand - handling modal forms with simple full page reload is messier. HTMX is an option.
+
+# Products API branch
+---
+## What I want
+* Move products POST and DELETE methods to a REST API

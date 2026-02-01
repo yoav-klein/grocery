@@ -6,4 +6,6 @@ class HttpError extends Error {
     }
 }
 
-export { HttpError };
+class UnhandledProblemTypeError extends Error {}
+
+export { HttpError, UnhandledProblemTypeError };
