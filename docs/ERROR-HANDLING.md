@@ -48,7 +48,7 @@ Our strategy for handling errors in form submitting is as follows: First, we sub
   I --> J[Try parse ProblemDetail]
   J --> K{Parsed JSON + has data.type?}
 
-  K -- No --> L[fallback]
+  K -- No --> L[statusCodeHandler]
   L --> Z
 
   K -- Yes --> M[problemDetailHandler]
