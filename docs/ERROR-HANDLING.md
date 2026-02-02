@@ -30,7 +30,6 @@ Let's map the failure modes that I need to react to in each page:
 Our strategy for handling errors in form submitting is as follows: First, we submit the forms using JavaScript `fetch`. Then, in the frontend, we follow the following pattern:
 
 ```mermaid
-flowchart TD
   flowchart TD
   A[fetch] --> B{response.ok?}
 
