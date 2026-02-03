@@ -7,6 +7,7 @@ Let's map the failure modes that I need to react to in each page:
 * New item form
     * Input validation - name length, positive quantity
     * Invalid values for enums (category/quantity type)
+    * Server error
 
 ## Products Page
 * New product form
