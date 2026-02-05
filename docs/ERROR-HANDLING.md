@@ -4,19 +4,19 @@
 Let's map the failure modes that I need to react to in each page:
 
 ## Current List Page
-* New item form
-    * Input validation - name length, positive quantity
-    * Invalid values for enums (category/quantity type)
-    * Server error
+* New item form (V)
+    * Input validation - name length, positive quantity (V)
+    * Invalid values for enums (category/quantity type) (V)
+    * Server error (V)
 
 ## Products Page
-* New product form
-    * Input validation - name length
-    * Duplicate product
-    * Invalid values for enums
+* New product form (V)
+    * Input validation - name length (V)
+    * Duplicate product (V)
+    * Invalid values for enums (V)
 
 ## Fixed List Page
-* Negative value for product
+* Negative or 0 value for product (V)
 * Product not exists (deleted in other session)
 * List removed in other session
 

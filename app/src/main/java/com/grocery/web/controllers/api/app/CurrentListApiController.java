@@ -28,15 +28,15 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.grocery.business.domain.dto.ListItemRequest;
-import com.grocery.business.domain.dto.ProductQuantity;
+import com.grocery.business.domain.dto.BulkAddItemRequest;
 import com.grocery.business.domain.events.AddItemEvent;
 import com.grocery.business.domain.events.DeleteItemEvent;
 import com.grocery.business.domain.events.EventManager;
 import com.grocery.business.domain.events.ListRefreshEvent;
+import com.grocery.business.domain.exception.ProductNotFoundException;
 import com.grocery.business.domain.model.AddItemResult;
 import com.grocery.business.domain.service.CurrentListService;
 import com.grocery.business.tenancy.exception.UserNotFoundException;
-import com.grocery.business.domain.exception.ProductNotFoundException;
 
 @Controller
 @RequestMapping("/tenant/{tenantId}/currentList")
@@ -64,10 +64,10 @@ public class CurrentListApiController {
     public ResponseEntity batchAdd(@PathVariable("tenantId") String tenantId, 
             @AuthenticationPrincipal Object user, 
             @PathVariable("listId") String listId, 
-            @RequestBody @Validated ArrayList<ProductQuantity> productQuantityList) throws UserNotFoundException, ProductNotFoundException {
+            @RequestBody @Validated BulkAddItemRequest bulkAddItemRequest) throws UserNotFoundException, ProductNotFoundException {
         OAuth2User oauth2User = (OAuth2User)user;
 
-        currentListService.bulkAdd(tenantId, oauth2User.getAttribute("sub"), listId, productQuantityList);
+        currentListService.bulkAdd(tenantId, oauth2User.getAttribute("sub"), listId, bulkAddItemRequest);
 
         eventManager.addEvent(new ListRefreshEvent());
 
