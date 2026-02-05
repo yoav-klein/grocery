@@ -14,11 +14,12 @@ Let's map the failure modes that I need to react to in each page:
     * Input validation - name length (V)
     * Duplicate product (V)
     * Invalid values for enums (V)
+    * Duplicate removes (V)
 
 ## Fixed List Page
 * Negative or 0 value for product (V)
-* Product not exists (deleted in other session)
-* List removed in other session
+* Product not exists (deleted in other session) (V)
+* List removed in other session (V)
 
 ## New List Page
 * Input validation - name length, empty list

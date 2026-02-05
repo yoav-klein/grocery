@@ -51,7 +51,7 @@ When a user marks an item as checked, the item is not just deleted from the list
 * Products Page
     * When adding a product, update the UI using the returned Product ID from the database.
 * After a long time with no activity, and then trying to do something, we get - `class org.springframework.security.authentication.AnonymousAuthenticationToken cannot be cast to class org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken`.
-
+* Fixed List - disable send button if list is empty
 
 ## Improvements
 ---

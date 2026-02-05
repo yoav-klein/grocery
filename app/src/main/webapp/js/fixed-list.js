@@ -36,8 +36,6 @@ formEl.addEventListener('submit', (e) => {
         if(parseInt(curr.quantity) > 0) {
             res.push(curr);
         }
-       
-       res.push(curr); // AND REMOVE THIS
     });
 
     const dto = {
