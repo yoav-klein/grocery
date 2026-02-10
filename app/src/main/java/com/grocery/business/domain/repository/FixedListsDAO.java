@@ -2,10 +2,14 @@ package com.grocery.business.domain.repository;
 
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,6 +28,7 @@ import com.grocery.business.domain.exception.FixedListAlreadyExistsException;
 
 @Repository
 public class FixedListsDAO {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     
     private final static String FIND_ALL_FIXED_LISTS = "SELECT * FROM tenant_%s.lists";
     private final static String FIND_FIXED_LIST = "SELECT * FROM tenant_%s.lists WHERE id = ?";
@@ -50,15 +55,15 @@ public class FixedListsDAO {
         return jdbcTemplate.query(String.format(FIND_ALL_FIXED_LISTS, tenantId), fixedListMapper);
     }
 
-    public FixedList getFixedList(String tenantId, int listId) throws FixedListNotFoundException {
+    public Optional<FixedList> findFixedList(String tenantId, int listId) throws FixedListNotFoundException {
         try {
-            return jdbcTemplate.queryForObject(String.format(FIND_FIXED_LIST, tenantId), fixedListMapper, listId);
+            return Optional.of(jdbcTemplate.queryForObject(String.format(FIND_FIXED_LIST, tenantId), fixedListMapper, listId));
         } catch(EmptyResultDataAccessException e) {
-            throw new FixedListNotFoundException(listId);
+            return Optional.empty();
         } 
     }
 
-    public int addFixedList(String tenantId, String name) throws FixedListAlreadyExistsException {
+    public int insertFixedList(String tenantId, String name) throws FixedListAlreadyExistsException {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         
         String statement = String.format(ADD_FIXED_LIST, tenantId);
@@ -73,6 +78,7 @@ public class FixedListsDAO {
                 }
             }, keyHolder);
         } catch(DuplicateKeyException e) {
+            logger.error("fixed list with name: {} already exists", name);
             throw new FixedListAlreadyExistsException();
         } 
 
@@ -84,9 +90,8 @@ public class FixedListsDAO {
     }
 
     public void updateListName(String tenantId, int listId, String listName) throws FixedListNotFoundException {
-        try {
-            this.jdbcTemplate.update(String.format(UPDATE_LIST_NAME, tenantId), listName, listId);
-        } catch(EmptyResultDataAccessException e) {
+        int rowsAffected = this.jdbcTemplate.update(String.format(UPDATE_LIST_NAME, tenantId), listName, listId);
+        if(0 == rowsAffected) {
             throw new FixedListNotFoundException(listId);
         }
     }

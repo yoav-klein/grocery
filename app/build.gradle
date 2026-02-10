@@ -40,6 +40,10 @@ dependencies {
 
     // this is to use model().attribute() method
     testImplementation("org.hamcrest:hamcrest:3.0")
+
+    // logging
+    implementation("ch.qos.logback:logback-classic:1.5.27")
+    implementation("org.slf4j:slf4j-api:2.0.17")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

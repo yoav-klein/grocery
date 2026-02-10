@@ -25,15 +25,15 @@ public class FixedListsService {
     }
 
     public FixedList getFixedList(String tenantId, int listId) throws FixedListNotFoundException {
-        FixedList list = fixedListDao.getFixedList(tenantId, listId);
+        FixedList list = fixedListDao.findFixedList(tenantId, listId).orElseThrow(() -> { return new FixedListNotFoundException(listId); });
         list.setProducts(listProductDao.getAllProductsForList(tenantId, listId));
 
         return list;
     }
     
     // TRANSACTIONAL
-    public int createFixedList(String tenantId, String name, List<Integer> productIds) throws FixedListAlreadyExistsException {
-        int listId = this.fixedListDao.addFixedList(tenantId, name);
+    public int addFixedList(String tenantId, String name, List<Integer> productIds) throws FixedListAlreadyExistsException {
+        int listId = this.fixedListDao.insertFixedList(tenantId, name);
         listProductDao.batchAddProductsToList(tenantId, listId, productIds);
 
         return listId;
@@ -41,6 +41,7 @@ public class FixedListsService {
 
     public void editFixedList(String tenantId, int listId, String listName, List<Integer> addProducts, List<Integer> removeProducts) throws FixedListNotFoundException {
         this.fixedListDao.updateListName(tenantId, listId, listName);
+        System.out.println("Updated list name!");
         this.listProductDao.editProducts(tenantId, listId, addProducts, removeProducts);
     }
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.grocery.business.domain.dto.FixedListRequest;
 import com.grocery.business.domain.dto.FixedListEditRequest;
@@ -29,7 +30,7 @@ public class FixedListsApiController {
     @PostMapping("/addList")
     public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @Validated @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException {
         
-        int listId = fixedListsService.createFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
+        int listId = fixedListsService.addFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
 
         return new ResponseEntity<Integer>(Integer.valueOf(listId), HttpStatus.OK);
     }
@@ -44,6 +45,16 @@ public class FixedListsApiController {
             fixedListEditRequest.getRemoveProducts());
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity handleDuplicateFixedList(FixedListAlreadyExistsException e) {
+        return new ResponseEntity(HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity handleNotFound(FixedListNotFoundException e) {
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
     
 }

@@ -53,7 +53,6 @@ function saveList() {
     const data = {
         listName: listName,
         addProducts: addProductsList,
-        addProducts: addProductsList,
         removeProducts: removeProductsList
     };
 
