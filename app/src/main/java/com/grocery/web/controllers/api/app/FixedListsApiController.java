@@ -17,6 +17,7 @@ import com.grocery.business.domain.dto.FixedListRequest;
 import com.grocery.business.domain.dto.FixedListEditRequest;
 import com.grocery.business.domain.exception.FixedListAlreadyExistsException;
 import com.grocery.business.domain.exception.FixedListNotFoundException;
+import com.grocery.business.domain.exception.ProductNotFoundException;
 import com.grocery.business.domain.service.FixedListsService;
 
 @Controller
@@ -28,7 +29,7 @@ public class FixedListsApiController {
     
     // new list
     @PostMapping("/addList")
-    public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @Validated @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException {
+    public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @Validated @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException, ProductNotFoundException {
         
         int listId = fixedListsService.addFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
 
@@ -54,6 +55,11 @@ public class FixedListsApiController {
 
     @ExceptionHandler
     public ResponseEntity handleNotFound(FixedListNotFoundException e) {
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity handleNotFound(ProductNotFoundException e) {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
     

@@ -1,6 +1,8 @@
 
 main {
     padding: 0;
+    --num-steps: 3;
+    --current-step: 0;
 }
 
 .step-wrapper {
@@ -118,8 +120,7 @@ main {
 @media(max-width: 768px) {
 
     main {
-        --num-steps: 3;
-        --current-step: 0;
+        
         overflow-x: hidden;
 
         display: flex;

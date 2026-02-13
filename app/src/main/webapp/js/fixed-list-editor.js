@@ -83,6 +83,7 @@ function mobileStepper(saveListCallback) {
     const render = () => mainEl.style.setProperty('--current-step', currentStep);
             
     primaryButtonEl.addEventListener('click', () => {
+        console.log("CURRENT STEP: " + currentStep);
         
         if(currentStep < numSteps - 1) {
             ++currentStep;

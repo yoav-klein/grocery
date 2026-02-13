@@ -1,12 +1,15 @@
 package com.grocery.business.domain.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.grocery.business.domain.exception.FixedListAlreadyExistsException;
 import com.grocery.business.domain.exception.FixedListNotFoundException;
+import com.grocery.business.domain.exception.ProductNotFoundException;
 import com.grocery.business.domain.model.FixedList;
 import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.repository.FixedListsDAO;
@@ -20,6 +23,9 @@ public class FixedListsService {
     @Autowired
     FixedListsDAO fixedListDao;
 
+    @Autowired
+    ProductService productService;
+
     public List<FixedList> getAllFixedLists(String tenantId) {
         return fixedListDao.getAllFixedLists(tenantId);
     }
@@ -31,9 +37,23 @@ public class FixedListsService {
         return list;
     }
     
-    // TRANSACTIONAL
-    public int addFixedList(String tenantId, String name, List<Integer> productIds) throws FixedListAlreadyExistsException {
+    @Transactional
+    public int addFixedList(String tenantId, String name, List<Integer> productIds) throws FixedListAlreadyExistsException, ProductNotFoundException {
         int listId = this.fixedListDao.insertFixedList(tenantId, name);
+
+        // check that all product ids are actually there to handle a situation where someone deleted some in the meantime
+        List<Product> allProducts = this.productService.getAllProducts(tenantId);
+        List<Integer> allProductIds = allProducts.stream().map(Product::getProductId).collect(Collectors.toList());
+        
+        System.out.println("CHECKING");
+        for(int i = 0; i < productIds.size(); ++i) {
+            System.out.println(productIds.get(i)); 
+            if(!allProductIds.contains(productIds.get(i))) {
+                System.out.println("FOUND!!");
+                throw new ProductNotFoundException(productIds.get(i));
+            }
+        }
+
         listProductDao.batchAddProductsToList(tenantId, listId, productIds);
 
         return listId;

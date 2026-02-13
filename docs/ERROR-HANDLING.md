@@ -23,7 +23,17 @@ Let's map the failure modes that I need to react to in each page:
 
 ## New List Page
 * Input validation - name length, empty list
+* Product not exists
 * Duplicates
+
+## Where I am now
+Working on the error handling of New fixed list/edit fixed list.
+Specifically:
+* If a user adds products that were deleted by another user
+    * This can happen both in the new list and edit list
+* If a user edits a list that doesn't exist because another user deleted it
+
+So the backend is taken care of, now we need to make sure to send a ProblemDetail message and display a nice error message in the frontend.
 
 <br><br>
 ---
