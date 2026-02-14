@@ -62,7 +62,37 @@ function saveList() {
         hasUnsavedChanges = false;
         commonElements.confirmationDialogEl.showModal();
     }).catch(e => {
-        if(e instanceof HttpError) {
+        console.log("error");
+        if(!e instanceof HttpError) {
+            handleGenericError()
+            return;
+        }
+
+        console.log("HTTP error");
+        const response = e.response;
+
+        e.response.json()
+            .then(data => {
+                if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
+                handleProblemDetail(data);
+            })
+            .catch(err => { statusCodeHandler(response); });
+    });
+}
+
+function handleProblemDetail(data) {
+    console.log("Handling problem detail: ")
+    console.log(data);
+}
+
+function statusCodeHandler(response) {
+    console.log("Handling statud code");
+}
+
+/* 
+            }
+            console.log("http error");
+            e.response.json().then(data => console.log(data)).catch((err) => console.log(err));
             if(e.response.status == 409) {
                 commonElements.errorMessageTitleEl.innerText = `List with name already exists!`;
             } else if(e.response.status == 400) {
@@ -83,7 +113,7 @@ function saveList() {
         }
         commonElements.errorDialogEl.showModal();
     });
-}
+} */
 
 
 initFixedListEditor(saveList, respondToChange, itemsCheckboxHandler, hasUnsavedChangesFunc);
