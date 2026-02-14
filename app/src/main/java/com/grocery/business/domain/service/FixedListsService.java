@@ -36,32 +36,32 @@ public class FixedListsService {
 
         return list;
     }
-    
-    @Transactional
-    public int addFixedList(String tenantId, String name, List<Integer> productIds) throws FixedListAlreadyExistsException, ProductNotFoundException {
-        int listId = this.fixedListDao.insertFixedList(tenantId, name);
 
+    private void checkProductsExists(String tenantId, List<Integer> productIds) {
         // check that all product ids are actually there to handle a situation where someone deleted some in the meantime
         List<Product> allProducts = this.productService.getAllProducts(tenantId);
         List<Integer> allProductIds = allProducts.stream().map(Product::getProductId).collect(Collectors.toList());
         
-        System.out.println("CHECKING");
         for(int i = 0; i < productIds.size(); ++i) {
-            System.out.println(productIds.get(i)); 
             if(!allProductIds.contains(productIds.get(i))) {
-                System.out.println("FOUND!!");
                 throw new ProductNotFoundException(productIds.get(i));
             }
         }
-
+    }
+    
+    @Transactional
+    public int addFixedList(String tenantId, String name, List<Integer> productIds) throws FixedListAlreadyExistsException, ProductNotFoundException {
+        checkProductsExists(tenantId, productIds);
+        int listId = this.fixedListDao.insertFixedList(tenantId, name);
         listProductDao.batchAddProductsToList(tenantId, listId, productIds);
 
         return listId;
     }
 
-    public void editFixedList(String tenantId, int listId, String listName, List<Integer> addProducts, List<Integer> removeProducts) throws FixedListNotFoundException {
+    @Transactional
+    public void editFixedList(String tenantId, int listId, String listName, List<Integer> addProducts, List<Integer> removeProducts) throws FixedListNotFoundException, ProductNotFoundException {
+        checkProductsExists(tenantId, addProducts);
         this.fixedListDao.updateListName(tenantId, listId, listName);
-        System.out.println("Updated list name!");
         this.listProductDao.editProducts(tenantId, listId, addProducts, removeProducts);
     }
 

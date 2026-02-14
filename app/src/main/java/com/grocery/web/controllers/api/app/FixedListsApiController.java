@@ -58,13 +58,16 @@ public class FixedListsApiController {
     }
 
     @ExceptionHandler
-    public ResponseEntity handleNotFound(FixedListNotFoundException e) {
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    public final ProblemDetail handleFixedListNotFound(FixedListNotFoundException e) {
+        ProblemDetail pd = ProblemDetail.forStatus(404);
+        pd.setType(URI.create("fixed-list-not-found"));
+        pd.setTitle("Fixed list not found"); // TODO: localize message
+        
+        return pd;
     }
 
     @ExceptionHandler
     public final ProblemDetail handleProductNotFoundException(ProductNotFoundException ex) throws Exception {
-        System.out.println("RETURNING Problem Detail");
         ProblemDetail pd = ProblemDetail.forStatus(404);
         pd.setType(URI.create("product-not-found"));
         pd.setTitle("Product not found"); // TODO: localize message

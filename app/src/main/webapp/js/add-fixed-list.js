@@ -81,39 +81,18 @@ function saveList() {
 }
 
 function handleProblemDetail(data) {
-    console.log("Handling problem detail: ")
-    console.log(data);
+    if(problemDetail.type === "product-not-found") handleProductNotFound();
+    
+    else throw new UnhandledProblemTypeError("don't know how to handle this error");
+}
+
+function handleProductNotFound() {
+    console.log("Product not found!");
 }
 
 function statusCodeHandler(response) {
     console.log("Handling statud code");
 }
-
-/* 
-            }
-            console.log("http error");
-            e.response.json().then(data => console.log(data)).catch((err) => console.log(err));
-            if(e.response.status == 409) {
-                commonElements.errorMessageTitleEl.innerText = `List with name already exists!`;
-            } else if(e.response.status == 400) {
-                e.response.json().then(data => {
-                    commonElements.errorMessageTitleEl.innerText = data.title;
-                    commonElements.errorMessageDetailsEl.replaceChildren();
-                    data.errors.forEach(err =>  {
-                        const listItem = document.createElement('li');
-                        listItem.innerText = `${err.reason}`;
-                        commonElements.errorMessageDetailsEl.appendChild(listItem);
-                    })
-                });
-            } else {
-                commonElements.errorMessageTitleEl.innerText = 'Something went wrong on our side...';
-            }
-        } else {
-            commonElements.errorMessageTitleEl.innerText = 'Something went wrong on our side...';
-        }
-        commonElements.errorDialogEl.showModal();
-    });
-} */
 
 
 initFixedListEditor(saveList, respondToChange, itemsCheckboxHandler, hasUnsavedChangesFunc);
