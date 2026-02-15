@@ -20,7 +20,7 @@ function hasUnsavedChangesFunc() { return hasUnsavedChanges; }
 function respondToChange() {
     if(selectedProducts.length === 0 && commonElements.listNameInputEl.value.length <= 1) {
         hasUnsavedChanges = false;
-        commonElements.saveButtonEl.disabled = true;
+        // commonElements.saveButtonEl.disabled = true;
     }
     else {
         hasUnsavedChanges = true;
@@ -29,7 +29,7 @@ function respondToChange() {
             return;
         }
 
-        commonElements.saveButtonEl.disabled = true;
+        // commonElements.saveButtonEl.disabled = true;
     }
 }
 
@@ -81,9 +81,14 @@ function saveList() {
 }
 
 function handleProblemDetail(data) {
-    if(problemDetail.type === "product-not-found") handleProductNotFound();
+    if(data.type === "product-not-found") handleProductNotFound();
+    if(data.type === "invalid-arguments") handleInvalidArguments(data);
     
     else throw new UnhandledProblemTypeError("don't know how to handle this error");
+}
+
+function handleInvalidArguments(data) {
+    console.log("Invalid arguments"); // TODO parse errors field
 }
 
 function handleProductNotFound() {
@@ -91,7 +96,7 @@ function handleProductNotFound() {
 }
 
 function statusCodeHandler(response) {
-    console.log("Handling statud code");
+    console.log("Handling status code");
 }
 
 

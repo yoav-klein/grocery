@@ -97,14 +97,25 @@ function saveList() {
 }
 
 function handleProblemDetail(data) {
-    if(problemDetail.type === "product-not-found") handleProductNotFound();
+    if(data.type === "product-not-found") handleProductNotFound();
+    if(data.type === "fixed-list-not-found") handleFixedListNotFound();
+    if(data.type === "invalid-arguments") handleInvalidArguments();
     
     else throw new UnhandledProblemTypeError("don't know how to handle this error");
+}
+
+function handleInvalidArguments(data) {
+    console.log("Invalid arguments"); // TODO parse errors field
 }
 
 function handleProductNotFound() {
     console.log("Product not found!");
 }
+
+function handleFixedListNotFound() {
+    console.log("Fixed list not found!");
+}
+
     
 function statusCodeHandler(response) {
     console.log("Handling statud code");

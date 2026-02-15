@@ -37,24 +37,24 @@ public class FixedListsApiController {
         
         int listId = fixedListsService.addFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
 
-        return new ResponseEntity<Integer>(Integer.valueOf(listId), HttpStatus.OK);
+        return new ResponseEntity<>(listId, HttpStatus.OK);
     }
 
     // patch list
     @PutMapping("/{listId}")
-    public ResponseEntity editList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId, @RequestBody FixedListEditRequest fixedListEditRequest) throws FixedListNotFoundException {
+    public ResponseEntity<Object> editList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId, @Validated @RequestBody FixedListEditRequest fixedListEditRequest) throws FixedListNotFoundException {
         fixedListsService.editFixedList(tenantId,
             listId,
             fixedListEditRequest.getListName(),
             fixedListEditRequest.getAddProducts(), 
             fixedListEditRequest.getRemoveProducts());
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ExceptionHandler
-    public ResponseEntity handleDuplicateFixedList(FixedListAlreadyExistsException e) {
-        return new ResponseEntity(HttpStatus.CONFLICT);
+    public ResponseEntity<Object> handleDuplicateFixedList(FixedListAlreadyExistsException e) {
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler

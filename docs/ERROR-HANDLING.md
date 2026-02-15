@@ -23,8 +23,10 @@ Let's map the failure modes that I need to react to in each page:
 
 ## New List Page
 * Input validation - name length, empty list
-* Product not exists
-* Duplicates
+    * In Add list: (V - backend)
+    * In Edit list: (V - backend)
+* Product not exists (V - backend only)
+* Duplicates (V - backend only)
 
 ## Where I am now
 Working on the error handling of New fixed list/edit fixed list.
@@ -34,6 +36,9 @@ Specifically:
 * If a user edits a list that doesn't exist because another user deleted it
 
 So the backend is taken care of, now we need to make sure to send a ProblemDetail message and display a nice error message in the frontend.
+
+### Leftovers
+* In edit fixed lists: if a user removes all products from a list, we may want to throw an error.
 
 <br><br>
 ---
