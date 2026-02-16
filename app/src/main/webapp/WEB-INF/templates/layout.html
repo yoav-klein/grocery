@@ -6,12 +6,16 @@
     
     <!-- common header and stylesheets -->
     <title>Grocery</title>
-    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link th:remove="all" rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/layout.css" th:href="@{/css/layout.css}">
 
+    
     <!-- per-page links -->
-    <th:block th:replace="${links}" />
+    <!--/*/ <th:block th:replace="${links}" /> /*/-->
     <!-- per-page meta -->
-    <th:block th:replace="${meta}" />
+    <!--/*/ <th:block th:replace="${meta}" /> /*/-->
+
+    <!-- To understand the above few lines, see https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#thymeleaf-prototype-only-comment-blocks -->
 
     <meta name="_csrf" th:content="${_csrf.token}"/>
 	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
