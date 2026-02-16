@@ -32,7 +32,7 @@ public class InvitationsController {
     public String cancelInvitation(@PathVariable("id") String invitationId) throws InvitationNotFoundException {
         String tenantId = invitationService.getInvitationById(invitationId).getTenant().getId();
         invitationService.declineInvitation(invitationId);
-        return "redirect:/tenant/" + tenantId;
+        return "redirect:/tenant/" + tenantId + "/management";
     }
 
 }

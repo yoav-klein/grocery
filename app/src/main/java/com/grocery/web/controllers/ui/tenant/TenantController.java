@@ -49,7 +49,7 @@ public class TenantController {
     }
 
     @GetMapping("/management")
-    public String tenantManagement(Model model, @PathVariable("tenantId")String tenantId) {
+    public String tenantManagement(Model model, @PathVariable("tenantId") String tenantId) {
         
         model.addAttribute("memberships", tenantUserService.getAllUsersForTenant(tenantId));
         model.addAttribute("invitations", tenantService.getAllInvitationsForTenant(tenantId));
@@ -71,7 +71,7 @@ public class TenantController {
         
         ra.addFlashAttribute("invitationId", invitation.getId()); // not sure if I need this...
 
-        return String.format("redirect:/tenant/%s", tenantId);
+        return String.format("redirect:/tenant/%s/management", tenantId);
     }
 
     // remove user
@@ -79,14 +79,14 @@ public class TenantController {
     public String removeMember(Model model, @PathVariable("tenantId") String tenantId, @PathVariable("userId") String userId) throws UserNotFoundException {
         tenantUserService.removeUserFromTenant(tenantId, userId);
 
-        return String.format("redirect:/tenant/%s", tenantId);
+        return String.format("redirect:/tenant/%s/management", tenantId);
     }
 
     @PostMapping("/members/{userId}/promote")
     public String promoteMember(Model model, @PathVariable("tenantId") String tenantId, @PathVariable("userId") String userId) throws UserNotFoundException {
         tenantUserService.promoteToAdmin(tenantId, userId);
 
-        return String.format("redirect:/tenant/%s", tenantId);
+        return String.format("redirect:/tenant/%s/management", tenantId);
     }
 
     // leave tenant

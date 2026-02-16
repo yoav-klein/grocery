@@ -63,7 +63,7 @@ submitButton.addEventListener('click', (event) => {
             .catch(e => { 
                 statusCodeHandler(response);
             });
-    })
+    });
 });
 
 

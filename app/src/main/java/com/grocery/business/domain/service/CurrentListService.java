@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.grocery.business.domain.dto.ListItemRequest;
 import com.grocery.business.domain.dto.ProductQuantity;
+import com.grocery.business.domain.dto.BulkAddItemRequest;
 import com.grocery.business.domain.model.CurrentListItem;
 import com.grocery.business.domain.model.AddItemResult;
 import com.grocery.business.domain.model.Product;
@@ -56,13 +57,13 @@ public class CurrentListService {
         return result;
     }
 
-    public void bulkAdd(String tenantId, String userId, String listId, List<ProductQuantity> products) throws UserNotFoundException, ProductNotFoundException {
+    public void bulkAdd(String tenantId, String userId, String listId, BulkAddItemRequest request) throws UserNotFoundException, ProductNotFoundException {
         List<CurrentListItem> itemsToAdd = new ArrayList<>();
         LocalDateTime now = LocalDateTime.now();
         User addedBy = userService.getUserById(userId);
         
-        for(int i = 0; i < products.size(); ++i) {
-            ProductQuantity pq = products.get(i);
+        for(int i = 0; i < request.getProductQuantityList().size(); ++i) {
+            ProductQuantity pq = request.getProductQuantityList().get(i);
             Product product = productService.getProductById(tenantId, pq.getId());
             CurrentListItem item = new CurrentListItem();
             item.setName(product.getName());

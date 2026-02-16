@@ -55,21 +55,49 @@ newItemFormEl.addEventListener("submit", (event) => {
         headers: headers,
         body: body
     });
-    responsePromise.then(resp => { 
+    responsePromise
+    .then(resp => {
         if(!resp.ok) throw new HttpError(resp);
-        else { 
-            newItemFormEl.reset();
-            addItemDialogEl.close(); 
+
+        addProductForm.reset();
+        addProductDialogEl.close(); 
+    })
+    .catch(e => {
+        console.log("error");
+        if(!e instanceof HttpError) {
+            handleGenericError()
+            return;
         }
-    }).catch(e => {
-        if(e instanceof HttpError) {
-            e.response.json().then(data => {
-                if(data.type === "invalid-arguments") handleInvalidArguments(data);
-                else if(data.type === "generic-error") handleGenericError(data);
+
+        console.log("HTTP error");
+        const response = e.response;
+
+        response.json()
+            .then(data => {
+                console.log("JSON: " + data);
+                if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
+
+                problemDetailHandler(data)
             })
-        }
+            .catch(e => { 
+                statusCodeHandler(response);
+            });
     });
 });
+
+
+function problemDetailHandler(problemDetail) {
+    console.log("problemDetail " + problemDetail.type);
+    if(problemDetail.type === "invalid-arguments") handleInvalidArguments(problemDetail);
+    else if(problemDetail.type === "generic-error") handleGenericError("Something is wrong, try again");
+    else throw new UnhandledProblemTypeError("don't know how to handle this error");
+}
+
+function statusCodeHandler(response) {
+    console.log("statusCodeHandler " + response);
+    if(response.status == 409) handleConflict(response);
+    if(response.status == 400) handleGenericError("Something in your request is wrong");
+}
 
 function handleInvalidArguments(data) {
     data.errors.forEach(error => {
@@ -81,7 +109,12 @@ function handleInvalidArguments(data) {
     });
 }
 
-function handleGenericError(data) {
+
+function handleGenericError(message=null) {
+    console.log("generic error");
+
+    message = message ? message : 'Something went wrong, try again';
+    errorBannerEl.innerText = message;
     errorBannerEl.style.display = 'block';
 }
 

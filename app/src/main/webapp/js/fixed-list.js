@@ -32,15 +32,20 @@ formEl.addEventListener('submit', (e) => {
         const curr = {};
         curr.id = element.id.replace('product-', '');
         curr.quantity = element.value;
+        
         if(parseInt(curr.quantity) > 0) {
             res.push(curr);
         }
     });
 
+    const dto = {
+        productQuantityList: res
+    };
+
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append(csrfHeaderName, csrfToken);
-    const body = JSON.stringify(res);
+    const body = JSON.stringify(dto);
     const responsePromise = fetch(bulkUrl, {
         method: "POST",
         headers: headers,
@@ -55,6 +60,9 @@ formEl.addEventListener('submit', (e) => {
     }).catch(e => {
         e.response.json().then(data => {
             if(data.type === "product-not-found") {
+                errorBannerMessageEl.innerText = data.title;
+            }
+            if(data.type === "invalid-arguments") {
                 errorBannerMessageEl.innerText = data.title;
             }
         });

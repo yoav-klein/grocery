@@ -3,6 +3,8 @@ package com.grocery.security;
 import java.io.IOException;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -10,8 +12,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.grocery.business.tenancy.service.UserService;
 import com.grocery.business.tenancy.model.User;
+import com.grocery.business.tenancy.service.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +21,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class AutoRegistrationSuccessHandler implements AuthenticationSuccessHandler {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     UserService userService;
@@ -37,12 +41,11 @@ public class AutoRegistrationSuccessHandler implements AuthenticationSuccessHand
 
         // check if the user already exists in the database
         if(userService.checkIfUserExists(sub)) {
-            System.out.println("AutoRegistrationSuccessHandler:: user exists!");
             response.sendRedirect("/app");
             return;
         }
 
-        System.out.println("Registering user");
+        logger.info("Registering new user: {} - {}", name, email);
         
         // if not, add them to the database
         User user = new User(sub, name, email, pictureUrl);

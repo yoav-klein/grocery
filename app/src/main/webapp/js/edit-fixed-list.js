@@ -53,7 +53,6 @@ function saveList() {
     const data = {
         listName: listName,
         addProducts: addProductsList,
-        addProducts: addProductsList,
         removeProducts: removeProductsList
     };
 
@@ -79,17 +78,47 @@ function saveList() {
         hasUnsavedChanges = false;
         commonElements.confirmationDialogEl.showModal();
     }).catch(e => {
-        if(e instanceof HttpError) {
-            if(e.response.status == 409) {
-                commonElements.errorMessageEl.innerText = `List with name already exists!`;
-            } else {
-                commonElements.errorMessageEl.innerText = 'Something went wrong on our side...';
-            }
-        } else {
-            commonElements.errorMessageEl.innerText = 'Something went wrong on our side...';
+        console.log("error");
+        if(!e instanceof HttpError) {
+            handleGenericError()
+            return;
         }
-        commonElements.errorDialogEl.showModal();
+
+        console.log("HTTP error");
+        const response = e.response;
+
+        e.response.json()
+            .then(data => {
+                if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
+                handleProblemDetail(data);
+            })
+            .catch(err => { statusCodeHandler(response); });
     });
+}
+
+function handleProblemDetail(data) {
+    if(data.type === "product-not-found") handleProductNotFound();
+    if(data.type === "fixed-list-not-found") handleFixedListNotFound();
+    if(data.type === "invalid-arguments") handleInvalidArguments();
+    
+    else throw new UnhandledProblemTypeError("don't know how to handle this error");
+}
+
+function handleInvalidArguments(data) {
+    console.log("Invalid arguments"); // TODO parse errors field
+}
+
+function handleProductNotFound() {
+    console.log("Product not found!");
+}
+
+function handleFixedListNotFound() {
+    console.log("Fixed list not found!");
+}
+
+    
+function statusCodeHandler(response) {
+    console.log("Handling statud code");
 }
 
 initFixedListEditor(saveList, respondToChange, itemsCheckboxHandler, hasUnsavedChangesFunc);

@@ -20,7 +20,7 @@ function hasUnsavedChangesFunc() { return hasUnsavedChanges; }
 function respondToChange() {
     if(selectedProducts.length === 0 && commonElements.listNameInputEl.value.length <= 1) {
         hasUnsavedChanges = false;
-        commonElements.saveButtonEl.disabled = true;
+        // commonElements.saveButtonEl.disabled = true;
     }
     else {
         hasUnsavedChanges = true;
@@ -29,7 +29,7 @@ function respondToChange() {
             return;
         }
 
-        commonElements.saveButtonEl.disabled = true;
+        // commonElements.saveButtonEl.disabled = true;
     }
 }
 
@@ -62,27 +62,41 @@ function saveList() {
         hasUnsavedChanges = false;
         commonElements.confirmationDialogEl.showModal();
     }).catch(e => {
-        if(e instanceof HttpError) {
-            if(e.response.status == 409) {
-                commonElements.errorMessageTitleEl.innerText = `List with name already exists!`;
-            } else if(e.response.status == 400) {
-                e.response.json().then(data => {
-                    commonElements.errorMessageTitleEl.innerText = data.title;
-                    commonElements.errorMessageDetailsEl.replaceChildren();
-                    data.errors.forEach(err =>  {
-                        const listItem = document.createElement('li');
-                        listItem.innerText = `${err.reason}`;
-                        commonElements.errorMessageDetailsEl.appendChild(listItem);
-                    })
-                });
-            } else {
-                commonElements.errorMessageTitleEl.innerText = 'Something went wrong on our side...';
-            }
-        } else {
-            commonElements.errorMessageTitleEl.innerText = 'Something went wrong on our side...';
+        console.log("error");
+        if(!e instanceof HttpError) {
+            handleGenericError()
+            return;
         }
-        commonElements.errorDialogEl.showModal();
+
+        console.log("HTTP error");
+        const response = e.response;
+
+        e.response.json()
+            .then(data => {
+                if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
+                handleProblemDetail(data);
+            })
+            .catch(err => { statusCodeHandler(response); });
     });
+}
+
+function handleProblemDetail(data) {
+    if(data.type === "product-not-found") handleProductNotFound();
+    if(data.type === "invalid-arguments") handleInvalidArguments(data);
+    
+    else throw new UnhandledProblemTypeError("don't know how to handle this error");
+}
+
+function handleInvalidArguments(data) {
+    console.log("Invalid arguments"); // TODO parse errors field
+}
+
+function handleProductNotFound() {
+    console.log("Product not found!");
+}
+
+function statusCodeHandler(response) {
+    console.log("Handling status code");
 }
 
 

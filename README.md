@@ -3,7 +3,7 @@
 
 ## Where Im at now
 
-* Validation in controllers. Validate all forms and input that comes from UI.
+* Error handling
 
 
 ## Milestones
@@ -48,8 +48,10 @@ When a user marks an item as checked, the item is not just deleted from the list
     * Check that list name has changed
 * Events
     * ItemUpdatedEvent - when an item's quantity is updated.
-
-
+* Products Page
+    * When adding a product, update the UI using the returned Product ID from the database.
+* After a long time with no activity, and then trying to do something, we get - `class org.springframework.security.authentication.AnonymousAuthenticationToken cannot be cast to class org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken`.
+* Fixed List - disable send button if list is empty
 
 ## Improvements
 ---
@@ -74,7 +76,6 @@ When a user marks an item as checked, the item is not just deleted from the list
 
 ## NOTES
 * Repository exceptions are translated to 500
-
 
 ## Debates
 * Forms - full page reload or AJAX? full page reload is simpler - no JS.  On the other hand - handling modal forms with simple full page reload is messier. HTMX is an option. Eventually decided to go AJAX in all forms.
