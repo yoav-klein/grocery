@@ -65,9 +65,3 @@ main {
     color: var(--category-item-name-color);
     padding-inline-start: .5rem;
 }
-
-.big-add-button { 
-    font-size: 3rem;
-    padding: 2rem;
-    border-radius: 50%;
-}

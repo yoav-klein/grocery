@@ -34,6 +34,9 @@
     --tenant-card-bg-color: var(--color-green-spring);
     --overlay-bg-color: rgba(0,0,0,0.5);
 
+    /* Elements */
+    --primary-fab-bg-color: var(--color-green-primary);
+
     /* Categories */
     --category-bg-color: var(--color-white);
     --category-border-color: var(--color-slate-100);
@@ -46,6 +49,9 @@
     /* Layout */
     --header-height: 4rem;
     --sidebar-width: 250px;
+
+    /* Elements */
+    --primary-fab-size: 70px;
 
 }
 
@@ -121,10 +127,7 @@ ul {
 }
 
 .absolute-bottom-center {
-    position: absolute;   
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    
 }
 
 .delete-button {
@@ -161,6 +164,27 @@ ul {
     
     }
 }
+
+.primary-fab {
+    position: absolute;   
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--primary-fab-size);
+    height: var(--primary-fab-size);
+    font-size: 2rem;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--primary-fab-bg-color);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.primary-fab:hover {
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+}
+
 
 .error-banner {
     display: none;
