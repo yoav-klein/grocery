@@ -5,7 +5,7 @@ main {
 
 main > header {
     position: relative;
-    border-bottom: 1px solid var(--LINE-COLOR);
+    border-bottom: 1px solid var(--line-color);
     display: flex;
     align-items: center;
     justify-content: center;

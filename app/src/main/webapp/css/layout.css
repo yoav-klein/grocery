@@ -5,10 +5,11 @@ body {
 }
 
 body > header {
-    height: var(--HEADER-HEIGHT);
-    border-bottom: 1px solid var(--LINE-COLOR);
+    height: var(--header-height);
+    border-bottom: 1px solid var(--line-color);
     display: flex;
     align-items: center;
+    background-color: var(--header-bg-color);
 
 }
 
@@ -47,8 +48,11 @@ main {
 
 #sidebar {
     grid-area: sidebar;
-    width: var(--SIDEBAR-WIDTH);
-    border-right: 1px solid var(--LINE-COLOR);
+    
+    width: var(--sidebar-width);
+    border-right: 1px solid var(--line-color);
+    background: var(--sidebar-gradient);
+    color: var(--sidebar-text-color);
 
     transition: 300ms ease-in-out;
 
@@ -56,6 +60,36 @@ main {
     display: flex;
     flex-direction: column;
     overflow: auto;
+}
+
+#tenant-card {
+    color: var(--tenant-card-text-color);
+    border: 1px solid #A7F3D0;
+    border-radius: 10px;
+    background-color: var(--tenant-card-bg-color);
+    margin: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.current-tenant {
+    font-weight: 600;
+}
+
+.switch-tenant {
+    > a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: .5rem;
+        color: #374151;
+        font-size: 0.8rem;
+    }
 }
 
 #sidebar nav {
@@ -78,7 +112,7 @@ main {
     border-radius: 0.5em;
     display: flex;
     text-decoration: none;
-    color: var(--TEXT-COLOR);
+    color: var(--sidebar-text-color);
     align-items: center;
     padding: 1em;
     gap: 1em; /* to separate the icon from teh text */
@@ -86,9 +120,10 @@ main {
 
 /* setting a different style to the active tab */
 #sidebar nav ul li.active a, #sidebar a.active {
-    color: var(--ACCENT-COLOR);
+    font-weight: 600;
+    color: var(--sidebar-text-color);
     svg {
-        fill: var(--ACCENT-COLOR);
+        fill: var(--sidebar-text-color);
     }
 }
 
@@ -104,7 +139,7 @@ main {
 
 #sidebar nav svg {
     flex-shrink: 0; /* avoid distortions something ... ?*/
-    fill: var(--TEXT-COLOR);
+    fill: var(--sidebar-text-color);
 }
 
 #sidebar nav a span, #sidebar nav .dropdown-button span {
@@ -114,7 +149,7 @@ main {
 }
 
 #sidebar nav a:hover, .dropdown-button:hover {
-    background-color: var(--HOVER-COLOR);
+    background-color: var(--sidebar-hover-color);
 }
 
 /* || SUB MENU OPEN AND CLOSE */
@@ -149,7 +184,7 @@ main {
 }
 
 
-.overlay {
+#overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -157,7 +192,7 @@ main {
     width: 100%;
     z-index: 999;
     
-    background: rgba(0,0,0,0.5);
+    background: var(--overlay-bg-color);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -178,7 +213,6 @@ main {
         left: 0;
         bottom: 0;
         
-        background-color: var(--BASE-COLOR);
         transform: translateX(0);
         transition: transform 0.3s ease-in-out;
         box-shadow: 2px 0 10px rgba(0,0,0,0.1);

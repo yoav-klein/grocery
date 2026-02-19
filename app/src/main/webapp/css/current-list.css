@@ -10,11 +10,6 @@ main {
     height: 50vh;
 }
 
-
-.item-quantity {
-    min-width: 3rem;
-}
-
 /* CHECKBOX */
 
 
@@ -44,14 +39,15 @@ main {
     /* 1em will make it the same size as our font-size */
     width: 1em;
     height: 1em;
-    border: 0.05em solid white;
+    border: 0.05em solid  #94A3B8;
     border-radius: 0.15em;
     margin-right: .5em;
 }
 
 /* hover effect */
 .checkbox-container label:hover::before {
-    background-color: #35E07D;
+    background-color: #DCFCE7;
+    border-color: #22C55E;
 }
 
 .checkbox-container input[type="checkbox"]:checked + label::before {

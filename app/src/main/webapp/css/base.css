@@ -2,16 +2,51 @@
 
 /* || VARIABLES */
 :root {
-    --BASE-COLOR: #11121a;
-    --LINE-COLOR: #42434a;
-    --HOVER-COLOR: #222533;
-    --TEXT-COLOR: #e6e6ef;
-    --ACCENT-COLOR: #5e63ff;
-    --SECONDARY-TEXT-COLOR: #b0b3c1;
-    --HEADER-HEIGHT: 4rem;
-    --SIDEBAR-WIDTH: 250px;
-    --SAVE-BUTTON-COLOR: rgb(26, 216, 26);
-    --SAVE-BUTTON-HOVER-COLOR: rgb(17, 128, 17);
+    /* --- RAW COLORS --- */
+
+    /* Greens */
+    --color-green-soft:    #F0FDF4;
+    --color-green-mint:    #DCFCE7;
+    --color-green-spring:  #B9F6CA;
+    --color-green-primary: #22C55E;
+    --color-green-deep:    #166534;
+    --color-green-forest:  #064E3B;
+
+    /* Neutrals & Slates */
+    --color-white:         #FFFFFF;
+    --color-slate-100:     #F3F4F6;
+    --color-slate-400:     #94A3B8;
+    --color-slate-700:     #374151;
+
+    /* --- SEMANTIC COLOR VARIABLES -- */
+
+    /* Generic */
+    --body-bg-color: #FAFAFA;
+    --line-color: #E5E7EB;
+    --text-color: var(--color-slate-700);
+
+    /* Layout */
+    --header-bg-color: var(--color-green-mint);
+    --sidebar-gradient: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%);
+    --sidebar-text-color: var(--text-color);
+    --sidebar-hover-color: var(--color-green-mint);
+    --tenant-card-text-color: var(--color-green-forest);
+    --tenant-card-bg-color: var(--color-green-spring);
+    --overlay-bg-color: rgba(0,0,0,0.5);
+
+    /* Categories */
+    --category-bg-color: var(--color-white);
+    --category-border-color: var(--color-slate-100);
+    --category-title-color: var(--color-slate-700);
+    --category-item-name-color: #1E293B;
+    --category-item-secondary-color: var(--color-slate-400);
+
+    /* --- SIZES --- */
+
+    /* Layout */
+    --header-height: 4rem;
+    --sidebar-width: 250px;
+
 }
 
 /* || RESET */
@@ -34,7 +69,6 @@ button {
 
 a {
     text-decoration: none;
-    color: var(--TEXT-COLOR);
 }
 
 html {
@@ -44,8 +78,7 @@ html {
 }
 
 body {
-    background-color: var(--BASE-COLOR);
-    color: var(--TEXT-COLOR);
+    background-color: var(--body-bg-color);
 }
 
 html, body {

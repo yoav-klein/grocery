@@ -11,7 +11,6 @@ main {
     display: grid;
     align-content: start;
     grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
-    
     gap: 20px;
     justify-content: space-around;
     padding-bottom: 100px;
@@ -21,10 +20,12 @@ main {
 }
 
 .category {
-    border: 1px solid white;
+    background-color: var(--category-bg-color);
+    border: 1px solid var(--category-border-color);
     padding: 1rem;
     > h2 {
         margin-bottom: 2rem;
+        color: var(--category-title-color);
     }
 
     > ul {
@@ -41,21 +42,28 @@ main {
 .category-item {
     display: flex;
     flex-direction: row;
+    gap: 3px;
     
 }
 
 .item-quantity {
-    width: 3rem;
+    width: max-content;
     text-align: center;
+    color: var(--category-item-secondary-color);
+    font-size: 0.8rem;
 }
 
 .item-quantity-type {
-    min-width: 3rem;
+    color: var(--category-item-secondary-color);
+    min-width: max-content;
     text-align: center;
+    font-size: 0.8rem;
 }
 
 .item-name {
     flex: 1;
+    color: var(--category-item-name-color);
+    padding-inline-start: .5rem;
 }
 
 .big-add-button { 
