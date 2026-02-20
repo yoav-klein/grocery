@@ -43,6 +43,9 @@ main {
     display: flex;
     flex-direction: row;
     gap: 3px;
+    &:hover {
+        background: rgba(0,0,0,0.02);
+    }
     
 }
 
