@@ -7,14 +7,15 @@ const csrfToken = document.querySelector('meta[name="_csrf"]')
 const evtSource = new EventSource(document.baseURI + '/itemStream');
 
 const newItemFormEl = document.getElementById("new-item-form");
+const addItemButton = document.getElementById('add-item-button');
 const addItemDialogEl = document.getElementById('add-item-dialog');
-const closeDialogButtonEl = document.getElementById('close-add-item-dialog');
-const errorBannerEl = document.getElementById("error-banner");
+const errorBannerEl = document.getElementById("add-item-dialog-error-banner");
+const closeAddItemList = Array.from(document.querySelectorAll('[data-action="close-add-item-dialog"]'));
 
-closeDialogButtonEl.addEventListener('click', () => { 
+closeAddItemList.forEach(el => el.addEventListener('click', () => { 
     newItemFormEl.reset();
     errorBannerEl.style.display = 'none';
-});
+}));
 
 evtSource.addEventListener("NEW-ITEM", (event) => { 
     
@@ -32,8 +33,8 @@ evtSource.addEventListener("NEW-ITEM", (event) => {
     categoryEl.querySelector('ul').appendChild(newItem);
 });
 
-const addItemButton = document.getElementById('add-item-button');
 addItemButton.addEventListener('click', () => {
+    console.log("open modal");
     addItemDialogEl.showModal();
 })
 

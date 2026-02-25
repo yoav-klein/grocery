@@ -1,1 +1,1 @@
-Array.from(document.querySelectorAll('.close-modal-button')).forEach(el => el.addEventListener('click', (e) => { e.target.closest('dialog').close() }));
+Array.from(document.querySelectorAll('.js-close-dialog-button')).forEach(el => el.addEventListener('click', (e) => { e.target.closest('dialog').close() }));

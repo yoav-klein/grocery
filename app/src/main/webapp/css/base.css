@@ -2,47 +2,112 @@
 
 /* || VARIABLES */
 :root {
-    /* --- RAW COLORS --- */
+    /* --- COLOR VARIABLES - RAW COLORS --- */
 
     /* Greens */
-    --color-green-soft:    #F0FDF4;
-    --color-green-mint:    #DCFCE7;
-    --color-green-spring:  #B9F6CA;
-    --color-green-primary: #22C55E;
-    --color-green-deep:    #166534;
-    --color-green-forest:  #064E3B;
+    --color-green-50:  #F0FDF4;
+    --color-green-100: #DCFCE7;  /* mint */
+    --color-green-200: #B9F6CA;  /* spring */
+    --color-green-300: #86EFAC;
+    --color-green-400: #4ADE80;
+    --color-green-500: #22C55E;  /* strong usable brand green */
+    --color-green-600: #16A34A;
+    --color-green-700: #15803D;
+
 
     /* Neutrals & Slates */
-    --color-white:         #FFFFFF;
-    --color-slate-100:     #F3F4F6;
-    --color-slate-400:     #94A3B8;
-    --color-slate-700:     #374151;
+    --color-white: #ffffff;
+    --color-gray-50:  #f6f7f6;   /* main background */
+    --color-gray-100: #eef1ef;
+    --color-gray-200: #e3e7e4;   /* borders */
+    --color-gray-400: #8c978f;   /* muted text */
+    --color-gray-600: #5f6b63;   /* secondary text */
+    --color-gray-800: #1f2a24;   /* primary text */
+    
+    /* --- COLOR VARIABLES - GENERIC ROLES -- */
+        
+    /* Surfaces */
+    --color-surface-page: var(--color-gray-50);
+    --color-surface-card: var(--color-white);
+    --color-surface-dialog: var(--color-white);
 
-    /* --- SEMANTIC COLOR VARIABLES -- */
+    /* Borders */
+    --color-border-subtle: var(--color-gray-200);
+    --color-border-strong: var(--color-gray-400);
 
-    /* Generic */
-    --body-bg-color: #FAFAFA;
-    --line-color: #E5E7EB;
-    --text-color: var(--color-slate-700);
+    /* Text */
+    --color-text-primary: var(--color-gray-800);
+    --color-text-secondary: var(--color-gray-600);
+    --color-text-muted: var(--color-gray-400);
+    --color-text-inverse: var(--color-white);
+
+    /* Actions */
+    --color-action-primary: var(--color-green-500);
+    --color-action-primary-hover: var(--color-green-600);
+    --color-action-primary-soft: var(--color-green-100);
+    --color-action-secondary-hover: var(--color-gray-100);
+
+    /* Inputs */
+    --color-input-border: var(--color-border-subtle);
+    --color-input-focus-border: var(--color-action-primary);
+    --color-input-text: var(--color-text-primary);
+
+
+    /* --- COLOR VARIABLES - DOMAIN TOKENS --- */
 
     /* Layout */
-    --header-bg-color: var(--color-green-mint);
-    --sidebar-gradient: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%);
-    --sidebar-text-color: var(--text-color);
-    --sidebar-hover-color: var(--color-green-mint);
-    --tenant-card-text-color: var(--color-green-forest);
-    --tenant-card-bg-color: var(--color-green-spring);
-    --overlay-bg-color: rgba(0,0,0,0.5);
+    --color-header-bg: var(--color-green-100);
+    --color-layout-border: var(--color-border-subtle);
 
-    /* Elements */
-    --primary-fab-bg-color: var(--color-green-primary);
+    --color-sidebar-gradient-start: var(--color-green-100);
+    --color-sidebar-gradient-end: var(--color-green-200);
+    --color-sidebar-item-text: var(--primary-text-color);
+    --color-sidebar-item-bg-hover: var(--color-green-300);
+    --color-sidebar-item-bg-active: ; /* TODO */
+    --color-sidebar-item-text-active: ;
 
-    /* Categories */
-    --category-bg-color: var(--color-white);
-    --category-border-color: var(--color-slate-100);
-    --category-title-color: var(--color-slate-700);
-    --category-item-name-color: #1E293B;
-    --category-item-secondary-color: var(--color-slate-400);
+    --color-tenant-card-bg: var(--color-green-200);
+    --color-tenant-card-border: var(--color-green-200);
+    --color-tenant-card-text-primary: var(--color-gray-900);
+    --color-tenant-card-text-secondary: var(--color-gray-600);
+
+    --color-menu-button-hover: ;
+    --color-overlay-bg: rgba(0,0,0,0.5);;
+
+     /* Main */
+    --color-main-background: var(--color-surface-page);
+
+    /* Cards */
+    --color-card-background: var(--color-surface-card);
+    --color-card-border: var(--color-border-subtle);
+    --color-card-title: var(--color-text-primary);
+    --color-card-item-name: var(--color-text-primary);
+    --color-card-item-quantity: var(--color-text-secondary);
+
+    /* Floating Action Button */
+    --color-fab-background: var(--color-action-primary);
+    --color-fab-background-hover: var(--color-action-primary-hover);
+    --color-fab-icon: var(--color-text-inverse);
+
+    /* Dialog */
+    --color-dialog-background: var(--color-surface-dialog);
+    --color-dialog-border: var(--color-border-subtle);
+    --color-dialog-title: var(--color-text-primary);
+    --color-dialog-label: var(--color-text-secondary);
+
+    /* Dialog Inputs */
+    --color-dialog-input-border: var(--color-input-border);
+    --color-dialog-input-border-active: var(--color-action-primary);
+    --color-dialog-input-text: var(--color-input-text);
+
+    /* Dialog Buttons */
+    --color-dialog-button-primary-bg: var(--color-action-primary);
+    --color-dialog-button-primary-bg-hover: var(--color-action-primary-hover);
+    --color-dialog-secondary-bg-hover: var(--color-action-secondary-hover);
+    --color-dialog-button-primary-text: var(--color-text-inverse);
+    --color-dialog-button-secondary-text: var(--color-text-secondary);
+    --color-dialog-button-secondary-border: var(--color-border-subtle);
+
 
     /* --- SIZES --- */
 
@@ -52,6 +117,9 @@
 
     /* Elements */
     --primary-fab-size: 70px;
+
+    /* --- BORDERS --- */
+    --dialog-border: 
 
 }
 
@@ -84,7 +152,7 @@ html {
 }
 
 body {
-    background-color: var(--body-bg-color);
+    background-color: var(--color-main-background);
 }
 
 html, body {
@@ -145,12 +213,6 @@ ul {
     color: #b71c1c;
 }
 
-.top-corner-button {
-    position: absolute;
-    inset-inline-end: 5px;
-    top: 5px;
-}
-
 .save-button {
     background-color: var(--SAVE-BUTTON-COLOR);
 
@@ -175,18 +237,20 @@ ul {
     font-size: 2rem;
     border-radius: 50%;
     border: none;
-    background-color: var(--primary-fab-bg-color);
+    background-color: var(--color-fab-background);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     transition: transform 120ms ease, box-shadow 120ms ease;
+    color: var(--color-fab-icon);
 }
 
 .primary-fab:hover {
+    background-color: var(--color-fab-background-hover);
     transform: translateX(-50%) scale(1.1);
     box-shadow: 0 14px 32px rgba(0,0,0,0.16);
 }
 
 
-.error-banner {
+.dialog-error-banner {
     display: none;
     background-color: #fee2e2;
     border-left: 4px solid #ef4444;

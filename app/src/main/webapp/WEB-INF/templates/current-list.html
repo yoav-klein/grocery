@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="../../css/current-list.css" th:href="@{/css/current-list.css}">
     </head>
     <body th:replace="~{layout :: layout(~{::main},~{::script})}">
-        <div class="wrapper" th:remove="tag">
+        <div class="wrapper" th:remove="tag"> <!-- this is just for offline rendering -->
             <main>
                 <!-- template for adding items in JavaScript -->
                 <template id="item-template">
@@ -33,11 +33,11 @@
                         </ul>
                     </article>
                 </template>
-                <section id="list" class="category-grid">
+                <section class="category-grid">
                     <article class="category" th:each="category : ${itemsByCategory}" th:id="'category-' + ${category.key}">
                         <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                         <ul>
-                            <li th:each="item : ${category.value}" class="category-item" th:id="'item-' + ${item.id}">
+                            <li th:each="item : ${category.value}" th:id="'item-' + ${item.id}">
                                 <p class="item-quantity" th:text="${item.quantity}">3</p>
                                 <p class="item-quantity-type" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</p>
                                 <p class="item-name"><span th:text="${item.name}">Tomato</span></p>
@@ -331,33 +331,22 @@
                     </div>
                 </section>
                 <button id="add-item-button" class="primary-fab">+</button>
-                <dialog id="add-item-dialog" class="dialog-layout dialog-form">
+                <dialog id="add-item-dialog" class="dialog">
                     <header>
                         <h2>New Item</h2>
-                        <button id="close-add-item-dialog" class="close-modal-button top-corner-button">X</button>
+                        <button data-action="close-add-item-dialog" class="js-close-dialog-button close-dialog-button">&times;</button>
                     </header>
-                    <div id="error-banner" class="error-banner">
-                        <p>Oops, seems that something's wrong on our end</p>
-                    </div>
                     <form id="new-item-form">
-                        <div class="body">
+                        <div id="add-item-dialog-error-banner" class="dialog-error-banner">
+                            <p>Oops, seems that something's wrong on our end</p>
+                        </div>
+                        <div class="dialog-body">
                             <div class="field">
                                 <label for="name">Name</label>
                                 <input name="name" class="long-input" type="text" id="name">
-
                                 <p class="field-validation-error"></p>
                             </div>
-                            <div class="field">
-                                <label for="quantity">Quantity</label>
-                                <input class="short-input" name="quantity" type="number" id="quantity">
-                                
-                                <select name="quantityType">
-                                    <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
-                                    <option th:remove="all">Unit</option>
-                                </select>
-
-                                <p class="field-validation-error"></p>
-                            </div>
+                            
                             <div class="field">
                                 <label for="category" th:text="#{additem.label.category}">Category</label>
                                 <select name="category" class="long-input">
@@ -365,13 +354,25 @@
                                     <option th:remove="all">Fruits</option>
                                     <option th:remove="all">Dairy</option>
                                 </select>
+                                <p class="field-validation-error"></p>
+                            </div>
+
+                            <div class="field">
+                                <label for="quantity">Quantity</label>
+                                <div class="quantity-control">
+                                    <input name="quantity" type="number" id="quantity" value="1">
+                                    <select name="quantityType">
+                                        <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
+                                        <option th:remove="all">Unit</option>
+                                    </select>
+                                </div>
+                                <p class="field-validation-error"></p>
                             </div>
                         </div>
         
-                        <div class="footer">
-                            <p class="submit-button-container">
-                                <button id="new-item-button" type="submit" name="save">Submit!</button>
-                            </p>
+                        <div class="dialog-footer">
+                            <button data-action="close-add-item-dialog" type="reset" class="js-close-dialog-button dialog-secondary-action-button" name="cancel">Cancel</button>
+                            <button id="dialog-submit-button" type="submit" name="save" class="dialog-primary-action-button">Submit</button>
                         </div>
                     </form>
                 </dialog>
