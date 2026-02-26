@@ -10,9 +10,9 @@ main {
 .category-grid {
     display: grid;
     align-content: start;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    justify-content: space-around;
+    justify-content: start;
     padding-bottom: 100px;
     overflow: auto;
     height: 100%;

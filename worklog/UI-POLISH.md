@@ -7,12 +7,26 @@ The `ui` branch should achieve the following goals:
 * Error handling in UI
 
 
-## UI Design
+## Next steps
 ---
-### Layout
-* Active page - consider left accent bar
+* Padding and margins system
+* Categories - grid aligned to the left.
+* Fonts
+* Forms - error messages
+* Sidebar - fixed lists - smaller font maybe.
+* Manage tenant
+* Tenant selection
 
-### Current List
-* Add (+) buttons
-* Checkbox feels disconnected
-* Maybe reduce space between categories when there are small number of categories
+
+## TODO LATER
+---
+* Forms - style select elements better
+* Quantity type - change select to moving pill
+
+
+
+## Steps
+---
+
+### Step 2
+* Categories polish - settle out the grid stuff

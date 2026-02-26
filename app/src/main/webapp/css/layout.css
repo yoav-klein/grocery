@@ -105,6 +105,10 @@ main {
 #sidebar nav ul {
     list-style-type: none;
     flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 #sidebar nav a, #sidebar nav .dropdown-button {
@@ -117,10 +121,14 @@ main {
     gap: 1em; /* to separate the icon from teh text */
 }
 
+
+
 /* setting a different style to the active tab */
-#sidebar nav ul li.active a, #sidebar a.active {
+#sidebar nav ul li.active a {
+    background-color: var(--color-sidebar-item-bg-active);
     font-weight: 600;
     color: var(--color-sidebar-item-text-active);
+
     svg {
         fill: var(--color-sidebar-item-text-active);
     }
@@ -158,9 +166,13 @@ main {
     display: grid;
     grid-template-rows: 0fr;
     transition: 300ms ease-in-out;
+    margin-top: 5px;
 
     > div {
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
     }
 }
 

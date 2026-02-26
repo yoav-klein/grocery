@@ -63,7 +63,7 @@
     --color-sidebar-gradient-end: var(--color-green-200);
     --color-sidebar-item-text: var(--primary-text-color);
     --color-sidebar-item-bg-hover: var(--color-green-300);
-    --color-sidebar-item-bg-active: ; /* TODO */
+    --color-sidebar-item-bg-active: var(--color-green-400);
     --color-sidebar-item-text-active: ;
 
     --color-tenant-card-bg: var(--color-green-200);
