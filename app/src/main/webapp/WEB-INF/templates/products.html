@@ -14,18 +14,46 @@
         <div class="wrapper" th:remove="tag">
 
             <main>
-                <section id="list" class="category-grid">
+                <section class="category-grid">
                     <article class="category" th:each="category : ${productsByCategory}">
                         <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                         <ul>
-                            <li class="category-item" th:each="product : ${category.value}">
+                            <li th:each="product : ${category.value}">
                                 <p class="item-name" th:text="${product.name}">Tomato</p>
                                 <p class="item-quantity-type" th:text="${product.quantityType}">Kg</p>
-                                <div>
-                                    <form method="post" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}">
-                                        <input type="hidden" name="_method" value="delete">
-                                        <button name="id" th:value="${product.productId}" class="delete-button">×</button>
-                                    </form>
+                                <div class="product-actions-container js-product-actions-container">
+                                    <button class="product-actions-button js-product-actions-button"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
+                                    </button>
+                                    <div class="product-actions js-product-actions">
+                                        <form method="post" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}">
+                                            <input type="hidden" name="_method" value="delete">
+    
+                                            <button class="delete-button" name="id" th:value="${product.productId}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                                <span>Delete</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li th:remove="all">
+                                <p class="item-name">Cucmber</p>
+                                <p class="item-quantity-type">Kg</p>
+                                <div class="product-actions-container js-product-actions-container">
+                                    <button class="product-actions-button js-product-actions-button"> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
+                                    </button>
+                                    <div class="product-actions js-product-actions">
+                                        <form method="post">
+                                            <input type="hidden" name="_method" value="delete">
+    
+                                            <button class="delete-button" name="id">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                                <span>Delete</span>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -33,41 +61,43 @@
                 </section>
                 <button id="add-product-button" class="primary-fab">+</button>
                 
-                <dialog id="add-product-dialog" class="dialog-layout dialog-layout">
+                <dialog id="add-product-dialog" class="dialog">
                     <header>
                         <h2>New Product</h2>
-                        <button class="close-modal-button top-corner-button">X</button>
-                        <div id="form-error-banner" class="error-banner"></div>
+                        <button class="js-close-dialog-button close-dialog-button">&times;</button>
                     </header>
-                    <form id="new-product-form" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" th:object="${product}" method="post">
-                        <div class="body">
+                    <form id="new-product-form">
+                        <div id="form-error-banner" class="dialog-error-banner">
+                            <p>Oops, seems that something's wrong on our end</p>
+                        </div>
+                        <div class="dialog-body">
                             <div class="field">
                                 <label for="name">Name</label>
-                                <input th:field="*{name}" class="long-input" type="text" th:classappend="${#fields.hasErrors('name')}? 'field-error'" />
-                                <p class="field-validation-error"></p>
-                            </div>
-                            <div class="field">
-                                <label for="quantity">Quantity Type</label>
-                                <select th:field="*{quantityType}" th:classappend="${#fields.hasErrors('quantityType')}? 'field-error'">
-                                    <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
-                                    <option th:remove="all">Unit</option>
-                                </select>
+                                <input name="name" class="long-input" type="text" />
                                 <p class="field-validation-error"></p>
                             </div>
                             <div class="field">
                                 <label for="category" th:text="#{additem.label.category}">Category</label>
-                                <select th:field="*{category}" class="long-input" th:classappend="${#fields.hasErrors('category')}? 'field-error'">
+                                <select name="category" class="long-input">
                                     <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}">Vegetables</option>
                                     <option th:remove="all">Fruits</option>
                                     <option th:remove="all">Dairy</option>
                                 </select>
                                 <p class="field-validation-error"></p>
                             </div>
+                            <div class="field">
+                                <label for="quantity">Quantity Type</label>
+                                <select name="quantityType">
+                                    <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
+                                    <option th:remove="all">Unit</option>
+                                </select>
+                                <p class="field-validation-error"></p>
+                            </div>
+                            
                         </div>
-                        <div class="footer">
-                            <p class="submit-button-container">
-                                <button id="new-item-button" type="submit" name="save">Submit!</button>
-                            </p>
+                        <div class="dialog-footer">
+                            <button data-action="close-add-item-dialog" type="reset" class="js-close-dialog-button dialog-secondary-action-button" name="cancel">Cancel</button>
+                            <button id="dialog-submit-button" type="submit" name="save" class="dialog-primary-action-button">Submit</button>
                         </div>
                     </form>
                 </dialog>

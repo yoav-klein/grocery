@@ -33,7 +33,7 @@
                         </ul>
                     </article>
                 </template>
-                <section class="category-grid">
+                <section id="all-categories" class="category-grid">
                     <article class="category" th:each="category : ${itemsByCategory}" th:id="'category-' + ${category.key}">
                         <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                         <ul>
@@ -50,7 +50,7 @@
                     </article>
                     <!-- a bunch of categories for demo purposes, will be removed by the th:remove -->
                     <div th:remove="all" class="display-contents">
-                        <!-- <article class="category">
+                        <article class="category">
                             <h2>VEGETABLES</h2>
                             <ul>
                                 <li class="category-item">
@@ -314,7 +314,7 @@
                             </ul>
                         </article>
                         
-                        -->
+                       
                         <article class="category">
                             <h2>VEGETABLES</h2>
                             <ul>

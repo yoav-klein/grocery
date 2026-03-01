@@ -2,19 +2,45 @@
 import { HttpError, UnhandledProblemTypeError } from './common.js';
 
 
-
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]')
 const csrfToken = document.querySelector('meta[name="_csrf"]')
 
 const addProductButtonEl = document.getElementById("add-product-button");
 const addProductDialogEl = document.getElementById("add-product-dialog");
-const submitButton = document.getElementById('new-item-button');
+const submitButton = document.getElementById('dialog-submit-button');
 const addProductForm = document.getElementById('new-product-form');
 const formErrorBanner = document.getElementById('form-error-banner');
+
+const productActionsButtons = document.querySelectorAll('.js-product-actions-button');
+const productActionsContainers = document.querySelectorAll('.js-product-actions-container');
+
+Array.from(productActionsButtons).forEach(el => {
+    el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const opened = document.querySelector('.js-product-actions.show');
+        const pressedButton = e.currentTarget;
+        if(opened !== null) {
+            opened.classList.remove('show');
+            const openedButton = opened.closest('.js-product-actions-container').querySelector('.js-product-actions-button');
+            if(pressedButton === openedButton) return;
+        }
+        pressedButton.closest('.js-product-actions-container').querySelector('.js-product-actions').classList.add('show');
+        
+    });
+});
 
 addProductButtonEl.addEventListener('click', () => {
     addProductDialogEl.showModal();
 });
+
+window.addEventListener('click', (event) => {
+    console.log("WINDOW");
+    closeAllProductMenus();
+});
+
+function closeAllProductMenus() {
+    Array.from(document.querySelectorAll('.product-actions.show')).forEach(el => el.classList.remove('show'));
+}
 
 submitButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -29,7 +55,6 @@ submitButton.addEventListener('click', (event) => {
     headers.append(csrfHeaderName.content, csrfToken.content);
     const body = JSON.stringify(data);
 
-    console.log("SENDING: " + body);
     const responsePromise = fetch(document.baseURI, {
         method: "POST",
         headers: headers,
@@ -41,7 +66,8 @@ submitButton.addEventListener('click', (event) => {
         if(!resp.ok) throw new HttpError(resp);
 
         addProductForm.reset();
-        addProductDialogEl.close(); 
+        addProductDialogEl.close();
+        window.location.reload();
     })
     .catch(e => {
         console.log("error");

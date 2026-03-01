@@ -23,6 +23,8 @@
     --color-gray-400: #8c978f;   /* muted text */
     --color-gray-600: #5f6b63;   /* secondary text */
     --color-gray-800: #1f2a24;   /* primary text */
+
+    --color-red: #EF4444;
     
     /* --- COLOR VARIABLES - GENERIC ROLES -- */
         
@@ -196,21 +198,6 @@ ul {
 
 .absolute-bottom-center {
     
-}
-
-.delete-button {
-    color: #d32f2f; ;
-    background-color: transparent;
-    border: 1px solid currentColor;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: grid;
-    place-items: center;
-}
-
-.delete-button:hover {
-    color: #b71c1c;
 }
 
 .save-button {

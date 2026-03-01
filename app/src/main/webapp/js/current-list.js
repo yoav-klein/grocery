@@ -17,7 +17,9 @@ closeAddItemList.forEach(el => el.addEventListener('click', () => {
     errorBannerEl.style.display = 'none';
 }));
 
-evtSource.addEventListener("NEW-ITEM", (event) => { 
+evtSource.addEventListener("NEW-ITEM", (event) => {
+
+    console.log("GOT NEW ITEM");
     
     const eventData = JSON.parse(event.data);
     const allCategorySections = Array.from(document.querySelectorAll('article.category'));
@@ -60,8 +62,8 @@ newItemFormEl.addEventListener("submit", (event) => {
     .then(resp => {
         if(!resp.ok) throw new HttpError(resp);
 
-        addProductForm.reset();
-        addProductDialogEl.close(); 
+        newItemFormEl.reset();
+        addItemDialogEl.close(); 
     })
     .catch(e => {
         console.log("error");
@@ -143,7 +145,7 @@ evtSource.addEventListener("REFRESH-LIST", (event) => {
 })
 
 function createNewCategory(categoryName) {
-    const listEl = document.getElementById('list');
+    const listEl = document.getElementById('all-categories');
     const newElement = document.getElementById("category-template").content.cloneNode(true);
     // TODO: localization
     newElement.querySelector('h2').innerText = categoryName;

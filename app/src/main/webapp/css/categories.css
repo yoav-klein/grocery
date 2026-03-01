@@ -11,6 +11,7 @@ main {
     display: grid;
     align-content: start;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: minmax(200px, auto);
     gap: 20px;
     justify-content: start;
     padding-bottom: 100px;
@@ -41,6 +42,7 @@ main {
 .category > ul > li {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 3px;
     &:hover {
         background: rgba(0,0,0,0.02);
