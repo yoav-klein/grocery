@@ -13,14 +13,18 @@
     </head>
     <body th:replace="~{layout :: layout(~{::main},~{::script})}">
         <div class="wrapper" th:remove="tag">
-
             <main>
                 <header>
-                    <h1 th:text="${fixedList.name}">LIST NAME</h1>
+                    <div id="header-title">
+                        <h1 th:text="${fixedList.name}">LIST NAME</h1>
+                        <p class="header-meta">3 categories • 6 items</p>
+                    </div>
                     <div class="actions">
+                        <button id="insert-button" form="list">Insert</button>
                         <a href="#" th:href="@{/tenant/{tenantId}/lists/edit/{listId}(tenantId=${tenant.id},listId=${fixedList.id})}"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 -960 960 960" width="36px" fill="#ffffff"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></a>
                         <button id="delete-button"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 -960 960 960" width="36px" fill="#ffffff"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></button>
                     </div>
+                    
                 </header>
                 <div id="error-banner" class="error-banner">
                     <span>Server Error: Could not save your list. Please try again.</span>
@@ -31,17 +35,20 @@
                         <article class="category" th:each="category : ${productsByCategory}">
                             <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                             <ul>
-                                <li th:each="product : ${category.value}" class="category-item">
+                                <li th:each="product : ${category.value}">
                                     <p class="item-name"><span th:text="${product.name}">PRODUCT NAME</span></p>
-                                    <input class="item-quantity quantity" type="number" th:id="'product-' + ${product.productId}" value="0">
-                                    <p class="item-quantity-type" th:text="${product.quantityType}">Kg</p>
+                                    <div class="js-stepper stepper">
+                                        <button type="button" disabled class="js-decrement-button decrement-button">-</button>
+                                        <input readonly class="js-quantity-input quantity-input" type="number" th:id="'product-' + ${product.productId}" value="0">
+                                        <button type="button" class="js-increment-button increment-button">+</button>
+                                    </div>
+                                    <p class="quantity-type-pill" th:text="${product.quantityType}">Kg</p>
                                 </li>
                             </ul>
                         </article>
                     </section>
-                    <input type="submit" value="INSERT" class="absolute-bottom-center insert-button">
                 </form>
-                <dialog id="delete-confirmation-dialog" class="dialog-layout">
+                <dialog id="delete-confirmation-dialog" class="dialog">
                     <header>
                         <h2>Delete List</h2>
                     </header>

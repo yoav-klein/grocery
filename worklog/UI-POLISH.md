@@ -11,12 +11,14 @@ The `ui` branch should achieve the following goals:
 ---
 * Padding and margins system
 * Categories - typography and colors
+* Add/Edit fixed list page
 * Fonts
 * Forms - error messages
 * Sidebar - fixed lists - smaller font maybe.
 * Manage tenant
 * Tenant selection
 * Error handling in forms
+* Make the kebab menu thing a component
 
 
 ## TODO LATER
@@ -34,7 +36,8 @@ The `ui` branch should achieve the following goals:
 ### Step 3
 * Products page
 
+### Step 4
+* Fixed list page
 
-## Latest
+## Current
 ---
-Worked on the kebab menu of products. I need to make the kebab thing a component to reuse it elsewhere.

@@ -12,17 +12,32 @@ const bulkUrl = `${tenantBaseUrl}/currentList/bulk/${listId}`;
 
 const formEl = document.getElementById('list');
 const deleteButtonEl = document.getElementById('delete-button');
-const editButtonEl = document.getElementById('edit-button');
 const deleteConfirmationDialog = document.getElementById('delete-confirmation-dialog');
 
 const errorBannerEl = document.getElementById('error-banner');
 const errorBannerMessageEl = errorBannerEl.querySelector('span');
 
+const steppers = document.querySelectorAll('.js-stepper');
+Array.from(steppers).forEach(stepper => stepper.addEventListener('click', e => {
+    const decrementButton = stepper.querySelector('.js-decrement-button');
+    
+    const input = stepper.querySelector('.js-quantity-input');
+    if(e.target.classList.contains('js-increment-button')) {
+        input.stepUp();
+        decrementButton.disabled = false;
+    } else if(e.target.classList.contains('js-decrement-button')) {
+        input.stepDown();
+        if(Number(input.value) === 0) {
+            decrementButton.disabled = true;
+        }
+    }
+}));
+
 deleteButtonEl.addEventListener('click', () => {
     deleteConfirmationDialog.showModal();
 });
 
-const inputs = document.querySelectorAll('.quantity');
+const inputs = document.querySelectorAll('.js-quantity-input');
 
 formEl.addEventListener('submit', (e) => {
     e.preventDefault();

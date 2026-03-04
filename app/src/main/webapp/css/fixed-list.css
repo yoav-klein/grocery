@@ -1,27 +1,36 @@
 
 main {
-    padding: 0;
+    padding: 1rem;
 }
 
 main > header {
-    position: relative;
     border-bottom: 1px solid var(--line-color);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
     height: 70px;
+
     h1 {
         text-align: center;
     }
 
+    .header-meta {
+        margin: 6px 0 0;
+        font-size: 13px;
+        opacity: 0.75;
+    }
+
     .actions {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        svg {
+            fill: var(--color-text-muted);
+        }
+        
         inset-inline-end: 40px;
         display: flex;
         flex-direction: row;
         gap: 20px;
+        
         button {
             background-color: transparent;
             border: none;
@@ -29,16 +38,21 @@ main > header {
     }
 }
 
-.category-grid {
-    padding: 1rem;
-}
-
-
-.insert-button {
-    width: 150px;
-    height: 70px;
+#insert-button {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
     border-radius: 5px;
+    color: var(--color-fab-icon);
+    background-color: var(--color-fab-background);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin-inline-end: 20px;
+
+    &:hover {
+        background-color: var(--color-fab-background-hover);
+        box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+    }
 }
+
 
 .error-banner {
     padding: 1rem;
@@ -60,4 +74,78 @@ main > header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+/* ITEM ROW */
+
+.stepper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-inline-end: 5px;
+}
+
+.quantity-input {
+    width: 2rem;
+    text-align: center;
+    border: 1px solid var(--color-input-border);
+    border-radius: 2px;
+}
+
+.increment-button, .decrement-button {
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-card-background);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    transition: 
+        background-color 120ms ease,
+        box-shadow 120ms ease,
+        transform 60ms ease,
+        border-color 120ms ease;
+
+    &:hover:not(:disabled) {
+        background-color: var(--color-action-primary-soft);
+        border-color: var(--color-green-300);
+        color: var(--color-green-700);
+
+        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(1px);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    &:disabled {
+        background-color: var(--color-gray-100);
+        border-color: var(--color-border-subtle);
+        color: var(--color-text-muted);
+
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+}
+
+.quantity-type-pill {
+    width: 4rem;
+}
+
+
+/* disable number input built-in stepper */
+/* For Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

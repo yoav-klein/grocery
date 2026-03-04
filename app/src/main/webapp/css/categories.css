@@ -50,7 +50,7 @@ main {
 }
 
 .item-quantity {
-    width: max-content;
+    min-width: max-content;
     text-align: center;
     color: var(--color-card-item-quantity);
     font-size: 0.8rem;
