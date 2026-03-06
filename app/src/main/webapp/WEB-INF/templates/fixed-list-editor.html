@@ -14,22 +14,22 @@
         <link rel="stylesheet" href="../../css/fixed-list-editor.css" th:href="@{/css/fixed-list-editor.css}">
     </head>
     <body th:replace="~{layout :: layout(~{::main},~{::script})}">
-        <div class="wrapper">
+        <div class="wrapper" th:remove="tag">
             <main>
-                <div class="step-wrapper">
+                <div id="step-wrapper">
                     <header class="step">
-                        <div class="title">
+                        <div class="header-title">
                             <h1 th:text="(${mode} == 'add')? 'Add Fixed List' : 'Edit Fixed List'">HEADING</h1>
                             <p th:text="(${mode} == 'add')? 'Create a reusable list' : 'Edit the fixed list'">Create a reusable list</p>
                         </div>
-                        <div class="name">
+                        <div class="header-list-name">
                             <button th:if="${mode} == 'edit'" id="edit-name-button"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 -960 960 960" width="36px" fill="#ffffff"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></button>
                             <label for="listName">List name</label>
                             <input id="listName" type="text" placeholder="e.g., Weekly groceries" th:value="(${mode} == 'edit')? ${fixedList.name} : ''" th:disabled="${mode} == 'edit'" th:data-init-value="(${mode} == 'edit')? ${fixedList.name} : ''"/>
                         </div>
-                        <div class="actions">
-                            <button id="cancel-button">Cancel</button>
-                            <button id="save-button" class="save-button" disabled>Save</button>
+                        <div class="header-actions">
+                            <button id="cancel-button" class="action-button secondary-action-button">Cancel</button>
+                            <button id="save-button" class="action-button primary-action-button" disabled>Save</button>
                         </div>
                     </header>
                     <section id="catalog" class="category-grid step">
@@ -80,6 +80,7 @@
                     </section>
                     <section id="selected-section" class="step">
                         <h1>LIST NAME</h1>
+                        <h2>Selected Items</h2>
                         <ul id="selected-list">
                             <li th:if="${mode} == 'edit'" th:each="category: ${listProductsByCategory}" th:attr="data-category-name=${category.key}">
                                 <h3 th:text="#{${'category.title.' + category.key}}">CATEGORY NAME</h3>

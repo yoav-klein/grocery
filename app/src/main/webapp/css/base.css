@@ -32,6 +32,7 @@
     --color-surface-page: var(--color-gray-50);
     --color-surface-card: var(--color-white);
     --color-surface-dialog: var(--color-white);
+    --color-surface-raised: var(#F6F8F7);
 
     /* Borders */
     --color-border-subtle: var(--color-gray-200);
@@ -47,6 +48,7 @@
     --color-action-primary: var(--color-green-500);
     --color-action-primary-hover: var(--color-green-600);
     --color-action-primary-soft: var(--color-green-100);
+    --color-action-secondary: var(--color-gray-50);
     --color-action-secondary-hover: var(--color-gray-100);
 
     /* Inputs */
@@ -85,11 +87,6 @@
     --color-card-title: var(--color-text-primary);
     --color-card-item-name: var(--color-text-primary);
     --color-card-item-quantity: var(--color-text-secondary);
-
-    /* Floating Action Button */
-    --color-fab-background: var(--color-action-primary);
-    --color-fab-background-hover: var(--color-action-primary-hover);
-    --color-fab-icon: var(--color-text-inverse);
 
     /* Dialog */
     --color-dialog-background: var(--color-surface-dialog);
@@ -198,22 +195,36 @@ ul {
     padding: 1rem;
 }
 
-.absolute-bottom-center {
+
+/* COMPONENTS */
+
+.action-button {
+    border-radius: 10px;
     
+    height: 50px;
+    width: 150px;
 }
 
-.save-button {
-    background-color: var(--SAVE-BUTTON-COLOR);
+.primary-action-button {
+    border: none;
+    background-color: var(--color-action-primary);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    color: var(--color-text-inverse);
+}
 
-    &:hover {
-        background-color: var(--SAVE-BUTTON-HOVER-COLOR);
-    }
+.primary-action-button:hover {
+    background-color: var(--color-action-primary-hover);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+}
 
-    &:disabled {
-        background-color: #b0b3c1;
-    
-    
-    }
+.secondary-action-button {
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-action-secondary);
+    color: var(--color-text-secondary);
+}
+
+.secondary-action-button:hover {
+    background-color: var(--color-action-secondary-hover);
 }
 
 .primary-fab {
@@ -226,14 +237,14 @@ ul {
     font-size: 2rem;
     border-radius: 50%;
     border: none;
-    background-color: var(--color-fab-background);
+    background-color: var(--color-action-primary);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     transition: transform 120ms ease, box-shadow 120ms ease;
-    color: var(--color-fab-icon);
+    color: var(--color-text-inverse);
 }
 
 .primary-fab:hover {
-    background-color: var(--color-fab-background-hover);
+    background-color: var(--color-action-primary-hover);
     transform: translateX(-50%) scale(1.1);
     box-shadow: 0 14px 32px rgba(0,0,0,0.16);
 }

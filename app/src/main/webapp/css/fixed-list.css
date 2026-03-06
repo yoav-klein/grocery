@@ -29,30 +29,11 @@ main > header {
         inset-inline-end: 40px;
         display: flex;
         flex-direction: row;
+        align-items: center;
         gap: 20px;
         
-        button {
-            background-color: transparent;
-            border: none;
-        }
     }
 }
-
-#insert-button {
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    color: var(--color-fab-icon);
-    background-color: var(--color-fab-background);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    margin-inline-end: 20px;
-
-    &:hover {
-        background-color: var(--color-fab-background-hover);
-        box-shadow: 0 14px 32px rgba(0,0,0,0.16);
-    }
-}
-
 
 .error-banner {
     padding: 1rem;

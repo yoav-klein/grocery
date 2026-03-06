@@ -11,7 +11,6 @@ The `ui` branch should achieve the following goals:
 ---
 * Padding and margins system
 * Categories - typography and colors
-* Add/Edit fixed list page
 * Fonts
 * Forms - error messages
 * Sidebar - fixed lists - smaller font maybe.
@@ -19,6 +18,7 @@ The `ui` branch should achieve the following goals:
 * Tenant selection
 * Error handling in forms
 * Make the kebab menu thing a component
+* Mobile
 
 
 ## TODO LATER
@@ -39,5 +39,11 @@ The `ui` branch should achieve the following goals:
 ### Step 4
 * Fixed list page
 
+### Step 5
+* Add/Edit fixed list page
+
 ## Current
 ---
+Add/Edit fixed list. 
+Worked on the header. Next - make the content of the page look better.
+Worked on the right panel (Selected Items). Next - final touches.
