@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../../css/offline.css">
         <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
         <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
+        <link rel="stylesheet" href="../../css/kebab-menus.css" th:href="@{/css/kebab-menus.css}">
         <link rel="stylesheet" href="../../css/products.css" th:href="@{/css/products.css}">
     </head>
     <body th:replace="~{layout :: layout(~{::main},~{::script})}">
@@ -21,11 +22,11 @@
                             <li th:each="product : ${category.value}">
                                 <p class="item-name" th:text="${product.name}">Tomato</p>
                                 <p class="item-quantity-type" th:text="${product.quantityType}">Kg</p>
-                                <div class="product-actions-container js-product-actions-container">
-                                    <button class="product-actions-button js-product-actions-button"> 
+                                <div class="kebab-menu js-kebab-menu">
+                                    <button class="kebab-menu-button js-kebab-menu-button"> 
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
                                     </button>
-                                    <div class="product-actions js-product-actions">
+                                    <div class="kebab-menu-actions js-kebab-menu-actions">
                                         <form method="post" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}">
                                             <input type="hidden" name="_method" value="delete">
     
@@ -40,11 +41,11 @@
                             <li th:remove="all">
                                 <p class="item-name">Cucmber</p>
                                 <p class="item-quantity-type">Kg</p>
-                                <div class="product-actions-container js-product-actions-container">
-                                    <button class="product-actions-button js-product-actions-button"> 
+                                <div class="kebab-menu js-kebab-menu">
+                                    <button class="kebab-menu-button js-kebab-menu-button"> 
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
                                     </button>
-                                    <div class="product-actions js-product-actions">
+                                    <div class="kebab-menu-actions js-kebab-menu-actions">
                                         <form method="post">
                                             <input type="hidden" name="_method" value="delete">
     
@@ -104,6 +105,7 @@
             </main>
         </div>
         <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script src="../../js/kebab-menus.js" th:src="@{/js/kebab-menus.js}"></script>
         <script type="module" src="../../js/products.js" th:src="@{/js/products.js}"></script>
     </body>
 </html>

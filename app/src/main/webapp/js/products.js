@@ -11,36 +11,9 @@ const submitButton = document.getElementById('dialog-submit-button');
 const addProductForm = document.getElementById('new-product-form');
 const formErrorBanner = document.getElementById('form-error-banner');
 
-const productActionsButtons = document.querySelectorAll('.js-product-actions-button');
-const productActionsContainers = document.querySelectorAll('.js-product-actions-container');
-
-Array.from(productActionsButtons).forEach(el => {
-    el.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const opened = document.querySelector('.js-product-actions.show');
-        const pressedButton = e.currentTarget;
-        if(opened !== null) {
-            opened.classList.remove('show');
-            const openedButton = opened.closest('.js-product-actions-container').querySelector('.js-product-actions-button');
-            if(pressedButton === openedButton) return;
-        }
-        pressedButton.closest('.js-product-actions-container').querySelector('.js-product-actions').classList.add('show');
-        
-    });
-});
-
 addProductButtonEl.addEventListener('click', () => {
     addProductDialogEl.showModal();
 });
-
-window.addEventListener('click', (event) => {
-    console.log("WINDOW");
-    closeAllProductMenus();
-});
-
-function closeAllProductMenus() {
-    Array.from(document.querySelectorAll('.product-actions.show')).forEach(el => el.classList.remove('show'));
-}
 
 submitButton.addEventListener('click', (event) => {
     event.preventDefault();

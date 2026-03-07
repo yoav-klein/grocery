@@ -1,7 +1,7 @@
 
 import { BASE_URL } from './config.js';
 import { HttpError } from './common.js';
- 
+
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]').content;
 const csrfToken = document.querySelector('meta[name="_csrf"]').content;
 
