@@ -11,23 +11,23 @@ The `ui` branch should achieve the following goals:
 ---
 * Padding and margins system
 * Add/Edit fixed list
-    * final touches
     * mobile view
 * Categories - typography and colors
 * Fonts
 * Forms - error messages
 * Sidebar - fixed lists - smaller font maybe.
-* Manage tenant
-* Tenant selection
 * Error handling in forms
 * Make the kebab menu thing a component
 * Mobile
+* Tenant selection
+* Manage tenant
 
 
 ## TODO LATER
 ---
 * Forms - style select elements better
 * Quantity type - change select to moving pill
+* Add fixed list - instead of confirmation modal - toast and redirect to new list
 
 
 ## Steps
@@ -50,10 +50,15 @@ The `ui` branch should achieve the following goals:
     * Edit/Delete in kebab menu
     * Number of categories and items
 
+### Step 7
+* Add/Edit fixed list page
+    * Edit name button
+    * Confirmation dialog
+* Fixed list page
+    * Delete confirmation dialog
+
+### Step 8
+* 
 
 ### Currently
-I want to put in the fixed list page the edit and delete in a kebab menu
-So I want to work on a reusable kebab menu system. Started it in the test.html file.
-GPT's review: https://chatgpt.com/s/t_69aada71a71c8191a9dad4b6d0224781.
-Ok done that!
-
+Fixed list page - delete list confirmation dialog

@@ -34,7 +34,6 @@ public class FixedListsApiController {
     // new list
     @PostMapping("/addList")
     public ResponseEntity<Integer> createList(@PathVariable("tenantId") String tenantId, @Validated @RequestBody FixedListRequest fixedListRequest) throws FixedListAlreadyExistsException, ProductNotFoundException {
-        
         int listId = fixedListsService.addFixedList(tenantId, fixedListRequest.getListName(), fixedListRequest.getProductIds());
 
         return new ResponseEntity<>(listId, HttpStatus.OK);

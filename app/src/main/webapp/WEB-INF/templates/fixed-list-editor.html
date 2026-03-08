@@ -110,27 +110,27 @@
                         <span>Back</span>
                     </button>
                 </div>
-                <dialog id="confirmation-dialog" class="dialog-layout">
-                    <header>
-                        <h2>List Added!</h2>
+                <dialog id="confirmation-dialog" class="confirmation-dialog">
+                    <header class="dialog-header">
+                        <h2>Fixed list created</h2>
                     </header>
-                    <div class="body">
-                        <p>List <span id="success-list-name">LISTNAME</span> successfully <span th:if="${mode} == 'add'">added</span><span>th:if="${mode} == 'edit'">edited</span></p>
+                    <div class="dialog-body">
+                        <p><span id="success-list-name">LISTNAME</span> was <span th:if="${mode} == 'add'">added</span><span th:if="${mode} == 'edit'">edited</span> successfully.</p>
                     </div>
-                    <div class="footer">
-                        <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
-                        <a id="to-list-link" th:href="@{/tenant/{tenantId}/lists(tenantId=${tenant.id})}">To the List</a>
+                    <div class="dialog-footer">
+                        <a class="dialog-secondary-action-button" th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Go home</a>
+                        <a class="dialog-primary-action-button" id="to-list-link" th:href="@{/tenant/{tenantId}/lists(tenantId=${tenant.id})}">Open list</a>
                     </div>
                 </dialog>
                 <dialog id="error-dialog" class="dialog-layout">
                     <header>
                         <h2>Ooops...</h2>
                     </header>
-                    <div class="body">
+                    <div class="dialog-body">
                         <p id="error-message-title"></p>
                         <ul id="error-message-details"></ul>
                     </div>
-                    <div class="footer">
+                    <div class="dialog-footer">
                         <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
                         <button class="close-modal-button">To the List</button>
                     </div>

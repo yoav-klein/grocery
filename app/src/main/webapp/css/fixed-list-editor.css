@@ -82,6 +82,15 @@ main {
 
 }
 
+#edit-name-button {
+    border: none;
+    background-color: transparent;
+
+    svg {
+        fill: var(--color-text-secondary);
+    }
+}
+
 #catalog {
     grid-area: catalog;
 }

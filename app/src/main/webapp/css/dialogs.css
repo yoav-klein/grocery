@@ -1,7 +1,7 @@
 
 /* MODAL DIALOG */
 
-.dialog[open] {
+.form-dialog[open] {
     /* put the dialog in the middle of page */
     margin: auto;
     
@@ -50,7 +50,6 @@
         align-items: center;
         justify-content: flex-end;
 
-        border-top: 1px solid ;
         padding: 14px 20px;
 
         border-top: 1px solid #eef0f2;
@@ -108,6 +107,55 @@
 .long-input {
     width: 100%;
  }
+
+ .confirmation-dialog[open] {
+    margin: auto;
+    
+    padding: 20px 25px;
+    border: 1px solid var(--color-dialog-border);
+    background-color: var(--color-dialog-background);
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+
+    width: min(360px, calc(100vw - 32px));
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .dialog-header {
+        margin-bottom: 1rem;
+
+        h2 {
+            text-align: center;
+        }
+    }
+
+    .dialog-body {
+        flex: 1 1 auto;
+    }
+
+    .dialog-footer {
+        flex: 0 0 auto;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+
+        gap: 12px;
+    }
+ }
+
+.confirmation-dialog[open].delete-confirmation-dialog {
+    form {
+        display: contents;
+    }
+
+    .dialog-primary-action-button {
+        background-color: var(--color-red);
+    }
+}
 
 .dialog-primary-action-button {
     border: none;
