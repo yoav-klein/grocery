@@ -12,28 +12,10 @@ const addItemDialogEl = document.getElementById('add-item-dialog');
 const errorBannerEl = document.getElementById("add-item-dialog-error-banner");
 const closeAddItemList = Array.from(document.querySelectorAll('[data-action="close-add-item-dialog"]'));
 
-closeAddItemList.forEach(el => el.addEventListener('click', () => { 
+closeAddItemList.forEach(el => el.addEventListener('click', () => {
     newItemFormEl.reset();
-    errorBannerEl.style.display = 'none';
+    resetForm();
 }));
-
-evtSource.addEventListener("NEW-ITEM", (event) => {
-
-    console.log("GOT NEW ITEM");
-    
-    const eventData = JSON.parse(event.data);
-    const allCategorySections = Array.from(document.querySelectorAll('article.category'));
-    let categoryEl = allCategorySections.find(i => i.getAttribute('id') === `category-${eventData.category}`);
-    console.log(categoryEl);
-    if(categoryEl === undefined) {
-        categoryEl = createNewCategory(eventData.category);
-        console.log(categoryEl);
-    }
-    
-    const newItem = createNewItem(eventData);
-    
-    categoryEl.querySelector('ul').appendChild(newItem);
-});
 
 addItemButton.addEventListener('click', () => {
     console.log("open modal");
@@ -46,8 +28,8 @@ newItemFormEl.addEventListener("submit", (event) => {
 
     const formData = new FormData(newItemFormEl);
     const data = Object.fromEntries(formData.entries()); // convert to plain object
-    
-    newItemFormEl.querySelectorAll('.field-validation-error').forEach(item => item.innerText = '');
+
+    resetForm();
     
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -88,6 +70,15 @@ newItemFormEl.addEventListener("submit", (event) => {
     });
 });
 
+function resetForm() {
+    
+    newItemFormEl.querySelectorAll('.field-validation-error').forEach(item => item.innerText = '');
+    newItemFormEl.querySelectorAll('.field input').forEach(item => item.classList.remove('error-input'));
+    newItemFormEl.querySelectorAll('.field select').forEach(item => item.classList.remove('error-input'));
+    errorBannerEl.innerText = '';
+    errorBannerEl.style.display = 'none';
+}
+
 
 function problemDetailHandler(problemDetail) {
     console.log("problemDetail " + problemDetail.type);
@@ -107,6 +98,8 @@ function handleInvalidArguments(data) {
         const field = error.field;
         const reason = error.reason;
 
+        const errorEl = document.querySelector(`input[name="${field}"]`);
+        errorEl.classList.add('error-input');
         const errorMessageEl = document.querySelector(`input[name="${field}"] ~ .field-validation-error`);
         errorMessageEl.innerText = reason;
     });
@@ -139,6 +132,27 @@ evtSource.addEventListener("DELETE-ITEM", (event) => {
         parentList.parentElement.remove();
     }
 });
+
+
+
+evtSource.addEventListener("NEW-ITEM", (event) => {
+
+    console.log("GOT NEW ITEM");
+    
+    const eventData = JSON.parse(event.data);
+    const allCategorySections = Array.from(document.querySelectorAll('article.category'));
+    let categoryEl = allCategorySections.find(i => i.getAttribute('id') === `category-${eventData.category}`);
+    console.log(categoryEl);
+    if(categoryEl === undefined) {
+        categoryEl = createNewCategory(eventData.category);
+        console.log(categoryEl);
+    }
+    
+    const newItem = createNewItem(eventData);
+    
+    categoryEl.querySelector('ul').appendChild(newItem);
+});
+
 
 evtSource.addEventListener("REFRESH-LIST", (event) => {
     location.reload();

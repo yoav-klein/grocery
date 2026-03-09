@@ -95,6 +95,15 @@
         transition: border 0.2s, box-shadow 0.2s;
     }
 
+    input.error-input, select.error-input {
+        border: 1px solid red;
+    }
+
+    .field-validation-error {
+        font-size: 0.8rem;
+        color: red;
+    }
+
     input:focus,
     select:focus {
         border-color: var(--color-dialog-input-border-active);

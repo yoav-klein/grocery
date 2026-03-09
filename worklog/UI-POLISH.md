@@ -6,19 +6,20 @@ The `ui` branch should achieve the following goals:
 * Refactoring JavaScript code to be more maintainable
 * Error handling in UI
 
+It should not be 100%, just around 80-90%. Should lay the foundations for going forward with other stuff while the UI
+already feels more mature.
+
 
 ## Backlog
 ---
 * Padding and margins system
-* Add/Edit fixed list
-    * mobile view
+* Mobile view
 * Categories - typography and colors
 * Fonts
 * Forms - error messages
-* Sidebar - fixed lists - smaller font maybe.
 * Error handling in forms
+* Sidebar - fixed lists - smaller font maybe.
 * Make the kebab menu thing a component
-* Mobile
 * Tenant selection
 * Manage tenant
 
@@ -58,7 +59,7 @@ The `ui` branch should achieve the following goals:
     * Delete confirmation dialog
 
 ### Step 8
-* 
+* Error views
 
 ### Currently
 Fixed list page - delete list confirmation dialog

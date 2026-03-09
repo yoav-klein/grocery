@@ -350,7 +350,7 @@
                             
                             <div class="field">
                                 <label for="category" th:text="#{additem.label.category}">Category</label>
-                                <select name="category" class="long-input">
+                                <select id="category" name="category" class="long-input">
                                     <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}">Vegetables</option>
                                     <option th:remove="all">Fruits</option>
                                     <option th:remove="all">Dairy</option>
