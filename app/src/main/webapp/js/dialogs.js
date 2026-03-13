@@ -71,9 +71,20 @@ Array.from(dialogElements).forEach(dialog => {
             errorDetail.fieldErrors.forEach(error => {
                 const field = error.field;
                 const reason = error.reason;
-    
+
                 const errorMessageEl = dialog.querySelector(`input[name="${field}"] ~ .field-validation-error`);
-                errorMessageEl.innerText = reason;
+                if(errorMessageEl) {
+                    errorMessageEl.innerText = reason;
+                } else {
+                    const inputEl = dialog.querySelector(`input[name="${field}"]`);
+                    const validationFieldId = inputEl.dataset.validationFieldId;
+                    if(validationFieldId) {
+                        const validationFieldEl = document.getElementById(validationFieldId)
+                        if(validationFieldEl) {
+                            validationFieldEl.innerText = reason;
+                        }
+                    }
+                }
             });
         }
 

@@ -361,13 +361,13 @@
                             <div class="field">
                                 <label for="quantity">Quantity</label>
                                 <div class="quantity-control">
-                                    <input name="quantity" type="number" id="quantity" value="1">
+                                    <input data-validation-field-id="quantity-validation-field" name="quantity" type="number" id="quantity" value="1">
                                     <select name="quantityType">
                                         <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
                                         <option th:remove="all">Unit</option>
                                     </select>
                                 </div>
-                                <p class="field-validation-error"></p>
+                                <p id="quantity-validation-field" class="field-validation-error"></p>
                             </div>
                         </div>
         

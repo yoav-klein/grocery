@@ -16,8 +16,6 @@ already feels more mature.
 * Mobile view
 * Categories - typography and colors
 * Fonts
-* Forms - error messages
-* Error handling in forms
 * Sidebar - fixed lists - smaller font maybe.
 * Make the kebab menu thing a component
 * Tenant selection
@@ -62,6 +60,8 @@ already feels more mature.
 * Form system (V)
 * Error views (V)
 
+### Step 9
+* 
 
 ### Currently
 Finished Working on the forms system
