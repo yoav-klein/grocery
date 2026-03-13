@@ -72,19 +72,24 @@ Array.from(dialogElements).forEach(dialog => {
                 const field = error.field;
                 const reason = error.reason;
 
-                const errorMessageEl = dialog.querySelector(`input[name="${field}"] ~ .field-validation-error`);
-                if(errorMessageEl) {
-                    errorMessageEl.innerText = reason;
-                } else {
-                    const inputEl = dialog.querySelector(`input[name="${field}"]`);
-                    const validationFieldId = inputEl.dataset.validationFieldId;
-                    if(validationFieldId) {
-                        const validationFieldEl = document.getElementById(validationFieldId)
-                        if(validationFieldEl) {
-                            validationFieldEl.innerText = reason;
-                        }
-                    }
+                const directErrorEl = dialog.querySelector(
+                    `input[name="${field}"] ~ .field-validation-error`
+                );
+
+                if (directErrorEl) {
+                    directErrorEl.innerText = reason;
+                    return;
                 }
+
+                const inputEl = dialog.querySelector(`input[name="${field}"]`);
+                const validationFieldId = inputEl?.dataset?.validationFieldId;
+                if (!validationFieldId) return;
+
+                const fallbackErrorEl = document.getElementById(validationFieldId);
+                if (!fallbackErrorEl) return;
+
+                fallbackErrorEl.innerText = reason;
+
             });
         }
 
