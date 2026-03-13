@@ -7,29 +7,15 @@ const csrfToken = document.querySelector('meta[name="_csrf"]')
 const evtSource = new EventSource(document.baseURI + '/itemStream');
 
 const newItemFormEl = document.getElementById("new-item-form");
-const addItemButton = document.getElementById('add-item-button');
 const addItemDialogEl = document.getElementById('add-item-dialog');
-const errorBannerEl = document.getElementById("add-item-dialog-error-banner");
-const closeAddItemList = Array.from(document.querySelectorAll('[data-action="close-add-item-dialog"]'));
-
-closeAddItemList.forEach(el => el.addEventListener('click', () => {
-    newItemFormEl.reset();
-    resetForm();
-}));
-
-addItemButton.addEventListener('click', () => {
-    console.log("open modal");
-    addItemDialogEl.showModal();
-})
 
 
 newItemFormEl.addEventListener("submit", (event) => {
     event.preventDefault(); // prevent page reload
+    addItemDialogEl.dispatchEvent(new CustomEvent('submitting'));
 
     const formData = new FormData(newItemFormEl);
     const data = Object.fromEntries(formData.entries()); // convert to plain object
-
-    resetForm();
     
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -44,8 +30,8 @@ newItemFormEl.addEventListener("submit", (event) => {
     .then(resp => {
         if(!resp.ok) throw new HttpError(resp);
 
-        newItemFormEl.reset();
-        addItemDialogEl.close(); 
+        addItemDialogEl.dispatchEvent(new CustomEvent('submitsuccess'));
+
     })
     .catch(e => {
         console.log("error");
@@ -59,7 +45,8 @@ newItemFormEl.addEventListener("submit", (event) => {
 
         response.json()
             .then(data => {
-                console.log("JSON: " + data);
+                console.log("JSON: ");
+                console.log(data);
                 if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
 
                 problemDetailHandler(data)
@@ -70,48 +57,26 @@ newItemFormEl.addEventListener("submit", (event) => {
     });
 });
 
-function resetForm() {
-    
-    newItemFormEl.querySelectorAll('.field-validation-error').forEach(item => item.innerText = '');
-    newItemFormEl.querySelectorAll('.field input').forEach(item => item.classList.remove('error-input'));
-    newItemFormEl.querySelectorAll('.field select').forEach(item => item.classList.remove('error-input'));
-    errorBannerEl.innerText = '';
-    errorBannerEl.style.display = 'none';
-}
-
-
 function problemDetailHandler(problemDetail) {
-    console.log("problemDetail " + problemDetail.type);
-    if(problemDetail.type === "invalid-arguments") handleInvalidArguments(problemDetail);
+    if(problemDetail.type === "invalid-arguments") handleInvalidArguments(problemDetail.errors);
     else if(problemDetail.type === "generic-error") handleGenericError("Something is wrong, try again");
     else throw new UnhandledProblemTypeError("don't know how to handle this error");
 }
 
 function statusCodeHandler(response) {
     console.log("statusCodeHandler " + response);
-    if(response.status == 409) handleConflict(response);
-    if(response.status == 400) handleGenericError("Something in your request is wrong");
+
+    if(response.status === 400) handleGenericError("Something in your request is wrong");
+    if(response.status === 500) handleGenericError("Something is wrong on our side, try again");
 }
 
-function handleInvalidArguments(data) {
-    data.errors.forEach(error => {
-        const field = error.field;
-        const reason = error.reason;
-
-        const errorEl = document.querySelector(`input[name="${field}"]`);
-        errorEl.classList.add('error-input');
-        const errorMessageEl = document.querySelector(`input[name="${field}"] ~ .field-validation-error`);
-        errorMessageEl.innerText = reason;
-    });
+function handleInvalidArguments(fieldErrors) {
+    console.log(fieldErrors);
+    addItemDialogEl.dispatchEvent(new CustomEvent('submiterror', { detail: { type: "field", fieldErrors: fieldErrors } }));
 }
 
-
-function handleGenericError(message=null) {
-    console.log("generic error");
-
-    message = message ? message : 'Something went wrong, try again';
-    errorBannerEl.innerText = message;
-    errorBannerEl.style.display = 'block';
+function handleGenericError(message="Something is wrong, try again") {
+    addItemDialogEl.dispatchEvent(new CustomEvent('submiterror', { detail: { type: "form", message: message } }));
 }
 
 /* DELETE ITEMS */

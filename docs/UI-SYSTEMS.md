@@ -35,6 +35,8 @@ Every form dialog is structured like this:
     * Left - secondary action
     * Right - primary action
 
+I use the system I developed in the `frontend` repo, see it there.
+
 ## Color system
 
 There are 3 levels of CSS variables that control colors.

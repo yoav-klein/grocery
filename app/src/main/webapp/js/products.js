@@ -5,20 +5,13 @@ import { HttpError, UnhandledProblemTypeError } from './common.js';
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]')
 const csrfToken = document.querySelector('meta[name="_csrf"]')
 
-const addProductButtonEl = document.getElementById("add-product-button");
 const addProductDialogEl = document.getElementById("add-product-dialog");
 const submitButton = document.getElementById('dialog-submit-button');
 const addProductForm = document.getElementById('new-product-form');
-const formErrorBanner = document.getElementById('form-error-banner');
-
-addProductButtonEl.addEventListener('click', () => {
-    addProductDialogEl.showModal();
-});
 
 submitButton.addEventListener('click', (event) => {
     event.preventDefault();
-
-    resetErrorBanner();
+    addProductDialogEl.dispatchEvent(new CustomEvent('submitting'));
 
     const formData = new FormData(addProductForm);
     const data = Object.fromEntries(formData.entries());
@@ -38,8 +31,7 @@ submitButton.addEventListener('click', (event) => {
     .then(resp => {
         if(!resp.ok) throw new HttpError(resp);
 
-        addProductForm.reset();
-        addProductDialogEl.close();
+        addProductDialogEl.dispatchEvent(new CustomEvent('submitsuccess'));
         window.location.reload();
     })
     .catch(e => {
@@ -54,7 +46,8 @@ submitButton.addEventListener('click', (event) => {
 
         response.json()
             .then(data => {
-                console.log("JSON: " + data);
+                console.log("JSON: ");
+                console.log(data);
                 if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
 
                 problemDetailHandler(data)
@@ -67,44 +60,25 @@ submitButton.addEventListener('click', (event) => {
 
 
 function problemDetailHandler(problemDetail) {
-    console.log("problemDetail " + problemDetail.type);
-    if(problemDetail.type === "invalid-arguments") handleInvalidArguments(problemDetail);
-    else if(problemDetail.type === "generic-error") handleGenericError(problemDetail);
+    console.log("problemDetail ");
+    console.log(problemDetail);
+    if(problemDetail.type === "invalid-arguments") handleInvalidArguments(problemDetail.errors);
+    else if(problemDetail.type === "generic-error") handleFormError(problemDetail.title);
     else throw new UnhandledProblemTypeError("don't know how to handle this error");
 }
 
 function statusCodeHandler(response) {
     console.log("statusCodeHandler " + response);
-    if(response.status == 409) handleConflict(response);
-    if(response.status == 400) handleGenericError("Something in your request is wrong");
+    
+    if(response.status == 409) handleFormError('Product with such name and category already exists!');
+    if(response.status == 400) handleFormError("Something in your request is wrong");
 }
 
-
-function handleInvalidArguments(data) {
-    data.errors.forEach(error => {
-        const field = error.field;
-        const reason = error.reason;
-
-        console.log(`${field}: ${reason}`);
-        const errorMessageEl = document.querySelector(`input[name="${field}"] ~ .field-validation-error`);
-        errorMessageEl.innerText = reason;
-    });
+function handleFormError(message = "Something is wrong") {
+    addProductDialogEl.dispatchEvent(new CustomEvent('submiterror', { detail: { type: "form", message: message } }));
 }
 
-function handleGenericError(message=null) {
-    console.log("generic error");
-
-    message = message ? message : 'Something went wrong, try again';
-    formErrorBanner.innerText = message;
-    formErrorBanner.style.display = 'block';
-}
-
-function handleConflict(response) {
-    formErrorBanner.style.display = 'block';
-    formErrorBanner.innerText = 'Product with such name and category already exists!';
-}
-
-function resetErrorBanner() {
-    formErrorBanner.style.display = 'none';
-    formErrorBanner.innerText = '';
+function handleInvalidArguments(fieldErrors) {
+    console.log(fieldErrors);
+    addProductDialogEl.dispatchEvent(new CustomEvent('submiterror', { detail: { type: "field", fieldErrors: fieldErrors } }));
 }

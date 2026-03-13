@@ -34,32 +34,34 @@ already feels more mature.
 ## Steps
 ---
 
-### Step 2
+### Step 2 (V)
 * Categories polish - settle out the grid stuff
 
-### Step 3
+### Step 3 (V)
 * Products page
 
-### Step 4
+### Step 4 (V)
 * Fixed list page
 
-### Step 5
+### Step 5 (V)
 * Add/Edit fixed list page
 
-### Step 6
+### Step 6 (V)
 * Fixed list page
     * Edit/Delete in kebab menu
     * Number of categories and items
 
-### Step 7
+### Step 7 (V)
 * Add/Edit fixed list page
     * Edit name button
     * Confirmation dialog
 * Fixed list page
     * Delete confirmation dialog
 
-### Step 8
-* Error views
+### Step 8 (V)
+* Form system (V)
+* Error views (V)
+
 
 ### Currently
-Fixed list page - delete list confirmation dialog
+Finished Working on the forms system

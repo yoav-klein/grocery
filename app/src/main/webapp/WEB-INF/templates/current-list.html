@@ -331,17 +331,17 @@
                         </article>
                     </div>
                 </section>
-                <button id="add-item-button" class="primary-fab">+</button>
-                <dialog id="add-item-dialog" class="form-dialog">
+                <button class="primary-fab" data-open-dialog data-dialog-id="add-item-dialog">+</button>
+                <dialog id="add-item-dialog" class="form-dialog js-form-dialog">
                     <header>
                         <h2>New Item</h2>
-                        <button data-action="close-add-item-dialog" class="js-close-dialog-button close-dialog-button">&times;</button>
+                        <button class="js-close-dialog-button close-dialog-button">&times;</button>
                     </header>
                     <form id="new-item-form">
-                        <div id="add-item-dialog-error-banner" class="dialog-error-banner">
+                        <div class="dialog-error-banner">
                             <p>Oops, seems that something's wrong on our end</p>
                         </div>
-                        <div class="dialog-body">
+                        <div class="form-dialog-body">
                             <div class="field">
                                 <label for="name">Name</label>
                                 <input name="name" class="long-input" type="text" id="name">
@@ -371,8 +371,8 @@
                             </div>
                         </div>
         
-                        <div class="dialog-footer">
-                            <button data-action="close-add-item-dialog" type="reset" class="js-close-dialog-button dialog-secondary-action-button" name="cancel">Cancel</button>
+                        <div class="form-dialog-footer">
+                            <button type="reset" class="js-close-dialog-button dialog-secondary-action-button" name="cancel">Cancel</button>
                             <button id="dialog-submit-button" type="submit" name="save" class="dialog-primary-action-button">Submit</button>
                         </div>
                     </form>
