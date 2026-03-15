@@ -128,10 +128,13 @@ main > header {
 }
 
 .increment-button, .decrement-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid var(--color-border-subtle);
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     background-color: var(--color-card-background);
     color: var(--color-text-secondary);
     cursor: pointer;

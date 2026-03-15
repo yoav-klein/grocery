@@ -3,6 +3,10 @@ main {
     padding: 1rem;
 }
 
+.category-grid .item-name {
+    padding-inline-start: .5rem;
+}
+
 .checkbox-container {
     /* in order to align the checkbox and text in the same height, display flex*/
     display: flex;

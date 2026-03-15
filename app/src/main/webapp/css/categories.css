@@ -12,7 +12,7 @@ main {
     align-content: start;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-auto-rows: minmax(200px, auto);
-    gap: 20px;
+    gap: 1.25rem;
     justify-content: start;
     padding-bottom: 100px;
     overflow: auto;
@@ -66,5 +66,4 @@ main {
 .item-name {
     flex: 1;
     color: var(--color-card-item-name);
-    padding-inline-start: .5rem;
 }
