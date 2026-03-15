@@ -39,6 +39,9 @@ main {
     cursor: pointer;
     z-index: 1000;
     visibility: hidden;
+    svg {
+        fill: var(--color-sidebar-item-text)
+    }
 }
 
 #menu-button:hover {
@@ -93,8 +96,6 @@ main {
 
 #sidebar nav {
     padding: .2rem;
-    /* height: 100%; */
-    /* have the nav take all the available space in the sidebar */
     flex-grow: 1;
 
     /* flex to arrange the main menu and the Manage Tenant link which is separate */
@@ -108,23 +109,25 @@ main {
 
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--sidebar-menu-gap);
 }
 
-#sidebar nav a, #sidebar nav .dropdown-button {
+.menu-item a, .menu-item .dropdown-button {
     border-radius: 0.5em;
     display: flex;
     text-decoration: none;
     color: var(--color-sidebar-item-text);
     align-items: center;
-    padding: 1em;
-    gap: 1em; /* to separate the icon from teh text */
+    padding: 1rem;
+    gap: 1rem; /* to separate the icon from teh text */
 }
 
-
+.menu-item a:hover, .menu-item .dropdown-button:hover {
+    background-color: var(--color-sidebar-item-bg-hover);
+}
 
 /* setting a different style to the active tab */
-#sidebar nav ul li.active a {
+.menu-item.active a {
     background-color: var(--color-sidebar-item-bg-active);
     font-weight: 600;
     color: var(--color-sidebar-item-text-active);
@@ -149,15 +152,12 @@ main {
     fill: var(--color-sidebar-item-text);
 }
 
-#sidebar nav a span, #sidebar nav .dropdown-button span {
+.menu-item span {
     /* so that the span will take all the available space, pushing the other flex elements to the sides 
     so that the little button of the Create item will be in the end of the line */ 
     flex-grow: 1;
 }
 
-#sidebar nav a:hover, .dropdown-button:hover {
-    background-color: var(--color-sidebar-item-bg-hover);
-}
 
 /* || SUB MENU OPEN AND CLOSE */
 
@@ -166,13 +166,13 @@ main {
     display: grid;
     grid-template-rows: 0fr;
     transition: 300ms ease-in-out;
-    margin-top: 5px;
+    margin-top: var(--sidebar-menu-gap);
 
     > div {
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: var(--sidebar-menu-gap);
     }
 }
 
@@ -191,7 +191,7 @@ main {
 
 /* have the submenu items idented */
 #sidebar .sub-menu a {
-    padding-inline-start: 2em;
+    padding-inline-start: 2rem;
 }
 
 
@@ -224,18 +224,18 @@ main {
         left: 0;
         bottom: 0;
         
-        transform: translateX(0);
+        transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
         box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         z-index: 1000; /* be on top of overlay */
     }
  
-    #sidebar.close {
-        transform: translateX(-100%);
+    #sidebar.show {
+        transform: translateX(0);
     }
 
-    .overlay.active {
-        opacity: 1;
+    #overlay.active {
+        opacity: 0.3;
         visibility: visible;
     }
 }

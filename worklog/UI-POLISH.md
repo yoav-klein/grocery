@@ -12,12 +12,10 @@ already feels more mature.
 
 ## Backlog
 ---
-* Padding and margins system
 * Mobile view
 * Categories - typography and colors
 * Fonts
 * Sidebar - fixed lists - smaller font maybe.
-* Make the kebab menu thing a component
 * Tenant selection
 * Manage tenant
 
@@ -61,7 +59,8 @@ already feels more mature.
 * Error views (V)
 
 ### Step 9
-* 
+* Padding and margins system
 
 ### Currently
-Finished Working on the forms system
+Finished Working on the forms system.
+Starting step 9

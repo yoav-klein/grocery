@@ -77,7 +77,7 @@
     --color-tenant-card-text-secondary: var(--color-gray-600);
 
     --color-menu-button-hover: ;
-    --color-overlay-bg: rgba(0,0,0,0.5);;
+    --color-overlay-bg: var(--color-gray-100);
 
      /* Main */
     --color-main-background: var(--color-surface-page);
@@ -113,13 +113,14 @@
 
     /* Layout */
     --header-height: 4rem;
-    --sidebar-width: 250px;
+    --sidebar-width: 16rem;
+    --sidebar-menu-gap: 0.4rem;
 
     /* Elements */
     --primary-fab-size: 70px;
 
     /* --- BORDERS --- */
-    --dialog-border: 
+    --dialog-border: ;
 
 }
 
@@ -128,6 +129,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    font-family: Poppins, 'Segoe UI', sans-serif;
+    line-height: 1.5rem;
+    background-color: white;
+}
+
+body {
+    background-color: var(--color-main-background);
+}
+
+html, body {
+    height: 100%;
 }
 
 input,
@@ -145,55 +160,10 @@ a {
     text-decoration: none;
 }
 
-html {
-    font-family: Poppins, 'Segoe UI', sans-serif;
-    line-height: 1.5rem;
-    background-color: white;
-}
-
-body {
-    background-color: var(--color-main-background);
-}
-
-html, body {
-    height: 100%;
-}
 
 ul {
     list-style-type: none;
 }
-
-
-/* || UTILITY */
-
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.padding-1rem {
-    padding: 1rem;
-}
-
-.flex-1 {
-    flex-grow: 1;
-}
-
-.round-borders {
-    border-radius: 10px;
-}
-
-.padding-1 {
-    padding: 1rem;
-}
-
 
 /* COMPONENTS */
 

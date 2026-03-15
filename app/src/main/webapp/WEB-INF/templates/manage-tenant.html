@@ -18,8 +18,8 @@
                 <ul class="member-list">
                     <li class="member-row" th:each="membership: ${memberships}">
                         <img th:src="${membership.user.pictureUrl}" alt="user picture">
-                        <p class="flex-1" th:text="${membership.user.name}">John Doe</p>
-                        <p class="flex-1" th:text="${membership.user.email}">john.doe@gmail.com</p>
+                        <p  th:text="${membership.user.name}">John Doe</p>
+                        <p  th:text="${membership.user.email}">john.doe@gmail.com</p>
                         <p th:text="${membership.role}">Member</p>
                         <div class="member-action-menu-container-placeholder">
                             <div class="member-action-menu-container" th:unless="${membership.user.id} == ${user.id}" th:if="${@tenantUserService.isAdmin(user.id, tenant.id)}">
@@ -47,8 +47,8 @@
                 <dialog id="add-invitation-dialog" class="modal-dialog">
                     <h2>Invite new member</h3>
                     <button id="close-modal">X</button>
-                    <form class="flex-column" method="post" th:action="@{/tenant/{tenantId}/invitations(tenantId=${tenant.id})}">
-                        <div class="inputs flex-column">
+                    <form method="post" th:action="@{/tenant/{tenantId}/invitations(tenantId=${tenant.id})}">
+                        <div class="inputs">
                             <div class="field-container">
                                 <label for="user-mail">User Email</label>
                                 <input id="user-mail" class="long-input" type="text" name="email">
