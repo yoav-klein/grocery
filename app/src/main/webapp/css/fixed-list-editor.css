@@ -22,8 +22,7 @@ main {
 
 #step-wrapper header {
     grid-area: head;
-    border-bottom: 1px solid var(--line-color);
-    height: 100px;
+    height: var(--height-fixed-list);
 
     display: flex;
     flex-direction: row;

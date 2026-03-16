@@ -25,7 +25,13 @@
     --color-gray-800: #1f2a24;   /* primary text */
 
     /* Reds */
-    --color-red: #EF4444;
+    --color-red-50:  #FEF2F2;
+    --color-red-100: #FEE2E2;
+    --color-red-200: #FECACA;
+    --color-red-300: #FCA5A5;
+    --color-red-400: #F87171;
+    --color-red-500: #EF4444;  /* your delete text */
+    --color-red-600: #DC2626;
     
     /* --- COLOR VARIABLES - GENERIC ROLES -- */
         
@@ -44,6 +50,11 @@
     --color-text-secondary: var(--color-gray-600);
     --color-text-muted: var(--color-gray-400);
     --color-text-inverse: var(--color-white);
+    --color-text-delete: var(--color-red-600);
+    
+    /* Backgrounds */
+    --color-background-delete: var(--color-red-50);
+    --color-background-delete-hover: var(--color-red-100);
 
     /* Actions */
     --color-action-primary: var(--color-green-500);
@@ -108,6 +119,16 @@
     --color-dialog-button-secondary-text: var(--color-text-secondary);
     --color-dialog-button-secondary-border: var(--color-border-subtle);
 
+    --color-dialog-button-delete-text: var(--color-text-inverse);
+    --color-dialog-button-delete-bg: var(--color-red-500);
+    --color-dialog-button-delete-hover: var(--color-red-600);
+
+    /* Errors */
+    --color-error-banner-text: var(--color-red-600);
+    --color-error-banner-border: var(--color-red-200);
+    --color-error-banner-bg: var(--color-red-50);
+    --color-field-error-text: var(--color-red-600);
+    --color-field-error-border: var(--color-red-500);
 
     /* --- SIZES --- */
 
@@ -115,6 +136,9 @@
     --header-height: 4rem;
     --sidebar-width: 16rem;
     --sidebar-menu-gap: 0.4rem;
+
+    /* Fixed List */
+    --height-fixed-list: 5rem;
 
     /* Elements */
     --primary-fab-size: 70px;

@@ -8,12 +8,22 @@ Array.from(openModalButtons).forEach(button => {
     });
 });
 
-/* CLOSE MODAL */
+/* CLOSE FORM DIALOG */
 const closeFormButtons = document.querySelectorAll('.js-close-dialog-button');
 Array.from(closeFormButtons).forEach(button => {
-    button.addEventListener('click', () => {
-        resetAndCloseDialog(button.closest('.form-dialog'));
-    });
+    const formDialog = button.closest('.form-dialog');
+    const confirmDialog = button.closest('.confirmation-dialog');
+
+    if(formDialog) {
+        button.addEventListener('click', () => {
+            resetAndCloseDialog(formDialog);
+        });
+    }
+    if(confirmDialog) {
+        button.addEventListener('click', () => {
+            confirmDialog.close();
+        });
+    }
 });
 
 function resetAndCloseDialog(dialog) {
@@ -26,11 +36,16 @@ function resetAndCloseDialog(dialog) {
 }
 
 function clearErrors(dialog) {
+    // clear field validation errors
     const fieldValidationErrorEls = dialog.querySelectorAll('.field-validation-error');
-    const formLevelErrorBanner = dialog.querySelector('.dialog-error-banner');
-
     Array.from(fieldValidationErrorEls).forEach(p => p.innerText = '');
 
+    // clear error class from divs with 'error' class
+    const errorFields = dialog.querySelectorAll('.field.error');
+    errorFields.forEach(el => el.classList.remove('error'));
+
+    // clear error banner
+    const formLevelErrorBanner = dialog.querySelector('.dialog-error-banner');
     if(formLevelErrorBanner) {
         formLevelErrorBanner.innerText = '';
         formLevelErrorBanner.classList.remove('show');
@@ -72,6 +87,10 @@ Array.from(dialogElements).forEach(dialog => {
                 const field = error.field;
                 const reason = error.reason;
 
+                const inputEl = dialog.querySelector(`input[name="${field}"]`);
+                // apply 'error' class to closest '.field'
+                inputEl.closest('.field')?.classList?.add('error');
+
                 const directErrorEl = dialog.querySelector(
                     `input[name="${field}"] ~ .field-validation-error`
                 );
@@ -80,8 +99,7 @@ Array.from(dialogElements).forEach(dialog => {
                     directErrorEl.innerText = reason;
                     return;
                 }
-
-                const inputEl = dialog.querySelector(`input[name="${field}"]`);
+                
                 const validationFieldId = inputEl?.dataset?.validationFieldId;
                 if (!validationFieldId) return;
 

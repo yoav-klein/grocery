@@ -68,7 +68,7 @@
                         <button class="dialog-secondary-action-button js-close-dialog-button">Cancel</button>
                         <form method="post" th:action="@{/tenant/{tenantId}/lists/{listId}(tenantId=${tenant.id},listId=${fixedList.id})}">
                             <input type="hidden" name="_method" value="delete">
-                            <button class="dialog-primary-action-button" type="submit">Delete</button>
+                            <button class="dialog-primary-action-button delete-button" type="submit">Delete</button>
                         </form>
                         
                     </div>

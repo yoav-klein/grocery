@@ -3,6 +3,12 @@ main {
     padding: 1rem;
 }
 
+
+/* CATEGORY GRID OVERRIDES */
+.category-grid {
+    padding-bottom: calc(--primary-fab-size + 30px);
+}
+
 .category-grid .item-name {
     padding-inline-start: .5rem;
 }
