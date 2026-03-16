@@ -158,6 +158,7 @@
 
     .dialog-body {
         flex: 1 1 auto;
+        margin-bottom: 2rem;
     }
 
     .dialog-footer {
