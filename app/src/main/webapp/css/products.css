@@ -13,8 +13,8 @@ main {
 .kebab-menu-button {
     border-radius: 50%;
     border: 1px solid var(--color-text-muted);
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
     background: transparent;
     display: flex;
     align-items: center;
@@ -22,8 +22,8 @@ main {
     
     svg {
         fill: var(--color-text-muted);
-        width: 16px;
-        height: 16px;
+        width: 1rem;
+        height: 1rem;
     }
 
     margin-inline-start: 20px;
@@ -34,14 +34,12 @@ main {
         0 1px 2px rgba(0, 0, 0, 0.05),
         0 6px 16px rgba(0, 0, 0, 0.08);
     
-    padding: 6px 0;
+    padding: 0.4rem 0;
     min-width: 120px;
     border-radius: 7px;
     border: 1px solid var(--color-border-subtle);
     background-color: var(--color-white);
 }
-
-
 
 .delete-button {
     width: 100%;

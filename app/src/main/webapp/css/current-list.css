@@ -37,22 +37,22 @@ main {
 .checkbox-container label::before {
     content: '';
     /* 1em will make it the same size as our font-size */
-    width: 1em;
-    height: 1em;
-    border: 0.05em solid  #94A3B8;
-    border-radius: 0.15em;
-    margin-right: .5em;
+    width: 1rem;
+    height: 1rem;
+    border: 0.05em solid  var(--color-border-subtle);
+    border-radius: 2px;
+    margin-right: .5rem;
 }
 
 /* hover effect */
 .checkbox-container label:hover::before {
-    background-color: #DCFCE7;
-    border-color: #22C55E;
+    background-color: var(--color-green-100);
+    border-color: var(--color-green-400);
 }
 
 .checkbox-container input[type="checkbox"]:checked + label::before {
     content: '\002714';
-    background-color: #27AE60;
+    background-color: var(--color-green-400);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,7 +62,7 @@ main {
 
 .quantity-control {
     display: grid;
-    grid-template-columns: 90px 100px; /* or 120px 1fr */
+    grid-template-columns: 90px 100px;
     gap: 10px;
     align-items: center;
 }
