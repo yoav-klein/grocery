@@ -3,7 +3,6 @@ package com.grocery.web.controllers.api.app;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,8 +26,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import com.grocery.business.domain.dto.ListItemRequest;
 import com.grocery.business.domain.dto.BulkAddItemRequest;
+import com.grocery.business.domain.dto.ListItemRequest;
 import com.grocery.business.domain.events.AddItemEvent;
 import com.grocery.business.domain.events.DeleteItemEvent;
 import com.grocery.business.domain.events.EventManager;
@@ -64,9 +63,9 @@ public class CurrentListApiController {
     public ResponseEntity batchAdd(@PathVariable("tenantId") String tenantId, 
             @AuthenticationPrincipal Object user, 
             @PathVariable("listId") String listId, 
-            @RequestBody @Validated BulkAddItemRequest bulkAddItemRequest) throws UserNotFoundException, ProductNotFoundException {
+            @RequestBody @Validated BulkAddItemRequest bulkAddItemRequest) throws UserNotFoundException, ProductNotFoundException, Exception {
         OAuth2User oauth2User = (OAuth2User)user;
-
+        
         currentListService.bulkAdd(tenantId, oauth2User.getAttribute("sub"), listId, bulkAddItemRequest);
 
         eventManager.addEvent(new ListRefreshEvent());

@@ -24,7 +24,7 @@
                         </div>
                         <div class="header-list-name">
                             <button th:if="${mode} == 'edit'" id="edit-name-button"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 -960 960 960" width="36px" fill="#ffffff"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></button>
-                            <label for="listName">List name</label>
+                            <label for="listName" class="nowrap">List name</label>
                             <input id="listName" type="text" placeholder="e.g., Weekly groceries" th:value="(${mode} == 'edit')? ${fixedList.name} : ''" th:disabled="${mode} == 'edit'" th:data-init-value="(${mode} == 'edit')? ${fixedList.name} : ''"/>
                         </div>
                         <div class="header-actions">
@@ -118,8 +118,10 @@
                         <p><span id="success-list-name">LISTNAME</span> was <span th:if="${mode} == 'add'">added</span><span th:if="${mode} == 'edit'">edited</span> successfully.</p>
                     </div>
                     <div class="dialog-footer">
-                        <a class="dialog-secondary-action-button" th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Go home</a>
-                        <a class="dialog-primary-action-button" id="to-list-link" th:href="@{/tenant/{tenantId}/lists(tenantId=${tenant.id})}">Open list</a>
+                        <div class="dialog-footer-controls">
+                            <a class="dialog-action-button dialog-secondary-action-button" th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Go home</a>
+                            <a class="dialog-action-button dialog-primary-action-button" id="to-list-link" th:href="@{/tenant/{tenantId}/lists(tenantId=${tenant.id})}">Open list</a>
+                        </div>
                     </div>
                 </dialog>
                 <dialog id="error-dialog">
@@ -133,18 +135,6 @@
                     <div class="dialog-footer">
                         <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
                         <button class="close-modal-button">To the List</button>
-                    </div>
-                </dialog>
-                <dialog id="cancel-dialog">
-                    <header>
-                        <h2>Cancel</h2>
-                        <button class="close-modal-button top-corner-button">X</button>
-                    </header>
-                    <div class="body">
-                        <p>Are you sure you want to abort?</p>
-                    </div>
-                    <div class="footer">
-                        <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Yes</a>
                     </div>
                 </dialog>
             </main>

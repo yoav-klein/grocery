@@ -2,6 +2,10 @@
 
 /* || VARIABLES */
 :root {
+    /*****************************************/
+    /*  COLORS                               */
+    /*****************************************/
+
     /* --- COLOR VARIABLES - RAW COLORS --- */
 
     /* Greens */
@@ -87,7 +91,7 @@
     --color-tenant-card-text-primary: var(--color-gray-900);
     --color-tenant-card-text-secondary: var(--color-gray-600);
 
-    --color-menu-button-hover: ;
+    --color-menu-button-hover: var(--color-green-200);
     --color-overlay-bg: var(--color-gray-100);
 
      /* Main */
@@ -130,18 +134,79 @@
     --color-field-error-text: var(--color-red-600);
     --color-field-error-border: var(--color-red-500);
 
-    /* --- SIZES --- */
+    /*****************************************/
+    /*  SIZES                                */
+    /*****************************************/
+
+    /* --- SIZES - RAW UNITS --- */
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 4rem;
+
+    /* --- SIZES - DOMAIN TOKENS --- */
+
+    /* Generic */
+    --input-padding: var(--space-2);
+    --padding-md: var(--space-4);
 
     /* Layout */
-    --header-height: 4rem;
+    --header-height: var(--space-8);
     --sidebar-width: 16rem;
-    --sidebar-menu-gap: 0.4rem;
+    --sidebar-kebab-button-margin: var(--space-4);
+    --sidebar-kebab-button-padding: var(--space-3);
+    --sidebar-tenant-card-margin: var(--space-4);
+    --sidebar-tenant-card-padding: var(--space-4);
+    --sidebar-tenant-card-gap: var(--space-4);
+    --sidebar-tenant-card-switch-tenant-gap: var(--space-2);
+    --sidebar-menu-padding: var(--space-1);
+    --sidebar-menu-gap: var(--space-1);
+    --sidebar-menu-item-padding-tb: var(--space-4);
+    --sidebar-menu-item-padding-rl: var(--space-4);
+    --sidebar-menu-item-gap: var(--space-3);
+    --sidebar-submenu-item-padding-tb: var(--space-6);
+    --main-padding: var(--padding-md);
+
+    /* Dialog */
+    --dialog-parts-gap: var(--space-5);
+    --dialog-padding-tb: var(--space-5);
+    --dialog-padding-rl: var(--space-6);
+    --dialog-inter-control-space: var(--space-4);
+    --dialog-inner-control-space: var(--space-1);
+    --dialog-footer-margin-top: var(--space-5);
+    --dialog-footer-padding-top: var(--space-3);
+    --dialog-footer-buttons-gap: var(--space-2);
+    --dialog-error-banner-padding: var(--padding-md);
+    --dialog-action-button-padding: var(--space-2) var(--space-4);
+
+    /* Categories */
+    --categories-gap: var(--space-4);
+    --category-header-margin: var(--space-6);
+    --category-padding: var(--space-4);
+    --category-items-gap: var(--space-1);
+    --category-item-fields-gap: var(--space-1);
+
+    /* Kebabs */
+    --kebab-menu-item-gap: var(--space-3);
+    --kebab-menu-item-padding: var(--space-2) var(--space-3);
+    --kebab-menu-actions-padding-tb: var(--space-2);
+    
 
     /* Fixed List */
-    --height-fixed-list: 5rem;
+    --fixed-list-header-height: 5rem;
+    --fixed-list-header-actions-gap: var(--space-5);
+    --fixed-list-error-banner-padding: var(--padding-md);
+    --fixed-list-stepper-gap: var(--space-1);
+    --fixed-list-stepper-margin-end: var(--space-1);
 
     /* Elements */
-    --primary-fab-size: 70px;
+    --primary-fab-size: clamp(30px, 4.5rem, 90px);
+    --primary-fab-absolute-pos-bottom: 2rem;
 
     /* --- BORDERS --- */
     --dialog-border: ;
@@ -189,6 +254,15 @@ ul {
     list-style-type: none;
 }
 
+main {
+    padding: var(--main-padding);
+}
+
+/* UTIL */
+.nowrap {
+    text-wrap: nowrap;
+} 
+
 /* COMPONENTS */
 
 .action-button {
@@ -222,7 +296,7 @@ ul {
 
 .primary-fab {
     position: absolute;   
-    bottom: 30px;
+    bottom: var(--primary-fab-absolute-pos-bottom);
     left: 50%;
     transform: translateX(-50%);
     width: var(--primary-fab-size);

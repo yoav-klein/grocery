@@ -65,12 +65,13 @@
                         <p>This will delete this list</p>
                     </div>
                     <div class="dialog-footer">
-                        <button class="dialog-secondary-action-button js-close-dialog-button">Cancel</button>
-                        <form method="post" th:action="@{/tenant/{tenantId}/lists/{listId}(tenantId=${tenant.id},listId=${fixedList.id})}">
-                            <input type="hidden" name="_method" value="delete">
-                            <button class="dialog-primary-action-button delete-button" type="submit">Delete</button>
-                        </form>
-                        
+                        <div class="dialog-footer-controls">
+                            <button class="dialog-action-button dialog-secondary-action-button js-close-dialog-button">Cancel</button>
+                            <form method="post" th:action="@{/tenant/{tenantId}/lists/{listId}(tenantId=${tenant.id},listId=${fixedList.id})}">
+                                <input type="hidden" name="_method" value="delete">
+                                <button class="dialog-action-button dialog-primary-action-button delete-button" type="submit">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </dialog>
             </main>

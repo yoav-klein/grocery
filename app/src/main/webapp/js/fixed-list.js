@@ -2,8 +2,8 @@
 import { BASE_URL } from './config.js';
 import { HttpError } from './common.js';
 
-const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]').content;
-const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]')?.content;
+const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
 
 const listId = document.querySelector('meta[name="listId"]').content;
 const tenantId = document.querySelector('meta[name="tenantId"]').content;
@@ -81,9 +81,9 @@ formEl.addEventListener('submit', (e) => {
                 errorBannerMessageEl.innerText = data.title;
             }
         });
-        errorBannerEl.classList.add('active');
+        errorBannerEl.classList.add('show');
     });
 });
 
-document.getElementById('close-error-banner-button').addEventListener('click', () => { errorBannerEl.classList.remove('active') });
+document.getElementById('close-error-banner-button').addEventListener('click', () => { errorBannerEl.classList.remove('show') });
 

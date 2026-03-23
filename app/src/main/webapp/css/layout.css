@@ -30,8 +30,8 @@ main {
 #menu-button {
     border: none;
     border-radius: .5em;
-    margin-left: 1rem;
-    padding: .5rem;
+    margin-left: var(--sidebar-kebab-button-margin);
+    padding: var(--sidebar-kebab-button-padding);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,14 +69,14 @@ main {
     border: 1px solid var(--color-tenant-card-border);
     border-radius: 10px;
     background-color: var(--color-tenant-card-bg);
-    margin: 1rem;
+    margin: var(--sidebar-tenant-card-margin);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    padding: var(--sidebar-tenant-card-padding);
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1rem;
+    gap: var(--sidebar-tenant-card-gap);
 }
 
 .current-tenant {
@@ -88,14 +88,14 @@ main {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: .5rem;
+        gap: var(--sidebar-tenant-card-switch-tenant-gap);
         color: var(--color-tenant-card-text-secondary);
         font-size: 0.8rem;
     }
 }
 
 #sidebar nav {
-    padding: .2rem;
+    padding: var(--sidebar-menu-padding);
     flex-grow: 1;
 
     /* flex to arrange the main menu and the Manage Tenant link which is separate */
@@ -118,8 +118,8 @@ main {
     text-decoration: none;
     color: var(--color-sidebar-item-text);
     align-items: center;
-    padding: 1rem;
-    gap: 1rem; /* to separate the icon from teh text */
+    padding: var(--sidebar-menu-item-padding-tb) var(--sidebar-menu-item-padding-rl);
+    gap: var(--sidebar-menu-item-gap); /* to separate the icon from the text */
 }
 
 .menu-item a:hover, .menu-item .dropdown-button:hover {
@@ -138,7 +138,7 @@ main {
 }
 
 /* since the dropdown button is a button, we need some styles to make it look like the <a> elements */
-.dropdown-button {
+.menu-item > button {
     width: 100%;
     text-align: start;
     background: none;
@@ -191,7 +191,7 @@ main {
 
 /* have the submenu items idented */
 #sidebar .sub-menu a {
-    padding-inline-start: 2rem;
+    padding-inline-start: var(--sidebar-submenu-item-padding-tb);
 }
 
 

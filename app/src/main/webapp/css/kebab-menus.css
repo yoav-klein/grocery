@@ -15,9 +15,33 @@
     pointer-events: none;
 }
 
+.kebab-menu-actions {
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.05),
+        0 6px 16px rgba(0, 0, 0, 0.08);
+    
+    padding: var(--kebab-menu-actions-padding-tb) 0;
+    width: 8rem;
+    border-radius: 7px;
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-white);
+}
+
+.kebab-menu-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--kebab-menu-item-gap);
+    padding: var(--kebab-menu-item-padding);
+    font-size: .9rem;
+    border: none;
+    background-color: transparent;
+}
 
 .kebab-menu.kebab-show .kebab-menu-actions {
     pointer-events: auto;
     opacity: 1;
     transform: translateY(0);
 }
+

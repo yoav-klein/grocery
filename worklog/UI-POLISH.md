@@ -24,7 +24,12 @@ already feels more mature.
 ---
 * Forms - style select elements better
 * Quantity type - change select to moving pill
-* Add fixed list - instead of confirmation modal - toast and redirect to new list
+* Icons for each category
+* Icons for tenants
+* On Adding stuff - success toast
+* Add Fixed List
+    * Summary - number of items chosen
+    * X button next to selected
 
 
 ## Steps
@@ -60,7 +65,15 @@ already feels more mature.
 
 ### Step 9
 * Padding and margins system
+    * Layout (V)
+    * Forms (V)
+    * Categories (V)
+    * Current List (V)
+    * Products (V)
+    * Fixed List (V)
+    * Fixed List Editor (V)
+    
 
 ### Currently
-Finished Working on the forms system.
-Starting step 9
+Size system - padding and margins.
+Step 9 - categorires. Just finished forms

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+
+        .wrapper {
+            height: 700px;
+            width: 500px;
+            margin: auto;
+            background-color: aqua;
+        }
+
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-auto-rows: minmax(200px, auto);
+            gap: 10px;
+            overflow: auto;
+            /* height: 100%; */
+
+            > div {
+                border: 1px solid red;
+            }
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="category-grid">
+            <div>fdsafdsfsdfsfsfsdLorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis totam a odit saepe sequi nostrum itaque, adipisci recusandae suscipit vitae reiciendis, molestiae veniam deleniti rem quia maxime odio error dicta?</div>
+        </div>
+    </div>
+</body>
+</html>
