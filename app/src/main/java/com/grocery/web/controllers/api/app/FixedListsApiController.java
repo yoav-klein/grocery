@@ -4,21 +4,20 @@ package com.grocery.web.controllers.api.app;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.grocery.business.domain.dto.FixedListRequest;
 import com.grocery.business.domain.dto.FixedListEditRequest;
+import com.grocery.business.domain.dto.FixedListRequest;
 import com.grocery.business.domain.exception.FixedListAlreadyExistsException;
 import com.grocery.business.domain.exception.FixedListNotFoundException;
 import com.grocery.business.domain.exception.ProductNotFoundException;
@@ -41,7 +40,7 @@ public class FixedListsApiController {
 
     // patch list
     @PutMapping("/{listId}")
-    public ResponseEntity<Object> editList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId, @Validated @RequestBody FixedListEditRequest fixedListEditRequest) throws FixedListNotFoundException {
+    public ResponseEntity<Object> editList(@PathVariable("tenantId") String tenantId, @PathVariable("listId") int listId, @Validated @RequestBody FixedListEditRequest fixedListEditRequest) throws FixedListAlreadyExistsException, FixedListNotFoundException {
         fixedListsService.editFixedList(tenantId,
             listId,
             fixedListEditRequest.getListName(),

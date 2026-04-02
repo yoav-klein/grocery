@@ -89,11 +89,16 @@ public class FixedListsDAO {
         this.jdbcTemplate.update(String.format(DELETE_FIXED_LIST, tenantId), listId);
     }
 
-    public void updateListName(String tenantId, int listId, String listName) throws FixedListNotFoundException {
-        int rowsAffected = this.jdbcTemplate.update(String.format(UPDATE_LIST_NAME, tenantId), listName, listId);
-        if(0 == rowsAffected) {
-            throw new FixedListNotFoundException(listId);
-        }
+    public void updateListName(String tenantId, int listId, String listName) throws FixedListNotFoundException, FixedListAlreadyExistsException {
+        try {
+            int rowsAffected = this.jdbcTemplate.update(String.format(UPDATE_LIST_NAME, tenantId), listName, listId);
+            if(0 == rowsAffected) {
+                throw new FixedListNotFoundException(listId);
+            }
+        } catch(DuplicateKeyException e) {
+            logger.error("fixed list with name: {} already exists", listName);
+            throw new FixedListAlreadyExistsException();
+        } 
     }
     
 }

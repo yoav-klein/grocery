@@ -16,103 +16,139 @@
     <body th:replace="~{layout :: layout(~{::main},~{::script})}">
         <div class="wrapper" th:remove="tag">
             <main>
+                <div class="mobile-header mobile-only">
+                    <h1 class="mobile-header-title" th:text="(${mode} == 'add')? 'Add Fixed List' : 'Edit Fixed List'">Add Fixed List</h1>
+                    <p class="mobile-header-subtitle">Create a reusable list</p>
+                    <div class="step-indicator-wrapper">
+                        <div class="step-indicator">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
                 <div id="step-wrapper">
                     <header class="step">
-                        <div class="header-title">
+                        <div class="header-title pc-only">
                             <h1 th:text="(${mode} == 'add')? 'Add Fixed List' : 'Edit Fixed List'">HEADING</h1>
                             <p th:text="(${mode} == 'add')? 'Create a reusable list' : 'Edit the fixed list'">Create a reusable list</p>
                         </div>
+                        <h4 class="mobile-only step-title">Name your list</h4>
                         <div class="header-list-name">
                             <button th:if="${mode} == 'edit'" id="edit-name-button"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 -960 960 960" width="36px" fill="#ffffff"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></button>
                             <label for="listName" class="nowrap">List name</label>
                             <input id="listName" type="text" placeholder="e.g., Weekly groceries" th:value="(${mode} == 'edit')? ${fixedList.name} : ''" th:disabled="${mode} == 'edit'" th:data-init-value="(${mode} == 'edit')? ${fixedList.name} : ''"/>
                         </div>
-                        <div class="header-actions">
+                        <div class="header-actions pc-only">
                             <button id="cancel-button" class="action-button secondary-action-button">Cancel</button>
                             <button id="save-button" class="action-button primary-action-button" disabled>Save</button>
                         </div>
                     </header>
-                    <section id="catalog" class="category-grid step">
-                        <article class="category" th:each="category: ${productsByCategory}">
-                            <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
-                            <ul>
-                                <li class="category-item" th:each="product : ${category.value}">
-                                    <input class="product-checkbox" data-category="VEGETABLES" th:attr="data-category=${category.key}" id="1" th:id="${product.productId}" type="checkbox" th:checked="${mode} == 'edit' and ${#lists.contains(fixedList.products, product)}">
-                                    <label for="1" th:for="${product.productId}" th:text="${product.name}">Tomato</label>
-                                </li>
-                                
-                                <li class="category-item" th:remove="all">
-                                    <input data-category="VEGETABLES" class="product-checkbox" id="2" type="checkbox">
-                                    <label for="2">Cucumber</label>
-                                </li>
-                                <li class="category-item" th:remove="all">
-                                    <input data-category="VEGETABLES" class="product-checkbox" id="3" type="checkbox">
-                                    <label for="3">Pepper</label>
-                                </li>
-                                <li class="category-item" th:remove="all">
-                                    <input data-category="VEGETABLES" class="product-checkbox" id="4" type="checkbox">
-                                    <label for="4">Onion</label>
-                                </li>
-                            </ul>
-                        </article>
-                        <article class="category" th:remove="all">
-                            <h2>FRUIT</h2>
-                            <ul>
-                                <li class="category-item">
-                                    <input class="product-checkbox" data-category="FRUIT" id="5" type="checkbox">
-                                    <label for="5" th:for="${product.productId}" th:text="${product.name}">Strawberry</label>
-                                </li>
-                                <li class="category-item">
-                                    <input class="product-checkbox" data-category="FRUIT" id="6" type="checkbox">
-                                    <label for="6">Orange</label>
-                                </li>
-                                <li class="category-item">
-                                    <input class="product-checkbox" data-category="FRUIT" id="7" type="checkbox">
-                                    <label for="7">Banana</label>
-                                </li>
-                                <li class="category-item">
-                                    <input class="product-checkbox" data-category="FRUIT" id="8" type="checkbox">
-                                    <label for="8">Kiwi</label>
-                                </li>
-                            </ul>
-                        </article>
-                        
+                    <section id="catalog" class="step categories-scroll-container">
+                        <h4 class="mobile-only step-title">Choose products</h4>
+                        <div class="category-grid">
+                            <article class="category" th:each="category: ${productsByCategory}">
+                                <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                                <ul>
+                                    <li class="category-item" th:each="product : ${category.value}">
+                                        <input class="product-checkbox" data-category="VEGETABLES" th:attr="data-category=${category.key}" id="1" th:id="${product.productId}" type="checkbox" th:checked="${mode} == 'edit' and ${#lists.contains(fixedList.products, product)}">
+                                        <label for="1" th:for="${product.productId}" th:text="${product.name}">Tomato</label>
+                                    </li>
+                                    
+                                    <li class="category-item" th:remove="all">
+                                        <input data-category="VEGETABLES" class="product-checkbox" id="2" type="checkbox">
+                                        <label for="2">Cucumber</label>
+                                    </li>
+                                    <li class="category-item" th:remove="all">
+                                        <input data-category="VEGETABLES" class="product-checkbox" id="3" type="checkbox">
+                                        <label for="3">Pepper</label>
+                                    </li>
+                                    <li class="category-item" th:remove="all">
+                                        <input data-category="VEGETABLES" class="product-checkbox" id="4" type="checkbox">
+                                        <label for="4">Onion</label>
+                                    </li>
+                                </ul>
+                            </article>
+                            <article class="category" th:remove="all">
+                                <h2>FRUIT</h2>
+                                <ul>
+                                    <li class="category-item">
+                                        <input class="product-checkbox" data-category="FRUIT" id="5" type="checkbox">
+                                        <label for="5" th:for="${product.productId}" th:text="${product.name}">Strawberry</label>
+                                    </li>
+                                    <li class="category-item">
+                                        <input class="product-checkbox" data-category="FRUIT" id="6" type="checkbox">
+                                        <label for="6">Orange</label>
+                                    </li>
+                                    <li class="category-item">
+                                        <input class="product-checkbox" data-category="FRUIT" id="7" type="checkbox">
+                                        <label for="7">Banana</label>
+                                    </li>
+                                    <li class="category-item">
+                                        <input class="product-checkbox" data-category="FRUIT" id="8" type="checkbox">
+                                        <label for="8">Kiwi</label>
+                                    </li>
+                                </ul>
+                            </article>
+                        </div>
                     </section>
-                    <section id="selected-section" class="step">
-                        <h1>LIST NAME</h1>
-                        <h2>Selected Items</h2>
+                    <section id="selected-section" class="step selected-section">
+                        <h4 class="mobile-only step-title">Review</h4>
+                        <div class="list-meta mobile-only">
+                            <h3 class="list-meta-name">LIST NAME</h1>
+                            <p th:if="${mode} == 'add'" class="list-meta-summary"><span class="num-selected">0</span> Products</p>
+                            <div class="mobile-only edit-summary" th:if="${mode} == 'edit'">
+                                <p class="edit-summary-added">Added: <span>0</span></p>
+                                <p class="edit-summary-removed">Removed: <span>0</span></p>
+                            </div>
+                        </div>
+                        <h3 class="selected-section-title pc-only">Selected Products <span class="selected-section-title-meta" th:if="${mode} == 'add'">(<span class="num-selected">0</span>)</span></h3>
+                        <div class="pc-only edit-summary" th:if="${mode} == 'edit'">
+                            <p class="edit-summary-added">Added: <span>0</span></p>
+                            <p class="edit-summary-removed">Removed: <span>0</span></p>
+                        </div>
                         <ul id="selected-list">
                             <li th:if="${mode} == 'edit'" th:each="category: ${listProductsByCategory}" th:attr="data-category-name=${category.key}">
-                                <h3 th:text="#{${'category.title.' + category.key}}">CATEGORY NAME</h3>
+                                <h3 th:text="#{${'category.title.' + category.key}}" class="category-title">CATEGORY NAME</h3>
+                                <div class="category-divider"></div>
                                 <ul>
-                                    <li th:each="product : ${category.value}" th:attr="data-category=${category.key}" th:text="${product.name}"></li>
+                                    <li class="selected-product" th:each="product : ${category.value}" th:attr="data-category=${category.key},data-product-id=${product.productId}">
+                                        <p class="selected-product-name" th:text="${product.name}"></p>
+                                        <button class="selected-product-remove-btn">&times;</button>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
                         <template id="selected-list-category-template">
                             <li data-category-name="CATEGORY-NAME">
-                                <h3>CATEGORY NAME</h3>
-                                <ul>
-                                </ul>
+                                <h3 class="category-title">CATEGORY NAME</h3>
+                                <div class="category-divider"></div>
+                                <ul></ul>
+                            </li>
+                        </template>
+                        <template id="selected-product-item-template">
+                            <li class="selected-product">
+                                <p class="selected-product-name"></p>
+                                <button class="selected-product-remove-btn">&times;</button>
                             </li>
                         </template>
                     </section>
                 </div>
-                <div class="step-actions">
-                    <button id="step-primary-button">
+                <div class="step-actions mobile-only">
+                    <button id="step-primary-button" class="primary-action-button" th:disabled="${mode} == 'add'">
                         <span class="current">Continue</span>
                         <span>Review</span>
                         <span>Save</span>
                     </button>
-                    <button id="step-secondary-button">
-                        <span class="current">Cancel</span>
+                    <button id="step-secondary-button" class="secondary-action-button invisible">
+                        <span class="current">Back</span>
                         <span>Back</span>
                         <span>Back</span>
                     </button>
                 </div>
                 <dialog id="confirmation-dialog" class="confirmation-dialog">
                     <header class="dialog-header">
-                        <h2>Fixed list created</h2>
+                        <h2>Fixed list <span th:text="${mode == 'add' ? 'created' : 'edited'}"></span></h2>
                     </header>
                     <div class="dialog-body">
                         <p><span id="success-list-name">LISTNAME</span> was <span th:if="${mode} == 'add'">added</span><span th:if="${mode} == 'edit'">edited</span> successfully.</p>
@@ -124,17 +160,20 @@
                         </div>
                     </div>
                 </dialog>
-                <dialog id="error-dialog">
-                    <header>
+                <dialog id="error-dialog" class="error-dialog">
+                    <header class="dialog-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M508.5-291.5Q520-303 520-320t-11.5-28.5Q497-360 480-360t-28.5 11.5Q440-337 440-320t11.5 28.5Q463-280 480-280t28.5-11.5ZM440-440h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
                         <h2>Ooops...</h2>
+                        <div class="space-occupier"></div>
                     </header>
                     <div class="dialog-body">
-                        <p id="error-message-title"></p>
-                        <ul id="error-message-details"></ul>
+                        <h4 id="error-message-title"></h4>
+                        <p id="error-message-details"></p>
                     </div>
                     <div class="dialog-footer">
-                        <a th:href="@{/tenant/{tenantId}/currentList(tenantId=${tenant.id})}">Home</a>
-                        <button class="close-modal-button">To the List</button>
+                        <form method="dialog">
+                            <button class="dialog-action-button dialog-primary-action-button">Ok</button>
+                        </form>
                     </div>
                 </dialog>
             </main>

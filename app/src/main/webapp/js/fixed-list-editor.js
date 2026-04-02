@@ -1,43 +1,95 @@
 
-const listNameInputEl = document.getElementById("listName");
 const tenantId = document.querySelector('meta[name="tenantId"]').content;
+const uiElements = {
+    saveButton: document.getElementById('save-button'),
+    selectedProductsList: document.getElementById('selected-list'),
+    main: document.querySelector('main'),
+    stepperPrimaryButton: document.getElementById('step-primary-button'),
+    reviewListName: document.querySelector('#selected-section .list-meta-name')
+}
 
 export const commonElements = { 
     csrfHeaderName: document.querySelector('meta[name="_csrf_header"]'),
     csrfToken: document.querySelector('meta[name="_csrf"]'),
-    saveButtonEl: document.getElementById('save-button'),
-    listNameInputEl: document.getElementById("listName"),
-    toListLinkEl: document.getElementById('to-list-link'),
-    confirmationDialogEl: document.getElementById('confirmation-dialog'),
-    errorDialogEl: document.getElementById('error-dialog'),
-    errorMessageTitleEl: document.getElementById('error-message-title'),
-    errorMessageDetailsEl: document.getElementById('error-message-details'),
-    successListNameSpanEl: document.getElementById('success-list-name')
+    listNameInput: document.getElementById("listName"),
+    toListLink: document.getElementById('to-list-link'),
+    confirmationDialog: document.getElementById('confirmation-dialog'),
+    errorDialog: document.getElementById('error-dialog'),
+    successListNameSpan: document.getElementById('success-list-name')
  };
 
 
-export function initFixedListEditor(saveListCallback, respondToChangeCallback, itemsCheckboxHandlerCallback, hasUnsavedChangesFunc) {
-    saveButtonHandler(saveListCallback);
-    cancelButtonHandler();
-    checkboxesHandler(respondToChangeCallback, itemsCheckboxHandlerCallback);
-    mobileStepper(saveListCallback);
-    changeListNameHandler(respondToChangeCallback);
-    cancelChangesProtection(hasUnsavedChangesFunc);
+export function initFixedListEditor({
+    mode,
+    saveListCallback,
+    addItemCallback, 
+    removeItemCallback,
+    hasUnsavedChangesCallback,
+    isSubmittingCallback,
+    getStateCallback
+}) {
+    initSaveButtonHandler(saveListCallback);
+    initCancelButtonHandler();
+    initCheckboxHandlers(isSubmittingCallback, addItemCallback, removeItemCallback, mode, getStateCallback);
+    initDeleteProductHandler(removeItemCallback, isSubmittingCallback, mode, getStateCallback);
+    initMobileStepper(saveListCallback, isSubmittingCallback);
+    initChangeListNameHandler(isSubmittingCallback);
+    initCancelChangesProtection(hasUnsavedChangesCallback);
+    initSubmissionHandlers();
 }
 
-function saveButtonHandler(saveListCallback) {
-    const saveButtonEl = document.getElementById('save-button');
-    saveButtonEl.addEventListener('click', saveListCallback);
-}
+function initSubmissionHandlers() {
+    commonElements.confirmationDialog.addEventListener('submitsuccess', (e) => {
+        commonElements.successListNameSpan.innerText = e.detail.listName;
+        // add /<list-id> using the list-id we get back from the server to the href
+        commonElements.toListLink.setAttribute('href', commonElements.toListLink.getAttribute('href') + '/' + e.detail.listId);
+        commonElements.confirmationDialog.showModal();
+    });
 
-function cancelButtonHandler() {
-    const cancelButtonEl = document.getElementById('cancel-button');
-    cancelButtonEl.addEventListener('click', () => {
-        window.location.replace(`${window.location.origin}/app/tenant/${tenantId}`);
+    commonElements.errorDialog.addEventListener('submiterror', (e) => {
+        document.getElementById('error-message-title').innerText = e.detail.title;
+        document.getElementById('error-message-details').innerText = e.detail.message;
+        commonElements.errorDialog.showModal();
     });
 }
 
-function checkboxesHandler(respondToChangeCallback, itemsCheckboxHandlerCallback) {
+function initSaveButtonHandler(saveListCallback) {
+    uiElements.saveButton.addEventListener('click', saveListCallback);
+}
+
+function initCancelButtonHandler() {
+    const cancelButtonEl = document.getElementById('cancel-button');
+    cancelButtonEl.addEventListener('click', redirectToHome);
+}
+
+function redirectToHome() {
+    window.location.replace(`${window.location.origin}/app/tenant/${tenantId}`);
+}
+
+function updateControls(isSubmittingCallback) {
+    uiElements.saveButton.disabled = !isSubmittingCallback();
+    const currentStep = parseInt(getComputedStyle(uiElements.main).getPropertyValue('--current-step'));
+    const numSteps = parseInt(getComputedStyle(uiElements.main).getPropertyValue('--num-steps'));
+
+    if(currentStep === numSteps - 1) {
+        if(isSubmittingCallback()) {
+            uiElements.stepperPrimaryButton.disabled = false;
+        } else {
+            uiElements.stepperPrimaryButton.disabled = true;
+        }
+        return;
+    }
+
+    if(currentStep === 0) { // name step
+        if(commonElements.listNameInput.value.length > 1) {
+            uiElements.stepperPrimaryButton.disabled = false;
+        } else {
+            uiElements.stepperPrimaryButton.disabled = true;
+        }
+    }
+}
+
+function initCheckboxHandlers(isSubmittingCallback, addItemCallback, removeItemCallback, mode, getStateCallback) {
     const allCheckboxes = document.querySelectorAll('.product-checkbox');
     allCheckboxes.forEach(input => {
         
@@ -46,49 +98,75 @@ function checkboxesHandler(respondToChangeCallback, itemsCheckboxHandlerCallback
             const name = e.target.nextElementSibling.innerText;
             const productCategory = e.target.getAttribute('data-category');
             const productId = e.target.getAttribute('id');
-            
+
             if(e.target.checked) {
-                handleChangeInUI('checked', productId, name, productCategory);
+                addItemCallback(productId, name, productCategory);
             } else {
-                handleChangeInUI('unchecked', productId, name, productCategory);
+                removeItemCallback(productId, name, productCategory);
             }
-    
-            itemsCheckboxHandlerCallback(e.target.checked, productId, name, productCategory);
-            respondToChangeCallback();
+            
+            renderCheckboxChange(e.target.checked, productId, name, productCategory);
+            renderSummary(mode, getStateCallback);
+            updateControls(isSubmittingCallback);
         });
     });
 }
 
+function renderSummary(mode, getStateCallback) {
+    if(mode === "add") {
+        Array.from(document.querySelectorAll('.num-selected')).forEach(el => {
+            el.innerText = getStateCallback().numSelected;
+        });
+    }
+    if(mode === "edit") {
+        Array.from(document.querySelectorAll('.edit-summary-added   span')).forEach(el => el.innerText = getStateCallback().numAdded);
+        Array.from(document.querySelectorAll('.edit-summary-removed span')).forEach(el => el.innerText = getStateCallback().numRemoved);
+    }
+}
 
-function cancelChangesProtection(hasUnsavedChangesFunc) {
+function initDeleteProductHandler(removeItemCallback, isSubmittingCallback, mode, getStateCallback) {
+    uiElements.selectedProductsList.addEventListener('click', (e) => {
+        if(!e.target.classList.contains('selected-product-remove-btn')) return;
+
+        const productId = e.target.parentElement.dataset.productId;
+        removeItemCallback(productId);
+
+        // uncheck checkbox
+        document.getElementById(productId).checked = false; 
+        // this is a bit of a hack, but ** it, it works
+        renderCheckboxChange(false, productId, null, e.target.parentElement.dataset.category);
+        renderSummary(mode, getStateCallback)
+        updateControls(isSubmittingCallback);
+    })
+}
+
+function initCancelChangesProtection(hasUnsavedChangesFunc) {
     /** UNSAVED CHANGES PROTECTION */
     window.addEventListener("beforeunload", (e) => {
       if (!hasUnsavedChangesFunc()) return;
     
       e.preventDefault();
     
-    
       e.returnValue = "";
     });
 }
 
-function mobileStepper(saveListCallback) {
-    const primaryButtonEl = document.getElementById('step-primary-button');
+function initMobileStepper(saveListCallback, isSubmittingCallback) {
+    const primaryButtonEl = uiElements.stepperPrimaryButton;
     const secondaryButtonEl = document.getElementById('step-secondary-button');
 
-    const mainEl = document.querySelector('main');
+    const mainEl = uiElements.main;
     const numSteps = parseInt(getComputedStyle(mainEl).getPropertyValue('--num-steps'));
     let currentStep = parseInt(getComputedStyle(mainEl).getPropertyValue('--current-step'));
 
-    const render = () => mainEl.style.setProperty('--current-step', currentStep);
-            
+    const updateStep = () => mainEl.style.setProperty('--current-step', currentStep);
+
     primaryButtonEl.addEventListener('click', () => {
-        console.log("CURRENT STEP: " + currentStep);
-        
         if(currentStep < numSteps - 1) {
             ++currentStep;
-            render();
-            setButtons();
+            updateStep();
+            renderButtons();
+            renderStepIndicator();
         } else { // save was hit
             saveListCallback();
         }
@@ -97,12 +175,19 @@ function mobileStepper(saveListCallback) {
     secondaryButtonEl.addEventListener('click', () => {
         if(currentStep > 0) {
             --currentStep;
-            render();
-            setButtons();
+            updateStep();
+            renderButtons();
+            renderStepIndicator();
         }
     });
 
-    function setButtons() {
+    function renderStepIndicator() {
+        const stepIndicatorDots = document.querySelectorAll('.step-indicator .dot');
+        stepIndicatorDots.forEach(dot => dot.classList.remove('active'));
+        stepIndicatorDots[currentStep].classList.add('active');
+    }
+
+    function renderButtons() {
         const primaryLabels = Array.from(document.querySelectorAll('#step-primary-button span'));
         const secondaryLabels = Array.from(document.querySelectorAll('#step-secondary-button span'));
 
@@ -113,39 +198,43 @@ function mobileStepper(saveListCallback) {
 
         // if on step 3, check if list is empty/no name, and if so - disable button
         if(currentStep === numSteps - 1) {
-            if(selectedProducts.length === 0 || listNameInputEl.value === '') {
-                primaryButtonEl.disabled = true;
-            } else {
+            if(isSubmittingCallback()) {
                 primaryButtonEl.disabled = false;
-            }
+            } else {
+                primaryButtonEl.disabled = true;
+            }    
         } else {
             primaryButtonEl.disabled = false;
+        }
+
+        // if on step 0, disable secondary
+        if(currentStep === 0) {
+            secondaryButtonEl.classList.add('invisible');
+        } else {
+            secondaryButtonEl.classList.remove('invisible');
         }
     }
 }
 
 /** when name of list changes, change the list name heading in mobile view */
-function changeListNameHandler(respondToChangeCallback) {
-    const listNameHeadingEl = document.querySelector('#selected-section h1');
-    
-    listNameInputEl.addEventListener('input', (e) => {
-        listNameHeadingEl.innerText = e.target.value;
-        respondToChangeCallback();
+function initChangeListNameHandler(isSubmittingCllbk) {    
+    commonElements.listNameInput.addEventListener('input', (e) => {
+        uiElements.reviewListName.innerText = e.target.value;
+        updateControls(isSubmittingCllbk);
+
+        // in mobile view, allow Continue only if name is not empty
+
     });
 }
 
 
-
-/** HANDLE CHANGES IN THE SELECTED PRODUCTS PANE */
-const selectedProductsListEl = document.getElementById('selected-list');
-
-function handleChangeInUI(checkedOrUnchecked, productId, name, productCategory) {
-    const selectedProductsCategories = selectedProductsListEl.querySelectorAll(':scope>li'); // get direct children li elements
+function renderCheckboxChange(isChecked, productId, name, productCategory) {
+    const selectedProductsCategories = uiElements.selectedProductsList.querySelectorAll(':scope>li'); // get direct children li elements
 
     // find the relevant category li
     let selectedProductsCategory = Array.from(selectedProductsCategories).find(i => i.getAttribute('data-category-name') === productCategory);
 
-    if(checkedOrUnchecked === 'checked') { // case added
+    if(isChecked) { // case added
         let selectedProductsCategoryListEl;
 
         // if there's not such category yet in the selected list, create it
@@ -155,29 +244,31 @@ function handleChangeInUI(checkedOrUnchecked, productId, name, productCategory) 
             selectedProductsCategory.setAttribute('data-category-name', productCategory);
             selectedProductsCategory.querySelector('h3').innerText = productCategory;
             // add it to the top-level <ul>
-            selectedProductsListEl.appendChild(selectedProductsCategory);
+            uiElements.selectedProductsList.appendChild(selectedProductsCategory);
         }
 
         selectedProductsCategoryListEl = selectedProductsCategory.querySelector('ul');
-        // append the child to the category list
-        const liEl = document.createElement('li');
-        liEl.setAttribute('data-category', productCategory);
-        liEl.innerText = name;
+        // clone the template, and append the child to the category list
+        const selectedProductItem = document.getElementById("selected-product-item-template").content.cloneNode(true).querySelector('li');
+        
+        selectedProductItem.setAttribute('data-category', productCategory);
+        selectedProductItem.setAttribute('data-product-id', productId);
+        selectedProductItem.querySelector('.selected-product-name').innerText = name;
 
-        selectedProductsCategoryListEl.appendChild(liEl);
+        selectedProductsCategoryListEl.appendChild(selectedProductItem);
 
     } else { // case removed
         const selectedProductsCategoryListEl = selectedProductsCategory.querySelector('ul');
         
         Array.from(selectedProductsCategoryListEl.children).forEach(child => {
-            if(child.innerText === name) {
+            if(child.getAttribute('data-product-id') === productId) {
                 selectedProductsCategoryListEl.removeChild(child);
             }
         });
 
         // in case it's last item in category, remove category
         if(Array.from(selectedProductsCategoryListEl.children).length === 0) {
-            selectedProductsListEl.removeChild(selectedProductsCategory); 
+            uiElements.selectedProductsList.removeChild(selectedProductsCategory); 
         }
     }
 }

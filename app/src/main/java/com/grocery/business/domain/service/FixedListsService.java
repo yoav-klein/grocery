@@ -59,7 +59,7 @@ public class FixedListsService {
     }
 
     @Transactional
-    public void editFixedList(String tenantId, int listId, String listName, List<Integer> addProducts, List<Integer> removeProducts) throws FixedListNotFoundException, ProductNotFoundException {
+    public void editFixedList(String tenantId, int listId, String listName, List<Integer> addProducts, List<Integer> removeProducts) throws FixedListAlreadyExistsException, FixedListNotFoundException, ProductNotFoundException {
         checkProductsExists(tenantId, addProducts);
         this.fixedListDao.updateListName(tenantId, listId, listName);
         this.listProductDao.editProducts(tenantId, listId, addProducts, removeProducts);

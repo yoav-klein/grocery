@@ -5,36 +5,40 @@ import { HttpError } from './common.js';
 
 // array that will hold the selected products and will be sent to the server
 const selectedProducts = new Array();
+let submitted = false;
 
-function itemsCheckboxHandler(isChecked, productId, name, productCategory) {
-    if(isChecked) {
-        selectedProducts.push(productId);
-    } else {
-        selectedProducts.splice(selectedProducts.indexOf(productId), 1);
-    }
+function getState() {
+    return { 
+        numSelected: selectedProducts.length
+     };
 }
 
-let hasUnsavedChanges = false;
-function hasUnsavedChangesFunc() { return hasUnsavedChanges; }
+function addItem(productId) {
+    selectedProducts.push(productId);
+}
 
-function respondToChange() {
-    if(selectedProducts.length === 0 && commonElements.listNameInputEl.value.length <= 1) {
-        hasUnsavedChanges = false;
-        // commonElements.saveButtonEl.disabled = true;
-    }
-    else {
-        hasUnsavedChanges = true;
-        if(selectedProducts.length !== 0 && commonElements.listNameInputEl.value.length > 1) {
-            commonElements.saveButtonEl.disabled = false;
-            return;
-        }
+function removeItem(productId) {
+    selectedProducts.splice(selectedProducts.indexOf(productId), 1);
+}
 
-        // commonElements.saveButtonEl.disabled = true;
+function isSubmitting() {
+    if(selectedProducts.length !== 0 && commonElements.listNameInput.value.length > 1) {
+        return true;
     }
+    return false;
+}
+
+function hasUnsavedChanges() {
+    if(submitted) return false;
+
+    if(selectedProducts.length === 0 && commonElements.listNameInput.value.length <= 1) {
+        return false;
+    }
+    return true;
 }
 
 function saveList() {
-    const listName = commonElements.listNameInputEl.value;
+    const listName = commonElements.listNameInput.value;
     const data = {
         listName: listName,
         productIds: selectedProducts
@@ -51,26 +55,21 @@ function saveList() {
     });
 
     responsePromise.then(resp => {
+        console.log(resp.status);
         if(!resp.ok) {
             throw new HttpError(resp);
         }
         return resp.text();
     }).then(listId => {
-        commonElements.successListNameSpanEl.innerText = listName;
-        // add /<list-id> using the list-id we get back from the server to the href
-        commonElements.toListLinkEl.setAttribute('href', commonElements.toListLinkEl.getAttribute('href') + '/' + listId);
-        hasUnsavedChanges = false;
-        commonElements.confirmationDialogEl.showModal();
+        commonElements.confirmationDialog.dispatchEvent(new CustomEvent('submitsuccess', { detail: { listName, listId } }));
+        submitted = true;
     }).catch(e => {
-        console.log("error");
-        if(!e instanceof HttpError) {
-            handleGenericError()
+        if(!(e instanceof HttpError)) {
+            handleUnknownError()
             return;
         }
 
-        console.log("HTTP error");
         const response = e.response;
-
         e.response.json()
             .then(data => {
                 if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
@@ -80,24 +79,50 @@ function saveList() {
     });
 }
 
+function handleUnknownError() {
+    console.log("UNKNOWN ERROR");
+}
+
 function handleProblemDetail(data) {
     if(data.type === "product-not-found") handleProductNotFound();
-    if(data.type === "invalid-arguments") handleInvalidArguments(data);
     
     else throw new UnhandledProblemTypeError("don't know how to handle this error");
 }
 
-function handleInvalidArguments(data) {
-    console.log("Invalid arguments"); // TODO parse errors field
-}
 
 function handleProductNotFound() {
+    commonElements.errorDialog.dispatchEvent(new CustomEvent('submiterror', { 
+        detail: {
+            title: 'Request Error',
+            message: 'One of the products in your request are missing, refresh the page and try again'
+        }
+    }));
     console.log("Product not found!");
 }
 
 function statusCodeHandler(response) {
+    let title;
+    let message;
+    if(response.status === 409) {
+        title = "Duplicate";
+        message = "A list with such name already exists"
+    }
+
+    commonElements.errorDialog.dispatchEvent(new CustomEvent('submiterror', { 
+        detail: {
+            title, message
+        }
+    }));
     console.log("Handling status code");
 }
 
 
-initFixedListEditor(saveList, respondToChange, itemsCheckboxHandler, hasUnsavedChangesFunc);
+initFixedListEditor({
+    mode: 'add', 
+    saveListCallback: saveList, 
+    addItemCallback: addItem, 
+    removeItemCallback: removeItem,
+    hasUnsavedChangesCallback: hasUnsavedChanges, 
+    isSubmittingCallback: isSubmitting, 
+    getStateCallback: getState 
+});

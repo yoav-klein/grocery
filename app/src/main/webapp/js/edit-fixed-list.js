@@ -5,51 +5,62 @@ import { HttpError } from './common.js';
 const listId = document.querySelector('meta[name="listId"]').content;
 const tenantId = document.querySelector('meta[name="tenantId"]').content;
 
-const initialListName = commonElements.listNameInputEl.getAttribute("data-init-value");
+const initialListName = commonElements.listNameInput.dataset.initValue;
+
 const editNameButtonEl = document.getElementById("edit-name-button");
+editNameButtonEl.addEventListener('click', () => { commonElements.listNameInput.disabled = false; });
 
 // array that will hold the selected products and will be sent to the server
 const addProductsList = [];
 const removeProductsList = [];
+let submitted = false;
 
-editNameButtonEl.addEventListener('click', () => { commonElements.listNameInputEl.disabled = false; });
+function getState() {
+    return { 
+        numAdded: addProductsList.length,
+        numRemoved: removeProductsList.length
+     };
+}
+
+function isSubmitting() {
+    const productsAdded = addProductsList.length > 0;
+    const productsRemoved = removeProductsList.length > 0;
+    const listNameChanged = initialListName !== commonElements.listNameInput.value;
+    const listNameEmpty = commonElements.listNameInput.value === 0;
+
+    if(listNameEmpty) return false;
+    return productsAdded || productsRemoved || listNameChanged;
+}
+
+function hasUnsavedChanges() {
+    if(submitted) return false;
+
+    const productsAdded = addProductsList.length > 0;
+    const productsRemoved = removeProductsList.length > 0;
+    const listNameChanged = initialListName !== commonElements.listNameInput.value;
+
+    return productsAdded || productsRemoved || listNameChanged;
+}
 
 
-let hasUnsavedChanges = false;
-function hasUnsavedChangesFunc() { return hasUnsavedChanges; }
-
-function itemsCheckboxHandler(isChecked, productId, name, productCategory) {
-    if(isChecked) {
-        if(removeProductsList.includes(productId)) {
-            removeProductsList.splice(removeProductsList.indexOf(productId), 1);
-        } else {
-            addProductsList.push(productId);
-        }
+function addItem(productId) {
+    if(removeProductsList.includes(productId)) {
+        removeProductsList.splice(removeProductsList.indexOf(productId), 1);
     } else {
-        if(addProductsList.includes(productId)) {
-            addProductsList.splice(addProductsList.indexOf(productId), 1);
-        } else {
-            removeProductsList.push(productId);
-        }
+        addProductsList.push(productId);
     }
 }
 
-function respondToChange() {
-    const isProductsAddedOrRemoved = addProductsList.length !== 0 || removeProductsList.length !== 0;
-    const isNameChanged = commonElements.listNameInputEl.value !== initialListName;
-    
-    if(!isProductsAddedOrRemoved && !isNameChanged) {
-        hasUnsavedChanges = false;
-        commonElements.saveButtonEl.disabled = true;
-    }
-    else {
-        hasUnsavedChanges = true;
-        commonElements.saveButtonEl.disabled = false;
+function removeItem(productId) {
+    if(addProductsList.includes(productId)) {
+        addProductsList.splice(addProductsList.indexOf(productId), 1);
+    } else {
+        removeProductsList.push(productId);
     }
 }
 
 function saveList() {
-    const listName = commonElements.listNameInputEl.value;
+    const listName = commonElements.listNameInput.value;
     const data = {
         listName: listName,
         addProducts: addProductsList,
@@ -67,41 +78,47 @@ function saveList() {
     });
 
     responsePromise.then(resp => {
+        console.log(resp.status);
+        console.log(resp.ok);
         if(!resp.ok) {
             throw new HttpError(resp);
         }
         return resp.text();
     }).then(() => {
-        commonElements.successListNameSpanEl.innerText = listName;
-        // add /<list-id> using the list-id we get back from the server to the href
-        commonElements.toListLinkEl.setAttribute('href', commonElements.toListLinkEl.getAttribute('href') + '/' + listId);
-        hasUnsavedChanges = false;
-        commonElements.confirmationDialogEl.showModal();
+        commonElements.confirmationDialog.dispatchEvent(new CustomEvent('submitsuccess', { detail: { listName, listId } }));
+        submitted = true;
     }).catch(e => {
-        console.log("error");
-        if(!e instanceof HttpError) {
+        if(!(e instanceof HttpError)) {
             handleGenericError()
             return;
         }
 
         console.log("HTTP error");
-        const response = e.response;
-
         e.response.json()
             .then(data => {
+                console.log("RFC 9457 error");
+                console.log(data);
                 if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
                 handleProblemDetail(data);
             })
-            .catch(err => { statusCodeHandler(response); });
+            .catch(err => { statusCodeHandler(e.response); });
     });
 }
 
 function handleProblemDetail(data) {
-    if(data.type === "product-not-found") handleProductNotFound();
-    if(data.type === "fixed-list-not-found") handleFixedListNotFound();
-    if(data.type === "invalid-arguments") handleInvalidArguments();
-    
-    else throw new UnhandledProblemTypeError("don't know how to handle this error");
+    switch(data.type) {
+        case "product-not-found":
+            handleProductNotFound();
+            break;
+        case "fixed-list-not-found":
+            handleFixedListNotFound();
+            break;
+        case "invalid-argumets":
+            handleInvalidArguments();
+            break;
+        default:
+            throw new UnhandledProblemTypeError("don't know how to handle this error");
+    }
 }
 
 function handleInvalidArguments(data) {
@@ -109,16 +126,48 @@ function handleInvalidArguments(data) {
 }
 
 function handleProductNotFound() {
-    console.log("Product not found!");
+    console.log("Handle product not found");
+    commonElements.errorDialog.dispatchEvent(new CustomEvent('submiterror', { 
+        detail: {
+            title: 'Request Error',
+            message: 'One of the products in your request are missing, refresh the page and try again'
+        }
+    }));
 }
 
 function handleFixedListNotFound() {
-    console.log("Fixed list not found!");
+    commonElements.errorDialog.dispatchEvent(new CustomEvent('submiterror', { 
+        detail: {
+            title: 'Request Error',
+            message: 'This fixed list does not exist'
+        }
+    }));
 }
 
     
 function statusCodeHandler(response) {
-    console.log("Handling statud code");
+    let title;
+    let message;
+    if(response.status === 409) {
+        title = "Duplicate";
+        message = "A list with such name already exists"
+    }
+
+    commonElements.errorDialog.dispatchEvent(new CustomEvent('submiterror', { 
+        detail: {
+            title, message
+        }
+    }));
+    console.log("Handling status code");
 }
 
-initFixedListEditor(saveList, respondToChange, itemsCheckboxHandler, hasUnsavedChangesFunc);
+
+initFixedListEditor({
+    mode: 'edit', 
+    saveListCallback: saveList, 
+    addItemCallback: addItem, 
+    removeItemCallback: removeItem,
+    hasUnsavedChangesCallback: hasUnsavedChanges, 
+    isSubmittingCallback: isSubmitting, 
+    getStateCallback: getState 
+});

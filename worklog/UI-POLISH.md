@@ -72,8 +72,13 @@ already feels more mature.
     * Products (V)
     * Fixed List (V)
     * Fixed List Editor (V)
-    
+
+### Step 10
+* Mobile view - take care that everything looks good on mobile view
+* Fixed List Editor
+    * Edit list
+    * Error handling
 
 ### Currently
-Size system - padding and margins.
-Step 9 - categorires. Just finished forms
+Fixed List Editor - was working on that strong today, there's still some more small stuff to take care of:
+Also the Edit Fixed List needs to be aligned with the new code of fixedListeditor.js and CSS..

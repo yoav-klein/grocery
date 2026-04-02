@@ -43,7 +43,8 @@
     --color-surface-page: var(--color-gray-50);
     --color-surface-card: var(--color-white);
     --color-surface-dialog: var(--color-white);
-    --color-surface-raised: var(#F6F8F7);
+    --color-surface-raised: var(--color-gray-100);
+    --color-surface-raised-more: var(--color-gray-200);
 
     /* Borders */
     --color-border-subtle: var(--color-gray-200);
@@ -272,6 +273,10 @@ main {
     width: 150px;
 }
 
+.action-button[disabled] {
+    opacity: 0.7;
+}
+
 .primary-action-button {
     border: none;
     background-color: var(--color-action-primary);
@@ -279,7 +284,7 @@ main {
     color: var(--color-text-inverse);
 }
 
-.primary-action-button:hover {
+.primary-action-button:hover:not([disabled]) {
     background-color: var(--color-action-primary-hover);
     box-shadow: 0 14px 32px rgba(0,0,0,0.16);
 }
@@ -290,7 +295,7 @@ main {
     color: var(--color-text-secondary);
 }
 
-.secondary-action-button:hover {
+.secondary-action-button:hover:not([disabled]) {
     background-color: var(--color-action-secondary-hover);
 }
 
