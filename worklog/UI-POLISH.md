@@ -12,10 +12,6 @@ already feels more mature.
 
 ## Backlog
 ---
-* Mobile view
-* Categories - typography and colors
-* Fonts
-* Sidebar - fixed lists - smaller font maybe.
 * Tenant selection
 * Manage tenant
 
@@ -27,9 +23,8 @@ already feels more mature.
 * Icons for each category
 * Icons for tenants
 * On Adding stuff - success toast
-* Add Fixed List
-    * Summary - number of items chosen
-    * X button next to selected
+* Sidebar - fixed lists - smaller font maybe.
+* Fixed list editor - submitting state (low opacity during submitting)
 
 
 ## Steps
@@ -73,12 +68,10 @@ already feels more mature.
     * Fixed List (V)
     * Fixed List Editor (V)
 
-### Step 10
+### Step 10 (V)
 * Mobile view - take care that everything looks good on mobile view
 * Fixed List Editor
     * Edit list
     * Error handling
 
 ### Currently
-Fixed List Editor - was working on that strong today, there's still some more small stuff to take care of:
-Also the Edit Fixed List needs to be aligned with the new code of fixedListeditor.js and CSS..

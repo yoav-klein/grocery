@@ -97,15 +97,17 @@
                         <div class="list-meta mobile-only">
                             <h3 class="list-meta-name">LIST NAME</h1>
                             <p th:if="${mode} == 'add'" class="list-meta-summary"><span class="num-selected">0</span> Products</p>
-                            <div class="mobile-only edit-summary" th:if="${mode} == 'edit'">
+                            <div class="edit-summary" th:if="${mode} == 'edit'">
                                 <p class="edit-summary-added">Added: <span>0</span></p>
                                 <p class="edit-summary-removed">Removed: <span>0</span></p>
                             </div>
                         </div>
-                        <h3 class="selected-section-title pc-only">Selected Products <span class="selected-section-title-meta" th:if="${mode} == 'add'">(<span class="num-selected">0</span>)</span></h3>
-                        <div class="pc-only edit-summary" th:if="${mode} == 'edit'">
-                            <p class="edit-summary-added">Added: <span>0</span></p>
-                            <p class="edit-summary-removed">Removed: <span>0</span></p>
+                        <div class="list-meta pc-only">
+                            <h3 class="selected-section-title">Selected Products <span class="selected-section-title-meta" th:if="${mode} == 'add'">(<span class="num-selected">0</span>)</span></h3>
+                            <div class="edit-summary" th:if="${mode} == 'edit'">
+                                <p class="edit-summary-added">Added: <span>0</span></p>
+                                <p class="edit-summary-removed">Removed: <span>0</span></p>
+                            </div>
                         </div>
                         <ul id="selected-list">
                             <li th:if="${mode} == 'edit'" th:each="category: ${listProductsByCategory}" th:attr="data-category-name=${category.key}">

@@ -114,7 +114,6 @@ button[disabled] {
     overflow: auto;
 
     .selected-section-title {
-        margin-bottom: 1rem;
         text-align: inline-start;
     }
 
@@ -183,9 +182,16 @@ button[disabled] {
     height: 24px;
 }
 
+.list-meta {
+    margin-bottom: var(--space-4);
+}
+
 .edit-summary {
     display: flex;
     flex-direction: row;
+    gap: var(--space-4);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
 }
 
 
@@ -356,10 +362,6 @@ button[disabled] {
         border: none;
         background-color: transparent;
         box-shadow: none;
-        
-        .list-meta {
-            margin-bottom: var(--space-4);
-        }
 
         .list-meta-name {
             font-size: 1.25rem;      /* ~20px */

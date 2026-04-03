@@ -7,6 +7,9 @@
 
     <logger name="com.grocery" level="DEBUG" />
     <logger name="Spring Security Debugger" level="WARN" />
+    <logger name="org.springframework.security" level="trace" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
     
     
     <root level="INFO">
