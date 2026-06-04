@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
+import org.springframework.security.config.Customizer;
 
 @PropertySource("file:/C:/Users/yoavk/.secrets/google-openid-credentials.properties")
 @EnableWebSecurity(debug=true)
@@ -32,13 +33,10 @@ public class SpringSecurityConfig {
 
     @Value("${googleClientSecret}")
     private String googleClientSecret;
-
-    @Autowired
-    AutoRegistrationSuccessHandler autoRegisterSuccessHandler;
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthorizationManager<RequestAuthorizationContext> tenantAuthManager) throws Exception {
-        return http.oauth2Login(oauth2 -> oauth2.successHandler(autoRegisterSuccessHandler))
+        return http.oauth2Login(Customizer.withDefaults())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/tenant/**").access(tenantAuthManager)
                 .anyRequest().authenticated()

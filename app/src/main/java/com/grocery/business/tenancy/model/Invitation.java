@@ -2,15 +2,15 @@ package com.grocery.business.tenancy.model;
 public class Invitation {
     private String id;
     private Tenant tenant;
-    private User user;
+    private User invitedBy;
 
     public Invitation() {
     }
 
-    public Invitation(String id, Tenant tenant, User user) {
+    public Invitation(String id, Tenant tenant, User invitedBy) {
         this.id = id;
         this.tenant = tenant;
-        this.user = user;
+        this.invitedBy = invitedBy;
     }
 
     public String getId() {
@@ -28,12 +28,12 @@ public class Invitation {
         this.tenant = tenant;
     }
 
-    public User getUser() {
-        return user;
+    public User getInvitedBy() {
+        return invitedBy;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setInvitedBy(User invitedBy) {
+        this.invitedBy = invitedBy;
     }
     
 }

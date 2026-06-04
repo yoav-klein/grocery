@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +35,7 @@ import com.grocery.business.domain.exception.ProductNotFoundException;
 import com.grocery.business.domain.model.AddItemResult;
 import com.grocery.business.domain.service.CurrentListService;
 import com.grocery.business.tenancy.exception.UserNotFoundException;
+import com.grocery.security.model.SecurityUser;
 
 @Controller
 @RequestMapping("/tenant/{tenantId}/currentList")
@@ -48,9 +48,8 @@ public class CurrentListApiController {
 
     // add item
     @PostMapping("/addItem")
-    public ResponseEntity addItem(@RequestBody @Validated ListItemRequest request, @AuthenticationPrincipal Object user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
-        OAuth2User oauth2User = (OAuth2User)user;
-        AddItemResult result = currentListService.addListItem(request, oauth2User.getAttribute("sub"), tenantId);
+    public ResponseEntity addItem(@RequestBody @Validated ListItemRequest request, @AuthenticationPrincipal SecurityUser user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
+        AddItemResult result = currentListService.addListItem(request, user.getAppUser().getId(), tenantId);
 
         if     (result.getResult() == AddItemResult.Result.CREATED) eventManager.addEvent(new AddItemEvent(result.getItem()));
         else if(result.getResult() == AddItemResult.Result.UPDATED) System.out.println("IMPLEMENT UPDATE EVENT");
@@ -61,12 +60,10 @@ public class CurrentListApiController {
     // bulk add
     @PostMapping("/bulk/{listId}")
     public ResponseEntity batchAdd(@PathVariable("tenantId") String tenantId, 
-            @AuthenticationPrincipal Object user, 
+            @AuthenticationPrincipal SecurityUser user, 
             @PathVariable("listId") String listId, 
             @RequestBody @Validated BulkAddItemRequest bulkAddItemRequest) throws UserNotFoundException, ProductNotFoundException, Exception {
-        OAuth2User oauth2User = (OAuth2User)user;
-        
-        currentListService.bulkAdd(tenantId, oauth2User.getAttribute("sub"), listId, bulkAddItemRequest);
+        currentListService.bulkAdd(tenantId, user.getAppUser().getId(), listId, bulkAddItemRequest);
 
         eventManager.addEvent(new ListRefreshEvent());
 
@@ -96,10 +93,8 @@ public class CurrentListApiController {
     }
 
     @DeleteMapping("/item")
-    public ResponseEntity deleteItem(@RequestParam("itemId") String itemId, @AuthenticationPrincipal Object user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
-        OAuth2User oauth2User = (OAuth2User)user;
-
-        currentListService.deleteListItem(tenantId, oauth2User.getAttribute("sub"), itemId);
+    public ResponseEntity deleteItem(@RequestParam("itemId") String itemId, @AuthenticationPrincipal SecurityUser user, @PathVariable("tenantId") String tenantId) throws UserNotFoundException {
+        currentListService.deleteListItem(tenantId, user.getAppUser().getId(), itemId);
 
         eventManager.addEvent(new DeleteItemEvent(itemId));
 

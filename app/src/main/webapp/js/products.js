@@ -41,9 +41,7 @@ submitButton.addEventListener('click', (event) => {
             return;
         }
 
-        console.log("HTTP error");
         const response = e.response;
-
         response.json()
             .then(data => {
                 console.log("JSON: ");
@@ -79,6 +77,5 @@ function handleFormError(message = "Something is wrong") {
 }
 
 function handleInvalidArguments(fieldErrors) {
-    console.log(fieldErrors);
     addProductDialogEl.dispatchEvent(new CustomEvent('submiterror', { detail: { type: "field", fieldErrors: fieldErrors } }));
 }

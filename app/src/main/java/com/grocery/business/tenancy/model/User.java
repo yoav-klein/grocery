@@ -2,22 +2,24 @@ package com.grocery.business.tenancy.model;
 
 public class User {
     private String id;
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String displayName;
     private String email;
     private String pictureUrl;
 
-    // Constructors
     public User() {
     }
 
-    public User(String id, String name, String email, String pictureUrl) {
+    public User(String id, String firstName, String lastName, String displayName, String email, String pictureUrl) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.displayName = displayName;
         this.email = email;
         this.pictureUrl = pictureUrl;
     }
 
-    // Getters and Setters
     public String getId() {
         return id;
     }
@@ -26,12 +28,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getEmail() {
@@ -42,16 +60,6 @@ public class User {
         this.email = email;
     }
 
-    // toString method
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
     public String getPictureUrl() {
         return pictureUrl;
     }
@@ -59,4 +67,19 @@ public class User {
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
+    
+    // toString method
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", pictureUrl='" + pictureUrl + '\'' +
+                '}';
+    }
+
+
 }

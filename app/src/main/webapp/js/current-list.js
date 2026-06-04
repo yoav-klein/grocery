@@ -1,8 +1,8 @@
 
 import { HttpError } from './common.js';
 
-const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]')
-const csrfToken = document.querySelector('meta[name="_csrf"]')
+const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]');
+const csrfToken = document.querySelector('meta[name="_csrf"]');
 
 const evtSource = new EventSource(document.baseURI + '/itemStream');
 

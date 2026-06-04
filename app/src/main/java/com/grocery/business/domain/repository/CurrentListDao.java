@@ -22,6 +22,7 @@ import com.grocery.business.domain.model.ProductCategory;
 import com.grocery.business.domain.model.QuantityType;
 import com.grocery.business.domain.model.AddItemResult;
 import com.grocery.business.tenancy.model.User;
+import com.grocery.business.tenancy.repository.rowmappers.UserRowMapper;
 
 @Repository
 public class CurrentListDao {
@@ -30,10 +31,12 @@ public class CurrentListDao {
 
     private final String FIND_ALL_ITEMS = """
         SELECT li.*, 
-        u.id          as user_id, 
-        u.name        as user_name, 
-        u.picture_url as user_picture_url, 
-        u.email       as user_email,
+        u.id                as user_id, 
+        u.first_name        as user_first_name, 
+        u.last_name         as user_last_name, 
+        u.display_name      as user_display_name, 
+        u.picture_url       as user_picture_url, 
+        u.email             as user_email,
         category.name as category_name,
         qt.name as quantity_type_name
         FROM tenant_%s.items li 
@@ -55,13 +58,13 @@ public class CurrentListDao {
 
     private static final String DELETE_ITEM_ID = "DELETE FROM tenant_%s.items WHERE id = ?";
 
+    private final RowMapper<User> userRowMapper = new UserRowMapper("user_");
+
     private final RowMapper<CurrentListItem> listItemRowMapper = (resultSet, rowNum) -> {
         CurrentListItem item = new CurrentListItem();
-        User user = new User();
-        user.setId(resultSet.getString("user_id"));
-        user.setName(resultSet.getString("user_name"));
-        user.setEmail(resultSet.getString("user_email"));
-        user.setPictureUrl(resultSet.getString("user_picture_url"));
+
+        User user = userRowMapper.mapRow(resultSet, rowNum);
+        item.setAddedBy(user);
         item.setId(resultSet.getInt("id"));
         item.setName(resultSet.getString("name"));
         item.setQuantity(resultSet.getInt("quantity"));

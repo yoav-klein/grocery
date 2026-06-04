@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head th:include="~{layout :: head(~{::link},~{})}">
+<head th:include="~{layout :: head(~{::link},~{::meta})}">
     <meta charset="UTF-8">
+    <meta name="tenantId" th:content="${tenant.id}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/base.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
@@ -18,7 +19,7 @@
                 <ul class="member-list">
                     <li class="member-row" th:each="membership: ${memberships}">
                         <img th:src="${membership.user.pictureUrl}" alt="user picture">
-                        <p  th:text="${membership.user.name}">John Doe</p>
+                        <p  th:text="${membership.user.displayName}">John Doe</p>
                         <p  th:text="${membership.user.email}">john.doe@gmail.com</p>
                         <p th:text="${membership.role}">Member</p>
                         <div class="member-action-menu-container-placeholder">
@@ -44,40 +45,13 @@
             </section>
             <section>
                 <h2>Invitations</h2>
-                <dialog id="add-invitation-dialog" class="modal-dialog">
+                <dialog id="invitation-dialog" class="modal-dialog">
                     <h2>Invite new member</h3>
                     <button id="close-modal">X</button>
-                    <form method="post" th:action="@{/tenant/{tenantId}/invitations(tenantId=${tenant.id})}">
-                        <div class="inputs">
-                            <div class="field-container">
-                                <label for="user-mail">User Email</label>
-                                <input id="user-mail" class="long-input" type="text" name="email">
-                            </div>
-                        </div>
-                        <input type="submit" id="submit-button">
-                    </form>
+                    <p id="invitation-link"></p>
                 </dialog> 
 
-                <ul th:unless="${#lists.isEmpty(invitations)} == true" class="members-list">
-                    <li class="member-row" th:each="invitation : ${invitations}">
-                        <img th:src="${invitation.user.pictureUrl}" alt="user picture">
-                        <p class="member-name" th:text="${invitation.user.name}"></p>
-                        <p class="member-name" th:text="${invitation.user.email}"></p>
-                        <div class="member-action-menu-container-placeholder">
-                            <div class="member-action-menu-container" th:if="${@tenantUserService.isAdmin(user.id, tenant.id)}">
-                                <button class="kebab"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg></button>
-                                <ul class="member-action-menu">
-                                    <li>
-                                        <form th:action="@{/invitations/{invitationId}(invitationId=${invitation.id})}" method="post">
-                                            <input type="hidden" name="_method" value="delete">
-                                            <button type="submit">Cancel</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                
             </section>
         </div>
         <div>
@@ -120,6 +94,6 @@
             </section>
         </div>
     </main>
-    <script th:src="@{/js/manage-tenant.js}"></script>
+    <script type="module" th:src="@{/js/manage-tenant.js}"></script>
 </body>
 </html>

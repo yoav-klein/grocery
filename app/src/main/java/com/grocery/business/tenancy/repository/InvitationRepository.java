@@ -16,7 +16,7 @@ import com.grocery.business.tenancy.repository.rowmappers.InvitationMapper;
 public class InvitationRepository {
     // private static final String REMOVE_ALL_TENANT_INVITATIONS = "DELETE FROM tenant_system.invitations WHERE tenant_id = ?";
     private static final String REMOVE_INVITATION = "DELETE FROM tenant_system.invitations WHERE id = ?";
-    private static final String ADD_INVITATION = "INSERT INTO tenant_system.invitations(id, tenant_id, user_id) VALUES(?, ?, ?)";
+    private static final String ADD_INVITATION = "INSERT INTO tenant_system.invitations(id, tenant_id, invited_by) VALUES(?, ?, ?)";
     private static final String GET_INVITATION_BY_ID = "SELECT * FROM tenant_system.invitations WHERE id = ?";
     private static final String GET_ALL_INVITATIONS_FOR_USER = "SELECT * FROM tenant_system.invitations WHERE user_id = ?";
     private static final String GET_ALL_INVITATIONS_FOR_TENANT = "SELECT * FROM tenant_system.invitations WHERE tenant_id = ?";
@@ -30,15 +30,15 @@ public class InvitationRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void addInvitation(String id, String tenantId, String userId) {
-        this.jdbcTemplate.update(ADD_INVITATION, id, tenantId, userId);
+    public void save(String id, String tenantId, String invitedByUserId) {
+        this.jdbcTemplate.update(ADD_INVITATION, id, tenantId, invitedByUserId);
     }
 
-    public void removeInvitation(String invitationId) {
+    public void delete(String invitationId) {
         this.jdbcTemplate.update(REMOVE_INVITATION, invitationId);
     }
 
-    public Optional<Invitation> findInvitationById(String invitationId) {
+    public Optional<Invitation> findById(String invitationId) {
         Invitation invitation;
         try {
             invitation = this.jdbcTemplate.queryForObject(GET_INVITATION_BY_ID, invitationRowMapper, invitationId);
@@ -48,11 +48,11 @@ public class InvitationRepository {
         return Optional.of(invitation);
     }
 
-    public List<Invitation> getAllInvitationsForUser(String userId) {
+    /* public List<Invitation> getAllInvitationsForUser(String userId) {
         return this.jdbcTemplate.query(GET_ALL_INVITATIONS_FOR_USER, invitationRowMapper, userId);
-    }
+    } */
 
-    public List<Invitation> getAllInvitationsForTenant(String tenantId) {
+    /* public List<Invitation> getAllInvitationsForTenant(String tenantId) {
         return this.jdbcTemplate.query(GET_ALL_INVITATIONS_FOR_TENANT, invitationRowMapper, tenantId);
-    }
+    } */
 }

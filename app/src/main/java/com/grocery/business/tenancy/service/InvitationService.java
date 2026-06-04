@@ -6,9 +6,10 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import com.grocery.business.tenancy.exception.InvitationNotFoundException;
+import com.grocery.business.tenancy.exception.UserAlreadyInTenantException;
 import com.grocery.business.tenancy.model.Invitation;
 import com.grocery.business.tenancy.repository.InvitationRepository;
-import com.grocery.business.tenancy.repository.TenantUserRepository;
+import com.grocery.business.tenancy.service.TenantUserService;
 
 @Service("invitationService")
 public class InvitationService {
@@ -16,39 +17,31 @@ public class InvitationService {
     InvitationRepository invitationRepository;
 
     @Autowired
-    TenantUserRepository tenantUserRepository;
-
-    public String getInvitedUserId(String invitationId) throws InvitationNotFoundException {
-        Invitation invitation = invitationRepository.findInvitationById(invitationId).orElseThrow(() -> { return new InvitationNotFoundException(); });
-        
-        return invitation.getUser().getId();
-    }
+    TenantUserService tenantUserService;
 
     public String getInvitationTenantId(String invitationId) throws InvitationNotFoundException {
-        Invitation invitation = invitationRepository.findInvitationById(invitationId).orElseThrow(() -> { return new InvitationNotFoundException(); });
+        Invitation invitation = invitationRepository.findById(invitationId).orElseThrow(() -> { return new InvitationNotFoundException(); });
         
         return invitation.getTenant().getId();
     }
     
     // TRANSACTIONAL
     // security - allowed only to the invited user
-    @PreAuthorize("@authz.isUser(authentication, @invitationService.getInvitedUserId(#invitationId))")
-    public void acceptInvitation(@P("invitationId") String invitationId) throws InvitationNotFoundException {
-        Invitation invitation = invitationRepository.findInvitationById(invitationId).orElseThrow(() -> { return new InvitationNotFoundException(); });
+    public void acceptInvitation(String invitationId, String userId) throws InvitationNotFoundException, UserAlreadyInTenantException {
+        Invitation invitation = invitationRepository.findById(invitationId).orElseThrow(() -> { return new InvitationNotFoundException(); });
 
-        invitationRepository.removeInvitation(invitationId);
-        tenantUserRepository.addUserToTenant(invitation.getTenant().getId(), invitation.getUser().getId(), "regular");
+        invitationRepository.delete(invitationId);
+        tenantUserService.addUserToTenant(invitation.getTenant().getId(), userId, "regular");
     }
 
     // security - allowed only to the invited user, or tenant admin
-    @PreAuthorize("@authz.isAdmin(authentication, @invitationService.getInvitationTenantId(#invitationId)) or @authz.isUser(authentication, @invitationService.getInvitedUserId(#invitationId))")
-    public void declineInvitation(@P("invitationId") String invitationId) throws InvitationNotFoundException {
-        invitationRepository.removeInvitation(invitationId);
+    @PreAuthorize("@authz.isAdmin(principal.appUser.id, @invitationService.getInvitationTenantId(#invitationId))")
+    public void revokeInvitation(@P("invitationId") String invitationId) throws InvitationNotFoundException {
+        invitationRepository.delete(invitationId);
     }
 
-    
     public Invitation getInvitationById(String invitationId) throws InvitationNotFoundException {
-        Invitation invitation = invitationRepository.findInvitationById(invitationId).orElseThrow(() -> { return new InvitationNotFoundException(); });
+        Invitation invitation = invitationRepository.findById(invitationId).orElseThrow(() -> { return new InvitationNotFoundException(); });
         
         return invitation;
     }

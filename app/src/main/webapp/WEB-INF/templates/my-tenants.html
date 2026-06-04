@@ -46,22 +46,6 @@
                 <input type="submit" id="submit-button">
             </form>
         </dialog>
-        <section th:unless="${#lists.isEmpty(invitations)} == true">
-                <h2>⌛ Pending Invitations</h2>
-                <ul>
-                    <li th:each="invitation : ${invitations}">
-                        <h3 th:text="${invitation.tenant.name}"></h3>
-                        <div>
-                            <form method="post" th:action="@{/invitations/{invitationId}/accept(invitationId=${invitation.id})}">
-                                <button type="submit"><img th:src="@{/image/accept.svg}" height="800" width="800" alt="accept"></button>
-                            </form>
-                            <form method="post" th:action="@{/invitations/{invitationId}/decline(invitationId=${invitation.id})}">
-                                <button type="submit"><img th:src="@{/image/decline.svg}" height="800" width="800" alt="decline"></button>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </section>
     </main>
     
     <script src="js/main.js"></script>

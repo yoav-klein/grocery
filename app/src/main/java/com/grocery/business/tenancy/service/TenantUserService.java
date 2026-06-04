@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import com.grocery.business.tenancy.exception.UserAlreadyInTenantException;
 import com.grocery.business.tenancy.exception.UserNotFoundException;
 import com.grocery.business.tenancy.model.TenantMembership;
 import com.grocery.business.tenancy.repository.TenantUserRepository;
@@ -57,14 +58,14 @@ public class TenantUserService {
         return tenantUserRepository.isUserPartOfTenant(userId, tenantId) && tenantUserRepository.getUserRole(userId, tenantId).equals("admin");
     }
 
-    @PreAuthorize("@authz.isAdmin(authentication, #tenantId)")
+    @PreAuthorize("@authz.isAdmin(principal.appUser.id, #tenantId)")
     public void promoteToAdmin(@P("tenantId") String tenantId, @P("userId") String userId) throws UserNotFoundException {
         if(!isUserPartOfTenant(userId, tenantId)) throw new UserNotFoundException("User not part of tenant");
 
         tenantUserRepository.promoteToAdmin(tenantId, userId);
     }
 
-    @PreAuthorize("@tenantUserService.isStrongerMember(#tenantId, @authz.getUserIdFromAuthentication(authentication), #userId) or @authz.isUser(authentication, #userId)")
+    @PreAuthorize("@tenantUserService.isStrongerMember(#tenantId, principal.appUser.id, #userId) or principal.appUser.id == #userId")
     public void removeUserFromTenant(@P("tenantId") String tenantId, @P("userId") String userId) throws UserNotFoundException {
         if(!isUserPartOfTenant(userId, tenantId)) throw new UserNotFoundException("User not part of tenant");
 
@@ -92,7 +93,7 @@ public class TenantUserService {
         }
     }
 
-    public void addUserToTenant(String tenantId, String userId, String role) {
+    public void addUserToTenant(String tenantId, String userId, String role) throws UserAlreadyInTenantException {
         tenantUserRepository.addUserToTenant(tenantId, userId, role);
     }
 

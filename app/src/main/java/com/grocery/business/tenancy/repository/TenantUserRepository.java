@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.grocery.business.tenancy.exception.UserAlreadyInTenantException;
 import com.grocery.business.tenancy.model.Tenant;
 import com.grocery.business.tenancy.model.TenantMembership;
 import com.grocery.business.tenancy.model.User;
@@ -39,7 +40,7 @@ public class TenantUserRepository {
         String userId = rs.getString("user_id");
         String tenantId = rs.getString("tenant_id");
         
-        User user = userRepository.findUserById(userId).get();
+        User user = userRepository.findById(userId).get();
         Tenant tenant = tenantRepository.findTenantById(tenantId).get();
         LocalDateTime since = rs.getTimestamp("since").toLocalDateTime();
         LocalDateTime adminSince = null;
@@ -56,12 +57,17 @@ public class TenantUserRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void addUserToTenant(String tenantId, String userId, String role) {
+    public void addUserToTenant(String tenantId, String userId, String role) throws UserAlreadyInTenantException {
         Timestamp now = Timestamp.from(Instant.now());
-        if(role.equals("admin")) {
-            this.jdbcTemplate.update(ADD_USER_TO_TENANT, tenantId, userId, role, now, now);
-        } else {
-            this.jdbcTemplate.update(ADD_USER_TO_TENANT, tenantId, userId, role, now, null);
+
+        try {
+            if(role.equals("admin")) {
+                this.jdbcTemplate.update(ADD_USER_TO_TENANT, tenantId, userId, role, now, now);
+            } else {
+                this.jdbcTemplate.update(ADD_USER_TO_TENANT, tenantId, userId, role, now, null);
+            }
+        } catch(org.springframework.dao.DuplicateKeyException e) {
+            throw new UserAlreadyInTenantException();
         }
     }
 

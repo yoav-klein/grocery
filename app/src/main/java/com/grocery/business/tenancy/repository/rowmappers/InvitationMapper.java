@@ -25,9 +25,9 @@ public class InvitationMapper implements RowMapper<Invitation> {
     public Invitation mapRow(ResultSet rs, int rowNum) throws SQLException {
         String invitationId = rs.getString("id");
         String tenantId = rs.getString("tenant_id");
-        String userId = rs.getString("user_id");
+        String userId = rs.getString("invited_by");
 
-        User user = userRepository.findUserById(userId).get();
+        User user = userRepository.findById(userId).get();
         Tenant tenant = tenantRepository.findTenantById(tenantId).get();
 
         return new Invitation(invitationId, tenant, user);

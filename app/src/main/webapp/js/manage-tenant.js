@@ -1,17 +1,39 @@
+import { HttpError, UnhandledProblemTypeError } from './common.js';
+import { TENANT_URL } from './config.js';
 
 const addInvitationButtonEl = document.getElementById("add-invitation-button");
-const addInvitationDialogEl = document.getElementById("add-invitation-dialog");
+const invitationDialogEl = document.getElementById("invitation-dialog");
 const closeDialogButtonEl = document.getElementById("close-modal");
+const tenantId = document.querySelector('meta[name="tenantId"]').content;
+const invitationLinkEl = document.getElementById('invitation-link');
+const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]');
+const csrfToken = document.querySelector('meta[name="_csrf"]');
 
 // non-admins don't have this button
 if(addInvitationButtonEl) {
     addInvitationButtonEl.addEventListener('click', () => {
-        addInvitationDialogEl.showModal();
+        const headers = new Headers();
+        headers.append(csrfHeaderName.content, csrfToken.content);
+        
+        const responsePromise = fetch(TENANT_URL + '/' + tenantId + '/invitations', { method: 'POST', headers: headers });
+        responsePromise.then(response => {
+                if(!response.ok) {
+                    throw new HttpError(response);
+                }
+                return response.text();
+            })
+            .then(text => { 
+                invitationLinkEl.textContent = text;
+                invitationDialogEl.showModal();
+            })
+            .catch(e => {
+                // TODO: show error toast
+            });
     });
 }
 
 closeDialogButtonEl.addEventListener('click', () => {
-    addInvitationDialogEl.close();
+    invitationDialogEl.close();
 });
 
 const btns = document.querySelectorAll('.member-action-menu-container button');

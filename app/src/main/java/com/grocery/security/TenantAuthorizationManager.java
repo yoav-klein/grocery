@@ -9,7 +9,12 @@ import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
+
+import com.grocery.security.model.SecurityUser;
+import com.grocery.business.tenancy.model.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -23,8 +28,15 @@ public class TenantAuthorizationManager implements AuthorizationManager<RequestA
     public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext context) {
         HttpServletRequest request = context.getRequest();
         String tenantId = extractTenantId(request.getRequestURI());
+
+        Authentication currentAuth = authentication.get();
+        if(currentAuth instanceof AnonymousAuthenticationToken) {
+            throw new AccessDeniedException("Anonymous user");
+        }
+
+        User user = ((SecurityUser)currentAuth.getPrincipal()).getAppUser();
         
-        if(authz.isUserPartOfTenant(authentication.get(), tenantId)) {
+        if(authz.isUserPartOfTenant(user.getId(), tenantId)) {
             return new AuthorizationDecision(true);
         }
         return new AuthorizationDecision(false);
