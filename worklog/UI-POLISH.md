@@ -13,6 +13,7 @@ already feels more mature.
 ## Backlog
 ---
 * Tenant selection
+    * Identicons
 * Manage tenant
 
 
@@ -25,6 +26,7 @@ already feels more mature.
 * On Adding stuff - success toast
 * Sidebar - fixed lists - smaller font maybe.
 * Fixed list editor - submitting state (low opacity during submitting)
+* Photos for tenants - enable the user to upload an image
 
 
 ## Steps

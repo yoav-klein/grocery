@@ -71,15 +71,14 @@ public class UserService {
 
     
     private User registerUser(OidcUser oidcUser) {
-        User appUser = new User(
-            UUID.randomUUID().toString(),
-            oidcUser.getEmail(),
-            oidcUser.getGivenName(),
-            oidcUser.getFamilyName(),
-            oidcUser.getFullName(),
-            oidcUser.getPicture()
-        );
-
+        User appUser = new User();
+        appUser.setId(UUID.randomUUID().toString());
+        appUser.setDisplayName(oidcUser.getFullName());
+        appUser.setEmail(oidcUser.getEmail());
+        appUser.setFirstName(oidcUser.getGivenName());
+        appUser.setLastName(oidcUser.getFamilyName());
+        appUser.setPictureUrl(oidcUser.getPicture());
+        
         userRepository.save(appUser);
 
         return appUser;

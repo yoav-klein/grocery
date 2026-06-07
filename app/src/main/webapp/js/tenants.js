@@ -1,12 +1,15 @@
+import { Avatar } from './dicebear.js';
+import identicon from './identicon.json' with { type: 'json' };
 
-const addTenantButtonEl = document.getElementById("add-tenant-button");
-const addTenantDialogEl = document.getElementById("add-tenant-dialog");
-const closeDialogButtonEl = document.getElementById("close-modal");
+const tenants = Array.from(document.querySelectorAll('.tenant-card'));
+tenants.forEach(tenantEl => {
+    const tenantId = tenantEl.dataset.tenantId;
+    const avatar = new Avatar(identicon, {
+        seed: tenantId,
+        size: 50
+    });
 
-addTenantButtonEl.addEventListener('click', () => {
-    addTenantDialogEl.showModal();
+    const svg = avatar.toString();
+    tenantEl.querySelector('.tenant-image-container').innerHTML = svg;
 });
 
-closeDialogButtonEl.addEventListener('click', () => {
-    addTenantDialogEl.close();
-});

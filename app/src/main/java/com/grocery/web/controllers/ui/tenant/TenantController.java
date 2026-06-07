@@ -43,7 +43,6 @@ public class TenantController {
 
     @GetMapping("/management")
     public String tenantManagement(Model model, @PathVariable("tenantId") String tenantId) {
-        
         model.addAttribute("memberships", tenantUserService.getAllUsersForTenant(tenantId));
         model.addAttribute("page", "management");
 
@@ -54,16 +53,6 @@ public class TenantController {
     public String home(@PathVariable("tenantId")String tenantId) {
         return String.format("redirect:/tenant/%s/currentList", tenantId);
     }
-
-    // invite user to tenant
-    /* @PostMapping("/invitations")
-    public String inviteUser(RedirectAttributes ra, Model model, @PathVariable("tenantId") String tenantId, @AuthenticationPrincipal SecurityUser user) throws UserNotFoundException {
-        Invitation invitation = tenantService.createInvitation(tenantId, user.getAppUser().getId());
-        
-        ra.addFlashAttribute("invitationId", invitation.getId()); // not sure if I need this...
-
-        return String.format("redirect:/tenant/%s/management", tenantId);
-    } */
 
     // remove user
     @DeleteMapping("/members/{userId}")
