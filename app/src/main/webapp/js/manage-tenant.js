@@ -3,6 +3,7 @@ import { TENANT_URL } from './config.js';
 
 const addInvitationButtonEl = document.getElementById("add-invitation-button");
 const invitationDialogEl = document.getElementById("invitation-dialog");
+const genericErrorToast = document.getElementById("generic-error-toast");
 
 const tenantId = document.querySelector('meta[name="tenantId"]').content;
 const invitationLinkEl = document.getElementById('invitation-link');
@@ -28,6 +29,9 @@ if(addInvitationButtonEl) {
                 invitationDialogEl.showModal();
             })
             .catch(e => {
+                console.log("ERROR");
+                console.log(e.response);
+                invitationErrorToast.dispatchEvent(new CustomEvent('show'));
                 // TODO: show error toast
             });
     });

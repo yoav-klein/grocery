@@ -41,6 +41,7 @@
 
     /* Meanings */
     --color-success: #47f764;
+    --color-error: var(--color-red-600);
         
     /* Surfaces */
     --color-surface-page: var(--color-gray-50);
