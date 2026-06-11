@@ -115,7 +115,7 @@ section {
 }
 
 .member-role {
-    margin-left: auto;
+    margin-inline-start: auto;
     font-size: 0.8rem;
 }
 
