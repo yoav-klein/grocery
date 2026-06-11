@@ -1,8 +1,6 @@
 
 ## Backlog
-* User icon and menu
-* Logout
-* Invitation prompt page - prettify
+
 * Error handling
     * JavaScript
     * Backend

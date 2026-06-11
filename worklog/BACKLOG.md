@@ -10,6 +10,8 @@
     * Enable tenant picture
     * Error handling in create new tenant (validation)
 * Guidance
+* Avatar icon and menu
+    * Logout
 
 ## Status
 * Internationalization - Started work, tracking in the `I18N.md` file

@@ -14,15 +14,15 @@ already feels more mature.
 ---
 * Tenant selection
     * Identicons
-* Manage tenant
-
+* Invitation prompt page - prettify
+* Language selection prettify
 
 ## TODO LATER
 ---
 * Forms - style select elements better
 * Quantity type - change select to moving pill
 * Icons for each category
-* Icons for tenants
+* Icons for tenants (V)
 * On Adding stuff - success toast
 * Sidebar - fixed lists - smaller font maybe.
 * Fixed list editor - submitting state (low opacity during submitting)
@@ -75,5 +75,14 @@ already feels more mature.
 * Fixed List Editor
     * Edit list
     * Error handling
+
+### Step 11
+* Manage tenant
+    * Kebab menu for user - z-index
+    * Admin/Member badges
+    * Hovers
+
+### Step 12
+* Lanauge selection
 
 ### Currently
