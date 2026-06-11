@@ -29,10 +29,7 @@ if(addInvitationButtonEl) {
                 invitationDialogEl.showModal();
             })
             .catch(e => {
-                console.log("ERROR");
-                console.log(e.response);
-                invitationErrorToast.dispatchEvent(new CustomEvent('show'));
-                // TODO: show error toast
+                genericErrorToast.dispatchEvent(new CustomEvent('show'));
             });
     });
 }
