@@ -45,3 +45,10 @@ if(activePageEl) {
         toggleSubMenu(submenuEl); 
     }
 }
+
+// LANGUAGES
+const changeLangButtonEl = document.querySelector('.change-language-button');
+const languagesMenuEl = document.querySelector('.languages-menu');
+changeLangButtonEl.addEventListener('click', () => {
+    languagesMenuEl.classList.toggle('show');
+})

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head th:include="~{layout :: head(~{::link},~{::meta})}">
+<html th:replace="~{layout :: layout(~{::link},~{::meta},~{::main},~{::script})}">
+<head>
     <meta charset="UTF-8">
     <meta name="tenantId" th:content="${tenant.id}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../css/manage-tenant.css" th:href="@{/css/manage-tenant.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/dist/tabler-icons.min.css">
 </head>
-<body th:replace="~{layout :: layout(~{::main},~{::script})}">
+<body>
     <div class="wrapper" th:remove="tag">
         <main>
             <section class="members">

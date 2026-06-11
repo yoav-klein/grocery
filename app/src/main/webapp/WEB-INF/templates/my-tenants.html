@@ -15,7 +15,7 @@
         </button> -->
     </header>
     <main>
-        <h1>My Tenants</h1>
+        <h1 th:text="#{mytenants.heading}">My Tenants</h1>
         <section class="tenants-grid">
             <div class="card tenant-card" th:each="membership : ${tenantMemberships}" th:data-tenant-id="${membership.tenant.id}">
                 <a href="index.html" th:href="@{/tenant/{tenantId}(tenantId=${membership.tenant.id})}">

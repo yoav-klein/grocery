@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head th:include="~{layout :: head(~{::link},~{})}">
+<html th:replace="~{layout :: layout(~{::link},~{},~{::main},~{::script})}">
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="../../css/kebab-menus.css" th:href="@{/css/kebab-menus.css}">
         <link rel="stylesheet" href="../../css/products.css" th:href="@{/css/products.css}">
     </head>
-    <body th:replace="~{layout :: layout(~{::main},~{::script})}">
+    <body>
         <div class="wrapper" th:remove="tag">
 
             <main>

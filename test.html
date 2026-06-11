@@ -5,23 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        dialog[open] {
-            width: 400px;
-            height: 400px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            height: 100px;
+            background-color: aqua;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        .languages {
+            margin-inline-start: auto;
+            width: 100px;
+            border: 1px solid red;
+            position: relative;
+        }
+
+        .language-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+        }
+
+        .show {
+            display: block;
+        }
+
+        .content {
+            position: relative;
+            height: 100%;
+        }
+
+        aside {
+            background-color: bisque;
+        }
+
+        main {
+            background-color: blueviolet;
         }
     </style>
 </head>
 <body>
-    <button id="open">OPEN</button>
-    <dialog>
-        <div class="footer">
-            <form method="dialog">
-                <button id="close">CLOSE</button>
-            </form>
+    <header>
+        <div class="languages">
+            <button class="change-language-button">
+                <span id="current-language" th:text="${#locale.language}"></span>
+                <span style="font-size: 2rem;">&#x1F310;</span>
+            </button>
+            <div class="language-menu">
+                <a href="#" th:href="@{?lang=he}">Hebrew</a>
+                <a href="#" th:href="@{?lang=en}">English</a>
+            </div>
         </div>
-    </dialog>
+        <div class="user-avatar">
+            AVATAR
+        </div>
+    </header>
+    <div class="content">
+        <aside>
+
+        </aside>
+        <main>
+
+        </main>
+    </div>
+    
     <script>
-        document.getElementById("open").addEventListener('click', () => { document.querySelector('dialog').showModal(); });
+        document.querySelector(".change-language-button").addEventListener('click', () => { 
+            document.querySelector('.language-menu').classList.toggle('show'); 
+        });
     </script>
 </body>
 </html>

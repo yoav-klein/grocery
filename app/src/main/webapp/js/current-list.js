@@ -4,7 +4,7 @@ import { HttpError } from './common.js';
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]');
 const csrfToken = document.querySelector('meta[name="_csrf"]');
 
-const evtSource = new EventSource(document.baseURI + '/itemStream');
+const evtSource = new EventSource(window.location.pathname + '/itemStream');
 
 const newItemFormEl = document.getElementById("new-item-form");
 const addItemDialogEl = document.getElementById('add-item-dialog');
@@ -21,7 +21,7 @@ newItemFormEl.addEventListener("submit", (event) => {
     headers.append("Content-Type", "application/json");
     headers.append(csrfHeaderName.content, csrfToken.content);
     const body = JSON.stringify(data);
-    const responsePromise = fetch(document.baseURI + "/addItem", {
+    const responsePromise = fetch(window.location.pathname + "/addItem", {
         method: "POST",
         headers: headers,
         body: body
@@ -156,7 +156,7 @@ function attachHandlerToDeleteCheckbox(el) {
             const id = e.target.id.replace("delete-checkbox-", "");
             const headers = new Headers();
             headers.append(csrfHeaderName.content, csrfToken.content);
-            const responsePromise = fetch(document.baseURI + `/item?itemId=${id}`, {
+            const responsePromise = fetch(window.location.pathname + `/item?itemId=${id}`, {
                 method: "DELETE",
                 headers: headers
             });

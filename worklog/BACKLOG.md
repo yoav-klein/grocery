@@ -10,3 +10,6 @@
     * Enable tenant picture
     * Error handling in create new tenant (validation)
 * Guidance
+
+## Status
+* Internationalization - Started work, tracking in the `I18N.md` file
