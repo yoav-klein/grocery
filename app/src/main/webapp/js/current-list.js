@@ -8,6 +8,7 @@ const evtSource = new EventSource(window.location.pathname + '/itemStream');
 
 const newItemFormEl = document.getElementById("new-item-form");
 const addItemDialogEl = document.getElementById('add-item-dialog');
+const addItemSuccessToast = document.getElementById("add-item-success-toast");
 
 
 newItemFormEl.addEventListener("submit", (event) => {
@@ -31,6 +32,7 @@ newItemFormEl.addEventListener("submit", (event) => {
         if(!resp.ok) throw new HttpError(resp);
 
         addItemDialogEl.dispatchEvent(new CustomEvent('submitsuccess'));
+        addItemSuccessToast.dispatchEvent(new CustomEvent('show'));
 
     })
     .catch(e => {
@@ -45,8 +47,6 @@ newItemFormEl.addEventListener("submit", (event) => {
 
         response.json()
             .then(data => {
-                console.log("JSON: ");
-                console.log(data);
                 if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
 
                 problemDetailHandler(data)

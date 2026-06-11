@@ -38,6 +38,9 @@
     --color-red-600: #DC2626;
     
     /* --- COLOR VARIABLES - GENERIC ROLES -- */
+
+    /* Meanings */
+    --color-success: #47f764;
         
     /* Surfaces */
     --color-surface-page: var(--color-gray-50);
@@ -196,6 +199,10 @@
     --kebab-menu-item-gap: var(--space-3);
     --kebab-menu-item-padding: var(--space-2) var(--space-3);
     --kebab-menu-actions-padding-tb: var(--space-2);
+
+    /* Toasts */
+    --toast-height: 80px;
+    --toast-width: 300px;
     
 
     /* Fixed List */

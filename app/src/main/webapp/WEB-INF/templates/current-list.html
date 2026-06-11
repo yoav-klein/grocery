@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
+        <link rel="stylesheet" href="../../css/toast.css" th:href="@{/css/toast.css}">
         <link rel="stylesheet" href="../../css/offline.css" th:remove="all">
         <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
         <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
@@ -13,6 +14,18 @@
     <body>
         <div class="wrapper" th:remove="tag"> <!-- this is just for offline rendering -->
             <main>
+                <div id="add-item-success-toast" class="js-toast toast toast-success">
+                    <div class="container-1">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <div class="container-2">
+                        <p>Success</p>
+                        <p>Item added successfully!</p>
+                    </div>
+                    <button class="close-toast js-close-toast">&times;</button>
+                </div>
+                
+                
                 <!-- template for adding items in JavaScript -->
                 <template id="item-template">
                     <li class="category-item">
@@ -386,6 +399,8 @@
             </main>
         </div>
         <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script src="../../js/toast.js" th:src="@{/js/toast.js}"></script>
         <script type="module" src="../../js/current-list.js" th:src="@{/js/current-list.js}"></script>
+        <script src="https://kit.fontawesome.com/68d2baaa06.js" crossorigin="anonymous"></script>
     </body>
 </html>

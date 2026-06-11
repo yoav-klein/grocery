@@ -15,3 +15,4 @@
 
 ## Status
 * Internationalization - Started work, tracking in the `I18N.md` file
+* User management - error handling
