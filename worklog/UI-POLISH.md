@@ -12,10 +12,14 @@ already feels more mature.
 
 ## Backlog
 ---
-* Tenant selection
-    * Identicons
+* Tenant selection (V)
+    * Identicons (V)
 * Invitation prompt page - prettify
-* Language selection prettify
+* Language selection prettify (V)
+* Manage tenant
+    * Admin/Member badges
+    * Hovers
+
 
 ## TODO LATER
 ---
@@ -27,6 +31,7 @@ already feels more mature.
 * Sidebar - fixed lists - smaller font maybe.
 * Fixed list editor - submitting state (low opacity during submitting)
 * Photos for tenants - enable the user to upload an image
+* Popovers - use "Floating UI" https://floating-ui.com/docs/getting-started
 
 
 ## Steps
@@ -77,12 +82,6 @@ already feels more mature.
     * Error handling
 
 ### Step 11
-* Manage tenant
-    * Kebab menu for user - z-index
-    * Admin/Member badges
-    * Hovers
-
-### Step 12
-* Lanauge selection
+* Lanauge selection (V)
 
 ### Currently

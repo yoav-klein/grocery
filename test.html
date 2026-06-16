@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,83 +16,30 @@
         }
 
         body {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-rows: auto 1fr;
         }
-        
-        header {
-            height: 100px;
-            background-color: aqua;
 
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+        header {
+            height: 200px;
+            background-color: aqua;
         }
 
         main {
-            flex-grow: 1;
-        }
-
-        .languages {
-            margin-inline-start: auto;
-            width: 100px;
-            border: 1px solid red;
-            position: relative;
-        }
-
-        .language-menu {
-            display: none;
-            position: absolute;
-            top: calc(100% + 8px);
-        }
-
-        .show {
-            display: block;
-        }
-
-        .content {
-            position: relative;
+            background-color: rgb(87, 109, 129);
             height: 100%;
         }
 
-        aside {
-            background-color: bisque;
-        }
-
-        main {
-            background-color: blueviolet;
-        }
+        
+        
     </style>
 </head>
 <body>
     <header>
-        <div class="languages">
-            <button class="change-language-button">
-                <span id="current-language" th:text="${#locale.language}"></span>
-                <span style="font-size: 2rem;">&#x1F310;</span>
-            </button>
-            <div class="language-menu">
-                <a href="#" th:href="@{?lang=he}">Hebrew</a>
-                <a href="#" th:href="@{?lang=en}">English</a>
-            </div>
-        </div>
-        <div class="user-avatar">
-            AVATAR
-        </div>
+        This is header
     </header>
-    <div class="content">
-        <aside>
-
-        </aside>
-        <main>
-
-        </main>
-    </div>
-    
-    <script>
-        document.querySelector(".change-language-button").addEventListener('click', () => { 
-            document.querySelector('.language-menu').classList.toggle('show'); 
-        });
-    </script>
+    <main>
+        This is main
+    </main>
 </body>
 </html>

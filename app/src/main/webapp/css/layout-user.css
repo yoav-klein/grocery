@@ -1,0 +1,114 @@
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+body > header {
+    height: var(--header-height);
+    border-bottom: 1px solid var(--color-layout-border);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--color-header-bg);
+    padding: 0 var(--space-4);
+    gap: var(--space-4);
+}
+
+
+#menu-button {
+    border: none;
+    border-radius: .5em;
+    padding: var(--sidebar-kebab-button-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    cursor: pointer;
+    z-index: 1000;
+    visibility: hidden;
+    svg {
+        fill: var(--color-sidebar-item-text)
+    }
+}
+
+.layout-header-menu {
+    background-color: var(--color-surface-page);
+    padding: 1rem 0;
+    border: 1px solid var(--color-border-subtle);
+    top: calc(100% + 8px);
+    inset-inline-end: 0;
+    z-index: 999;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, .08);
+    border-radius: 7px;
+}
+
+.layout-header-menu-item {
+    padding: 0.25rem 1rem;
+    border-radius: 4px;
+}
+
+.layout-header-menu-item:hover {
+    background-color: var(--color-surface-raised);
+}
+
+.languages {
+    margin-inline-start: auto; /* to split the flexbox into 2 parts */
+    height: 70%;
+}
+
+.change-language-button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+}
+
+.languages-menu {
+    display: none;
+
+    > a {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    }
+}
+
+
+.popover.opened .languages-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-avatar {
+    height: 70%;
+
+    img {
+        height: 100%;
+        width: auto;
+        border-radius: 50%;
+    }
+}
+
+.user-avatar .popover-button {
+    background-color: transparent;
+    border: none;
+}
+
+.popover.opened .user-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.user-menu button, .user-menu input[type="submit"] {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+
+.divider {
+    border: 1px solid var(--color-border-subtle);
+}

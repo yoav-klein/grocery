@@ -74,7 +74,7 @@ public class TenantController {
     public String leaveTenant(Model model, @PathVariable("tenantId") String tenantId, @PathVariable("user") String userId) throws UserNotFoundException {
         tenantUserService.removeUserFromTenant(tenantId, userId);
 
-        return "redirect:/my-tenants";
+        return "redirect:/tenants";
     }
 
     // delete tenant

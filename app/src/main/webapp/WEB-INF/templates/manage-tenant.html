@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::link},~{::meta},~{::main},~{::script})}">
+<html th:replace="~{layout-tenant :: layout(~{::link},~{::meta},~{::main},~{::script})}">
 <head>
     <meta charset="UTF-8">
     <meta name="tenantId" th:content="${tenant.id}">
@@ -36,7 +36,7 @@
                         <li class="row member" th:each="membership: ${memberships}">
                             <div class="member-picture">
                                 <!-- <p class="avatar">YK</p> -->
-                                <img th:src="${membership.user.pictureUrl}" alt="user picture">
+                                <img referrerpolicy="no-referrer" th:src="${membership.user.pictureUrl}" alt="user picture">
                             </div>
                             <p  th:text="${membership.user.displayName}">Yoav Klein</p>
                             <p class="member-role badge" th:classappend="(${membership.role} == 'admin'? 'badge-admin' : 'badge-member')" th:text="${membership.role}">Member</p>

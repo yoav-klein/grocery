@@ -45,4 +45,5 @@ public class GlobalAppControllerAdvice {
         return fixedListsService.getAllFixedLists(tenantId);
     }
 
+
 }

@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html th:replace="~{layout-user :: layout(~{::head}, ~{::main}, ~{::script})}" lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../../css/invitation-prompt.css" th:href="@{/css/invitation-prompt.css}">
 </head>
 <body>
-    <h1>You were invited!</h1>
-
-    <p>Invitation ID: <span th:text="${invitation.id}"></span></p>
-
-    <form th:action="@{/invitations/{invitationId}/accept(invitationId=${invitation.id})}" method="post">
-        <input type="submit">
-    </form>
+    <main>
+        <div class="content">
+            <div class="tenant-header" th:data-tenant-id="${invitation.tenant.id}">
+                <div class="tenant-image-container"></div>
+                <h4><span th:text="${invitation.tenant.name}"></span></h4>
+            </div>
+            <p class="invitation-body">
+                <img class="inviter-picture" referrerpolicy="no-referrer" th:src="${invitation.invitedBy.pictureUrl}" alt="user picture">
+                <span th:text="${invitation.invitedBy.displayName}"></span> invited you to join <span th:text="${invitation.tenant.name}"></span>
+            </p>
+            <div class="actions">
+                <form th:action="@{/invitations/{invitationId}/accept(invitationId=${invitation.id})}" method="post">
+                    <button type="submit" class="action-button primary-action-button">Accept invitation</button>
+                </form>
+                <a th:href="@{/tenants}">Decline</a>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="../../js/invitation-prompt.js" th:src="@{/js/invitation-prompt.js}"></script>
 </body>
 </html>

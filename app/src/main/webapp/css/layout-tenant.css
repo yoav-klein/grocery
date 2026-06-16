@@ -1,46 +1,4 @@
 
-body {
-    display: grid;
-    grid-template-rows: auto 1fr;
-}
-
-body > header {
-    height: var(--header-height);
-    border-bottom: 1px solid var(--color-layout-border);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: var(--color-header-bg);
-    padding: 0 1rem;
-}
-
-.languages {
-    position: relative;
-    margin-inline-start: auto;
-}
-
-.change-language-button {
-    background: none;
-    border: none;
-    font-size: 1rem;
-}
-
-.languages-menu {
-    padding: 0.5rem;
-    border: 1px solid var(--color-border-subtle);
-    position: absolute;
-    z-index: 20;
-    top: calc(100% + 8px);
-    inset-inline-end: 0;
-    display: none;
-}
-
-.show {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
 .content {
     z-index: 10;
     position: relative;
@@ -57,21 +15,6 @@ main {
     overflow: auto;
 }
 
-#menu-button {
-    border: none;
-    border-radius: .5em;
-    padding: var(--sidebar-kebab-button-padding);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    cursor: pointer;
-    z-index: 1000;
-    visibility: hidden;
-    svg {
-        fill: var(--color-sidebar-item-text)
-    }
-}
 
 #menu-button:hover {
     background-color: var(--color-menu-button-hover);
