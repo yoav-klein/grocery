@@ -32,7 +32,7 @@
             </button>
             <div class="popover-menu user-menu layout-header-menu">
                 <div class="divider"></div>
-                <button class="layout-header-menu-item">
+                <button id="logout-button" data-open-dialog data-dialog-id="logout-dialog" class="layout-header-menu-item">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <span>Logout</span>
                 </button>
@@ -40,6 +40,12 @@
         </div>
     </header>
     <div th:replace="${content}"></div>
+    <dialog id="logout-dialog" class="confirmation-dialog">
+        <p>Are you sure you want to log out?</p>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">YES</button>
+        </form>
+    </dialog>
     <th:block th:replace="${scripts}" />
     <script th:src="@{/js/layout.js}" src="../../js/layout.js"></script>
     <script th:src="@{/js/popovers.js}" src="../../js/popovers.js"></script>

@@ -1,6 +1,5 @@
 package com.grocery.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,7 +18,6 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
-import org.springframework.security.config.Customizer;
 
 @PropertySource("file:/C:/Users/yoavk/.secrets/google-openid-credentials.properties")
 @EnableWebSecurity(debug=true)
@@ -36,8 +34,11 @@ public class SpringSecurityConfig {
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthorizationManager<RequestAuthorizationContext> tenantAuthManager) throws Exception {
-        return http.oauth2Login(Customizer.withDefaults())
+        return http.oauth2Login(oauth -> {
+                oauth.loginPage("/login");
+            })
             .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/login").permitAll()
                 .requestMatchers("/tenant/**").access(tenantAuthManager)
                 .anyRequest().authenticated()
             )
