@@ -38,7 +38,8 @@
                                 <!-- <p class="avatar">YK</p> -->
                                 <img referrerpolicy="no-referrer" th:src="${membership.user.pictureUrl}" alt="user picture">
                             </div>
-                            <p  th:text="${membership.user.displayName}">Yoav Klein</p>
+                            <p th:text="${membership.user.displayName}">Yoav Klein</p>
+                            <p class="you-badge" th:if="${membership.user.id == user.id}">YOU</p>
                             <p class="member-role badge" th:classappend="(${membership.role} == 'admin'? 'badge-admin' : 'badge-member')" th:text="${membership.role}">Member</p>
                             <div class="kebab-menu js-kebab-menu" th:unless="${membership.user.id} == ${user.id}" th:if="${@tenantUserService.isAdmin(user.id, tenant.id)}">
                                 <button class="kebab-menu-button js-kebab-menu-button">

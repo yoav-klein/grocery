@@ -14,7 +14,7 @@ already feels more mature.
 ---
 * Tenant selection (V)
     * Identicons (V)
-* Invitation prompt page - prettify
+* Invitation prompt page - prettify (V)
 * Language selection prettify (V)
 * Manage tenant
     * Admin/Member badges
