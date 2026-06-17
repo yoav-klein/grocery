@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 import org.springframework.security.config.web.PathPatternRequestMatcherBuilderFactoryBean;
-import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
@@ -38,7 +36,7 @@ public class SpringSecurityConfig {
                 oauth.loginPage("/login");
             })
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/login").permitAll()
+                .requestMatchers("/login", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/tenant/**").access(tenantAuthManager)
                 .anyRequest().authenticated()
             )
@@ -67,8 +65,8 @@ public class SpringSecurityConfig {
 
     // we create this bean so it'll be available in the Controller class
     // so we can access the AccessToken
-    @Bean
+    /* @Bean
 	public OAuth2AuthorizedClientService authorizedClientService(ClientRegistrationRepository clientRegistrationRepository) {
 		return new InMemoryOAuth2AuthorizedClientService(clientRegistrationRepository);
-	}
+	} */
 }

@@ -3,11 +3,11 @@
 
 ## For launch
 * Login page with Google icon
+* Logout
 * Internationalization
 * Error pages
 * My tenants page
     * Error handling in create new tenant (validation)
-* Logout
 * Prettify invitation page (V)
 
 
@@ -23,3 +23,5 @@
     * Enable tenant picture
 * Guidance
 
+## Current
+* Login and logout pages - started
