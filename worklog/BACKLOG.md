@@ -2,13 +2,13 @@
 ---
 
 ## For launch
-* Login page with Google icon
-* Logout
 * Internationalization
 * Error pages
 * My tenants page
     * Error handling in create new tenant (validation)
-* Prettify invitation page (V)
+* Logout (V)
+* Login page with Google icon (V - still needs touch)
+* Prettify invitation page (V - still needs touch)
 
 
 * Feedbacks
