@@ -12,13 +12,6 @@ already feels more mature.
 
 ## Backlog
 ---
-* Tenant selection (V)
-    * Identicons (V)
-* Invitation prompt page - prettify (V)
-* Language selection prettify (V)
-* Manage tenant
-    * Admin/Member badges
-    * Hovers
 
 
 ## TODO LATER
@@ -81,7 +74,16 @@ already feels more mature.
     * Edit list
     * Error handling
 
-### Step 11
+### Step 11 (V)
 * Lanauge selection (V)
 
-### Currently
+### Step 12 (V)
+* Tenant selection (V)
+    * Identicons (V)
+* Invitation prompt page - prettify (V)
+
+## Step 13
+* Manage tenant
+    * Admin/Member badges - remove Member badge
+    * YOU badge (started)
+    * Hovers (Promote)
