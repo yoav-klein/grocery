@@ -80,7 +80,7 @@ public class SpringWebConfig implements WebMvcConfigurer, ApplicationContextAwar
         return messageSource;
     }
 
-        @Bean
+    @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
         return slr;
