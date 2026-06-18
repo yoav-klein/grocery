@@ -6,11 +6,14 @@
 * Error pages
 * My tenants page
     * Error handling in create new tenant (validation)
+
+## Done
 * Logout (V)
 * Login page with Google icon (V - still needs touch)
 * Prettify invitation page (V - still needs touch)
 
 
+## Later
 * Feedbacks
     * Accept invitation
     * Adding product
@@ -22,6 +25,7 @@
     * Add number of members in each tenant
     * Enable tenant picture
 * Guidance
+* Chat
 
 ## Current
 
