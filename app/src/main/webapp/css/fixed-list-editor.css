@@ -286,11 +286,16 @@ button[disabled] {
         gap: 0;
         flex-direction: row;
 
-        transform: translateX(calc(-1 * (100% / var(--num-steps)) * var(--current-step)));
         transition: transform 1s;
-
         overflow: auto;
-
+    }
+    
+    #step-wrapper:dir(ltr) {
+        transform: translateX(calc(-1 * (100% / var(--num-steps)) * var(--current-step)));
+    }
+    
+    #step-wrapper:dir(rtl) {
+        transform: translateX(calc((100% / var(--num-steps)) * var(--current-step)));
     }
 
     .step-actions {
