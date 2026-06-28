@@ -1,7 +1,7 @@
 
 const overlayEl = document.getElementById('overlay');
 
-const toggleSidebarButtonEl = document.getElementById("menu-button");
+const toggleSidebarButtonEl = document.getElementById("tenant-menu-button");
 toggleSidebarButtonEl.addEventListener('click', toggleSidebar);
 const sidebarEl = document.getElementById("sidebar");
 

@@ -26,7 +26,6 @@
                 <button class="close-toast js-close-toast">&times;</button>
             </div>
             <div class="inner-content">
-                    
                 <section class="members">
                     <div class="row section-header">
                         <h2><i class="ti ti-users"></i> Members <span class="members-count" th:text="${#lists.size(memberships)}">3</span></h2>
@@ -39,8 +38,10 @@
                                 <img referrerpolicy="no-referrer" th:src="${membership.user.pictureUrl}" alt="user picture">
                             </div>
                             <p th:text="${membership.user.displayName}">Yoav Klein</p>
-                            <p class="you-badge" th:if="${membership.user.id == user.id}">YOU</p>
-                            <p class="member-role badge" th:classappend="(${membership.role} == 'admin'? 'badge-admin' : 'badge-member')" th:text="${membership.role}">Member</p>
+                            <p class="badge badge-you" th:if="${membership.user.id == user.id}">You</p>
+                            <p class="badge member-role" th:classappend="(${membership.role} == 'admin'? 'badge-admin' : 'badge-member')">
+                                <span th:if="${membership.role == 'admin'}">Admin</span>
+                            </p>
                             <div class="kebab-menu js-kebab-menu" th:unless="${membership.user.id} == ${user.id}" th:if="${@tenantUserService.isAdmin(user.id, tenant.id)}">
                                 <button class="kebab-menu-button js-kebab-menu-button">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
@@ -48,13 +49,19 @@
                                 <ul class="kebab-menu-actions js-kebab-menu-actions">
                                     <li>
                                         <form th:unless="${membership.role} == 'admin'" method="post" th:action="@{/tenant/{tenantId}/members/{user}/promote(tenantId=${tenant.id},user=${membership.user.id})}">
-                                            <button class="kebab-menu-item" type="submit">Promote</button>
+                                            <button class="kebab-menu-item" type="submit">
+                                                <i class="fa-solid fa-person-arrow-up-from-line"></i>
+                                                <span>Promote</span>
+                                            </button>
                                         </form>
                                     </li>
                                     <li>
                                         <form th:if="${@tenantUserService.isStrongerMember(tenant.id, user.id, membership.user.id)}" method="post" th:action="@{/tenant/{tenantId}/members/{user}(tenantId=${tenant.id},user=${membership.user.id})}">
                                             <input type="hidden" name="_method" value="delete">
-                                            <button class="kebab-menu-item delete-button" type="submit">Delete</button>
+                                            <button class="kebab-menu-item delete-button" type="submit">
+                                                <i class="fa-regular fa-trash-can"></i>
+                                                <span>Delete</span>
+                                            </button>
                                         </form>
                                     </li>
                                 </ul>
@@ -106,7 +113,7 @@
                                 <p>Permanently delete Acme Corp and all its data. This cannot be undone.</p>
                             </div>
                             <button id="delete-tenant-button" data-open-dialog data-dialog-id="delete-tenant-confirmation-dialog" class="danger-zone-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                <i class="fa-regular fa-trash-can"></i>
                                 <span>Delete</span>
                             </button>
                             

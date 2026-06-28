@@ -84,6 +84,6 @@ already feels more mature.
 
 ## Step 13
 * Manage tenant
-    * Admin/Member badges - remove Member badge
-    * YOU badge (started)
-    * Hovers (Promote)
+    * Admin/Member badges - remove Member badge (V)
+    * YOU badge (V)
+    * Hovers (Promote) (V)

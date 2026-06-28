@@ -4,14 +4,14 @@
 ## For launch
 * Internationalization
 * Error pages
-* My tenants page
-    * Error handling in create new tenant (validation)
+* Manage tenant - confirmation for deleting user
 
 ## Done
 * Logout (V)
 * Login page with Google icon (V - still needs touch)
 * Prettify invitation page (V - still needs touch)
-
+* My tenants page
+    * Error handling in create new tenant (validation)
 
 ## Later
 * Feedbacks

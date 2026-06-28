@@ -6,7 +6,6 @@
     
     grid-template-columns: auto 1fr;
     grid-template-areas: "sidebar main";
-    overflow: auto;
 }
 
 
@@ -15,10 +14,6 @@ main {
     overflow: auto;
 }
 
-
-#menu-button:hover {
-    background-color: var(--color-menu-button-hover);
-}
 
 #sidebar {
     grid-area: sidebar;
@@ -84,7 +79,7 @@ main {
     gap: var(--sidebar-menu-gap);
 }
 
-.menu-item a, .menu-item .dropdown-button {
+#sidebar .menu-item a, #sidebar .menu-item .dropdown-button {
     border-radius: 0.5em;
     display: flex;
     text-decoration: none;
@@ -94,12 +89,12 @@ main {
     gap: var(--sidebar-menu-item-gap); /* to separate the icon from the text */
 }
 
-.menu-item a:hover, .menu-item .dropdown-button:hover {
+#sidebar .menu-item a:hover, #sidebar .menu-item .dropdown-button:hover {
     background-color: var(--color-sidebar-item-bg-hover);
 }
 
 /* setting a different style to the active tab */
-.menu-item.active a {
+#sidebar .menu-item.active a {
     background-color: var(--color-sidebar-item-bg-active);
     font-weight: 600;
     color: var(--color-sidebar-item-text-active);
@@ -110,7 +105,7 @@ main {
 }
 
 /* since the dropdown button is a button, we need some styles to make it look like the <a> elements */
-.menu-item > button {
+#sidebar .menu-item > button {
     width: 100%;
     text-align: start;
     background: none;
@@ -124,7 +119,7 @@ main {
     fill: var(--color-sidebar-item-text);
 }
 
-.menu-item span {
+#sidebar .menu-item span {
     /* so that the span will take all the available space, pushing the other flex elements to the sides 
     so that the little button of the Create item will be in the end of the line */ 
     flex-grow: 1;
@@ -185,10 +180,6 @@ main {
 
 
 @media (max-width: 768px) {
-    
-    #menu-button {
-        visibility: visible;
-    }
 
     #sidebar {
         position: absolute;

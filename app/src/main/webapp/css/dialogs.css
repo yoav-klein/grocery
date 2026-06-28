@@ -50,7 +50,6 @@
         border-top: 1px solid var(--color-border-subtle);
         margin-top: var(--dialog-footer-margin-top);   
         padding-top: var(--dialog-footer-padding-top);
-
         
     }
 
@@ -68,7 +67,7 @@
 .dialog-error-banner {
     display: none;
     background-color: var(--color-error-banner-bg);
-    border-left: 4px solid var(--color-error-banner-border);
+    border-inline-start: 4px solid var(--color-error-banner-border);
     padding: var(--dialog-error-banner-padding);
     margin-bottom: var(--dialog-inter-control-space);
     border-radius: 4px;

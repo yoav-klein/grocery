@@ -46,15 +46,4 @@ public class HomeController {
         
         return "tenants";
     }
-
-    // create tenant
-    @PostMapping("/tenants")
-    public String createTenant(Model model, RedirectAttributes ra, @AuthenticationPrincipal SecurityUser user, @Validated TenantRequest tenantRequest, BindingResult result) throws IOException {
-        Tenant tenant = tenantService.createTenant(tenantRequest.getTenantName(), user.getAppUser().getId());
-
-        // add the tenantId as flash attribute, mostly for tests
-        ra.addFlashAttribute("tenantId", tenant.getId());
-
-        return "redirect:/tenants";
-    }
 }

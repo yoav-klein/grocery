@@ -87,6 +87,10 @@ section {
     margin-inline-start: 20px;
 }
 
+.kebab-menu-item:hover {
+    background-color: var(--color-surface-kebab-menu-item);
+}
+
 .delete-button {
     color:var(--color-text-delete);
     svg {
@@ -116,7 +120,6 @@ section {
 
 .member-role {
     margin-inline-start: auto;
-    font-size: 0.8rem;
 }
 
 .member-picture {
@@ -148,16 +151,18 @@ section {
     border: none;
     border-radius: 5px;
     padding: 3px;
+    font-size: 0.8rem;
 }
 
 .badge-admin {
     color: #085041;
     background-color: #E1F5EE;
+    
 }
 
-.badge-member {
-    background-color: #F1EFE8;
-    color: #444441;
+.badge-you {
+    background-color: #EEF2FF;
+    color: #4338CA;
 }
 
 /* DANGER ZONE */

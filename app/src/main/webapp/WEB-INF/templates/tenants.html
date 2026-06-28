@@ -1,56 +1,67 @@
 <!DOCTYPE html>
-<html th:replace="~{layout-user :: layout(~{::head}, ~{::main}, ~{::script})}" lang="en" dir="ltr">
+<html th:replace="~{layout-user :: layout(~{::head}, ~{::#content}, ~{::script}, false)}" lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
     <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
     <link rel="stylesheet" href="../../css/tenants.css" th:href="@{/css/tenants.css}">
 </head>
 <body>
-    <main>
-        <h1 th:text="#{mytenants.heading}">My Tenants</h1>
-        <section class="tenants-grid">
-            <div class="card tenant-card" th:each="membership : ${tenantMemberships}" th:data-tenant-id="${membership.tenant.id}">
-                <a href="index.html" th:href="@{/tenant/{tenantId}(tenantId=${membership.tenant.id})}">
-                    <div class="tenant-header">
-                        <div class="tenant-image-container"></div>
-                        <h2 class="tenant-name" th:text="${membership.tenant.name}">SOMETENANT</h2>
-                    </div>
-                </a>
-            </div>
-            <div class="card add-tenant-card">
-                <button id="add-tenant-button" data-open-dialog data-dialog-id="add-tenant-dialog">
-                    <div>+</div>
-                    <div>Add Tenant</div>
-                </button>
-            </div>
-        </section>
-        <dialog class="form-dialog js-form-dialog" id="add-tenant-dialog">
-            <form th:action="@{tenants}" method="post" th:object="${tenantRequest}">
-                <div class="class="form-dialog-body"">
-                    <div class="field">
-                        <label for="tenantName">Tenant Name</label>
-                        <input th:field="*{tenantName}" class="long-input" type="text">
-                        <p th:if="${#fields.hasErrors('tenantName')}"> ERROR </p> 
-                    </div>
-                    <div class="field">
-                        <label for="defaultLanguage">Language</label>
-                        <select th:field="*{defaultLanguage}">
-                            <option value="EN">English</option>
-                            <option value="HE">עברית</option>
-                        </select>
-                    </div>
+    <div id="content">
+        <main>
+            <h1 th:text="#{mytenants.heading}">My Tenants</h1>
+            <section class="tenants-grid">
+                <div class="card tenant-card" th:each="membership : ${tenantMemberships}" th:data-tenant-id="${membership.tenant.id}">
+                    <a href="index.html" th:href="@{/tenant/{tenantId}(tenantId=${membership.tenant.id})}">
+                        <div class="tenant-header">
+                            <div class="tenant-image-container"></div>
+                            <h2 class="tenant-name" th:text="${membership.tenant.name}">SOMETENANT</h2>
+                        </div>
+                    </a>
                 </div>
-                <div class="form-dialog-footer">
-                    <div class="dialog-footer-controls">
-                        <button type="reset" class="js-close-dialog-button dialog-action-button dialog-secondary-action-button" name="cancel">Cancel</button>
-                        <button id="dialog-submit-button" type="submit" name="save" class="dialog-action-button dialog-primary-action-button">Submit</button>
-                    </div>
+                <div class="card add-tenant-card">
+                    <button id="add-tenant-button" data-open-dialog data-dialog-id="add-tenant-dialog">
+                        <div>+</div>
+                        <div>Add Tenant</div>
+                    </button>
                 </div>
-            </form>
-        </dialog>
-    </main>
+            </section>
+            <dialog class="form-dialog js-form-dialog" id="add-tenant-dialog">
+                <header>
+                    <div class="just-for-alignment"></div>
+                    <h2>New Tenant</h2>
+                    <button class="js-close-dialog-button close-dialog-button">&times;</button>
+                </header>
+                <form id="add-tenant-form">
+                    <div class="dialog-error-banner">
+                        <p>Oops, seems that something's wrong on our end</p>
+                    </div>
+                    <div class="form-dialog-body">
+                        <div class="field">
+                            <label for="tenantName">Tenant Name</label>
+                            <input name="tenantName" id="tenantName" class="long-input" type="text">
+                            <p class="field-validation-error"></p> 
+                        </div>
+                        <div class="field">
+                            <label for="defaultLanguage">Language</label>
+                            <select id="defaultLanguage" name="defaultLanguage">
+                                <option value="EN">English</option>
+                                <option value="HE">עברית</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-dialog-footer">
+                        <div class="dialog-footer-controls">
+                            <button type="reset" class="js-close-dialog-button dialog-action-button dialog-secondary-action-button" name="cancel">Cancel</button>
+                            <button id="dialog-submit-button" type="submit" name="save" class="dialog-action-button dialog-primary-action-button">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </dialog>
+        </main>
+    </div>
     
     <script type="module" src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
     <script type="module" src="../../js/tenants.js" th:src="@{/js/tenants.js}"></script>

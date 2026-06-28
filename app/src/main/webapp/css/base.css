@@ -26,7 +26,7 @@
     --color-gray-200: #e3e7e4;   /* borders */
     --color-gray-400: #8c978f;   /* muted text */
     --color-gray-600: #5f6b63;   /* secondary text */
-    --color-gray-800: #1f2a24;   /* primary text */
+    --color-gray-800: rgb(31, 42, 36);   /* primary text */
 
     /* Reds */
     --color-red-50:  #FEF2F2;
@@ -40,7 +40,7 @@
     /* --- COLOR VARIABLES - GENERIC ROLES -- */
 
     /* Meanings */
-    --color-success: #47f764;
+    --color-success: #6cee81;
     --color-error: var(--color-red-600);
         
     /* Surfaces */
@@ -49,6 +49,7 @@
     --color-surface-dialog: var(--color-white);
     --color-surface-raised: var(--color-gray-100);
     --color-surface-raised-more: var(--color-gray-200);
+    --color-surface-kebab-menu-item: var(--color-gray-50);
 
     /* Borders */
     --color-border-subtle: var(--color-gray-200);
@@ -145,14 +146,19 @@
 
     /* --- SIZES - RAW UNITS --- */
 
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.5rem;
-    --space-6: 2rem;
-    --space-7: 3rem;
-    --space-8: 4rem;
+    --space-1: 0.25rem; /* 4px */
+    --space-2: 0.5rem; /* 8px */
+    --space-3: 0.75rem; /* 12px */
+    --space-4: 1rem; /* 16px */
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-6: 1.75rem;
+    --space-7: 2rem;
+    --space-8: 2.25rem;
+    --space-9: 2.5rem;
+    --space-10: 2.75rem;
+    --space-11: 3rem;
+    --space-12: 3.25rem;
 
     /* --- SIZES - DOMAIN TOKENS --- */
 
@@ -161,7 +167,7 @@
     --padding-md: var(--space-4);
 
     /* Layout */
-    --header-height: var(--space-8);
+    --header-height: var(--space-12);
     --sidebar-width: 16rem;
     --sidebar-kebab-button-margin: var(--space-4);
     --sidebar-kebab-button-padding: var(--space-3);
@@ -233,6 +239,7 @@ html {
     font-family: Poppins, 'Segoe UI', sans-serif;
     line-height: 1.5rem;
     background-color: white;
+    color: var(--color-text-primary);
 }
 
 body {
@@ -248,6 +255,7 @@ button,
 select,
 textarea {
     font: inherit;
+    color: inherit;
 }
 
 button {

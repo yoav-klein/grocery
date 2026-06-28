@@ -30,6 +30,7 @@ public class ExceptionsAdvice extends ResponseEntityExceptionHandler {
         ProblemDetail body = ex.getBody();
         body.setType(URI.create("invalid-arguments"));
 
+        // create a list of maps, as such: [{field: 'name', reason: 'too short'}, {field: 'age', reason: 'too old'}]
         List<Map<String, String>> localizedErrors = ex.getFieldErrors()
             .stream()
             .map(error -> Map.of(

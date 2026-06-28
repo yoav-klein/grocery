@@ -16,26 +16,6 @@ So the structure is as follows:
     * the layout
     * components - dialogs, categories.
 
-### Classes
-
-
-
-## Form Dialog System
-
-Every form dialog is structured like this:
-* Header
-    * Title
-    * optional helper text
-    * close button on the top-left (or top-right for hebrew)
-    * Takes a fixed amount of height
-* Body
-    * Error banner for form-level errors (duplicate, server error)
-    * Input fields are stacked (label -> input -> validation)
-* Footer
-    * Left - secondary action
-    * Right - primary action
-
-I use the system I developed in the `frontend` repo, see it there.
 
 ## Color system
 

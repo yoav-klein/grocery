@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(links, meta, main, scripts)" th:replace="~{layout-user :: layout(~{::head}, ~{::#content}, ~{::script})}">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(links, meta, main, js)" th:replace="~{layout-user :: layout(~{::head}, ~{::#content}, ~{::script}, true)}">
     <head>
         
         <!-- per-page links -->
@@ -10,14 +10,11 @@
         <!-- To understand the above few lines, see https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#thymeleaf-prototype-only-comment-blocks -->
 
         <link rel="stylesheet" href="../../css/layout-tenant.css" th:href="@{/css/layout-tenant.css}">
-        <meta name="_csrf" th:content="${_csrf.token}"/>
-        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
         <meta name="tenantId" th:content="${tenant.id}">
 
     </head>
     <body>
-        
-        <div id="content" class="content">
+        <div id="content">
             <div id="overlay"></div>
             <aside id="sidebar">
                 <div id="tenant-card">
@@ -75,5 +72,7 @@
                 <div>WILL BE REPLACED</div>
             </main>
         </div>
+        <script th:src="@{/js/layout.js}" src="../../js/layout.js"></script>
+        <script th:replace="${js}"></script>
     </body>
 </html>

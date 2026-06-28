@@ -55,8 +55,6 @@ function clearErrors(dialog) {
 /** EVENTS */
 
 const dialogElements = document.querySelectorAll('.js-form-dialog');
-
-
 Array.from(dialogElements).forEach(dialog => {
     /* success submit */
     dialog.addEventListener('submitsuccess', () => {
@@ -66,7 +64,6 @@ Array.from(dialogElements).forEach(dialog => {
     
     /* submitting */
     dialog.addEventListener('submitting', () => {
-        console.log("SUBMITTING");
         dialog.dataset.state = "submitting";
         clearErrors(dialog);
     });

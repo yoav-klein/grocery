@@ -11,15 +11,19 @@ body > header {
     flex-direction: row;
     align-items: center;
     background-color: var(--color-header-bg);
-    padding: 0 var(--space-4);
+    padding: var(--space-1) var(--space-4);
     gap: var(--space-4);
 }
 
+.content {
+    overflow: auto;
+}
 
-#menu-button {
+
+#tenant-menu-button {
     border: none;
     border-radius: .5em;
-    padding: var(--sidebar-kebab-button-padding);
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,88 +31,138 @@ body > header {
     cursor: pointer;
     z-index: 1000;
     visibility: hidden;
+    height: 100%;
+    width: auto;
     svg {
-        fill: var(--color-sidebar-item-text)
+        fill: var(--color-sidebar-item-text);
+        height: 100%;
+        margin: 10%;
     }
 }
 
-.layout-header-menu {
+#tenant-menu-button:hover {
+    background-color: var(--color-menu-button-hover);
+}
+
+@media(max-width: 768px) {
+    #tenant-menu-button {
+        visibility: visible;
+    }
+}
+
+/* USER MENU MENU */
+
+.user-dropdown.opened .user-menu {
+    display: flex;
+}
+
+/* general styles for a menu */
+.dropdown-menu {
     background-color: var(--color-surface-page);
-    padding: 1rem 0;
+    padding: var(--space-2) var(--space-2);
     border: 1px solid var(--color-border-subtle);
-    top: calc(100% + 8px);
-    inset-inline-end: 0;
+    border-radius: 20px;
     z-index: 999;
     box-shadow: 0 15px 30px rgba(0, 0, 0, .08);
-    border-radius: 7px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    gap: var(--space-1);
 }
 
-.layout-header-menu-item {
-    padding: 0.25rem 1rem;
-    border-radius: 4px;
+.user-menu {
+    width: 200px;
+    top: calc(100% + 8px);
+    inset-inline-end: 0;
+    line-height: 1.1rem;
+    
+    .user-details {
+        color: var(--color-text-secondary);
+        font-size: 0.8rem;
+
+        p:last-child {
+            color: var(--color-text-muted);
+        }
+    }
 }
 
-.layout-header-menu-item:hover {
+
+
+.user-menu .menu-item {
+    color: var(--color-text-primary);
+    border-radius: 15px;
+    padding: 0 var(--space-2);
+    line-height: 2rem;
+    font-weight: 450;
+    font-size: 0.9rem;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-2);
+    align-items: center;
+    justify-content: start;
+
+    svg {
+        fill: var(--color-text-primary);
+    }
+
+    border: none;
+    background-color: transparent;
+    button, input[type="button"] {
+        border: none;
+        background-color: transparent;
+    }
+
+    .chevron {
+        margin-inline-start: auto;
+    }
+}
+
+.user-menu .menu-item:hover {
     background-color: var(--color-surface-raised);
 }
 
-.languages {
+
+/* USER AVATAR */
+
+.user-dropdown {
+    height: 100%;
+    aspect-ratio: 1/1;
     margin-inline-start: auto; /* to split the flexbox into 2 parts */
-    height: 70%;
-}
-
-.change-language-button {
-    background: none;
-    border: none;
-    font-size: 1rem;
-}
-
-.languages-menu {
-    display: none;
-
-    > a {
-        display: flex;
-        flex-direction: row;
-        gap: 16px;
+    
+    .open-menu-button  {
+        height: 100%;
     }
-}
-
-
-.popover.opened .languages-menu {
-    display: flex;
-    flex-direction: column;
-}
-
-.user-avatar {
-    height: 70%;
 
     img {
         height: 100%;
-        width: auto;
+        width: 100%;
         border-radius: 50%;
     }
 }
 
-.user-avatar .popover-button {
+.user-dropdown .open-menu-button {
     background-color: transparent;
     border: none;
-}
-
-.popover.opened .user-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.user-menu button, .user-menu input[type="submit"] {
-    background-color: transparent;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    align-items: center;
 }
 
 .divider {
     border: 1px solid var(--color-border-subtle);
+    width: 95%;
+    text-align: center;
+    align-self: center;
+}
+
+.language-dropdown {
+    width: 100%;
+}
+
+.language-dropdown.opened .language-menu {
+    display: flex;
+}
+
+.language-menu {
+    top: 0;
+    inset-inline-end: calc(100% + 8px);
 }
