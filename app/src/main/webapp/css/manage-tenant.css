@@ -58,9 +58,15 @@ section {
     padding: 0.5rem 0rem;
     background-color: var(--color-action-primary);
     color: var(--color-text-inverse);
-    width: 200px;
+    width: 150px;
     border-radius: 10px;
     border: none;
+
+    &:hover {
+        background-color: var(--color-action-primary-hover);
+    }
+
+    transition: all 0.2s ease-in-out;
 }
 
 
@@ -180,6 +186,11 @@ section.danger-zone {
     padding: 1rem;
     
     > form { width: 100%; }
+}
+
+.danger-zone .explanation p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
 }
 
 .danger-zone-button {

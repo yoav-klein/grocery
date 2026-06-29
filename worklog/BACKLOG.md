@@ -6,6 +6,7 @@
 * Error pages
 * Manage tenant - confirmation for deleting user (V)
 * Confirmation dialogs
+* In fixed list - if no item is added - disable button
 
 ## Done
 * Logout (V)
