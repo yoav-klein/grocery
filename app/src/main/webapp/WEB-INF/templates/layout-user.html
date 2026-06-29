@@ -8,6 +8,7 @@
     <title>Grocery App</title>
     <!-- common header and stylesheets -->
     <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
+    <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
     <link rel="stylesheet" href="../../css/dropdown-menus.css" th:href="@{/css/dropdown-menus.css}">
     <link rel="stylesheet" href="../../css/layout-user.css" th:href="@{/css/layout-user.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
@@ -50,14 +51,20 @@
         <th:block th:include="${content}"></div>
     </div>
     <dialog id="logout-dialog" class="confirmation-dialog">
-        <p>Are you sure you want to log out?</p>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit">YES</button>
-        </form>
+        <div class="dialog-body">
+            <p>Are you sure you want to log out?</p>
+        </div>
+        <div class="dialog-footer">
+            <form style="display: contents;" th:action="@{/logout}" method="post">
+                <button type="button" class="dialog-action-button dialog-secondary-action-button js-close-dialog-button">Cancel</button>
+                <button type="submit" class="dialog-action-button dialog-primary-action-button">Yes</button>
+            </form>
+        </div>
     </dialog>
     <th:block th:replace="${scripts}" />
     
     <script th:src="@{/js/dropdown-menus.js}" src="../../js/dropdown-menus.js"></script>
+    <script th:src="@{/js/dialogs.js}" src="../../js/dialogs.js"></script>
     <script src="https://kit.fontawesome.com/68d2baaa06.js" crossorigin="anonymous"></script>
 </body>
 </html>

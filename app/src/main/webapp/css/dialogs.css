@@ -217,7 +217,7 @@
             font-weight: 500;
         }
 
-        flex: 1 1 auto;
+        flex: 1 1 auto; 
     }
 
     .dialog-footer {
@@ -240,6 +240,7 @@
     justify-content: center;
     border-radius: 5px;
     padding: var(--dialog-action-button-padding);
+    width: 100px;
 }
 
 .dialog-primary-action-button {

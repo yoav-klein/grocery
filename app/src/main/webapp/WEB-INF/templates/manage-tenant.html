@@ -56,16 +56,27 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <form th:if="${@tenantUserService.isStrongerMember(tenant.id, user.id, membership.user.id)}" method="post" th:action="@{/tenant/{tenantId}/members/{user}(tenantId=${tenant.id},user=${membership.user.id})}">
-                                            <input type="hidden" name="_method" value="delete">
-                                            <button class="kebab-menu-item delete-button" type="submit">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                                <span>Delete</span>
-                                            </button>
-                                        </form>
+                                        <button data-open-dialog th:data-dialog-id="'remove-user-confirmation-dialog-' + ${membership.user.id}" th:if="${@tenantUserService.isStrongerMember(tenant.id, user.id, membership.user.id)}" class="kebab-menu-item delete-button" type="submit">
+                                            <i class="fa-solid fa-user-slash"></i>
+                                            <span>Remove</span>
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
+                            <!-- REMOVE USER CONFIRMATION DIALOG -->
+                            <dialog th:id="'remove-user-confirmation-dialog-' + ${membership.user.id}" class="confirmation-dialog">
+                                <div class="dialog-body">
+                                    <p>Are you sure you want to remove <span th:text="${membership.user.displayName}">Noam Betan</span> From this tenant?</p>
+                                </div>
+                                <div class="dialog-footer">
+                                    <form style="display: contents;" method="post" th:action="@{/tenant/{tenantId}/members/{user}(tenantId=${tenant.id},user=${membership.user.id})}">
+                                        <input type="hidden" name="_method" value="delete">
+                                        <button type="button" class="dialog-action-button dialog-secondary-action-button js-close-dialog-button">Cancel</button>
+                                        <button type="submit" class="dialog-action-button dialog-primary-action-button">Yes</button>
+                                    </form>
+                                </div>
+                                
+                            </dialog>
                         </li>
                         <li th:remove="all" class="row member" th:each="membership: ${memberships}">
                             <div>

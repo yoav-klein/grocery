@@ -4,7 +4,8 @@
 ## For launch
 * Internationalization
 * Error pages
-* Manage tenant - confirmation for deleting user
+* Manage tenant - confirmation for deleting user (V)
+* Confirmation dialogs
 
 ## Done
 * Logout (V)
@@ -26,6 +27,17 @@
     * Enable tenant picture
 * Guidance
 * Chat
+* Forms - style select elements better
+* Quantity type - change select to moving pill
+* Icons for each category
+* Icons for tenants (V)
+* On Adding stuff - success toast
+* Sidebar - fixed lists - smaller font maybe.
+* Fixed list editor - submitting state (low opacity during submitting)
+* Photos for tenants - enable the user to upload an image
+* Popovers - use "Floating UI" https://floating-ui.com/docs/getting-started
+* Invitation expiry 
+* Shorten the invitation link (base64 the uuid)
 
 ## Current
 
