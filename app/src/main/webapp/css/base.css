@@ -60,7 +60,11 @@
     --color-text-secondary: var(--color-gray-600);
     --color-text-muted: var(--color-gray-400);
     --color-text-inverse: var(--color-white);
-    --color-text-delete: var(--color-red-600);
+
+    /* Semantics */
+    --color-danger-primary: var(--color-red-500);
+    --color-danger-hover: var(--color-red-600);
+    --color-danger-light: var(--color-red-200);
     
     /* Backgrounds */
     --color-background-delete: var(--color-red-50);

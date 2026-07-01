@@ -24,9 +24,9 @@ main {
 }
 
 .delete-button {
-    color:var(--color-text-delete);
+    color:var(--color-danger-primary);
     svg {
-        fill: var(--color-text-delete);
+        fill: var(--color-danger-primary);
     }
 }
 

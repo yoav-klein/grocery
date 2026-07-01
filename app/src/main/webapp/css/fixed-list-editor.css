@@ -177,7 +177,7 @@ button[disabled] {
     border: none;
     border-radius: 50%;
     background-color: transparent;
-    color: var(--color-text-delete);
+    color: var(--color-danger-primary);
     width: 24px;
     height: 24px;
 }
