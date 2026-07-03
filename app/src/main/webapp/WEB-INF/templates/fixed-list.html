@@ -20,7 +20,7 @@
                         <p class="header-meta"><span th:text="${#maps.size(productsByCategory)}">3</span> categories • <span th:text="${#arrays.length(fixedList.products)}">6</span> items</p>
                     </div>
                     <div class="actions">
-                        <button id="insert-button" class="action-button primary-action-button" form="list">Add Items</button>
+                        <button id="insert-button" disabled class="action-button primary-action-button" form="list">Add Items</button>
                         <div class="ui-popover options-popover">
                             <button class="ui-popover-trigger">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
@@ -61,16 +61,16 @@
                         </article>
                     </section>
                 </form>
-                <dialog id="delete-confirmation-dialog" class="confirmation-dialog delete-confirmation-dialog">
-                    <div class="dialog-body">
+                <dialog id="delete-confirmation-dialog" class="ui-confirmation-dialog ui-danger-confirmation-dialog">
+                    <div class="ui-dialog-body">
                         <p>This will delete this list</p>
                     </div>
-                    <div class="dialog-footer">
-                        <div class="dialog-footer-controls">
-                            <button class="dialog-action-button dialog-secondary-action-button js-close-dialog-button">Cancel</button>
+                    <div class="ui-dialog-footer">
+                        <div class="ui-dialog-footer-controls">
+                            <button data-close-dialog class="ui-dialog-action-button ui-dialog-secondary-action-button">Cancel</button>
                             <form method="post" th:action="@{/tenant/{tenantId}/lists/{listId}(tenantId=${tenant.id},listId=${fixedList.id})}">
                                 <input type="hidden" name="_method" value="delete">
-                                <button class="dialog-action-button dialog-primary-action-button delete-button" type="submit">Delete</button>
+                                <button class="ui-dialog-action-button ui-dialog-primary-action-button ui-delete-button" type="submit">Delete</button>
                             </form>
                         </div>
                     </div>

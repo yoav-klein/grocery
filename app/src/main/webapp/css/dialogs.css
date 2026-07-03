@@ -1,8 +1,9 @@
 
 /* MODAL DIALOG */
 
-.form-dialog[open] {
-    /* put the dialog in the middle of page */
+/* shared for all dialogs */
+
+.ui-form-dialog, .ui-confirmation-dialog, .ui-error-dialog {
     margin: auto;
     
     padding: var(--dialog-padding-tb) var(--dialog-padding-rl);
@@ -11,6 +12,36 @@
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 
+    > header > h2 {
+        text-align: center;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .ui-dialog-body {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .ui-dialog-footer {
+        display: flex;
+        
+        flex: 0 0 auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    form {
+        display: contents;
+    }
+}
+
+.ui-form-dialog[open] {
+    /* put the dialog in the middle of page */
+    
     width: min(480px, calc(100vw - 32px));
 
     display: flex;
@@ -21,50 +52,28 @@
         flex: 0 0 auto; /* stay the same size */
         display: grid;
         grid-template-columns: 1rem 1fr 1rem;
-
-        h2 {
-            font-size: 22px;
-            font-weight: 600;
-            text-align: center;
-            color: var(--color-dialog-title);
-        }
     }
 
-
-    .form-dialog-body {
-        flex: 1 1 auto;
-
-        display: flex;
-        flex-direction: column;
+    .ui-dialog-body {
         gap: var(--dialog-inter-control-space);
     }
 
-    .form-dialog-footer {
-        flex: 0 0 auto;
-        
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
-
+    .ui-dialog-footer {
         border-top: 1px solid var(--color-border-subtle);
         margin-top: var(--dialog-footer-margin-top);   
         padding-top: var(--dialog-footer-padding-top);
         
     }
 
-    > form {
-        display: contents;
-    }
 }
 
-.dialog-footer-controls {
+.ui-dialog-footer-controls {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--dialog-footer-buttons-gap);
 }
 
-.dialog-error-banner {
+.ui-dialog-error-banner {
     display: none;
     background-color: var(--color-error-banner-bg);
     border-inline-start: 4px solid var(--color-error-banner-border);
@@ -74,16 +83,16 @@
     color: var(--color-error-banner-text);
 }
 
-.dialog-error-banner.show {
+.ui-dialog-error-banner.show {
     display: block;
 }
 
-.form-dialog[open][data-state="submitting"] {
+.ui-form-dialog[open][data-state="submitting"] {
     opacity: 0.5;
     pointer-events: none;
 }
 
-.close-dialog-button {
+.ui-dialog-close-button {
     justify-self: end;
     background: transparent;
     border: none;
@@ -92,9 +101,7 @@
     cursor: pointer;
 }
 
-.field {
-    /* margin: 1rem 0; */
-
+.ui-dialog-field {
     > label {
         display: block;
         color: var(--color-dialog-label);
@@ -111,7 +118,7 @@
         transition: border 0.2s, box-shadow 0.2s;
     }
 
-    .field-validation-error {
+    .ui-dialog-field-validation-error {
         font-size: 0.8rem;
         color: var(--color-field-error-text);
     }
@@ -123,7 +130,7 @@
     }
 }
 
-.field.error input, .field.error select {
+.ui-dialog-field.error input, .field.error select {
     border: 1px solid var(--color-field-error-border);
 }
 
@@ -133,67 +140,33 @@
 
 /* CONFIRMATION DIALOG */
 
-.confirmation-dialog[open] {
-    margin: auto;
-    
-    padding: var(--dialog-padding-tb) var(--dialog-padding-rl);
-    border: 1px solid var(--color-dialog-border);
-    background-color: var(--color-dialog-background);
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-
+.ui-confirmation-dialog[open] {
     width: min(360px, calc(100vw - 32px));
 
     display: flex;
     flex-direction: column;
     gap: var(--dialog-parts-gap);
+}
 
-    .dialog-header {
-        h2 {
-            text-align: center;
-        }
-    }
+.ui-danger-confirmation-dialog .ui-dialog-primary-action-button {
+    color: var(--color-text-inverse);
+    background-color: var(--color-danger-primary);
 
-    .dialog-body {
-        flex: 1 1 auto;
-    }
-
-    .dialog-footer {
-        flex: 0 0 auto;
-
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
-
-        gap: var(--dialog-footer-buttons-gap);
-    }
- }
-
-.confirmation-dialog[open].delete-confirmation-dialog {
-    form {
-        display: contents;
+    &:hover {
+        background-color: var(--color-danger-hover);
     }
 }
 
 /* ERROR DIALOG */
 
-.error-dialog[open] {
-    margin: auto;
-    
-    padding: var(--dialog-padding-tb) var(--dialog-padding-rl);
-    border: 1px solid var(--color-dialog-border);
-    background-color: var(--color-dialog-background);
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-
+.ui-error-dialog[open] {
     width: min(360px, calc(100vw - 32px));
 
     display: flex;
     flex-direction: column;
     gap: var(--dialog-parts-gap);
 
-    .dialog-header {
+    > header {
         --logo-size: 36px;
         display: grid;
         grid-template-columns: var(--logo-size) 1fr var(--logo-size);
@@ -212,65 +185,44 @@
         }
     }
 
-    .dialog-body {
-        #error-message-title {
+    .ui-dialog-body {
+        .ui-error-message-title {
             font-weight: 500;
         }
 
         flex: 1 1 auto; 
     }
-
-    .dialog-footer {
-        flex: 0 0 auto;
-
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-
-        gap: var(--dialog-footer-buttons-gap);
-    }
  }
 
-/* BUTTONS */
 
-.dialog-action-button {
+
+/* ACTION BUTTONS */
+
+.ui-dialog-action-button {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
     padding: var(--dialog-action-button-padding);
     width: 100px;
-}
-
-.dialog-primary-action-button {
-    border: none;
-    color: var(--color-dialog-button-primary-text);
-    background-color: var(--color-dialog-button-primary-bg);
-    font-weight: 500;
-    cursor: pointer;
     transition: background 0.2s;
 }
 
-.dialog-primary-action-button.delete-button {
-    color: var(--color-dialog-button-delete-text);
-    background-color: var(--color-dialog-button-delete-bg);
-    svg {
-        fill: var(--color-dialog-button-delete-text);
+.ui-dialog-primary-action-button {
+    color: var(--color-dialog-button-primary-text);
+    background-color: var(--color-dialog-button-primary-bg);
+    font-weight: 500;
+
+    &:hover {
+        background-color: var(--color-dialog-button-primary-bg-hover);
     }
-    &:hover { background-color: var(--color-dialog-button-delete-hover); }
 }
 
-.dialog-primary-action-button:hover {
-    background-color: var(--color-dialog-button-primary-bg-hover);
-}
-
-.dialog-secondary-action-button {
-    background: transparent;
+.ui-dialog-secondary-action-button {
     color: var(--color-dialog-button-secondary-text);
     border: 1px solid var(--color-dialog-button-secondary-border);
-}
 
-.dialog-secondary-action-button:hover {
-    background-color: var(--color-dialog-secondary-bg-hover);
+    &:hover {
+        background-color: var(--color-dialog-secondary-bg-hover);
+    }
 }

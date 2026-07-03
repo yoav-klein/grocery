@@ -105,7 +105,10 @@ function statusCodeHandler(response) {
     let message;
     if(response.status === 409) {
         title = "Duplicate";
-        message = "A list with such name already exists"
+        message = "A list with such name already exists";
+    } else if(response.status === 500) {
+        title = "Server error";
+        message = "Unexpected server error";
     }
 
     commonElements.errorDialog.dispatchEvent(new CustomEvent('submiterror', { 

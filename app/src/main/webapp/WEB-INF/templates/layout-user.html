@@ -17,13 +17,13 @@
 <body>
     <header>
         <button id="tenant-menu-button" th:if="${is_tenant_specific}">
-            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#fff"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
+            <i class="fa-solid fa-bars"></i>
         </button>
         <div class="ui-popover user-popover">
-            <button class="ui-popover-trigger open-menu-button">
+            <button class="ui-popover-trigger">
                 <img referrerpolicy="no-referrer" src="../../img/family-768x512.jpg" th:src="${user.pictureUrl}" alt="user picture">
             </button>
-            <div class="ui-popover-menu user-menu">
+            <div class="ui-popover-menu">
                 <div class="user-details">
                     <p th:text="${user.displayName}">Yoav Klein</p>
                     <p th:text="${user.email}">yoavklein25@gmail.com</p>
@@ -34,7 +34,7 @@
                         <span>Language</span>
                         <i class="fa-solid fa-chevron-left chevron"></i>
                     </button>
-                    <div class="ui-popover-menu language-menu">
+                    <div class="ui-popover-menu">
                         <a class="menu-item" href="?lang=he" th:href="@{?lang=he}"><span class="fi fi-il"></span><span>עב</span><i th:if="${#locale.language == 'he'}"class="fa-solid fa-check"></i></a>
                         <a class="menu-item" href="?lang=en" th:href="@{?lang=en}"><span class="fi fi-um"></span><span>En</span><i th:if="${#locale.language == 'en'}" class="fa-solid fa-check"></i></a>
                     </div>
@@ -48,17 +48,19 @@
         </div>
     </header>
     <div id="content" class="content">
-        <th:block th:include="${content}"></div>
+        <th:block th:include="${content}">
     </div>
-    <dialog id="logout-dialog" class="confirmation-dialog">
-        <div class="dialog-body">
+    <dialog id="logout-dialog" class="ui-confirmation-dialog">
+        <div class="ui-dialog-body">
             <p>Are you sure you want to log out?</p>
         </div>
-        <div class="dialog-footer">
-            <form style="display: contents;" th:action="@{/logout}" method="post">
-                <button type="button" class="dialog-action-button dialog-secondary-action-button js-close-dialog-button">Cancel</button>
-                <button type="submit" class="dialog-action-button dialog-primary-action-button">Yes</button>
-            </form>
+        <div class="ui-dialog-footer">
+            <div class="ui-dialog-footer-controls">
+                <form th:action="@{/logout}" method="post">
+                    <button type="button" class="ui-dialog-action-button ui-dialog-secondary-action-button" data-close-dialog>Cancel</button>
+                    <button type="submit" class="ui-dialog-action-button ui-dialog-primary-action-button">Yes</button>
+                </form>
+            </div>
         </div>
     </dialog>
     <th:block th:replace="${scripts}" />

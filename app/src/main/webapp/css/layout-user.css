@@ -21,18 +21,16 @@ body > header {
 
 
 #tenant-menu-button {
-    border: none;
     border-radius: .5em;
-    
     display: flex;
     align-items: center;
     justify-content: center;
-    background: none;
     cursor: pointer;
     z-index: 1000;
     visibility: hidden;
     height: 100%;
-    width: auto;
+    aspect-ratio: 1/1;
+    
     svg {
         fill: var(--color-sidebar-item-text);
         height: 100%;
@@ -51,45 +49,38 @@ body > header {
 }
 
 /* USER MENU */
-
-/* general styles for popover menus */
-
-.user-menu {
-    width: 200px;
-    top: calc(100% + 8px);
-    inset-inline-end: 0;
-    line-height: 1.1rem;
-    
-    .user-details {
-        color: var(--color-text-secondary);
-        font-size: 0.8rem;
-
-        p:last-child {
-            color: var(--color-text-muted);
-        }
-    }
-}
-
-.user-menu .menu-item .chevron{ 
-    margin-inline-start: auto;
-}
-
-/* USER AVATAR */
-
 .user-popover {
     height: 100%;
     aspect-ratio: 1/1;
     margin-inline-start: auto; /* to split the flexbox into 2 parts */
 }
 
-.user-popover .open-menu-button {
+.user-popover > .ui-popover-trigger {
     height: 100%;
-    background-color: transparent;
-    border: none;
     img {
         height: 100%;
         width: 100%;
         border-radius: 50%;
+    }
+}
+
+.user-popover > .ui-popover-menu {
+    top: calc(100% + 8px);
+    inset-inline-end: 0;
+    width: 200px;
+    line-height: 1.1rem;
+    
+    .user-details {
+        color: var(--color-text-secondary);
+        font-size: 0.8rem;
+    
+        p:last-child {
+            color: var(--color-text-muted);
+        }
+    }
+
+    .menu-item .chevron{ 
+        margin-inline-start: auto;
     }
 }
 
@@ -102,9 +93,10 @@ body > header {
 
 .language-popover {
     width: 100%;
+
+    .ui-popover-menu {
+        top: 0;
+        inset-inline-end: calc(100% + 8px);
+    }
 }
 
-.language-menu {
-    top: 0;
-    inset-inline-end: calc(100% + 8px);
-}

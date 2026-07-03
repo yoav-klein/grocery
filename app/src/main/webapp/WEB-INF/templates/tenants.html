@@ -28,23 +28,23 @@
                     </button>
                 </div>
             </section>
-            <dialog class="form-dialog js-form-dialog" id="add-tenant-dialog">
+            <dialog class="ui-form-dialog" id="add-tenant-dialog">
                 <header>
                     <div class="just-for-alignment"></div>
                     <h2>New Tenant</h2>
-                    <button class="js-close-dialog-button close-dialog-button">&times;</button>
+                    <button data-close-dialog class="ui-dialog-close-button">&times;</button>
                 </header>
                 <form id="add-tenant-form">
-                    <div class="dialog-error-banner">
+                    <div class="ui-dialog-error-banner">
                         <p>Oops, seems that something's wrong on our end</p>
                     </div>
-                    <div class="form-dialog-body">
-                        <div class="field">
+                    <div class="ui-dialog-body">
+                        <div class="ui-dialog-field">
                             <label for="tenantName">Tenant Name</label>
                             <input name="tenantName" id="tenantName" class="long-input" type="text">
-                            <p class="field-validation-error"></p> 
+                            <p class="ui-dialog-field-validation-error"></p> 
                         </div>
-                        <div class="field">
+                        <div class="ui-dialog-field">
                             <label for="defaultLanguage">Language</label>
                             <select id="defaultLanguage" name="defaultLanguage">
                                 <option value="EN">English</option>
@@ -52,10 +52,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-dialog-footer">
-                        <div class="dialog-footer-controls">
-                            <button type="reset" class="js-close-dialog-button dialog-action-button dialog-secondary-action-button" name="cancel">Cancel</button>
-                            <button id="dialog-submit-button" type="submit" name="save" class="dialog-action-button dialog-primary-action-button">Submit</button>
+                    <div class="ui-dialog-footer">
+                        <div class="ui-dialog-footer-controls">
+                            <button type="reset" data-close-dialog class="ui-dialog-action-button ui-dialog-secondary-action-button" name="cancel">Cancel</button>
+                            <button id="dialog-submit-button" type="submit" name="save" class="ui-dialog-action-button ui-dialog-primary-action-button">Submit</button>
                         </div>
                     </div>
                 </form>

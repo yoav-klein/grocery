@@ -12,6 +12,8 @@ const bulkUrl = `${tenantBaseUrl}/currentList/bulk/${listId}`;
 
 const formEl = document.getElementById('list');
 
+let totalToAdd = 0;
+
 const errorBannerEl = document.getElementById('error-banner');
 const errorBannerMessageEl = errorBannerEl.querySelector('span');
 
@@ -22,14 +24,27 @@ Array.from(steppers).forEach(stepper => stepper.addEventListener('click', e => {
     const input = stepper.querySelector('.js-quantity-input');
     if(e.target.classList.contains('js-increment-button')) {
         input.stepUp();
+        totalToAdd += 1;
         decrementButton.disabled = false;
     } else if(e.target.classList.contains('js-decrement-button')) {
         input.stepDown();
+        totalToAdd -= 1;
         if(Number(input.value) === 0) {
             decrementButton.disabled = true;
         }
     }
+
+    uiRender();
 }));
+
+function uiRender() {
+    const insertButton = document.getElementById('insert-button');
+    if(totalToAdd === 0) {
+        insertButton.disabled = true;
+    } else {
+        insertButton.disabled = false;
+    }
+}
 
 const inputs = document.querySelectorAll('.js-quantity-input');
 

@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(links, meta, main, js)" th:replace="~{layout-user :: layout(~{::head}, ~{::#content}, ~{::script}, true)}">
     <head>
-        
+        <link rel="stylesheet" href="../../css/layout-tenant.css" th:href="@{/css/layout-tenant.css}">
+        <meta name="tenantId" th:content="${tenant.id}">
         <!-- per-page links -->
         <!--/*/ <th:block th:replace="${links}" /> /*/-->
         <!-- per-page meta -->
         <!--/*/ <th:block th:replace="${meta}" /> /*/-->
 
         <!-- To understand the above few lines, see https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#thymeleaf-prototype-only-comment-blocks -->
-
-        <link rel="stylesheet" href="../../css/layout-tenant.css" th:href="@{/css/layout-tenant.css}">
-        <meta name="tenantId" th:content="${tenant.id}">
-
     </head>
     <body>
         <div id="content">
@@ -21,9 +18,7 @@
                     <div class="current-tenant" th:text="${tenant.name}">My Home</div>
                     <div class="switch-tenant">
                         <a href="tenants.html" th:href="@{/tenants}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m7 21-4-4 4-4"/><path d="M3 17h18"/><path d="m17 3 4 4-4 4"/><path d="M21 7H3"/>
-                            </svg>
+                            <i class="fa-solid fa-arrow-right-arrow-left"></i>
                             <span>Switch Tenant</span>
                         </a>
                     </div>
@@ -42,8 +37,8 @@
                                 <span>Fixed Lists</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-345 240-585l56-56 184 183 184-183 56 56-240 240Z"/></svg>
                             </button>
-                            <ul class="sub-menu">
-                                <div>
+                            <div class="sub-menu">
+                                <ul>
                                     <li class="menu-item" th:each="fixedList : ${allFixedLists}" th:classappend="(${page} == 'fixedList' + ${fixedList.id}? 'active')">
                                         <a href="#" th:href="@{/tenant/{tenantId}/lists/{list}(tenantId=${tenant.id},list=${fixedList.id})}" th:text="${fixedList.name}">Weekly</a>
                                     </li>
@@ -51,8 +46,8 @@
                                         <a href="#" th:href="@{/tenant/{tenantId}/lists/addList(tenantId=${tenant.id})}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
                                         <span>Add</span></a>
                                     </li>
-                                </div>
-                            </ul>
+                                </ul>
+                            </div>
                         </li>
                         <li class="menu-item" th:classappend="(${page} == 'products'? 'active')">
                             <a th:href="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}" href="#">

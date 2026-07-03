@@ -14,7 +14,7 @@
 <body>
     <div class="wrapper" th:remove="tag">
         <main>
-            <div id="generic-error-toast" class="js-toast toast toast-error">
+            <div id="generic-error-toast" class="ui-toast ui-toast-error">
                 <div class="container-1">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
@@ -63,15 +63,15 @@
                                 </ul>
                             </div>
                             <!-- REMOVE USER CONFIRMATION DIALOG -->
-                            <dialog th:id="'remove-user-confirmation-dialog-' + ${membership.user.id}" class="confirmation-dialog danger-confirmation-dialog">
-                                <div class="dialog-body">
+                            <dialog th:id="'remove-user-confirmation-dialog-' + ${membership.user.id}" class="ui-confirmation-dialog danger-confirmation-dialog">
+                                <div class="ui-dialog-body">
                                     <p>Are you sure you want to remove <span th:text="${membership.user.displayName}">Noam Betan</span> From this tenant?</p>
                                 </div>
-                                <div class="dialog-footer">
-                                    <form style="display: contents;" method="post" th:action="@{/tenant/{tenantId}/members/{user}(tenantId=${tenant.id},user=${membership.user.id})}">
+                                <div class="ui-dialog-footer">
+                                    <form method="post" th:action="@{/tenant/{tenantId}/members/{user}(tenantId=${tenant.id},user=${membership.user.id})}">
                                         <input type="hidden" name="_method" value="delete">
-                                        <button type="button" class="dialog-action-button dialog-secondary-action-button js-close-dialog-button">Cancel</button>
-                                        <button type="submit" class="dialog-action-button dialog-primary-action-button">Yes</button>
+                                        <button type="button" class="ui-dialog-action-button ui-dialog-secondary-action-button">Cancel</button>
+                                        <button type="submit" class="ui-dialog-action-button ui-dialog-primary-action-button">Yes</button>
                                     </form>
                                 </div>
                                 
@@ -103,8 +103,8 @@
                             </div>
                         </li>
                     </ul>
-                    <dialog id="invitation-dialog" class="confirmation-dialog">
-                        <button class="js-close-dialog-button close-dialog-button">&times;</button>
+                    <dialog id="invitation-dialog" class="ui-confirmation-dialog">
+                        <button data-close-dialog class="close-dialog-button">&times;</button>
                         <h3>Invite new member</h3>
                         <p>Invite a member to the tenant</p>
                         <button id="copy-invite-link-button">COPY LINK</button>
@@ -140,29 +140,33 @@
                             
                         </li>
                     </ul>
-                    <dialog id="delete-tenant-confirmation-dialog" class="confirmation-dialog danger-confirmation-dialog">
-                        <div class="dialog-body">
+                    <dialog id="delete-tenant-confirmation-dialog" class="ui-confirmation-dialog ui-danger-confirmation-dialog">
+                        <div class="ui-dialog-body">
                             <p>Are you sure you want to delete this tenant?</p>
                         </div>
-                        <div class="dialog-footer">
-                            <form style="display: contents;" th:action="@{/tenant/{tenantId}(tenantId=${tenant.id})}" method="post">
-                                <input type="hidden" name="_method" value="delete">
-                                <button type="button" class="dialog-action-button dialog-secondary-action-button js-close-dialog-button">Cancel</button>
-                                <button type="submit" class="dialog-action-button dialog-primary-action-button">Yes</button>
-                            </form>
+                        <div class="ui-dialog-footer">
+                            <div class="ui-dialog-footer-controls">
+                                <form th:action="@{/tenant/{tenantId}(tenantId=${tenant.id})}" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button type="button" class="ui-dialog-action-button ui-dialog-secondary-action-button" data-close-dialog>Cancel</button>
+                                    <button type="submit" class="ui-dialog-action-button ui-dialog-primary-action-button">Yes</button>
+                                </form>
+                            </div>
                         </div>
                         
                     </dialog>
-                    <dialog id="leave-tenant-confirmation-dialog" class="confirmation-dialog danger-confirmation-dialog">
-                        <div class="dialog-body">
+                    <dialog id="leave-tenant-confirmation-dialog" class="ui-confirmation-dialog ui-danger-confirmation-dialog">
+                        <div class="ui-dialog-body">
                             <p>Are you sure you want to leave this tenant?</p>
                         </div>
-                        <div class="dialog-footer">
-                            <form style="display: contents;" th:action="@{/tenant/{tenantId}/members/{userId}/leave(tenantId=${tenant.id},userId=${user.id})}" method="post">
-                                <input type="hidden" name="_method" value="delete">
-                                <button class="dialog-action-button dialog-secondary-action-button js-close-dialog-button" type="button">Cancel</button>
-                                <button class="dialog-action-button dialog-primary-action-button" type="submit">Yes</button>
-                            </form>
+                        <div class="ui-dialog-footer">
+                            <div class="ui-dialog-footer-controls">
+                                <form th:action="@{/tenant/{tenantId}/members/{userId}/leave(tenantId=${tenant.id},userId=${user.id})}" method="post">
+                                    <input type="hidden" name="_method" value="delete">
+                                    <button class="ui-dialog-action-button ui-dialog-secondary-action-button" data-close-dialog type="button">Cancel</button>
+                                    <button class="ui-dialog-action-button ui-dialog-primary-action-button" type="submit">Yes</button>
+                                </form>
+                            </div>
                         </div>
                     </dialog>
                 </section>

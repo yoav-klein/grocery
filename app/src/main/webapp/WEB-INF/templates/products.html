@@ -63,45 +63,45 @@
                 </div>
                 <button class="primary-fab" data-open-dialog data-dialog-id="add-product-dialog">+</button>
                 
-                <dialog id="add-product-dialog" class="form-dialog js-form-dialog">
+                <dialog id="add-product-dialog" class="ui-form-dialog">
                     <header>
                         <div class="just-for-alignment"></div>
                         <h2>New Product</h2>
-                        <button class="js-close-dialog-button close-dialog-button">&times;</button>
+                        <button data-close-dialog class="ui-dialog-close-button">&times;</button>
                     </header>
                     <form id="new-product-form">
-                        <div class="dialog-error-banner">
+                        <div class="ui-dialog-error-banner">
                             <p>Oops, seems that something's wrong on our end</p>
                         </div>
-                        <div class="form-dialog-body">
-                            <div class="field">
+                        <div class="ui-dialog-body">
+                            <div class="ui-dialog-field">
                                 <label for="name">Name</label>
                                 <input name="name" class="long-input" type="text" />
-                                <p class="field-validation-error"></p>
+                                <p class="ui-dialog-field-validation-error"></p>
                             </div>
-                            <div class="field">
+                            <div class="ui-dialog-field">
                                 <label for="category" th:text="#{additem.label.category}">Category</label>
                                 <select name="category" class="long-input">
                                     <option th:each="category : ${allCategories}" th:value="${category}" th:text="${category}">Vegetables</option>
                                     <option th:remove="all">Fruits</option>
                                     <option th:remove="all">Dairy</option>
                                 </select>
-                                <p class="field-validation-error"></p>
+                                <p class="ui-dialog-field-validation-error"></p>
                             </div>
-                            <div class="field">
+                            <div class="ui-dialog-field">
                                 <label for="quantity">Quantity Type</label>
                                 <select name="quantityType">
                                     <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
                                     <option th:remove="all">Unit</option>
                                 </select>
-                                <p class="field-validation-error"></p>
+                                <p class="ui-dialog-field-validation-error"></p>
                             </div>
                             
                         </div>
-                        <div class="form-dialog-footer">
-                            <div class="dialog-footer-controls">
-                                <button type="reset" class="js-close-dialog-button dialog-action-button dialog-secondary-action-button" name="cancel">Cancel</button>
-                                <button id="dialog-submit-button" type="submit" name="save" class="dialog-primary-action-button dialog-action-button">Submit</button>
+                        <div class="ui-dialog-footer">
+                            <div class="ui-dialog-footer-controls">
+                                <button type="reset" data-close-dialog class="ui-dialog-action-button ui-dialog-secondary-action-button" name="cancel">Cancel</button>
+                                <button id="dialog-submit-button" type="submit" name="save" class="ui-dialog-action-button ui-dialog-primary-action-button">Submit</button>
                             </div>
                         </div>
                     </form>

@@ -90,15 +90,11 @@
 
     --color-sidebar-gradient-start: var(--color-green-100);
     --color-sidebar-gradient-end: var(--color-green-200);
-    --color-sidebar-item-text: var(--primary-text-color);
     --color-sidebar-item-bg-hover: var(--color-green-300);
     --color-sidebar-item-bg-active: var(--color-green-400);
-    --color-sidebar-item-text-active: ;
 
     --color-tenant-card-bg: var(--color-green-200);
     --color-tenant-card-border: var(--color-green-200);
-    --color-tenant-card-text-primary: var(--color-gray-900);
-    --color-tenant-card-text-secondary: var(--color-gray-600);
 
     --color-menu-button-hover: var(--color-green-200);
     --color-overlay-bg: var(--color-gray-100);
@@ -116,7 +112,6 @@
     /* Dialog */
     --color-dialog-background: var(--color-surface-dialog);
     --color-dialog-border: var(--color-border-subtle);
-    --color-dialog-title: var(--color-text-primary);
     --color-dialog-label: var(--color-text-secondary);
 
     /* Dialog Inputs */
@@ -256,12 +251,14 @@ textarea {
 
 button {
     cursor: pointer;
+    background: none;
+    border: none;
 }
 
 a {
     text-decoration: none;
+    color: inherit;
 }
-
 
 ul {
     list-style-type: none;

@@ -19,9 +19,8 @@ main {
     grid-area: sidebar;
     
     width: var(--sidebar-width);
-    border-right: 1px solid var(--color-layout-border);
+    border-inline-end: 1px solid var(--color-layout-border);
     background: linear-gradient(135deg, var(--color-sidebar-gradient-start) 0%, var(--color-sidebar-gradient-end) 100%);
-    color: var(--color-sidebar-item-text);
 
     transition: 300ms ease-in-out;
 
@@ -32,7 +31,6 @@ main {
 }
 
 #tenant-card {
-    color: var(--color-tenant-card-text-primary);
     border: 1px solid var(--color-tenant-card-border);
     border-radius: 10px;
     background-color: var(--color-tenant-card-bg);
@@ -56,7 +54,7 @@ main {
         flex-direction: row;
         align-items: center;
         gap: var(--sidebar-tenant-card-switch-tenant-gap);
-        color: var(--color-tenant-card-text-secondary);
+        color: var(--color-text-secondary);
         font-size: 0.8rem;
     }
 }
@@ -71,7 +69,6 @@ main {
 }
 
 #sidebar nav ul {
-    list-style-type: none;
     flex-grow: 1;
 
     display: flex;
@@ -83,7 +80,6 @@ main {
     border-radius: 0.5em;
     display: flex;
     text-decoration: none;
-    color: var(--color-sidebar-item-text);
     align-items: center;
     padding: var(--sidebar-menu-item-padding-tb) var(--sidebar-menu-item-padding-rl);
     gap: var(--sidebar-menu-item-gap); /* to separate the icon from the text */
@@ -97,26 +93,18 @@ main {
 #sidebar .menu-item.active a {
     background-color: var(--color-sidebar-item-bg-active);
     font-weight: 600;
-    color: var(--color-sidebar-item-text-active);
-
-    svg {
-        fill: var(--color-sidebar-item-text-active);
-    }
 }
 
 /* since the dropdown button is a button, we need some styles to make it look like the <a> elements */
 #sidebar .menu-item > button {
     width: 100%;
     text-align: start;
-    background: none;
-    border: none;
-    cursor: pointer;
     flex-shrink: 0;
 }
 
 #sidebar nav svg {
     flex-shrink: 0; /* avoid distortions something ... ?*/
-    fill: var(--color-sidebar-item-text);
+    fill: var(--color-text-primary);
 }
 
 #sidebar .menu-item span {
@@ -135,11 +123,13 @@ main {
     transition: 300ms ease-in-out;
     margin-top: var(--sidebar-menu-gap);
 
-    > div {
+    > ul {
         overflow: hidden;
         display: flex;
         flex-direction: column;
         gap: var(--sidebar-menu-gap);
+        padding-inline-start: var(--sidebar-submenu-item-padding-tb);
+        font-size: 0.9rem;
     }
 }
 
@@ -158,9 +148,8 @@ main {
 
 /* have the submenu items idented */
 #sidebar .sub-menu a {
-    padding-inline-start: var(--sidebar-submenu-item-padding-tb);
+    
 }
-
 
 #overlay {
     position: absolute;

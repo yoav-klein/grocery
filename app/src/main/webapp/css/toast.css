@@ -1,13 +1,13 @@
 
 
-.toast {
+.ui-toast {
     height: var(--toast-height);
     width: var(--toast-width);
     border-radius: 7px;
     display: grid;
     align-items: center;
     grid-template-columns: 1.3fr 6fr 0.5fr;
-    padding: 1rem;
+    padding: var(--space-4);
     box-shadow: 0 15px 30px rgba(0, 0, 0, .08);
 
     position: absolute;
@@ -19,15 +19,19 @@
     background-color: aliceblue;
 }
 
-.toast:dir(ltr) {
+.ui-toast:dir(ltr) {
     transform: translateX(calc(-100% - 50px));
 }
 
-.toast:dir(rtl) {
+.ui-toast:dir(rtl) {
     transform: translateX(calc(100% + 50px));
 }
 
-.toast.toast-success {
+.ui-toast.show {
+    transform: translateX(0);
+}
+
+.ui-toast.ui-toast-success {
     border-left: 8px solid var(--color-success);
 
     .container-1 {
@@ -35,7 +39,7 @@
     }
 }
 
-.toast.toast-error {
+.ui-toast.ui-toast-error {
     border-left: 8px solid var(--color-error);
 
     .container-1 {
@@ -59,13 +63,7 @@
     color: var(--color-text-secondary);
 }
 
-.toast button {
+.ui-toast button {
     align-self: flex-start;
-    background-color: transparent;
-    border: none;
     font-size: 25px;
-}
-
-.toast.show {
-    transform: translateX(0);
 }

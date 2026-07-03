@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html th:replace="~{layout-user :: layout(~{::head}, ~{::main}, ~{::script}, false)}" lang="en" dir="ltr">
+<html th:replace="~{layout-user :: layout(~{::head}, ~{::#content}, ~{::script}, false)}" lang="en" dir="ltr">
 <head>
     <link rel="stylesheet" href="../../css/invitation-prompt.css" th:href="@{/css/invitation-prompt.css}">
 </head>
 <body>
-    <main>
-        <div class="content">
+    <div id="content">
+        <div class="inner-content">
             <div class="tenant-header" th:data-tenant-id="${invitation.tenant.id}">
                 <div class="tenant-image-container"></div>
                 <h4><span th:text="${invitation.tenant.name}"></span></h4>
@@ -21,7 +21,7 @@
                 <a th:href="@{/tenants}">Decline</a>
             </div>
         </div>
-    </main>
+        </div>
     <script type="module" src="../../js/invitation-prompt.js" th:src="@{/js/invitation-prompt.js}"></script>
 </body>
 </html>

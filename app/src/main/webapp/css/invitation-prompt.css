@@ -1,5 +1,5 @@
 
-.content {
+.inner-content {
     max-width: 500px;
     margin: var(--space-6) auto;
     display: flex;
