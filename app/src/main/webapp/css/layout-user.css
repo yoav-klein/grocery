@@ -50,25 +50,9 @@ body > header {
     }
 }
 
-/* USER MENU MENU */
+/* USER MENU */
 
-.user-dropdown.opened .user-menu {
-    display: flex;
-}
-
-/* general styles for a menu */
-.dropdown-menu {
-    background-color: var(--color-surface-page);
-    padding: var(--space-2) var(--space-2);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 20px;
-    z-index: 999;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, .08);
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-    gap: var(--space-1);
-}
+/* general styles for popover menus */
 
 .user-menu {
     width: 200px;
@@ -86,65 +70,27 @@ body > header {
     }
 }
 
-
-
-.user-menu .menu-item {
-    color: var(--color-text-primary);
-    border-radius: 15px;
-    padding: 0 var(--space-2);
-    line-height: 2rem;
-    font-weight: 450;
-    font-size: 0.9rem;
-    width: 100%;
-    
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-2);
-    align-items: center;
-    justify-content: start;
-
-    svg {
-        fill: var(--color-text-primary);
-    }
-
-    border: none;
-    background-color: transparent;
-    button, input[type="button"] {
-        border: none;
-        background-color: transparent;
-    }
-
-    .chevron {
-        margin-inline-start: auto;
-    }
+.user-menu .menu-item .chevron{ 
+    margin-inline-start: auto;
 }
-
-.user-menu .menu-item:hover {
-    background-color: var(--color-surface-raised);
-}
-
 
 /* USER AVATAR */
 
-.user-dropdown {
+.user-popover {
     height: 100%;
     aspect-ratio: 1/1;
     margin-inline-start: auto; /* to split the flexbox into 2 parts */
-    
-    .open-menu-button  {
-        height: 100%;
-    }
+}
 
+.user-popover .open-menu-button {
+    height: 100%;
+    background-color: transparent;
+    border: none;
     img {
         height: 100%;
         width: 100%;
         border-radius: 50%;
     }
-}
-
-.user-dropdown .open-menu-button {
-    background-color: transparent;
-    border: none;
 }
 
 .divider {
@@ -154,12 +100,8 @@ body > header {
     align-self: center;
 }
 
-.language-dropdown {
+.language-popover {
     width: 100%;
-}
-
-.language-dropdown.opened .language-menu {
-    display: flex;
 }
 
 .language-menu {

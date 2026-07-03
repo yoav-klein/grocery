@@ -25,8 +25,3 @@ There are 3 levels of CSS variables that control colors.
 3. Domain tokens - these are the variables that we actually use in the CSS classes, for example `--color-card-background` 
 
 Each level is using the level above it. This will help us make things more consistent and to coordinate colors between different parts of the UI.
-
-## Kebab menus system
-
-We have a system for kebab menus. It's in the `kebab-menus.css` and `kebab-menus.js` files. It defines an interface to easily create kebab menus in a page.
-

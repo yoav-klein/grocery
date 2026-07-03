@@ -4,33 +4,44 @@ main {
     position: relative; /* for the FAB */
 }
 
-.kebab-menu-button {
-    border-radius: 50%;
-    border: 1px solid var(--color-text-muted);
-    width: 1.25rem;
-    height: 1.25rem;
-    background: transparent;
+.product-popover.opened .ui-popover-menu {
     display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+.product-popover {
+    .ui-popover-trigger {
+        border-radius: 50%;
+        border: 1px solid var(--color-text-muted);
+        width: 1.25rem;
+        height: 1.25rem;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        svg {
+            fill: var(--color-text-muted);
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        margin-inline-start: 20px;
+    }
+
+    .ui-popover-menu {
+        top: calc(100% + 8px);
+        inset-inline-end: 0;
+    }
     
-    svg {
-        fill: var(--color-text-muted);
-        width: 1rem;
-        height: 1rem;
+    .menu-item.delete-button {
+        color:var(--color-danger-primary);
+        svg {
+            fill: var(--color-danger-primary);
+        }
     }
-
-    margin-inline-start: 20px;
-}
-
-.delete-button {
-    color:var(--color-danger-primary);
-    svg {
-        fill: var(--color-danger-primary);
+    
+    .menu-item.delete-button:hover { 
+        background-color: var(--color-background-delete);
     }
-}
-
-.delete-button:hover { 
-    background-color: var(--color-background-delete);
 }
 

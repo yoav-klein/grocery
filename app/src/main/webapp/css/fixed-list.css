@@ -27,41 +27,32 @@ main > header {
         gap: var(--fixed-list-header-actions-gap);
     }
 
-    .kebab-menu-button {
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: transparent;
-
-        svg {
-            height: 2rem;
-            width: 2rem;
+    .options-popover {
+        .ui-popover-trigger {
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
         }
-    }
 
-    .kebab-menu-actions {
-        width: 10rem;
-    }
+        .ui-popover-menu {
+            top: calc(100% + 8px);
+            inset-inline-end: 0;
+        }
 
-    a.kebab-menu-item {
-        color: var(--color-text-secondary);
-    }
-
-    .kebab-menu-item:hover {
-        background-color: rgba(0, 0, 0, 0.04);
-    }
+        .delete-button {
+            color: var(--color-danger-primary);
+            svg {
+                fill: var(--color-danger-primary);
+            }
+        }
     
-    .delete-button {
-        color: var(--color-danger-primary);
-        svg {
-            fill: var(--color-danger-primary);
+        .delete-button:hover {
+            background-color: var(--color-background-delete);
         }
     }
 
-    .delete-button:hover {
-        background-color: var(--color-background-delete);
-    }
 }
 
 .error-banner {

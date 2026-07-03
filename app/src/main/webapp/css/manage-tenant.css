@@ -1,8 +1,6 @@
 
 /* MANAGE TENANT */
 
-
-
 main {
     position: relative; /* for toasts */
 }
@@ -24,7 +22,6 @@ section {
     border: 1px solid var(--color-border-strong);
     border-radius: 15px;
 }
-
 
 .row {
     border-bottom: 1px solid var(--color-border-subtle);
@@ -73,38 +70,41 @@ section {
     border-bottom: none;
 }
 
-.kebab-menu-button {
-    border-radius: 50%;
-    border: 1px solid var(--color-text-muted);
-    width: 1.25rem;
-    height: 1.25rem;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.member-menu-popover {
+    .ui-popover-trigger {
+        border-radius: 50%;
+        border: 1px solid var(--color-text-muted);
+        width: 1.25rem;
+        height: 1.25rem;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        svg {
+            fill: var(--color-text-muted);
+            width: 1rem;
+            height: 1rem;
+        }
     
-    svg {
-        fill: var(--color-text-muted);
-        width: 1rem;
-        height: 1rem;
+        margin-inline-start: 20px;
     }
 
-    margin-inline-start: 20px;
-}
-
-.kebab-menu-item:hover {
-    background-color: var(--color-surface-kebab-menu-item);
-}
-
-.delete-button {
-    color:var(--color-danger-primary);
-    svg {
-        fill: var(--color-danger-primary);
+    .ui-popover-menu {
+        top: calc(100% + 8px);
+        inset-inline-end: 0;
     }
-}
-
-.delete-button:hover { 
-    background-color: var(--color-background-delete);
+    
+    .delete-button {
+        color:var(--color-danger-primary);
+        svg {
+            fill: var(--color-danger-primary);
+        }
+    }
+    
+    .delete-button:hover { 
+        background-color: var(--color-background-delete);
+    }
 }
 
 .member {

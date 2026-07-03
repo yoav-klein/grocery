@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="../../css/offline.css">
         <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
         <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
-        <link rel="stylesheet" href="../../css/kebab-menus.css" th:href="@{/css/kebab-menus.css}">
         <link rel="stylesheet" href="../../css/products.css" th:href="@{/css/products.css}">
     </head>
     <body>
@@ -23,15 +22,15 @@
                                 <li th:each="product : ${category.value}">
                                     <p class="item-name" th:text="${product.name}">Tomato</p>
                                     <p class="item-quantity-type" th:text="${product.quantityType}">Kg</p>
-                                    <div class="kebab-menu js-kebab-menu">
-                                        <button class="kebab-menu-button js-kebab-menu-button"> 
+                                    <div class="ui-popover product-popover">
+                                        <button class="ui-popover-trigger"> 
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
                                         </button>
-                                        <div class="kebab-menu-actions js-kebab-menu-actions">
+                                        <div class="ui-popover-menu">
                                             <form method="post" th:action="@{/tenant/{tenantId}/products(tenantId=${tenant.id})}">
                                                 <input type="hidden" name="_method" value="delete">
         
-                                                <button class="kebab-menu-item delete-button" name="id" th:value="${product.productId}">
+                                                <button class="menu-item delete-button" name="id" th:value="${product.productId}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
                                                     <span>Delete</span>
                                                 </button>
@@ -42,15 +41,15 @@
                                 <li th:remove="all">
                                     <p class="item-name">Cucmber</p>
                                     <p class="item-quantity-type">Kg</p>
-                                    <div class="kebab-menu js-kebab-menu">
-                                        <button class="kebab-menu-button js-kebab-menu-button"> 
+                                    <div class="ui-popover">
+                                        <button class="ui-popover-trigger"> 
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
                                         </button>
-                                        <div class="kebab-menu-actions js-kebab-menu-actions">
+                                        <div class="ui-popover-menu">
                                             <form method="post">
                                                 <input type="hidden" name="_method" value="delete">
         
-                                                <button class="kebab-menu-item delete-button" name="id">
+                                                <button class="menu-item delete-button" name="id">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
                                                     <span>Delete</span>
                                                 </button>
@@ -110,7 +109,6 @@
             </main>
         </div>
         <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
-        <script src="../../js/kebab-menus.js" th:src="@{/js/kebab-menus.js}"></script>
         <script type="module" src="../../js/products.js" th:src="@{/js/products.js}"></script>
     </body>
 </html>

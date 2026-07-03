@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../../css/offline.css">
     <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
     <link rel="stylesheet" href="../../css/toast.css" th:href="@{/css/toast.css}">
-    <link rel="stylesheet" href="../../css/kebab-menus.css" th:href="@{/css/kebab-menus.css}">
     <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
     <link rel="stylesheet" href="../../css/manage-tenant.css" th:href="@{/css/manage-tenant.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/dist/tabler-icons.min.css">
@@ -42,21 +41,21 @@
                             <p class="badge member-role" th:classappend="(${membership.role} == 'admin'? 'badge-admin' : 'badge-member')">
                                 <span th:if="${membership.role == 'admin'}">Admin</span>
                             </p>
-                            <div class="kebab-menu js-kebab-menu" th:unless="${membership.user.id} == ${user.id}" th:if="${@tenantUserService.isAdmin(user.id, tenant.id)}">
-                                <button class="kebab-menu-button js-kebab-menu-button">
+                            <div class="ui-popover member-menu-popover" th:unless="${membership.user.id} == ${user.id}" th:if="${@tenantUserService.isAdmin(user.id, tenant.id)}">
+                                <button class="ui-popover-trigger">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
                                 </button>
-                                <ul class="kebab-menu-actions js-kebab-menu-actions">
+                                <ul class="ui-popover-menu">
                                     <li>
                                         <form th:unless="${membership.role} == 'admin'" method="post" th:action="@{/tenant/{tenantId}/members/{user}/promote(tenantId=${tenant.id},user=${membership.user.id})}">
-                                            <button class="kebab-menu-item" type="submit">
+                                            <button class="menu-item" type="submit">
                                                 <i class="fa-solid fa-person-arrow-up-from-line"></i>
                                                 <span>Promote</span>
                                             </button>
                                         </form>
                                     </li>
                                     <li>
-                                        <button data-open-dialog th:data-dialog-id="'remove-user-confirmation-dialog-' + ${membership.user.id}" th:if="${@tenantUserService.isStrongerMember(tenant.id, user.id, membership.user.id)}" class="kebab-menu-item delete-button" type="submit">
+                                        <button data-close-menu data-open-dialog th:data-dialog-id="'remove-user-confirmation-dialog-' + ${membership.user.id}" th:if="${@tenantUserService.isStrongerMember(tenant.id, user.id, membership.user.id)}" class="menu-item delete-button" type="submit">
                                             <i class="fa-solid fa-user-slash"></i>
                                             <span>Remove</span>
                                         </button>
@@ -84,20 +83,20 @@
                             </div>
                             <p  th:text="${membership.user.displayName}">John Doe</p>
                             <p class="member-role badge badge-admin">Admin</p>
-                            <div class="kebab-menu js-kebab-menu" th:unless="${membership.user.id} == ${user.id}" th:if="${@tenantUserService.isAdmin(user.id, tenant.id)}">
-                                <button class="kebab-menu-button js-kebab-menu-button">
+                            <div class="ui-popover" th:unless="${membership.user.id} == ${user.id}" th:if="${@tenantUserService.isAdmin(user.id, tenant.id)}">
+                                <button class="ui-popover-trigger">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
                                 </button>
-                                <ul class="kebab-menu-actions js-kebab-menu-actions">
+                                <ul class="ui-popover-menu">
                                     <li>
                                         <form th:unless="${membership.role} == 'admin'" method="post" th:action="@{/tenant/{tenantId}/members/{user}/promote(tenantId=${tenant.id},user=${membership.user.id})}">
-                                            <button class="kebab-menu-item" type="submit">Promote</button>
+                                            <button class="menu-item" type="submit">Promote</button>
                                         </form>
                                     </li>
                                     <li>
                                         <form th:if="${@tenantUserService.isStrongerMember(tenant.id, user.id, membership.user.id)}" method="post" th:action="@{/tenant/{tenantId}/members/{user}(tenantId=${tenant.id},user=${membership.user.id})}">
                                             <input type="hidden" name="_method" value="delete">
-                                            <button class="kebab-menu-item delete-button" type="submit">Delete</button>
+                                            <button class="menu-item delete-button" type="submit">Delete</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -173,6 +172,5 @@
     <script type="module" src="../../js/manage-tenant.js" th:src="@{/js/manage-tenant.js}"></script>
     <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
     <script src="../../js/toast.js" th:src="@{/js/toast.js}"></script>
-    <script src="../../js/kebab-menus.js" th:src="@{/js/kebab-menus.js}"></script>
 </body>
 </html>

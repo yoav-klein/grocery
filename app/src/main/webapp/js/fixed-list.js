@@ -5,14 +5,12 @@ import { HttpError } from './common.js';
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]')?.content;
 const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
 
-const listId = document.querySelector('meta[name="listId"]').content;
-const tenantId = document.querySelector('meta[name="tenantId"]').content;
+const listId = document.querySelector('meta[name="listId"]')?.content;
+const tenantId = document.querySelector('meta[name="tenantId"]')?.content;
 const tenantBaseUrl = `${BASE_URL}/tenant/${tenantId}`;
 const bulkUrl = `${tenantBaseUrl}/currentList/bulk/${listId}`;
 
 const formEl = document.getElementById('list');
-const deleteButtonEl = document.getElementById('delete-button');
-const deleteConfirmationDialog = document.getElementById('delete-confirmation-dialog');
 
 const errorBannerEl = document.getElementById('error-banner');
 const errorBannerMessageEl = errorBannerEl.querySelector('span');
@@ -32,10 +30,6 @@ Array.from(steppers).forEach(stepper => stepper.addEventListener('click', e => {
         }
     }
 }));
-
-deleteButtonEl.addEventListener('click', () => {
-    deleteConfirmationDialog.showModal();
-});
 
 const inputs = document.querySelectorAll('.js-quantity-input');
 
