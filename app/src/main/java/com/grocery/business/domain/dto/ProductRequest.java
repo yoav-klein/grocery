@@ -1,6 +1,7 @@
 package com.grocery.business.domain.dto;
 
-import com.grocery.business.domain.model.*;
+import com.grocery.business.domain.model.ProductCategory;
+import com.grocery.business.domain.model.QuantityType;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -8,8 +9,7 @@ import jakarta.validation.constraints.Size;
 public class ProductRequest {
 
     @NotNull
-    @Size(max=48, message="Name too long")
-    @Size(min=2, message="Name too short")
+    @Size(min=2, max=40)
     private String name;
 
     private ProductCategory category;

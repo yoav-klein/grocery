@@ -1,7 +1,19 @@
 
-
 main {
     position: relative; /* for the FAB */
+    padding: 0;
+}
+
+.categories-scroll-container {
+    padding: var(--main-padding);
+}
+
+.category-grid {
+    padding-bottom: calc(var(--primary-fab-size) + var(--primary-fab-absolute-pos-bottom) + 5px);
+}
+
+.category-grid .category > ul {
+    grid-template-columns: 1fr max-content max-content;
 }
 
 .product-popover.opened .ui-popover-menu {
@@ -9,23 +21,22 @@ main {
 }
 
 .product-popover {
+    
     .ui-popover-trigger {
+        transform: translateY(0.2rem);
         border-radius: 50%;
         border: 1px solid var(--color-text-muted);
-        width: 1.25rem;
-        height: 1.25rem;
+        width: 1rem;
+        aspect-ratio: 1/1;
         background: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
+        display: grid;
+        place-content: center;
+
         svg {
             fill: var(--color-text-muted);
-            width: 1rem;
-            height: 1rem;
+            width: 0.7rem;
+            height: 0.7rem;
         }
-        
-        margin-inline-start: 20px;
     }
 
     .ui-popover-menu {
@@ -41,7 +52,7 @@ main {
     }
     
     .menu-item.delete-button:hover { 
-        background-color: var(--color-background-delete);
+        background-color: var(--color-danger-hover-light);
     }
 }
 

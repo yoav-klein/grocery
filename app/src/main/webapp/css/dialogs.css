@@ -42,7 +42,8 @@
 .ui-form-dialog[open] {
     /* put the dialog in the middle of page */
     
-    width: min(480px, calc(100vw - 32px));
+    
+    width: clamp(min(500px, calc(100vw - 32px)), 40vw, 600px);
 
     display: flex;
     flex-direction: column;
@@ -153,7 +154,7 @@
     background-color: var(--color-danger-primary);
 
     &:hover {
-        background-color: var(--color-danger-hover);
+        background-color: var(--color-danger-hover-strong);
     }
 }
 

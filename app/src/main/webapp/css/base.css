@@ -62,12 +62,9 @@
 
     /* Semantics */
     --color-danger-primary: var(--color-red-500);
-    --color-danger-hover: var(--color-red-600);
+    --color-danger-hover-strong: var(--color-red-600);
+    --color-danger-hover-light: var(--color-red-50);
     --color-danger-light: var(--color-red-200);
-    
-    /* Backgrounds */
-    --color-background-delete: var(--color-red-50);
-    --color-background-delete-hover: var(--color-red-100);
 
     /* Actions */
     --color-action-primary: var(--color-green-500);
@@ -87,12 +84,10 @@
     /* Layout */
     --color-header-bg: var(--color-green-100);
     --color-layout-border: var(--color-border-subtle);
-
     --color-sidebar-gradient-start: var(--color-green-100);
     --color-sidebar-gradient-end: var(--color-green-200);
     --color-sidebar-item-bg-hover: var(--color-green-300);
     --color-sidebar-item-bg-active: var(--color-green-400);
-
     --color-tenant-card-bg: var(--color-green-200);
     --color-tenant-card-border: var(--color-green-200);
 
@@ -106,8 +101,6 @@
     --color-card-background: var(--color-surface-card);
     --color-card-border: var(--color-border-subtle);
     --color-card-title: var(--color-text-primary);
-    --color-card-item-name: var(--color-text-primary);
-    --color-card-item-quantity: var(--color-text-secondary);
 
     /* Dialog */
     --color-dialog-background: var(--color-surface-dialog);
@@ -193,7 +186,7 @@
 
     /* Categories */
     --categories-gap: var(--space-4);
-    --category-header-margin: var(--space-6);
+    --category-header-margin: var(--space-4);
     --category-padding: var(--space-4);
     --category-items-gap: var(--space-1);
     --category-item-fields-gap: var(--space-1);
@@ -205,7 +198,6 @@
 
     /* Fixed List */
     --fixed-list-header-height: 5rem;
-    --fixed-list-header-actions-gap: var(--space-5);
     --fixed-list-error-banner-padding: var(--padding-md);
     --fixed-list-stepper-gap: var(--space-1);
     --fixed-list-stepper-margin-end: var(--space-1);
@@ -228,7 +220,6 @@
 
 html {
     font-family: Poppins, 'Segoe UI', sans-serif;
-    line-height: 1.5rem;
     background-color: white;
     color: var(--color-text-primary);
 }
@@ -251,7 +242,7 @@ textarea {
 
 button {
     cursor: pointer;
-    background: none;
+    background-color: transparent;
     border: none;
 }
 

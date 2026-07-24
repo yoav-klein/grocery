@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
+        <link rel="stylesheet" th:remove="all" href="../../css/base.css" th:href="@{/css/base.css}">
+        <link rel="stylesheet" th:remove="all" href="../../css/offline.css">
+        <link rel="stylesheet" th:remove="all" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
         <link rel="stylesheet" href="../../css/toast.css" th:href="@{/css/toast.css}">
-        <link rel="stylesheet" href="../../css/offline.css" th:remove="all">
-        <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
         <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
         <link rel="stylesheet" href="../../css/current-list.css" th:href="@{/css/current-list.css}">
     </head>
@@ -23,19 +23,18 @@
                         <p>Item added successfully!</p>
                     </div>
                     <button class="ui-toast-close">&times;</button>
-                </div>
-                
+                </div>  
                 
                 <!-- template for adding items in JavaScript -->
                 <template id="item-template">
                     <li class="category-item">
-                        <p class="item-quantity">0</p>
-                        <p class="item-quantity-type">Kg</p>
-                        <p class="item-name"><span>Fish</span></p>
                         <p class="checkbox-container">
                             <input class="delete-checkbox" type="checkbox">
                             <label></label>
                         </p>
+                        <p class="item-quantity">0</p>
+                        <p class="item-quantity-type">Kg</p>
+                        <p class="item-name"><span>Fish</span></p>
                     </li>
                 </template>
                 <template id="category-template">
@@ -47,19 +46,19 @@
                     </article>
                 </template>
                 <div class="categories-scroll-container">
-
                     <section id="all-categories" class="category-grid">
                         <article class="category" th:each="category : ${itemsByCategory}" th:id="'category-' + ${category.key}">
                             <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
                             <ul>
                                 <li th:each="item : ${category.value}" th:id="'item-' + ${item.id}">
-                                    <p class="item-quantity" th:text="${item.quantity}">3</p>
-                                    <p class="item-quantity-type" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</p>
-                                    <p class="item-name"><span th:text="${item.name}">Tomato</span></p>
                                     <p class="checkbox-container">
                                         <input class="delete-checkbox" type="checkbox" th:id="'delete-checkbox-' + ${item.id}">
                                         <label th:for="'delete-checkbox-' + ${item.id}"></label>
                                     </p>
+                                    <p class="item-quantity" th:text="${item.quantity}">3</p>
+                                    <p class="item-quantity-type" th:text="#{${'additem.quantitytype.' + item.quantityType}}">Kg</p>
+                                    <p class="item-name"><span th:text="${item.name}">Tomato</span></p>
+                                    
                                 </li>
                             </ul>
                         </article>
@@ -378,7 +377,7 @@
                             <div class="ui-dialog-field">
                                 <label for="quantity">Quantity</label>
                                 <div class="quantity-control">
-                                    <input data-validation-field-id="quantity-validation-field" name="quantity" type="number" id="quantity" value="1">
+                                    <input type="number" id="quantity" data-validation-field-id="quantity-validation-field" name="quantity" value="1">
                                     <select name="quantityType">
                                         <option th:each="type : ${allQuantityTypes}" th:value="${type}" th:text="${type}">Kg</option>
                                         <option th:remove="all">Unit</option>
@@ -398,9 +397,9 @@
                 </dialog>
             </main>
         </div>
-        <script src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script th:remove="all" src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script th:remove="all" src="https://kit.fontawesome.com/68d2baaa06.js" crossorigin="anonymous"></script>
         <script src="../../js/toast.js" th:src="@{/js/toast.js}"></script>
         <script type="module" src="../../js/current-list.js" th:src="@{/js/current-list.js}"></script>
-        <script src="https://kit.fontawesome.com/68d2baaa06.js" crossorigin="anonymous"></script>
     </body>
 </html>

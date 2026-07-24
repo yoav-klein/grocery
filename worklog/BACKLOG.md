@@ -4,6 +4,8 @@
 ## For launch
 * Internationalization
 * Error pages
+* UI refactoring
+* Fixed lists - when pressing "Add", spinner
 
 ## Done
 * Logout (V)

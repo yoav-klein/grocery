@@ -4,10 +4,10 @@
         <title>Document</title>
         <meta name="listId" th:content="${fixedList.id}">
         
-        <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
-        <link rel="stylesheet" href="../../css/offline.css">
-        <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
-        <link rel="stylesheet" href="../../css/popovers.css" th:href="@{/css/popovers.css}">
+        <link th:remove="all" rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
+        <link th:remove="all" rel="stylesheet" href="../../css/offline.css">
+        <link th:remove="all" rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
+        <link th:remove="all" rel="stylesheet" href="../../css/popovers.css" th:href="@{/css/popovers.css}">
         <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
         <link rel="stylesheet" href="../../css/fixed-list.css" th:href="@{/css/fixed-list.css}">
     </head>
@@ -23,7 +23,7 @@
                         <button id="insert-button" disabled class="action-button primary-action-button" form="list">Add Items</button>
                         <div class="ui-popover options-popover">
                             <button class="ui-popover-trigger">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000000"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
                             </button>
                             <div class="ui-popover-menu">
                                 <a class="menu-item" href="#" th:href="@{/tenant/{tenantId}/lists/edit/{listId}(tenantId=${tenant.id},listId=${fixedList.id})}">
@@ -77,7 +77,9 @@
                 </dialog>
             </main>
         </div>
-        <script type="module" src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script th:remove="all" type="module" src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
+        <script th:remove="all" type="module" src="../../js/popovers.js" th:src="@{/js/popovers.js}"></script>
+        <script th:remove="all" src="https://kit.fontawesome.com/68d2baaa06.js" crossorigin="anonymous"></script>
         <script type="module" src="../../js/fixed-list.js" th:src="@{/js/fixed-list.js}"></script>
     </body>
 </html>

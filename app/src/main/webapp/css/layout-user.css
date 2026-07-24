@@ -1,52 +1,24 @@
 
 body {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: var(--header-height) minmax(0, 1fr);
+}
+
+.content {
+    height: 100%;
+    overflow: auto;
 }
 
 body > header {
-    height: var(--header-height);
     border-bottom: 1px solid var(--color-layout-border);
+
     display: flex;
     flex-direction: row;
     align-items: center;
     background-color: var(--color-header-bg);
     padding: var(--space-1) var(--space-4);
-    gap: var(--space-4);
 }
 
-.content {
-    overflow: auto;
-}
-
-
-#tenant-menu-button {
-    border-radius: .5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-    visibility: hidden;
-    height: 100%;
-    aspect-ratio: 1/1;
-    
-    svg {
-        fill: var(--color-sidebar-item-text);
-        height: 100%;
-        margin: 10%;
-    }
-}
-
-#tenant-menu-button:hover {
-    background-color: var(--color-menu-button-hover);
-}
-
-@media(max-width: 768px) {
-    #tenant-menu-button {
-        visibility: visible;
-    }
-}
 
 /* USER MENU */
 .user-popover {
@@ -67,7 +39,7 @@ body > header {
 .user-popover > .ui-popover-menu {
     top: calc(100% + 8px);
     inset-inline-end: 0;
-    width: 200px;
+    width: max-content;
     line-height: 1.1rem;
     
     .user-details {
