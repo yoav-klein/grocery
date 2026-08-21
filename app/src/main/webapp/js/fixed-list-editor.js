@@ -5,7 +5,7 @@ const uiElements = {
     selectedProductsList: document.getElementById('selected-list'),
     main: document.querySelector('main'),
     stepperPrimaryButton: document.getElementById('step-primary-button'),
-    reviewListName: document.querySelector('#selected-section .list-meta-name')
+    reviewListName: document.querySelector('#selected .list-meta-name')
 }
 
 export const commonElements = { 
@@ -95,7 +95,7 @@ function initCheckboxHandlers(isSubmittingCallback, addItemCallback, removeItemC
         
         input.addEventListener('change', (e) => {
             // get the name and category of clicked checkbox
-            const name = e.target.nextElementSibling.innerText;
+            const name = e.target.closest('.category-item').querySelector('.js-product-name').innerText;
             const productCategory = e.target.getAttribute('data-category');
             const productId = e.target.getAttribute('id');
 
@@ -126,15 +126,16 @@ function renderSummary(mode, getStateCallback) {
 
 function initDeleteProductHandler(removeItemCallback, isSubmittingCallback, mode, getStateCallback) {
     uiElements.selectedProductsList.addEventListener('click', (e) => {
-        if(!e.target.classList.contains('selected-product-remove-btn')) return;
+        const btn = e.target.closest('.selected-product-remove-btn');
+        if(btn === null) return;
 
-        const productId = e.target.parentElement.dataset.productId;
+        const productId = btn.parentElement.dataset.productId;
         removeItemCallback(productId);
 
         // uncheck checkbox
         document.getElementById(productId).checked = false; 
         // this is a bit of a hack, but ** it, it works
-        renderCheckboxChange(false, productId, null, e.target.parentElement.dataset.category);
+        renderCheckboxChange(false, productId, null, btn.parentElement.dataset.category);
         renderSummary(mode, getStateCallback)
         updateControls(isSubmittingCallback);
     })
@@ -182,9 +183,11 @@ function initMobileStepper(saveListCallback, isSubmittingCallback) {
     });
 
     function renderStepIndicator() {
-        const stepIndicatorDots = document.querySelectorAll('.step-indicator .dot');
-        stepIndicatorDots.forEach(dot => dot.classList.remove('active'));
-        stepIndicatorDots[currentStep].classList.add('active');
+        const stepIndicatorDots = Array.from(document.querySelectorAll('.step-indicator .dot'));
+        for(let i = 0; i < numSteps; ++i) {
+            stepIndicatorDots[i].classList.toggle('done', i < currentStep);
+            stepIndicatorDots[i].classList.toggle('current', i === currentStep);
+        }
     }
 
     function renderButtons() {

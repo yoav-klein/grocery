@@ -1,10 +1,11 @@
 
 import { initFixedListEditor, commonElements } from "./fixed-list-editor.js";
 import { HttpError } from './common.js';
+import { TENANT_URL } from './config.js';
 
 const listId = document.querySelector('meta[name="listId"]').content;
 const tenantId = document.querySelector('meta[name="tenantId"]').content;
-
+const tenantBaseUrl = `${TENANT_URL}/${tenantId}`
 const initialListName = commonElements.listNameInput.dataset.initValue;
 
 const editNameButtonEl = document.getElementById("edit-name-button");
@@ -71,7 +72,7 @@ function saveList() {
     headers.append("Content-Type", "application/json");
     headers.append(commonElements.csrfHeaderName.content, commonElements.csrfToken.content);
     const body = JSON.stringify(data);
-    const responsePromise = fetch(`${window.location.origin}/app/tenant/${tenantId}/lists/${listId}`, {
+    const responsePromise = fetch(`${tenantBaseUrl}/lists/${listId}`, {
         method: "PUT",
         headers: headers,
         body: body

@@ -44,8 +44,6 @@ submitButton.addEventListener('click', (event) => {
         const response = e.response;
         response.json()
             .then(data => {
-                console.log("JSON: ");
-                console.log(data);
                 if(!data.type) throw new UnhandledProblemTypeError("unknown schema"); // if not a RFC 9457
 
                 problemDetailHandler(data)

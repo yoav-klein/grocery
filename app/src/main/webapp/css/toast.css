@@ -12,7 +12,7 @@
 
     position: absolute;
     top: 30px;
-    inset-inline-start: 30px;
+    inset-inline-end: 30px;
     
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     z-index: 999;
@@ -20,11 +20,11 @@
 }
 
 .ui-toast:dir(ltr) {
-    transform: translateX(calc(-100% - 50px));
+    transform: translateX(calc(100% + 50px));
 }
 
 .ui-toast:dir(rtl) {
-    transform: translateX(calc(100% + 50px));
+    transform: translateX(calc(-100% - 50px));
 }
 
 .ui-toast.show {

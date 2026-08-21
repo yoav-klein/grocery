@@ -104,25 +104,3 @@ h1 {
         font-size: 48px;
     }
 }
-
-/* add new tenant card */
-/* .tenants-grid > div:last-child {
-    a {
-        border: 3px dashed white;
-        background-color: #5e63ff;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 12px; 
-    }
-
-    div:first-child {
-        font-size: 48px;
-    }
-    transition: transform 0.3s ease;
-}
-
-.tenants-grid > div:last-child:hover {
-    transform: translateY(-7px) translateX(-2px);
-}
- */

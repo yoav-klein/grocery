@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr);
+        }
+
+        header {
+            height: 200px;
+            background-color: aqua;
+        }
+
+        main {
+            background-color: rgb(255, 255, 120);
+            padding: 1rem;
+            
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .content {
+            max-width: 800px;
+            border: 1px solid black;
+            height: 100%;
+            padding: 0.5rem;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 6fr minmax(150px, 4fr);
+            grid-template-rows: auto auto 1fr;
+            gap: 20px;
+
+            grid-template-areas: 
+                "heading heading"
+                "list-name list-name"
+                "products selected";
+        }
+
+        .step {
+            overflow: auto;
+        }
+
+        .header {
+            grid-area: heading;
+        }
+
+        .list-name {
+            grid-area: list-name;
+            border-bottom: 1px solid #333;;
+        }
+
+        .products {
+            grid-area: products;
+        }
+
+        .selected {
+            grid-area: selected;
+            background-color: #eef1ef;
+        }
+
+        label {
+            display: block;
+        }
+
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+        }
+
+        .item {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+        }
+
+        .step-wrapper {
+            display: contents;
+        }
+
+        .mobile-only {
+            display: none;
+        }
+
+
+
+        @media (max-width: 768px) {
+
+            .pc-only {
+                display: none
+            }
+
+            .mobile-only {
+                display: block;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .content {
+                padding: 0;
+                grid-template-areas: 
+                    "heading"
+                    "content"
+                    "actions"
+                ;
+
+                grid-template-rows: auto minmax(0, 1fr) auto;
+                grid-template-columns: minmax(0, 1fr);
+
+                overflow-x: hidden;
+            }
+
+            .list-name {
+                border-bottom: unset;
+            }
+
+            .step-wrapper {
+                display: block;
+                grid-area: content;
+
+                --num-steps: 3;
+                --current-step: 0;
+
+                width: calc(100% * var(--num-steps));
+                transform: translateX(calc(-1 * (100% / var(--num-steps)) * var(--current-step)));
+
+                display: flex;
+                flex-direction: row;
+                gap: 0;
+                transition: transform 1s;
+            }
+
+            .step {
+                width: calc(100% / var(--num-steps));
+                padding: 1rem;
+            }
+
+            .actions {
+                grid-area: actions;
+
+                display: flex;
+                flex-direction: column;
+                gap: 0.1rem;
+
+                button {
+                    height: 50px;
+                }
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        This is header
+    </header>
+    <main>
+        <div class="content">
+            <div class="header">
+                <h1>Create fixed list</h1>
+                <p>Create a reusable list</p>
+                <div class="step-indicator mobile-only">
+                    STEP INDICATOR
+                </div>
+            </div>
+            <div class="step-wrapper">
+
+                <div class="list-name step">
+                    <label for="list-name">List Name</label>
+                    <input type="text">
+                </div>
+                <div class="products step">
+                    <h3 class="mobile-only">
+                        Products
+                    </h3>
+                    <h4 class="mobile-only">
+                        Choose the products for this list
+                    </h4>
+                    <ul class="category-grid">
+                        <li class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Tomato</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Cucumber</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Onion</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Pepper</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Lattus</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Potatoes</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Garlic</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="category">
+                            <h2>FRUIT</h2>
+                            <ul>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Strawberry</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Orange</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Lemon</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Peach</p>
+                                </li>
+    
+                            </ul>
+                        </li>
+                        <li class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Tomato</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Cucumber</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Onion</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Pepper</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Lattus</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Potatoes</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Garlic</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Tomato</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Cucumber</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Onion</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Pepper</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Lattus</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Potatoes</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Garlic</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="category">
+                            <h2>VEGETABLES</h2>
+                            <ul>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Tomato</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Cucumber</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Onion</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Pepper</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Lattus</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Potatoes</p>
+                                </li>
+                                <li class="item">
+                                    <input type="checkbox">
+                                    <p>Garlic</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="selected step">Selected On the fly</div>
+            </div>
+            <div class="actions mobile-only">
+                <button id="button-next">NEXT</button>
+                <button id="button-prev">PREV</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        const nextButton = document.getElementById('button-next');
+        const prevButton = document.getElementById('button-prev');
+        const stepWrapperEl = document.querySelector('.step-wrapper');
+
+        const NUM_STEPS = 3;
+        
+        nextButton.addEventListener('click', () => {
+            let currentStep = parseInt(getComputedStyle(stepWrapperEl).getPropertyValue('--current-step'));
+            console.log('clicked next');
+            console.log(currentStep);
+            if(currentStep < (NUM_STEPS - 1)) {
+                currentStep++;
+                updateStep(currentStep);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            let currentStep = parseInt(getComputedStyle(stepWrapperEl).getPropertyValue('--current-step'));
+            if(currentStep > 0) {
+                currentStep--;
+                updateStep(currentStep);
+            }
+        });
+
+        const updateStep = (currentStep) => stepWrapperEl.style.setProperty('--current-step', currentStep);
+    </script>
+</body>
+</html>

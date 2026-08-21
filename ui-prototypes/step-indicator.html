@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: grid;
+            place-items: center;
+        }
+
+        .container {
+            background-color: aqua;
+            width: 500px;
+            height: 500px;
+
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+
+        }
+
+        .actions {
+            border: 1px solid black;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-indicator {
+            display: grid;
+            /* place-items: center; */
+            justify-items: center;
+        }
+
+        .wrapper {
+            height: 20%;
+            width: 80%;
+            border: 1px dashed red;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+        
+        }
+
+
+        .line {
+            flex-grow: 1;
+            background-color: black;
+            height: 1px;
+
+        }
+
+        .step {
+            position: relative;
+            height: 100%;
+            aspect-ratio: 1/1;
+            border: 1px solid black;
+            border-radius: 50%;
+            
+            display: grid;
+            place-items: center;
+        }
+
+        .checkmark {
+            display: none;
+        }
+
+        .step.done .checkmark {
+            display: block;
+        }
+
+        .step.current {
+            border-width: 2px;
+            box-shadow: 0 0 10px brown, 0 0 10px inset brown;
+            border-color: brown;
+        }
+
+        .name {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="step-indicator">
+            <div class="wrapper">
+                <div class="step">
+                    <div class="checkmark">V</div>
+                    <div class="name">Name List</div>
+                </div>
+                <div class="line"></div>
+                <div class="step">
+                    <div class="checkmark">V</div>
+                    <div class="name">Choose Products</div>
+                </div>
+                <div class="line"></div>
+                <div class="step">
+                    <div class="checkmark">V</div>
+                    <div class="name">Review</div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <button id="prev">PREV</button>
+            <button id="next">NEXT</button>
+        </div>
+    </div>
+    <script>
+        const nextButton = document.getElementById('next');
+        const prevButton = document.getElementById('prev');
+        let steps = Array.from(document.querySelectorAll('.step'));
+        let currentStep = 0;
+        const numSteps = steps.length;
+        render();
+
+        nextButton.addEventListener('click', () => {
+            if(currentStep < numSteps - 1) {
+                currentStep++;
+                render();
+            }
+        });
+        
+        prevButton.addEventListener('click', () => {
+            if(currentStep > 0) {
+                currentStep--;
+                render();
+            }
+        });
+
+        function render() {
+            console.log('redner');
+            for(let i = 0; i < numSteps; ++i) {
+                steps[i].classList.toggle('done', i < currentStep);
+                steps[i].classList.toggle('current', i === currentStep);
+                
+                
+            }
+        }
+    </script>
+</body>
+</html>

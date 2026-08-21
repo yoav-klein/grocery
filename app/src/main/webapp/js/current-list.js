@@ -9,6 +9,7 @@ const evtSource = new EventSource(window.location.pathname + '/itemStream');
 const newItemFormEl = document.getElementById("new-item-form");
 const addItemDialogEl = document.getElementById('add-item-dialog');
 const addItemSuccessToast = document.getElementById("add-item-success-toast");
+const markItemSuccessToast = document.getElementById("mark-item-success-toast");
 
 
 newItemFormEl.addEventListener("submit", (event) => {
@@ -36,7 +37,6 @@ newItemFormEl.addEventListener("submit", (event) => {
 
     })
     .catch(e => {
-        console.log("error");
         if(!e instanceof HttpError) {
             handleGenericError()
             return;
@@ -160,7 +160,14 @@ function attachHandlerToDeleteCheckbox(el) {
                 method: "DELETE",
                 headers: headers
             });
-            responsePromise.then(resp => console.log(`OK: ${resp.ok}`)).catch(e => console.log(`error: ${e}`));
+            responsePromise.then(resp => {
+                    if(!resp.ok) {
+                        throw new HttpError(resp);
+                    }
+
+                    markItemSuccessToast.dispatchEvent(new CustomEvent('show'));
+                })
+                .catch(e => console.log(`error: ${e}`));
         }
     });
 }

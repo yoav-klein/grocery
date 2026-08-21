@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="tenantId" th:content="${tenant.id}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/offline.css">
+    <link rel="stylesheet" th:remove="all" href="../../css/offline.css">
     <link rel="stylesheet" href="../../css/base.css" th:href="@{/css/base.css}">
     <link rel="stylesheet" href="../../css/toast.css" th:href="@{/css/toast.css}">
     <link rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">

@@ -1,8 +1,9 @@
 
 
 main {
-    position: relative; /* for the FAB */
+    position: relative; /* for the FAB and toast */
     padding: 0;
+    overflow-x: hidden;
 }
 
 .categories-scroll-container {

@@ -2,6 +2,10 @@
 Array.from(document.querySelectorAll('.ui-toast')).forEach(e => {
     e.addEventListener('show', () => {
         e.classList.add('show');
+
+        setTimeout(() => {
+            e.classList.remove('show');
+        }, 1500);
     });
 });
 
