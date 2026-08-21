@@ -257,6 +257,7 @@ ul {
 
 main {
     padding: var(--main-padding);
+    overflow-x: hidden; /* for toasts */
 }
 
 /* UTIL */
