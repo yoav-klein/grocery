@@ -10,6 +10,15 @@ resource "aws_security_group" "load_balancer" {
         description = "HTTP"
         cidr_blocks = ["0.0.0.0/0"]
     }
+
+    ingress {
+        from_port = 443
+        to_port = 443
+        protocol = "TCP"
+        description = "HTTPS"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
 }
 
 resource "aws_security_group_rule" "server_from_lb" {
