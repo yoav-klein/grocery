@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 
-@PropertySource("file:/C:/Users/yoavk/.secrets/google-openid-credentials.properties")
+@PropertySource("file:/${CONFIG_FILE}")
 @EnableWebSecurity(debug=true)
 @ComponentScan
 @EnableMethodSecurity

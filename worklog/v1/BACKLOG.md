@@ -7,7 +7,16 @@
 * Fixed lists - when pressing "Add", spinner
 * Add hoc adding of products in Add Fixed List
 * Default set of products in tenant
-
+* Products page - after adding a product, redirect to ?success in order to display a toast:
+```
+const params = new URLSearchParams(location.search);
+if (params.get('success') === '1') {
+  showToast('Success');
+  params.delete('success');
+  const newUrl = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+  history.replaceState({}, '', newUrl);
+}
+```
 
 ## Doing
 * UI refactoring

@@ -1,6 +1,7 @@
 package com.grocery;
 
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.filter.ForwardedHeaderFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -32,6 +33,8 @@ public class SpringAppInitializer extends AbstractAnnotationConfigDispatcherServ
 	public Filter[] getServletFilters() {
 		DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
 		delegatingFilterProxy.setTargetBeanName("springSecurityFilterChain");
-		return new Filter[] { delegatingFilterProxy, new HiddenHttpMethodFilter() };
+		ForwardedHeaderFilter fhf = new ForwardedHeaderFilter();
+		
+		return new Filter[] { fhf, delegatingFilterProxy, new HiddenHttpMethodFilter() };
 	}
 }
