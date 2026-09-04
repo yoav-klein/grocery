@@ -8,13 +8,33 @@
         <link th:remove="all" rel="stylesheet" href="../../css/offline.css">
         <link th:remove="all" rel="stylesheet" href="../../css/popovers.css">
         <link th:remove="all" rel="stylesheet" href="../../css/dialogs.css" th:href="@{/css/dialogs.css}">
+        <link rel="stylesheet" href="../../css/toast.css" th:href="@{/css/toast.css}">
         <link rel="stylesheet" href="../../css/categories.css" th:href="@{/css/categories.css}">
         <link rel="stylesheet" href="../../css/products.css" th:href="@{/css/products.css}">
     </head>
     <body>
         <div class="wrapper" th:remove="tag">
-
             <main>
+                <div id="add-item-success-toast" class="ui-toast ui-toast-success">
+                    <div class="container-1">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <div class="container-2">
+                        <p>Success</p>
+                        <p>Product added successfully!</p>
+                    </div>
+                    <button class="ui-toast-close">&times;</button>
+                </div>
+                <div id="delete-item-success-toast" class="ui-toast ui-toast-success">
+                    <div class="container-1">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <div class="container-2">
+                        <p>Success</p>
+                        <p>Product deleted successfully!</p>
+                    </div>
+                    <button class="ui-toast-close">&times;</button>
+                </div>
                 <div class="categories-scroll-container">
                     <section class="category-grid">
                         <article class="category" th:each="category : ${productsByCategory}">
@@ -111,6 +131,7 @@
         <script th:remove="all" src="../../js/dialogs.js" th:src="@{/js/dialogs.js}"></script>
         <script th:remove="all" src="../../js/popovers.js" th:src="@{/js/popovers.js}"></script>
         <script th:remove="all" src="https://kit.fontawesome.com/68d2baaa06.js" crossorigin="anonymous"></script>
+        <script src="../../js/toast.js" th:src="@{/js/toast.js}"></script>
         <script type="module" src="../../js/products.js" th:src="@{/js/products.js}"></script>
     </body>
 </html>

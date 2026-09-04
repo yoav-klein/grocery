@@ -12,10 +12,10 @@ Go over all the HTML+CSS+JS and refactor, check that everything is tight.
 * toasts
     * Current List
         * Add item (V)
-        * Mark item
+        * Mark item (V)
     * Products
-        * Add new product
-        * Delete product
+        * Add new product (V)
+        * Delete product (V)
     * Fixed list page
         * Submit
 

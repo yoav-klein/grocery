@@ -44,7 +44,7 @@ public class ProductsController {
     @DeleteMapping
     public String deleteProduct(@PathVariable("tenantId") String tenantId, @RequestParam("id") int id) {
         this.productService.deleteProduct(tenantId, id);
-        return String.format("redirect:/tenant/%s/products", tenantId);
+        return String.format("redirect:/tenant/%s/products?delete=true", tenantId);
     }
 
     

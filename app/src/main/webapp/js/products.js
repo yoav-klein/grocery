@@ -1,9 +1,30 @@
 
 import { HttpError, UnhandledProblemTypeError } from './common.js';
 
-
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]')
 const csrfToken = document.querySelector('meta[name="_csrf"]')
+
+const addItemSuccessToast = document.getElementById("add-item-success-toast");
+const deleteItemSuccessToast = document.getElementById("delete-item-success-toast");
+let shouldRewriteURl = false
+
+const params = new URLSearchParams(location.search);
+if (params.get('success') === 'true') {
+    addItemSuccessToast.dispatchEvent(new CustomEvent('show'));
+    params.delete('success');
+    shouldRewriteURl = true
+}
+
+if (params.get('delete') === 'true') {
+    deleteItemSuccessToast.dispatchEvent(new CustomEvent('show'));
+    params.delete('delete');
+    shouldRewriteURl = true
+}
+
+if(shouldRewriteURl) {
+    const newUrl = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+    history.replaceState({}, '', newUrl);
+}
 
 const addProductDialogEl = document.getElementById("add-product-dialog");
 const submitButton = document.getElementById('dialog-submit-button');
@@ -32,7 +53,10 @@ submitButton.addEventListener('click', (event) => {
         if(!resp.ok) throw new HttpError(resp);
 
         addProductDialogEl.dispatchEvent(new CustomEvent('submitsuccess'));
-        window.location.reload();
+
+        const successUrl = new URL(window.location.href);
+        successUrl.searchParams.set('success', 'true');
+        window.location.href = successUrl;
     })
     .catch(e => {
         console.log("error");
