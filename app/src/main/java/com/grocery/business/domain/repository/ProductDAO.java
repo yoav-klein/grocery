@@ -1,14 +1,20 @@
 package com.grocery.business.domain.repository;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -100,6 +106,26 @@ public class ProductDAO {
 
     public List<Product> getAllProducts(String tenantId) {
         return jdbcTemplate.query(String.format(GET_ALL_PRODUCTS, tenantId), this.rowMapper);
+    }
+
+    public void initProducts(String tenantId)  throws IOException {
+        Resource resource = new ClassPathResource("products.csv");
+        
+        List<Object[]> batch = new ArrayList<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader(resource.getFile().getPath()))) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                Object[] params = new Object[] {
+                    parts[0],
+                    parts[2],
+                    parts[3]
+                };
+                batch.add(params);
+            }
+        }
+
+        this.jdbcTemplate.batchUpdate(String.format(ADD_PRODUCT, tenantId), batch);
     }
 
     

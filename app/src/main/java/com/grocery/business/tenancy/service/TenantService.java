@@ -16,6 +16,7 @@ import com.grocery.business.tenancy.model.User;
 import com.grocery.business.tenancy.repository.InvitationRepository;
 import com.grocery.business.tenancy.repository.TenantRepository;
 import com.grocery.business.tenancy.repository.TenantUserRepository;
+import com.grocery.business.domain.repository.ProductDAO;
 
 @Service("tenantService")
 public class TenantService {
@@ -35,6 +36,9 @@ public class TenantService {
     @Autowired
     InvitationRepository invitationRepository;
 
+    @Autowired
+    ProductDAO productDao;
+
     // TRANSACTIONAL
     public Tenant createTenant(String tenantName, String ownerId) throws IOException {
         String tenantId = UUID.randomUUID().toString().replace("-", "");
@@ -47,6 +51,9 @@ public class TenantService {
         Tenant tenant = new Tenant();
         tenant.setId(tenantId);
         tenant.setName(tenantName);
+
+        // initial set of products
+        productDao.initProducts(tenantId);
 
         return tenant;
     }
