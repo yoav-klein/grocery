@@ -4,7 +4,6 @@
 ## To Do
 * Internationalization
 * Error pages
-* Fixed lists - when pressing "Add", spinner
 * Add hoc adding of products in Add Fixed List
 * What happens when a product is deleted and is in fixed lists?
 * UI improvements in subpage

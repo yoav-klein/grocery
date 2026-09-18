@@ -1,2 +1,0 @@
-
-INSERT INTO tenant_<TENANT_ID>.produts (name, category_id, quantity_type_id) VALUES('Cucumber', (SELECT id AS category_id FROM grocery_global.category WHERE name = 'VEGETABLES'), (SELECT id AS category_id FROM grocery_global.quantity_type WHERE name = 'KG'));

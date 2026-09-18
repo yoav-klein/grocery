@@ -1,12 +1,13 @@
 package com.grocery.business.domain.repository;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.nio.charset.Charset;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,7 @@ import com.grocery.business.domain.model.Product;
 import com.grocery.business.domain.model.ProductCategory;
 import com.grocery.business.domain.model.QuantityType;
 import com.grocery.business.domain.exception.ProductAlreadyExistsException;
+import com.grocery.business.tenancy.model.Language;
 
 @Repository("productDao")
 public class ProductDAO {
@@ -108,16 +110,25 @@ public class ProductDAO {
         return jdbcTemplate.query(String.format(GET_ALL_PRODUCTS, tenantId), this.rowMapper);
     }
 
-    public void initProducts(String tenantId)  throws IOException {
+    public void initProducts(String tenantId, Language language)  throws IOException {
         Resource resource = new ClassPathResource("products.csv");
         
         List<Object[]> batch = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(resource.getFile().getPath()))) {
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(resource.getFile().getPath()), "UTF-8")))  {
             String line;
+            int productNameIndex = 0;
+            switch(language) {
+                case EN:
+                    productNameIndex = 0;
+                    break;
+                case HE:
+                    productNameIndex = 1;
+                    break;
+            }
             while((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 Object[] params = new Object[] {
-                    parts[0],
+                    parts[productNameIndex],
                     parts[2],
                     parts[3]
                 };

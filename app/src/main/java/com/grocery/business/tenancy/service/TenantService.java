@@ -16,6 +16,7 @@ import com.grocery.business.tenancy.model.User;
 import com.grocery.business.tenancy.repository.InvitationRepository;
 import com.grocery.business.tenancy.repository.TenantRepository;
 import com.grocery.business.tenancy.repository.TenantUserRepository;
+import com.grocery.business.tenancy.dto.TenantRequest;
 import com.grocery.business.domain.repository.ProductDAO;
 
 @Service("tenantService")
@@ -40,20 +41,20 @@ public class TenantService {
     ProductDAO productDao;
 
     // TRANSACTIONAL
-    public Tenant createTenant(String tenantName, String ownerId) throws IOException {
+    public Tenant createTenant(TenantRequest request, String ownerId) throws IOException {
         String tenantId = UUID.randomUUID().toString().replace("-", "");
         tenantRepository.createTenantSchema(tenantId);
-        tenantRepository.createTenant(tenantId, tenantName);
+        tenantRepository.createTenant(tenantId, request.getTenantName());
         try {
             tenantUserService.addUserToTenant(tenantId, ownerId, "admin");
         } catch(UserAlreadyInTenantException e) {} // not really possible in this scenario
 
         Tenant tenant = new Tenant();
         tenant.setId(tenantId);
-        tenant.setName(tenantName);
+        tenant.setName(request.getTenantName());
 
         // initial set of products
-        productDao.initProducts(tenantId);
+        productDao.initProducts(tenantId, request.getDefaultLanguage());
 
         return tenant;
     }

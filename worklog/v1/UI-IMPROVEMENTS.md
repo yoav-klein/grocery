@@ -6,6 +6,7 @@ Go over all the HTML+CSS+JS and refactor, check that everything is tight.
 ## TODO
 * tenants
 * dialogs - sizes
+* Spinner for long running requests
 
 ## Doing
 * Reset buttons in Fixed list and add fixed list pages

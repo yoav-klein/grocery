@@ -32,7 +32,7 @@ public class TenantsApiController {
     
     @PostMapping("/tenants")
     public ResponseEntity createTenant(@AuthenticationPrincipal SecurityUser user, @Validated @RequestBody TenantRequest tenantRequest) throws IOException {
-        Tenant tenant = tenantService.createTenant(tenantRequest.getTenantName(), user.getAppUser().getId());
+        Tenant tenant = tenantService.createTenant(tenantRequest, user.getAppUser().getId());
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
