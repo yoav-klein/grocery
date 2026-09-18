@@ -125,7 +125,9 @@ public class ProductDAO {
                     productNameIndex = 1;
                     break;
             }
+            int count = 0;
             while((line = reader.readLine()) != null) {
+                ++count;
                 String[] parts = line.split(",");
                 Object[] params = new Object[] {
                     parts[productNameIndex],
@@ -134,9 +136,13 @@ public class ProductDAO {
                 };
                 batch.add(params);
             }
+            System.out.println(String.format("=============================", count));
+            System.out.println(String.format("Adding %s", count));
+            System.out.println(String.format("=============================", count));
         }
 
-        this.jdbcTemplate.batchUpdate(String.format(ADD_PRODUCT, tenantId), batch);
+        int[] ret = this.jdbcTemplate.batchUpdate(String.format(ADD_PRODUCT, tenantId), batch);
+        System.out.println(ret.length);
     }
 
     

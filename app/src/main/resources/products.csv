@@ -1,11 +1,11 @@
 Bread,לחם,BREAD,UNIT
-Pita,פיתה,BREAD,PACK
-Rolls,לחמניות,BREAD,PACK
+Pita,פיתה,BREAD,UNIT
+Rolls,לחמניות,BREAD,UNIT
 Baguette,בגט,BREAD,UNIT
 Challah,חלה,BREAD,UNIT
 Sliced Bread,לחם פרוס,BREAD,UNIT
 Whole Wheat Bread,לחם מלא,BREAD,UNIT
-Tortillas,טורטיות,BREAD,PACK
+Tortillas,טורטיות,BREAD,UNIT
 Tomato,עגבניה,VEGETABLES,KG
 Cherry Tomatoes,עגבניות שרי,VEGETABLES,KG
 Cucumber,מלפפון,VEGETABLES,KG
@@ -15,7 +15,7 @@ Green Pepper,פלפל ירוק,VEGETABLES,KG
 Hot Pepper,פלפל חריף,VEGETABLES,KG
 Onion,בצל,VEGETABLES,KG
 Red Onion,בצל סגול,VEGETABLES,KG
-Green Onion,בצל ירוק,VEGETABLES,PACK
+Green Onion,בצל ירוק,VEGETABLES,UNIT
 Garlic,שום,VEGETABLES,UNIT
 Potato,תפוח אדמה,VEGETABLES,KG
 Sweet Potato,בטטה,VEGETABLES,KG
@@ -27,21 +27,21 @@ Red Cabbage,כרוב סגול,VEGETABLES,UNIT
 Cauliflower,כרובית,VEGETABLES,UNIT
 Broccoli,ברוקולי,VEGETABLES,UNIT
 Lettuce,חסה,VEGETABLES,UNIT
-Spinach,תרד,VEGETABLES,PACK
-Mushrooms,פטריות,VEGETABLES,PACK
+Spinach,תרד,VEGETABLES,UNIT
+Mushrooms,פטריות,VEGETABLES,UNIT
 Celery,סלרי,VEGETABLES,UNIT
 Beetroot,סלק,VEGETABLES,KG
-Radish,צנונית,VEGETABLES,PACK
+Radish,צנונית,VEGETABLES,UNIT
 Pumpkin,דלעת,VEGETABLES,KG
 Corn,תירס,VEGETABLES,UNIT
 Avocado,אבוקדו,VEGETABLES,KG
-Parsley,פטרוזיליה,VEGETABLES,PACK
-Cilantro,כוסברה,VEGETABLES,PACK
-Dill,שמיר,VEGETABLES,PACK
-Basil,בזיליקום,VEGETABLES,PACK
-Mint,נענע,VEGETABLES,PACK
-Rosemary,רוזמרין,VEGETABLES,PACK
-Thyme,טימין,VEGETABLES,PACK
+Parsley,פטרוזיליה,VEGETABLES,UNIT
+Cilantro,כוסברה,VEGETABLES,UNIT
+Dill,שמיר,VEGETABLES,UNIT
+Basil,בזיליקום,VEGETABLES,UNIT
+Mint,נענע,VEGETABLES,UNIT
+Rosemary,רוזמרין,VEGETABLES,UNIT
+Thyme,טימין,VEGETABLES,UNIT
 Apple,תפוח,FRUITS,KG
 Banana,בננה,FRUITS,KG
 Orange,תפוז,FRUITS,KG
@@ -59,12 +59,12 @@ Melon,מלון,FRUITS,UNIT
 Pineapple,אננס,FRUITS,UNIT
 Mango,מנגו,FRUITS,KG
 Kiwi,קיווי,FRUITS,KG
-Strawberries,תותים,FRUITS,PACK
-Blueberries,אוכמניות,FRUITS,PACK
-Raspberries,פטל,FRUITS,PACK
+Strawberries,תותים,FRUITS,UNIT
+Blueberries,אוכמניות,FRUITS,UNIT
+Raspberries,פטל,FRUITS,UNIT
 Pomegranate,רימון,FRUITS,KG
-Dates,תמרים,FRUITS,PACK
-Eggs,ביצים,PROTEIN,PACK
+Dates,תמרים,FRUITS,UNIT
+Eggs,ביצים,PROTEIN,UNIT
 Chicken Breast,חזה עוף,PROTEIN,KG
 Chicken Thighs,פרגיות,PROTEIN,KG
 Chicken Legs,שוקי עוף,PROTEIN,KG
@@ -77,46 +77,46 @@ Beef Roast,צלי בקר,PROTEIN,KG
 Beef Ribs,אסאדו,PROTEIN,KG
 Schnitzel,שניצל,PROTEIN,KG
 Turkey Breast,חזה הודו,PROTEIN,KG
-Hot Dogs,נקניקיות,PROTEIN,PACK
-Sausages,נקניקיות בשר,PROTEIN,PACK
+Hot Dogs,נקניקיות,PROTEIN,UNIT
+Sausages,נקניקיות בשר,PROTEIN,UNIT
 Salmon,סלמון,PROTEIN,KG
 Tuna Steak,סטייק טונה,PROTEIN,KG
 Tilapia,אמנון,PROTEIN,KG
 Sea Bream,דניס,PROTEIN,KG
 Sea Bass,לברק,PROTEIN,KG
-Tofu,טופו,PROTEIN,PACK
+Tofu,טופו,PROTEIN,UNIT
 Rice,אורז,DRY_GOODS,KG
 Basmati Rice,אורז בסמטי,DRY_GOODS,KG
 Jasmine Rice,אורז יסמין,DRY_GOODS,KG
-Pasta,פסטה,DRY_GOODS,PACK
-Spaghetti,ספגטי,DRY_GOODS,PACK
-Couscous,קוסקוס,DRY_GOODS,PACK
-Bulgur,בורגול,DRY_GOODS,PACK
-Quinoa,קינואה,DRY_GOODS,PACK
-Oats,שיבולת שועל,DRY_GOODS,PACK
+Pasta,פסטה,DRY_GOODS,UNIT
+Spaghetti,ספגטי,DRY_GOODS,UNIT
+Couscous,קוסקוס,DRY_GOODS,UNIT
+Bulgur,בורגול,DRY_GOODS,UNIT
+Quinoa,קינואה,DRY_GOODS,UNIT
+Oats,שיבולת שועל,DRY_GOODS,UNIT
 Flour,קמח,DRY_GOODS,KG
 Whole Wheat Flour,קמח מלא,DRY_GOODS,KG
-Corn Flour,קמח תירס,DRY_GOODS,PACK
-Breadcrumbs,פירורי לחם,DRY_GOODS,PACK
+Corn Flour,קמח תירס,DRY_GOODS,UNIT
+Breadcrumbs,פירורי לחם,DRY_GOODS,UNIT
 Sugar,סוכר,DRY_GOODS,KG
-Brown Sugar,סוכר חום,DRY_GOODS,PACK
-Powdered Sugar,אבקת סוכר,DRY_GOODS,PACK
-Cornstarch,קורנפלור,DRY_GOODS,PACK
-Yeast,שמרים,DRY_GOODS,PACK
-Baking Powder,אבקת אפייה,DRY_GOODS,PACK
-Baking Soda,סודה לשתייה,DRY_GOODS,PACK
-Cocoa Powder,אבקת קקאו,DRY_GOODS,PACK
-Chickpeas,גרגרי חומוס,DRY_GOODS,PACK
-Lentils,עדשים,DRY_GOODS,PACK
-Green Lentils,עדשים ירוקות,DRY_GOODS,PACK
-Red Lentils,עדשים אדומות,DRY_GOODS,PACK
-Black Beans,שעועית שחורה,DRY_GOODS,PACK
-White Beans,שעועית לבנה,DRY_GOODS,PACK
-Kidney Beans,שעועית אדומה,DRY_GOODS,PACK
-Corn Flakes,קורנפלקס,DRY_GOODS,PACK
-Granola,גרנולה,DRY_GOODS,PACK
-Cereal,דגני בוקר,DRY_GOODS,PACK
-Salt,מלח,SPICES,PACK
+Brown Sugar,סוכר חום,DRY_GOODS,UNIT
+Powdered Sugar,אבקת סוכר,DRY_GOODS,UNIT
+Cornstarch,קורנפלור,DRY_GOODS,UNIT
+Yeast,שמרים,DRY_GOODS,UNIT
+Baking Powder,אבקת אפייה,DRY_GOODS,UNIT
+Baking Soda,סודה לשתייה,DRY_GOODS,UNIT
+Cocoa Powder,אבקת קקאו,DRY_GOODS,UNIT
+Chickpeas,גרגרי חומוס,DRY_GOODS,UNIT
+Lentils,עדשים,DRY_GOODS,UNIT
+Green Lentils,עדשים ירוקות,DRY_GOODS,UNIT
+Red Lentils,עדשים אדומות,DRY_GOODS,UNIT
+Black Beans,שעועית שחורה,DRY_GOODS,UNIT
+White Beans,שעועית לבנה,DRY_GOODS,UNIT
+Kidney Beans,שעועית אדומה,DRY_GOODS,UNIT
+Corn Flakes,קורנפלקס,DRY_GOODS,UNIT
+Granola,גרנולה,DRY_GOODS,UNIT
+Cereal,דגני בוקר,DRY_GOODS,UNIT
+Salt,מלח,SPICES,UNIT
 Black Pepper,פלפל שחור,SPICES,UNIT
 Paprika,פפריקה,SPICES,UNIT
 Sweet Paprika,פפריקה מתוקה,SPICES,UNIT
@@ -133,7 +133,7 @@ Nutmeg,אגוז מוסקט,SPICES,UNIT
 Curry Powder,אבקת קארי,SPICES,UNIT
 Chili Flakes,פתיתי צ'ילי,SPICES,UNIT
 Saffron,זעפרן,SPICES,UNIT
-Vanilla Sugar,סוכר וניל,SPICES,PACK
+Vanilla Sugar,סוכר וניל,SPICES,UNIT
 Vanilla Extract,תמצית וניל,SPICES,UNIT
 Canned Tuna,טונה בקופסה,CANNED_GOODS,UNIT
 Sardines,סרדינים,CANNED_GOODS,UNIT
@@ -153,18 +153,18 @@ Greek Yogurt,יוגורט יווני,DAIRY,UNIT
 White Cheese,גבינה לבנה,DAIRY,UNIT
 Cottage Cheese,קוטג',DAIRY,UNIT
 Cream Cheese,גבינת שמנת,DAIRY,UNIT
-Yellow Cheese,גבינה צהובה,DAIRY,PACK
-Mozzarella,מוצרלה,DAIRY,PACK
-Feta Cheese,גבינה בולגרית,DAIRY,PACK
-Goat Cheese,גבינת עיזים,DAIRY,PACK
+Yellow Cheese,גבינה צהובה,DAIRY,UNIT
+Mozzarella,מוצרלה,DAIRY,UNIT
+Feta Cheese,גבינה בולגרית,DAIRY,UNIT
+Goat Cheese,גבינת עיזים,DAIRY,UNIT
 Butter,חמאה,DAIRY,UNIT
 Cream,שמנת,DAIRY,UNIT
 Cooking Cream,שמנת לבישול,DAIRY,UNIT
 Whipping Cream,שמנת מתוקה,DAIRY,UNIT
 Sour Cream,שמנת חמוצה,DAIRY,UNIT
 Water,מים,BEVERAGES,LITER
-Mineral Water,מים מינרליים,BEVERAGES,PACK
-Sparkling Water,מים מוגזים,BEVERAGES,PACK
+Mineral Water,מים מינרליים,BEVERAGES,UNIT
+Sparkling Water,מים מוגזים,BEVERAGES,UNIT
 Orange Juice,מיץ תפוזים,BEVERAGES,LITER
 Apple Juice,מיץ תפוחים,BEVERAGES,LITER
 Grape Juice,מיץ ענבים,BEVERAGES,LITER
@@ -173,7 +173,7 @@ Diet Cola,קולה זירו,BEVERAGES,LITER
 Lemonade,לימונדה,BEVERAGES,LITER
 Iced Tea,תה קר,BEVERAGES,LITER
 Energy Drink,משקה אנרגיה,BEVERAGES,UNIT
-Beer,בירה,ALCOHOL,PACK
+Beer,בירה,ALCOHOL,UNIT
 Wine,יין,ALCOHOL,UNIT
 Red Wine,יין אדום,ALCOHOL,UNIT
 White Wine,יין לבן,ALCOHOL,UNIT
@@ -191,63 +191,63 @@ Toothpaste,משחת שיניים,HYGIENE,UNIT
 Toothbrush,מברשת שיניים,HYGIENE,UNIT
 Dental Floss,חוט דנטלי,HYGIENE,UNIT
 Deodorant,דאודורנט,HYGIENE,UNIT
-Razors,סכיני גילוח,HYGIENE,PACK
+Razors,סכיני גילוח,HYGIENE,UNIT
 Shaving Cream,קצף גילוח,HYGIENE,UNIT
-Cotton Swabs,מקלוני אוזניים,HYGIENE,PACK
-Cotton Pads,צמר גפן,HYGIENE,PACK
-Wet Wipes,מגבונים לחים,HYGIENE,PACK
-Toilet Paper,נייר טואלט,DISPOSABLE,PACK
-Paper Towels,נייר סופג,DISPOSABLE,PACK
-Tissues,טישו,DISPOSABLE,PACK
-Napkins,מפיות,DISPOSABLE,PACK
-Trash Bags,שקיות אשפה,DISPOSABLE,PACK
+Cotton Swabs,מקלוני אוזניים,HYGIENE,UNIT
+Cotton Pads,צמר גפן,HYGIENE,UNIT
+Wet Wipes,מגבונים לחים,HYGIENE,UNIT
+Toilet Paper,נייר טואלט,DISPOSABLE,UNIT
+Paper Towels,נייר סופג,DISPOSABLE,UNIT
+Tissues,טישו,DISPOSABLE,UNIT
+Napkins,מפיות,DISPOSABLE,UNIT
+Trash Bags,שקיות אשפה,DISPOSABLE,UNIT
 Aluminum Foil,נייר אלומיניום,DISPOSABLE,UNIT
 Plastic Wrap,ניילון נצמד,DISPOSABLE,UNIT
 Baking Paper,נייר אפייה,DISPOSABLE,UNIT
-Sandwich Bags,שקיות אוכל,DISPOSABLE,PACK
-Disposable Plates,צלחות חד פעמיות,DISPOSABLE,PACK
-Disposable Cups,כוסות חד פעמיות,DISPOSABLE,PACK
-Disposable Cutlery,סכו"ם חד פעמי,DISPOSABLE,PACK
+Sandwich Bags,שקיות אוכל,DISPOSABLE,UNIT
+Disposable Plates,צלחות חד פעמיות,DISPOSABLE,UNIT
+Disposable Cups,כוסות חד פעמיות,DISPOSABLE,UNIT
+Disposable Cutlery,סכו"ם חד פעמי,DISPOSABLE,UNIT
 Dish Soap,סבון כלים,CLEANING_SUPPLIES,UNIT
-Dishwasher Tablets,טבליות למדיח,CLEANING_SUPPLIES,PACK
-Dishwasher Salt,מלח למדיח,CLEANING_SUPPLIES,PACK
+Dishwasher Tablets,טבליות למדיח,CLEANING_SUPPLIES,UNIT
+Dishwasher Salt,מלח למדיח,CLEANING_SUPPLIES,UNIT
 Dishwasher Rinse Aid,נוזל הברקה למדיח,CLEANING_SUPPLIES,UNIT
-Laundry Detergent,אבקת כביסה,CLEANING_SUPPLIES,PACK
+Laundry Detergent,אבקת כביסה,CLEANING_SUPPLIES,UNIT
 Laundry Gel,ג'ל כביסה,CLEANING_SUPPLIES,UNIT
 Fabric Softener,מרכך כביסה,CLEANING_SUPPLIES,UNIT
 Floor Cleaner,נוזל רצפות,CLEANING_SUPPLIES,UNIT
 Bleach,אקונומיקה,CLEANING_SUPPLIES,UNIT
 Glass Cleaner,מנקה חלונות,CLEANING_SUPPLIES,UNIT
 Degreaser,מסיר שומנים,CLEANING_SUPPLIES,UNIT
-Cleaning Sponges,ספוגים לניקוי,CLEANING_SUPPLIES,PACK
+Cleaning Sponges,ספוגים לניקוי,CLEANING_SUPPLIES,UNIT
 Instant Coffee,קפה נמס,COFFEE,UNIT
-Black Coffee,קפה שחור,COFFEE,PACK
-Ground Coffee,קפה טחון,COFFEE,PACK
-Coffee Beans,פולי קפה,COFFEE,PACK
-Espresso Capsules,קפסולות אספרסו,COFFEE,PACK
-Decaf Coffee,קפה נטול קפאין,COFFEE,PACK
-Frozen Peas,אפונה קפואה,FROZEN_FOOD,PACK
-Frozen Corn,תירס קפוא,FROZEN_FOOD,PACK
-Frozen Vegetables,ירקות קפואים,FROZEN_FOOD,PACK
-Frozen Broccoli,ברוקולי קפוא,FROZEN_FOOD,PACK
-Frozen French Fries,צ'יפס קפוא,FROZEN_FOOD,PACK
+Black Coffee,קפה שחור,COFFEE,UNIT
+Ground Coffee,קפה טחון,COFFEE,UNIT
+Coffee Beans,פולי קפה,COFFEE,UNIT
+Espresso Capsules,קפסולות אספרסו,COFFEE,UNIT
+Decaf Coffee,קפה נטול קפאין,COFFEE,UNIT
+Frozen Peas,אפונה קפואה,FROZEN_FOOD,UNIT
+Frozen Corn,תירס קפוא,FROZEN_FOOD,UNIT
+Frozen Vegetables,ירקות קפואים,FROZEN_FOOD,UNIT
+Frozen Broccoli,ברוקולי קפוא,FROZEN_FOOD,UNIT
+Frozen French Fries,צ'יפס קפוא,FROZEN_FOOD,UNIT
 Frozen Pizza,פיצה קפואה,FROZEN_FOOD,UNIT
-Frozen Bourekas,בורקס קפוא,FROZEN_FOOD,PACK
-Frozen Fish,דג קפוא,FROZEN_FOOD,PACK
-Frozen Schnitzel,שניצל קפוא,FROZEN_FOOD,PACK
+Frozen Bourekas,בורקס קפוא,FROZEN_FOOD,UNIT
+Frozen Fish,דג קפוא,FROZEN_FOOD,UNIT
+Frozen Schnitzel,שניצל קפוא,FROZEN_FOOD,UNIT
 Ice Cream,גלידה,FROZEN_FOOD,UNIT
-Popsicles,ארטיקים,FROZEN_FOOD,PACK
+Popsicles,ארטיקים,FROZEN_FOOD,UNIT
 Chocolate,שוקולד,CANDY,UNIT
 Dark Chocolate,שוקולד מריר,CANDY,UNIT
 Milk Chocolate,שוקולד חלב,CANDY,UNIT
 White Chocolate,שוקולד לבן,CANDY,UNIT
-Candy,סוכריות,CANDY,PACK
-Gummy Candy,סוכריות גומי,CANDY,PACK
-Lollipops,סוכריות על מקל,CANDY,PACK
-Wafers,ופלים,CANDY,PACK
-Cookies,עוגיות,CANDY,PACK
-Biscuits,ביסקוויטים,CANDY,PACK
-Marshmallows,מרשמלו,CANDY,PACK
+Candy,סוכריות,CANDY,UNIT
+Gummy Candy,סוכריות גומי,CANDY,UNIT
+Lollipops,סוכריות על מקל,CANDY,UNIT
+Wafers,ופלים,CANDY,UNIT
+Cookies,עוגיות,CANDY,UNIT
+Biscuits,ביסקוויטים,CANDY,UNIT
+Marshmallows,מרשמלו,CANDY,UNIT
 Olive Oil,שמן זית,OTHER,LITER
 Canola Oil,שמן קנולה,OTHER,LITER
 Sunflower Oil,שמן חמניות,OTHER,LITER
@@ -267,9 +267,9 @@ Chocolate Spread,ממרח שוקולד,OTHER,UNIT
 Jam,ריבה,OTHER,UNIT
 Honey,דבש,OTHER,UNIT
 Maple Syrup,סירופ מייפל,OTHER,UNIT
-Tea,תה,OTHER,PACK
-Green Tea,תה ירוק,OTHER,PACK
-Dog Food,אוכל לכלבים,OTHER,PACK
-Cat Food,אוכל לחתולים,OTHER,PACK
+Tea,תה,OTHER,UNIT
+Green Tea,תה ירוק,OTHER,UNIT
+Dog Food,אוכל לכלבים,OTHER,UNIT
+Cat Food,אוכל לחתולים,OTHER,UNIT
 Fish Food,אוכל לדגים,OTHER,UNIT
-Cat Litter,חול לחתולים,OTHER,PACK
+Cat Litter,חול לחתולים,OTHER,UNIT
