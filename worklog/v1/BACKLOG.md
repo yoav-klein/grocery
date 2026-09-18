@@ -2,14 +2,13 @@
 ---
 
 ## To Do
-* Internationalization
 * Error pages
 * Add hoc adding of products in Add Fixed List
 * What happens when a product is deleted and is in fixed lists?
 * UI improvements in subpage
 
 ## Doing
-* Default set of products in tenant
+* Internationalization
 
 ## Done
 * Logout (V)
@@ -20,4 +19,4 @@
 * Confirmation dialogs (V)
 * Manage tenant - confirmation for deleting user (V)
 * In fixed list - if no item is added - disable jjbutton (V)
-
+* Default set of products in tenant
