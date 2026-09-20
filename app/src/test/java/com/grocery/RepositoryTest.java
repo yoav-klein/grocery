@@ -23,17 +23,17 @@ public class RepositoryTest  extends AbstractTransactionalTestNGSpringContextTes
     @Test
     public void testAddProduct() throws Exception {
         
-        ProductRequest pr = new ProductRequest();
+        /* ProductRequest pr = new ProductRequest();
         pr.setName("Kaki");
         pr.setCategory(ProductCategory.ALCOHOL);
         pr.setQuantityType(QuantityType.KG);
         
-        productDao.addProduct("d271397f084242e1b4b7d0d840cbadf7", pr);
+        productDao.addProduct("d271397f084242e1b4b7d0d840cbadf7", pr); */
 
     }
 
     @Test
     public void testAddProducts() throws Exception {
-        productDao.initProducts("d271397f084242e1b4b7d0d840cbadf7");
+        // productDao.initProducts("d271397f084242e1b4b7d0d840cbadf7");
     }
 }

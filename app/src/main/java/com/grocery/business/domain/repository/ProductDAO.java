@@ -1,7 +1,6 @@
 package com.grocery.business.domain.repository;
 
 import java.io.BufferedReader;
-import java.nio.charset.Charset;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -136,9 +135,6 @@ public class ProductDAO {
                 };
                 batch.add(params);
             }
-            System.out.println(String.format("=============================", count));
-            System.out.println(String.format("Adding %s", count));
-            System.out.println(String.format("=============================", count));
         }
 
         int[] ret = this.jdbcTemplate.batchUpdate(String.format(ADD_PRODUCT, tenantId), batch);

@@ -36,7 +36,7 @@ public class SpringSecurityConfig {
                 oauth.loginPage("/login");
             })
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/login", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/login", "/css/**", "/js/**", "/messages").permitAll()
                 .requestMatchers("/tenant/**").access(tenantAuthManager)
                 .anyRequest().authenticated()
             )
