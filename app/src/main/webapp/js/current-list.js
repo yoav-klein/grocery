@@ -1,5 +1,6 @@
 
 import { HttpError } from './common.js';
+import messages from './i18n.js';
 
 const csrfHeaderName = document.querySelector('meta[name="_csrf_header"]');
 const csrfToken = document.querySelector('meta[name="_csrf"]');
@@ -121,14 +122,14 @@ evtSource.addEventListener("NEW-ITEM", (event) => {
 
 evtSource.addEventListener("REFRESH-LIST", (event) => {
     location.reload();
-})
+});
 
-function createNewCategory(categoryName) {
+function createNewCategory(categoryKey) {
     const listEl = document.getElementById('all-categories');
     const newElement = document.getElementById("category-template").content.cloneNode(true);
-    // TODO: localization
-    newElement.querySelector('h2').innerText = categoryName;
-    newElement.querySelector('article').setAttribute('id', `category-${categoryName}`);
+    
+    newElement.querySelector('h2').innerText = messages[`category.title.${categoryKey}`];
+    newElement.querySelector('article').setAttribute('id', `category-${categoryKey}`);
     
     // returns the appended <article>
     return listEl.appendChild(newElement.querySelector('article'));
