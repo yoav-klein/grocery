@@ -33,7 +33,7 @@
                 <div class="ui-popover language-popover">
                     <button class="ui-popover-trigger menu-item">
                         <i class="fa-solid fa-language"></i>
-                        <span>Language</span>
+                        <span th:text="#{userMenu.language}">Language</span>
                         <i class="fa-solid fa-chevron-left chevron"></i>
                     </button>
                     <div class="ui-popover-menu">
@@ -44,7 +44,7 @@
                 <div class="divider"></div>
                 <button id="logout-button" data-open-dialog data-dialog-id="logout-dialog" class="menu-item" data-close-menu>
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    <span>Logout</span>
+                    <span th:text="#{userMenu.logout}">Logout</span>
                 </button>
             </div>
         </div>
@@ -54,13 +54,13 @@
     </div>
     <dialog id="logout-dialog" class="ui-confirmation-dialog">
         <div class="ui-dialog-body">
-            <p>Are you sure you want to log out?</p>
+            <p th:text="#{userMenu.logoutConfirmation}">Are you sure you want to log out?</p>
         </div>
         <div class="ui-dialog-footer">
             <div class="ui-dialog-footer-controls">
                 <form th:action="@{/logout}" method="post">
-                    <button type="button" class="ui-dialog-action-button ui-dialog-secondary-action-button" data-close-dialog>Cancel</button>
-                    <button type="submit" class="ui-dialog-action-button ui-dialog-primary-action-button">Yes</button>
+                    <button type="button" class="ui-dialog-action-button ui-dialog-secondary-action-button" data-close-dialog th:text="#{generic.forms.cancel}">Cancel</button>
+                    <button type="submit" class="ui-dialog-action-button ui-dialog-primary-action-button" th:text="#{generic.forms.yes}">Yes</button>
                 </form>
             </div>
         </div>
