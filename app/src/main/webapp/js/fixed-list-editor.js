@@ -1,4 +1,6 @@
 
+import messages from './i18n.js';
+
 const tenantId = document.querySelector('meta[name="tenantId"]').content;
 const uiElements = {
     saveButton: document.getElementById('save-button'),
@@ -119,8 +121,8 @@ function renderSummary(mode, getStateCallback) {
         });
     }
     if(mode === "edit") {
-        Array.from(document.querySelectorAll('.edit-summary-added   span')).forEach(el => el.innerText = getStateCallback().numAdded);
-        Array.from(document.querySelectorAll('.edit-summary-removed span')).forEach(el => el.innerText = getStateCallback().numRemoved);
+        Array.from(document.querySelectorAll('.edit-summary-added   .number')).forEach(el => el.innerText = getStateCallback().numAdded);
+        Array.from(document.querySelectorAll('.edit-summary-removed .number')).forEach(el => el.innerText = getStateCallback().numRemoved);
     }
 }
 
@@ -245,7 +247,7 @@ function renderCheckboxChange(isChecked, productId, name, productCategory) {
             // clone the template "selected-list-category-template"
             selectedProductsCategory = document.getElementById("selected-list-category-template").content.cloneNode(true).querySelector('li');
             selectedProductsCategory.setAttribute('data-category-name', productCategory);
-            selectedProductsCategory.querySelector('h3').innerText = productCategory;
+            selectedProductsCategory.querySelector('h3').innerText = messages[`category.${productCategory}`];
             // add it to the top-level <ul>
             uiElements.selectedProductsList.appendChild(selectedProductsCategory);
         }

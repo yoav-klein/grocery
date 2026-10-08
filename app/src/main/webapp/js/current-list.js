@@ -128,7 +128,7 @@ function createNewCategory(categoryKey) {
     const listEl = document.getElementById('all-categories');
     const newElement = document.getElementById("category-template").content.cloneNode(true);
     
-    newElement.querySelector('h2').innerText = messages[`category.title.${categoryKey}`];
+    newElement.querySelector('h2').innerText = messages[`category.${categoryKey}`];
     newElement.querySelector('article').setAttribute('id', `category-${categoryKey}`);
     
     // returns the appended <article>

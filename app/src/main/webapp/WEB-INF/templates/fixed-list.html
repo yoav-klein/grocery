@@ -17,10 +17,10 @@
                 <header>
                     <div id="header-title">
                         <h1 th:text="${fixedList.name}">LIST NAME</h1>
-                        <p class="header-meta"><span th:text="${#maps.size(productsByCategory)}">3</span> categories • <span th:text="${#arrays.length(fixedList.products)}">6</span> items</p>
+                        <p class="header-meta"><span th:text="${#maps.size(productsByCategory)}">3</span> <span th:text="#{fixedList.categories}">categories</span> • <span th:text="${#arrays.length(fixedList.products)}">6</span><span th:text="#{fixedList.items}">items</span></p>
                     </div>
                     <div class="actions">
-                        <button id="insert-button" disabled class="action-button primary-action-button" form="list">Add Items</button>
+                        <button id="insert-button" disabled class="action-button primary-action-button" form="list" th:text="#{fixedList.add}">Add Items</button>
                         <div class="ui-popover options-popover">
                             <button class="ui-popover-trigger">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -28,11 +28,11 @@
                             <div class="ui-popover-menu">
                                 <a class="menu-item" href="#" th:href="@{/tenant/{tenantId}/lists/edit/{listId}(tenantId=${tenant.id},listId=${fixedList.id})}">
                                     <i class="fa-regular fa-pen-to-square"></i>
-                                    <span>Edit</span>
+                                    <span th:text="#{fixedList.edit}">Edit</span>
                                 </a>
                                 <button id="delete-button" class="menu-item delete-button" data-close-menu data-open-dialog data-dialog-id="delete-confirmation-dialog">
                                     <i class="fa-regular fa-trash-can"></i>
-                                    <span>Delete</span>
+                                    <span th:text="#{fixedList.delete}">Delete</span>
                                 </button>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                 <form id="list">
                     <section class="category-grid">
                         <article class="category" th:each="category : ${productsByCategory}">
-                            <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                            <h2 th:text="#{${'category.' + category.key}}">VEGETABLES</h2>
                             <ul>
                                 <li th:each="product : ${category.value}">
                                     <p class="item-name"><span th:text="${product.name}">PRODUCT NAME</span></p>

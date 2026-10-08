@@ -34,24 +34,24 @@
                 <div id="step-wrapper">
                     <div class="step step-1">
                         <div class="title">
-                            <h1 th:text="(${mode} == 'add')? 'Add Fixed List' : 'Edit Fixed List'">HEADING</h1>
-                            <p th:text="(${mode} == 'add')? 'Create a reusable list' : 'Edit the fixed list'">Create a reusable list</p>
+                            <h1 th:text="(${mode} == 'add')? #{fixedListEditor.addListTitle} : #{fixedListEditor.editListTitle}">HEADING</h1>
+                            <p th:text="(${mode} == 'add')? #{fixedListEditor.addListSubtitle} : #{fixedListEditor.editListSubtitle}">Create a reusable list</p>
                         </div>
                         <div class="list-name">
-                            <label for="listName" class="nowrap">List name</label>
+                            <label for="listName" class="nowrap" th:text="#{fixedListEditor.listName}">List name</label>
                             <div th:if="${mode} == 'edit'" class="list-name-edit">
                                 <input id="listName" type="text" th:value="${fixedList.name}" disabled th:data-init-value="${fixedList.name}"/>
                                 <button id="edit-name-button"><i class="fa-regular fa-pen-to-square"></i></button>
                             </div>
-                            <input th:if="${mode} == 'add'" id="listName" type="text" placeholder="e.g., Weekly groceries"/>
+                            <input th:if="${mode} == 'add'" id="listName" type="text" th:placeholder="#{fixedListEditor.listNamePlaceholder}"/>
                         </div>
-                    </div>
+                    </div> 
                     <section id="catalog" class="step">
                         <h4 class="mobile-only step-title">Products</h4>
                         <p class="mobile-only step-subtitle">Choose products to include in the list</p>
                         <div class="category-grid">
                             <article class="category" th:each="category: ${productsByCategory}">
-                                <h2 th:text="#{${'category.title.' + category.key}}">VEGETABLES</h2>
+                                <h2 th:text="#{${'category.' + category.key}}">VEGETABLES</h2>
                                 <ul>
                                     <li class="category-item" th:each="product : ${category.value}">
                                         <label th:for="${product.productId}">
@@ -70,15 +70,16 @@
                         <h4 class="mobile-only step-title">Review</h4>
                         <div class="list-meta mobile-only">
                             <h3 class="list-meta-name">LIST NAME</h1>
-                            <p th:if="${mode} == 'add'" class="list-meta-summary"><span class="num-selected">0</span> Products</p>
+                            <p th:if="${mode} == 'add'" class="list-meta-summary"><span class="num-selected">0</span><span th:text="#{fixedListEditor.products}"> Products</span></p>
                             <div class="edit-summary" th:if="${mode} == 'edit'">
-                                <p class="edit-summary-added">Added: <span>0</span></p>
-                                <p class="edit-summary-removed">Removed: <span>0</span></p>
+                                <p class="edit-summary-added"><span th:text="#{fixedListEditor.added}">Added</span>: <span class="number">0</span></p> 
+                                <p class="edit-summary-removed"><span th:text="#{fixedListEditor.removed}">Removed</span>: <span class="number">0</span></p>
                             </div>
                         </div>
+
                         <div class="list-meta pc-only">
                             <h3 class="selected-section-title">
-                                <span>
+                                <span th:text="#{fixedListEditor.selectedProducts}">
                                     Selected Products
                                 </span>
                                 <span class="selected-section-title-meta" th:if="${mode} == 'add'">
@@ -86,13 +87,13 @@
                                 </span>
                             </h3>
                             <div class="edit-summary" th:if="${mode} == 'edit'">
-                                <p class="edit-summary-added">Added: <span>0</span></p>
-                                <p class="edit-summary-removed">Removed: <span>0</span></p>
+                                <p class="edit-summary-added"><span th:text="#{fixedListEditor.added}">Added</span>: <span class="number">0</span></p> 
+                                <p class="edit-summary-removed"><span th:text="#{fixedListEditor.removed}">Removed</span>: <span class="number">0</span></p>
                             </div>
                         </div>
                         <ul id="selected-list">
                             <li th:if="${mode} == 'edit'" th:each="category: ${listProductsByCategory}" th:attr="data-category-name=${category.key}">
-                                <h3 th:text="#{${'category.title.' + category.key}}" class="category-title">CATEGORY NAME</h3>
+                                <h3 th:text="#{${'category.' + category.key}}" class="category-title">CATEGORY NAME</h3>
                                 <div class="category-divider"></div>
                                 <ul>
                                     <li class="selected-product" th:each="product : ${category.value}" th:attr="data-category=${category.key},data-product-id=${product.productId}">
@@ -103,8 +104,8 @@
                             </li>
                         </ul>
                         <div class="actions pc-only">
-                            <button id="cancel-button" class="action-button secondary-action-button">Cancel</button>
-                            <button id="save-button" class="action-button primary-action-button" disabled>Save</button>
+                            <button id="cancel-button" class="action-button secondary-action-button" th:text="#{generic.cancel}">Cancel</button>
+                            <button id="save-button" class="action-button primary-action-button" disabled th:text="#{generic.save}">Save</button>
                         </div>
                         <template id="selected-list-category-template">
                             <li data-category-name="CATEGORY-NAME">
